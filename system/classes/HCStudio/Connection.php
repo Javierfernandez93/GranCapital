@@ -27,7 +27,7 @@ use RecursiveArrayIterator;
 class Connection {
 	# Variables privadas
 	private static $connections = array(
-		'default' => ['localhost', 'root', 'root', 'app_fsa'], 
+		'default' => ['localhost', 'root', 'root', 'app_gran_capital'], 
 		'world' => ['localhost', 'root', 'root', 'apps_world'], 
 	);
 
@@ -37,8 +37,8 @@ class Connection {
 	private $mysqli;
 	static  $protocol = 'http';
 	// static  $proyect_url = '192.168.100.237:8888/fsa';
-	static  $proyect_url = 'localhost:8888/fsa';
-	static  $proyect_name = 'Financiera San Andrés';
+	static  $proyect_url = 'localhost:8888/grancapital';
+	static  $proyect_name = 'Gran Capital Found';
 
 	public function getConnectioName() {
 		return $this->connection;

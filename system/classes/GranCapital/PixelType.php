@@ -1,6 +1,6 @@
 <?php
 
-namespace FSA;
+namespace GranCapital;
 
 class PixelType {
     public static function hasPixel(array $element = null) : bool

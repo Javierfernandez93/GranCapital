@@ -1,6 +1,6 @@
 <?php
 
-namespace FSA;
+namespace GranCapital;
 
 class WebFlow {
     public static function getProperty(array $properties = null, string $property_name = null) 

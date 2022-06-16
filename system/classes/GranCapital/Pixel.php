@@ -1,6 +1,6 @@
 <?php
 
-namespace FSA;
+namespace GranCapital;
 
 class Pixel {
     public static function getProperty(array $properties = null, string $property_name = null) 

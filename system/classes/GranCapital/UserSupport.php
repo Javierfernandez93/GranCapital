@@ -1,6 +1,6 @@
 <?php
 
-namespace FSA;
+namespace GranCapital;
 
 use HCStudio\Orm;
 use HCStudio\Session;

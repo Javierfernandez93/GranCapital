@@ -1,6 +1,6 @@
 <?php
 
-namespace FSA;
+namespace GranCapital;
 
 use OwnBoss\CampaignPerSheet;
 use OwnBoss\ChatPerSheet;

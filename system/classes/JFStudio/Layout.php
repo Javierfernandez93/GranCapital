@@ -27,7 +27,7 @@ class Layout
 	public $virtual_view= null;
 	public $_view_root  = null;
 	public $content_virtual_view = null;
-	public $_pretitle  = 'Financiera San Andrés ';
+	public $_pretitle  = 'Gran Capital Found ';
 	public $modules    = [];
 	# protected vars
 
@@ -345,9 +345,10 @@ class Layout
 
 	# function:: adds js scripts to "view".view.php
 	# extended by setScript()
+	# fixed fo vuejs
 	public function isJsModule($script = null)
 	{
-		return strpos($script, ".module.") !== false;
+		return strpos($script, ".module.") !== false || strpos($script, ".vue.") !== false;
 	}
 	public function setJsScripts()
 	{
