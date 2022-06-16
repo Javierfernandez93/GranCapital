@@ -1,8 +1,4 @@
-<?php
-
-use Firebase\JWT\JWT;
-
- define("TO_ROOT", "../..");
+<?php define("TO_ROOT", "../..");
 
 require_once TO_ROOT . "/system/core.php";
 
@@ -16,18 +12,14 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$route = JFStudio\Router::Profile;
-$Layout->init(JFStudio\Router::getName($route),'profile',"backoffice",'',TO_ROOT.'/');
+$route = JFStudio\Router::Gains;
+$Layout->init(JFStudio\Router::getName($route),'index',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript([
-	'profile.css',
-	'profile.vue.js'
-]);
+$Layout->setScript(['notifications.css','backoffice.js']);
 
 $Layout->setVar([
 	'route' =>  $route,
-	'floating_nav' =>  true,
 	'UserLogin' => $UserLogin
 ]);
 $Layout();

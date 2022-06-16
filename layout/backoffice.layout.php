@@ -17,6 +17,7 @@
     <!-- Font Awesome Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link href="../../src/css/general.css" rel="stylesheet" />
     <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     
@@ -39,7 +40,7 @@
         <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($route == 'backoffice'){?>active<?php } ?>"
+                    <a class="nav-link <?php if($route == JFStudio\Router::Backoffice){?>active<?php } ?>"
                         href="../../apps/backoffice">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -63,11 +64,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Backoffice</span>
+                        <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::Backoffice);?></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/tables.html">
+                    <a class="nav-link <?php if($route == JFStudio\Router::Referrals){?>active<?php } ?>" href="../../apps/referrals">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -90,11 +91,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Referidos</span>
+                        <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::Referrals);?></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/billing.html">
+                    <a class="nav-link <?php if($route == JFStudio\Router::Gains){?>active<?php } ?>" href="../../apps/gains">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
@@ -117,7 +118,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Ganancias</span>
+                        <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::Gains);?></span>
                     </a>
                 </li>
 
@@ -125,7 +126,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Ajustes de cuenta</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($route == 'profile'){?>active<?php } ?>"
+                    <a class="nav-link  <?php if($route == JFStudio\Router::Profile){?>active<?php } ?>"
                         href="../../apps/backoffice/profile">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -196,17 +197,18 @@
         </div>
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <nav
-            class="navbar navbar-main navbar-expand-lg bg-transparent shadow-none position-absolute px-4 w-100 z-index-2">
+                
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl <?php if($floating_nav === true) { ?>bg-transparent position-absolute floating-nav w-100 z-index-2<?php } ?>">
             <div class="container-fluid py-1">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="text-white opacity-5"
-                                href="javascript:;">Pages</a>
+                        <li class="breadcrumb-item text-sm"><a class=" opacity-5" href="javascript:;">Páginas</a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Profile</li>
+                        <li class="breadcrumb-item text-sm  active" aria-current="page">
+                            <?php echo JFStudio\Router::getName($route);?>
+                        </li>
                     </ol>
-                    <h6 class="text-white font-weight-bolder ms-2">Profile</h6>
+                    <h6 class=" font-weight-bolder ms-2"><?php echo JFStudio\Router::getName($route);?></h6>
                 </nav>
                 <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -219,13 +221,13 @@
                     </div>
                     <ul class="navbar-nav justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                            <a href="javascript:;" class="nav-link  font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
                                 <span class="d-sm-inline d-none">Sign In</span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0">
+                            <a href="javascript:;" class="nav-link  p-0">
                             </a><a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
                                     <i class="sidenav-toggler-line bg-white"></i>
@@ -233,14 +235,8 @@
                                     <i class="sidenav-toggler-line bg-white"></i>
                                 </div>
                             </a>
-
                         </li>
-                        <li class="nav-item px-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0">
-                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                        <li class="nav-item dropdown px-2 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>

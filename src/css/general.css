@@ -25,3 +25,9 @@ body {
 .fw-bold {
     font-family: 'PoppinsBlack';
 }
+
+.floating-nav li,
+.floating-nav h6,
+.floating-nav a {
+    color: white !important;
+}

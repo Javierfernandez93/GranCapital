@@ -5,8 +5,6 @@
 
 namespace JFStudio;
 
-use BTC\Api;
-
 class Layout
 {
 	# const vars
@@ -27,7 +25,7 @@ class Layout
 	public $virtual_view= null;
 	public $_view_root  = null;
 	public $content_virtual_view = null;
-	public $_pretitle  = 'Gran Capital Found ';
+	public $_pretitle  = 'Gran Capital Found - ';
 	public $modules    = [];
 	# protected vars
 

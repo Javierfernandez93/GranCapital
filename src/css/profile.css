@@ -1,0 +1,24 @@
+.img-upload,
+.img-upload:before,
+.img-upload:hover,
+.img-upload:hover:before {
+    transition: opacity ease-in 500ms;
+}
+.img-upload:hover:before {
+    opacity: 1;
+}
+.img-upload:before {
+    cursor: pointer;
+    opacity: 0;
+    content: 'Subir imagen';    
+    position: absolute;
+    left: 0;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}

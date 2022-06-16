@@ -12,13 +12,14 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$Layout->init('Oficina virtual','index',"backoffice",'',TO_ROOT.'/');
+$route = JFStudio\Router::Backoffice;
+$Layout->init(JFStudio\Router::getName($route),'index',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript(['notifications.css','backoffice.js']);
 
 $Layout->setVar([
-	'route' => 'backoffice',
+	'route' =>  $route,
 	'UserLogin' => $UserLogin
 ]);
 $Layout();
