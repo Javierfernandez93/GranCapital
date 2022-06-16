@@ -11,7 +11,9 @@ Vue.createApp({
                 names: null,
                 image: null,
                 active: false,
+                has_card: false,
             },
+            lastReferrals : {},
         }
     },
     watch : {
@@ -25,7 +27,21 @@ Vue.createApp({
     methods: {
         getProfile : function() {
             this.User.getProfile({},(response)=>{
-                Object.assign(this.user, response.user)
+                if(response.s == 1)
+                {
+                    Object.assign(this.user, response.user)
+                }
+            })
+        },
+        getLastReferrals : function() {
+            this.User.getLastReferrals({},(response)=>{
+                if(response.s == 1)
+                {
+                    this.lastReferrals = response.lastReferrals.map((referral)=>{
+                        referral.signup_date = new Date(referral.signup_date*1000).toLocaleDateString()
+                        return referral
+                    })
+                }
             })
         },
         checkFields : function() {
@@ -56,5 +72,6 @@ Vue.createApp({
         this.User = new User
         
         this.getProfile()
+        this.getLastReferrals()
     },
 }).mount('#app')

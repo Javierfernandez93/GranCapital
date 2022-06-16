@@ -38,7 +38,7 @@ Vue.createApp({
             this.User.doSignup(this.user,(response)=>{
                 if(response.s == 1)
                 {
-                    window.location.href = '../../apps/backofice'
+                    window.location.href = '../../apps/backoffice'
                 } else if(response.r == "MAIL_ALREADY_EXISTS") {
                     this.feedback = 'El correo proporcionado ya existe'
                 }

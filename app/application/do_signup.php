@@ -12,8 +12,14 @@ if($data['email'])
     {
         if($UserLogin->doSignup($data))
         {
-            $data['s'] = 1;
-            $data['r'] = 'SIGNUP_OK';
+            if($UserLogin->login($data['email'],$data['password']))
+            {
+                $data['s'] = 1;
+                $data['r'] = 'LOGGED_OK';
+            } else {
+                $data['s'] = 0;
+                $data['r'] = 'NOT_LOGGED';
+            }
         } else {
             $data['s'] = 0;
             $data['r'] = 'ERROR_ON_SIGNUP';

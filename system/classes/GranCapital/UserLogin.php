@@ -63,6 +63,11 @@ class UserLogin extends Orm {
     return $this->session->get('pid');
   }
 
+  public function hasCard() : bool
+  { 
+    return (new UserCard)->hasCard($this->company_id);
+  }
+
   public function setFieldSession($field_session = false) {
     $this->_setFieldSession($field_session);
   }
