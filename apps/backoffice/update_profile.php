@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $Layout = JFStudio\Layout::getInstance();
 
-$UserLogin = new Talento\UserLogin;
+$UserLogin = new GranCapital\UserLogin;
 
 if($UserLogin->_loaded === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");

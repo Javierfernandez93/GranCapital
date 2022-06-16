@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data["mail"]){
 
-	$UserLogin = new Talento\UserLogin;
+	$UserLogin = new GranCapital\UserLogin;
 
 	if($UserLogin->isUniqueMail($data["mail"]))
 	{

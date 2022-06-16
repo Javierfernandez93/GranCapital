@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$SupportUser = new Talento\SupportUser;	
+$SupportUser = new GranCapital\SupportUser;	
 
 if(($SupportUser->_loaded === true) || (HCStudio\Util::checkCurlAuthHeaders($data['PHP_AUTH_USER'],$data['PHP_AUTH_PW'])))
 {

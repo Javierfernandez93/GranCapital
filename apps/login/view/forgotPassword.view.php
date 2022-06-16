@@ -4,9 +4,10 @@
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">
             <div class="col-11 col-xl-6">
-                <div class="card shadow-lg rounded p-4">
+                <div class="card border-0 p-4">
                     <div class="card-header bg-transparent border-0">
-                        <div class="fs-3">Recuperar contraseña</div>
+                        <div class="fs-4 fw-bold">Recuperar contraseña</div>
+                        <div class="text-muted">Ingresa tus datos para continuar</div>
                     </div>
                     <div class="card-body">
 
@@ -14,7 +15,7 @@
                             <input 
                                 :autofocus="true"
                                 :class="isValidMail ? 'is-valid' : ''"
-                                type="email" ref="email" v-model="email" class="form-control" @keydown.enter.exact.prevent="recoverPassword" placeholder="correo electronico" aria-label="correo electronico" aria-describedby="basic-addon1">
+                                type="email" ref="email" v-model="email" class="form-control form-control-lg bg-light" @keydown.enter.exact.prevent="recoverPassword" placeholder="correo electronico" aria-label="correo electronico" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="text-end">
@@ -28,7 +29,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
 
-                        <button :disabled="!isValidMail" class="btn btn-primary w-100" @click="recoverPassword" id="button">
+                        <button :disabled="!isValidMail" class="btn btn-lg btn-primary w-100" @click="recoverPassword" id="button">
                             Recuperar contraseña
                         </button>
                     </div>

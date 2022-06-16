@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Talento\UserLogin;
+$UserLogin = new GranCapital\UserLogin;
 
 if($UserLogin->_loaded === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
@@ -15,7 +15,7 @@ $Layout->init("Ganancias","gains","backoffice","",TO_ROOT."/");
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript(['partner-gains.*']);
 
-$UserLogin = new Talento\UserLogin;
+$UserLogin = new GranCapital\UserLogin;
 
 $Layout->setVar([
 	"nav" => "partner",

@@ -1,28 +1,5 @@
-body {
-  background-image: url('../../src/img/23148.jpg');
-  background-attachment: fixed;
-  background-size: cover;
-}
-.box-step-container {
-  overflow: hidden;
-  border-radius: 5px;
-  border-right: 1px solid #e8e8e8;
-  border-top: 1px solid #e8e8e8;
-  background-color: #fff;
-   margin-bottom: 1rem;
-  box-shadow: 0 12px 12px rgba(0,0,0,0.1);
-}
-.box-step {
-  background-size: contain;
-   margin-bottom: 1rem;
-  background-attachment: fixed;
-  background-position: middle;
-}
-.box {
-  height: -webkit-fill-available;
-  background-color: #fff;
-  border-radius: 4px;
-}
-.form-group{
-  margin-bottom: 1rem;
+.img-bg {
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }

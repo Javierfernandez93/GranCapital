@@ -9,12 +9,12 @@ $returnData = Array();
 
 
 $returnData['buy_per_user_login'] = HCStudio\Util::getVarFromPGS('buy_per_user_login');
-$UserLogin = new Talento\UserLogin;
+$UserLogin = new GranCapital\UserLogin;
 
 if($UserLogin->_loaded === true)
 {
 	if($returnData["buy_per_user_login"]){
-		$BuyPerUser = new Talento\BuyPerUser();
+		$BuyPerUser = new GranCapital\BuyPerUser();
 
 		$BuyPerUser->setId($returnData["buy_per_user_login"]);
 

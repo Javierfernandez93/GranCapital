@@ -14,6 +14,10 @@ class User extends Http
     {
         return this.call('../../app/application/recover_password.php',data,callback);
     }    
+    doSignup(data,callback)
+    {
+        return this.call('../../app/application/recover_password.php',data,callback);
+    }    
 }
 
 export { User }

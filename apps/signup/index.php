@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Talento\UserLogin;
+$UserLogin = new GranCapital\UserLogin;
 
 if($UserLogin->_loaded === true) {
 	HCStudio\Util::redirectTo(TO_ROOT . "/apps/backoffice/");
@@ -11,10 +11,14 @@ if($UserLogin->_loaded === true) {
 $Session = new HCStudio\Session('sponsor');
  
 $Layout = JFStudio\Layout::getInstance();
-$Layout->init("Únete a Los talentos","index","blank","",TO_ROOT."/");
+$Layout->init("Regístrate","index","two_columns","",TO_ROOT."/");
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript(['signup.*','theme.min.css'],true);
+$Layout->setScript([
+	'jquery.mask.js',
+	'signup.vue.js',
+	'signup.css'
+]);
 
 $sponsor_id = $Session->get('sponsor_id');
 
