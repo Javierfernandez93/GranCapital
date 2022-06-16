@@ -1,0 +1,118 @@
+.header-profile-user,
+.user-sidebar .user-img img {
+    object-fit: cover;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.rounded {
+    border-radius: .375rem!important;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.avatar-group .avatar-xs+.avatar-xs {
+    margin-left: -.40625rem;
+}
+
+.avatar-group .avatar+.avatar {
+    margin-left: -.75rem;
+}
+.avatar-xs {
+    width: 1.625rem;
+    height: 1.625rem;
+    font-size: .54167rem;
+}
+.avatar {
+    position: relative;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+}
+.avatar-group {
+    display: inline-flex;
+}
+.avatar-group .avatar:not(:last-child) {
+    -webkit-mask-image: url(../../src/img/avatar-group.svg) !important;
+    mask-image: url(../../src/img/avatar-group.svg);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+.lead,
+.lead-md,
+.lead-xl,
+.lead-xxl {
+    transition: all ease 200ms;
+}
+.lead-md {
+    font-size: 1.6rem;
+}
+.lead-xxl {
+    font-size: 2.5rem;
+}
+.lead-xl {
+    font-size: 2rem;
+}
+.text-ellipsis,
+.single-line-text
+{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.input-group-text {
+    height: 100%;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+.draggable {
+    height: 200px;
+    position: absolute;
+    width: 100%;
+}
+.card {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.upload-file {
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+}
+.draggable,
+.upload-file {
+    height: 200px;
+    width: 100%;
+}
+.avatar-xl {
+    width: 4rem;
+    height: 4rem;
+}
+
+.badge {
+    line-height: 14px;
+}
+.dataTables_paginate {
+    padding-right: 7rem !important;
+}
+/* custom modal styles */
+.modal-content {
+  border: none !important;
+  box-shadow:  0 12px 12px rgba(0,0,0,0.2) !important;
+}

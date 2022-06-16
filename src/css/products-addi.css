@@ -1,0 +1,19 @@
+.card-category:hover
+{
+	box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+	transform: scale(1.04);
+}
+.card-category:hover,
+.card-category
+{
+	transition: all ease 200ms;
+}
+.card-category
+{
+	cursor: pointer;
+	min-height: 200px;
+}
+
+.opacity-3 {
+	opacity: 0.3;
+}

@@ -1,0 +1,17 @@
+p {
+	margin-bottom: 0;
+}
+
+.box-commerce,
+.box-commerce:hover {
+	transition: all ease 200ms;
+}
+.box-commerce:hover {
+	background-color: #dee2e6;
+}
+textarea {
+	background-color: transparent;
+	border: 1px solid #fff;
+	padding: 6px 0;
+	border-radius: 3px;
+}

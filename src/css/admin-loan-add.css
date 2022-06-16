@@ -1,0 +1,9 @@
+#response-client-list {
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	left: 0;
+	top: 0;
+	overflow-y: scroll;
+	max-height: 200px;
+}

@@ -1,0 +1,136 @@
+.pre-attachment-transport .pre-attachment-bg-box, .pre-attachment-offers .pre-attachment-bg-box, .pre-attachment-friendship .pre-attachment-bg-box, .pre-attachment-car-pool .pre-attachment-bg-box{
+  float: right;
+}
+.pre-attachment-love .pre-attachment-bg-box, .pre-attachment-love2 .pre-attachment-bg-box, .pre-attachment-radar-bus .pre-attachment-bg-box, .pre-attachment-job .pre-attachment-bg-box{
+  float: left;
+}
+
+.pre-attachment-transport{
+  background-image: url('../../src/img/page4.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-offers{
+  background-image: url('../../src/img/page5.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-friendship{
+  background-image: url('../../src/img/page6.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-car-pool{
+  background-image: url('../../src/img/page7.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-love{
+  background-image:  url('../../src/img/avatars5.png'), url('../../src/img/page8.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-love2{
+  background-image: url('../../src/img/page11.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-love3{
+  background-image: url('../../src/img/page12.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-radar-bus{
+  background-image: url('../../src/img/page9.jpg');
+  border-bottom: .5px;
+}
+.pre-attachment-job{
+  background-image: url('../../src/img/page10.jpg');
+  /*border-bottom: .5px;*/
+}
+
+.pre-attachment-bg-box{ color: #fff; }
+
+.pre-attachment-transport .pre-attachment-bg-box
+{
+    margin-top: 150px;
+    width: 590px;
+    height: 345px;
+    font-size: 30px;
+    padding: 55px 110px 20px 19px;
+    border-radius: 9px;
+    line-height: 30px;
+}
+.pre-attachment-offers .pre-attachment-bg-box
+{
+    margin-top: 165px;
+    width: 654px;
+    height: 317px;
+    font-size: 30px;
+    padding: 56px 160px 20px 50px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-friendship .pre-attachment-bg-box
+{
+    margin-top: 176px;
+    width: 662px;
+    height: 329px;
+    font-size: 30px;
+    padding: 56px 160px 20px 50px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-car-pool .pre-attachment-bg-box
+{
+    margin-top: 176px;
+    width: 662px;
+    height: 329px;
+    font-size: 30px;
+    padding: 56px 160px 20px 50px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-love .pre-attachment-bg-box
+{
+    margin-top: 176px;
+    width: 662px;
+    height: 329px;
+    font-size: 41.86px;
+    padding: 77px 30px 40px 85px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-love2 .pre-attachment-bg-box
+{
+    margin-top: 176px;
+    width: 662px;
+    height: 329px;
+    font-size: 41.86px;
+    padding: 77px 30px 40px 85px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-love3 .pre-attachment-bg-box
+{
+    margin-top: 188px;
+    width: 484px;
+    height: 293px;
+    font-size: 34px;
+    padding: 50px 57px 9px 60px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-radar-bus .pre-attachment-bg-box
+{
+    margin-top: 155px;
+    width: 696px;
+    height: 386px;
+    font-size: 39px;
+    padding: 70px 45px 20px 90px;
+    border-radius: 10px;
+    line-height: 30px;
+}
+.pre-attachment-job .pre-attachment-bg-box
+{
+    margin-top: 160px;
+    width: 680px;
+    height: 386px;
+    font-size: 33px;
+    padding: 70px 44px 30px 75px;
+    border-radius: 10px;
+    line-height: 30px;
+}

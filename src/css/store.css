@@ -1,0 +1,90 @@
+.img-banner,
+.store-container {
+    height: 250px;
+}
+.store-container {
+    position: relative;
+    box-shadow: inset 0rem -3.2rem 3.2em rgb(0 0 0 / 80%);
+}
+.card-product,
+.card-product:hover
+{
+    transition: all ease 200ms;
+}
+.card-product:hover
+{
+    border-color: #222 !important;
+}
+.card-product {
+    border-radius: 0;
+    border: 1px solid #c5c5c5 !important;
+}
+.card-img {
+  height: 120px;
+  object-fit: cover;
+}
+.card {
+  box-shadow: none;
+  border: none;
+}
+.img-banner {  
+  object-fit: cover;
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+}
+.card-img-top {
+ height: 150px;
+  object-fit: cover;
+}
+
+@keyframes placeHolderShimmer {
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #F6F6F6;
+    background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+.animated-background.img  {
+    height: 56px;
+}
+.animated-background.lead  {
+  height: 30px;
+}
+
+.lead-xl {
+    font-size: 2rem;
+}
+.lead-md {
+    font-size: 1.1rem;
+}
+.lead-sm {
+    font-size: 0.5rem;
+}
+.bold {
+    font-weight: 900 !important;
+}
+
+.single-line,
+.single-text
+{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}

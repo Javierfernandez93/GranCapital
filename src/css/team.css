@@ -1,0 +1,8 @@
+.search-list {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10001;
+	top: 53px;
+	box-shadow: 0 7px 12px rgba(0,0,0,0.2);
+}

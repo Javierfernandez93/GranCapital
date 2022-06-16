@@ -1,0 +1,22 @@
+.container-fluid
+{
+	height: 100% !important;
+}
+.progress-circle,
+#content-wrapper {
+	background-color: #fff !important;
+}
+.progress-circle {
+  margin: 0px;
+  width: 280px;
+  height: 280px !important;
+  position: relative;
+  left: calc(50% - 280px/2);
+}
+.progressbar-text {
+  font-size: 4rem !important;
+}
+#lottie {
+	width: 280px;
+	height: 280px;
+}

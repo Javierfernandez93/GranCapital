@@ -1,0 +1,472 @@
+@font-face {
+    font-family: GeomanistRegular;
+    src: url(../../src/fonts/Geomanist-Regular.otf);
+}
+@font-face {
+    font-family: GeomanistMedium;
+    src: url(../../src/fonts/Geomanist-Medium.otf);
+}
+@font-face {
+  font-family: 'AvenirNextRegular';
+  src: url('../../src/fonts/AvenirNextLTPro-Regular.woff');
+}
+@font-face {
+  font-family: 'AvenirNextBold';
+  src: url('../../src/fonts/AvenirNextLTPro-Bold.woff');
+}
+@font-face {
+  font-family: 'AvenirNextUltraLight';
+  src: url('../../src/fonts/AvenirNext-UltraLight.woff');
+}
+.font-medium {
+  font-family: AvenirNextRegular;
+}
+.font-regular {
+  font-family: AvenirNextBold;
+}
+.font-ultra-light {
+  font-family: AvenirNextUltraLight;
+}
+body {
+  font-family: AvenirNextRegular;
+}
+.section {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 600px;
+}
+.bg-section-9 {
+  background-image: url(../../src/img/section-9-bg-1.png);
+}
+.bg-purple-dark {
+  background-color: #001c31 !important;
+}
+.bg-blue-sky {
+  background-color: #607e8b !important;
+}
+.text-green-river {
+  color: #003f54 !important;
+}
+.text-green-field {
+  color: #003f41 !important;
+}
+.text-blue-sky {
+  color: #607e8b !important;
+}
+.color-green {
+  color: #99ff00;
+}
+.color-orange {
+  color: #ff5600;
+}
+.color-purple {
+  color: #9a2889;
+}
+.color-gray {
+  color: #939196;
+}
+.color-nblue {
+  color: #009CDE;
+}
+.text-blue {
+  color: #283c5c !important;
+}
+.text-purple {
+  color: #646472 !important;
+}
+.color-yellow,
+.text-yellow {
+  color: #fef384;
+}
+.text-blue-dark {
+  color: #002d3e !important;
+}
+.text-xhuge {
+  font-size: 84px;
+  line-height: 76px;
+}
+.text-huge {
+  font-size: 42px;
+}
+.text-blue-soft {
+  color: #bee3f7 !important;
+}
+.bg-orange {
+  background-color: #ec7610;
+}
+.bg-white {
+  background-color: #fff !important;
+}
+.bg-blue-soft {
+  background-color: #bee3f7 !important;
+}
+.bg-blue-dark {
+  background-color: #002d3e !important;
+}
+.bg-blue-dark {
+  background-color: #001c31 !important;
+}
+.bg-purple-dark {
+  background-color: #2e0029 !important;
+}
+.bg-purple {
+  background-color: #390334 !important;
+}
+.bg-yellow {
+  background-color: #ff8d00b8 !important;
+}
+.bg-blue {
+  background-color: #283c5c !important;
+}
+.text-green-river-dark {
+  color: #497f80 !important;
+}
+.bg-green-river-dark {
+  background-color: #497f80 !important;
+}
+.bg-gray {
+  background-color: #e8e8ee;
+}
+.bg-gray {
+  background-color: #1f1f27;
+}
+.bg-green-field {
+  background-color: #003f41 !important;
+}
+.bg-green-river {
+  background-color: #83bfbf !important;
+}
+.no-padding {
+  padding: 0 !important;
+}
+.box-vertical-center {
+  display: flex;
+  align-items: center; 
+}
+.box-circle {
+  display: inline-block;
+  width: 32px;
+  border-radius: 100%;
+  height: 32px;
+  padding: 3px;
+}
+.box-circle-medium {
+  font-size: 22px;
+  letter-spacing: -1px;
+}
+.box-circle-huge {
+  width: 52px;
+  height: 52px;
+  padding: 0px;
+}
+.header {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  display: inline-block;
+  z-index: 1;
+  /*background-image: url(../../src/img/bg/1.png);*/
+  background-color: transparent !important;
+  background-position: top;
+  background-size: cover;
+  background-position: 0px -47px;
+  background-size: 101%;
+}
+.header,
+.fixed-top {
+  z-index: 1001;
+}
+.fixed-top {
+  top: 140px;
+}
+.text-red,
+.color-red {
+  color: #94123c;
+}
+.navbar-inverse .navbar-nav .nav-link {
+  margin: 0 44px;
+}
+.contact_us{
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .hidden-sm {
+    display: none;
+  }
+  .contact_us{
+    padding-left: 100px;
+  }
+}
+.color-white,
+.text-white {
+  color: #fff;
+}
+.box-nav { 
+  z-index: 101;
+  top: 140px;
+  background: #1c646bcc;
+  position: fixed;
+  width: 100%;
+  padding: 8px 83px;
+}
+.box-info-package {
+  height: 200px;
+}
+.mdl-progress {
+  width: 100%;
+}
+
+.box-loader  {
+  position: fixed;
+  z-index: 10001;
+  background: #fff;
+  width: 100%;
+  top: 0;
+  opacity: 0;
+  text-align: center;
+  left: 0;
+}
+
+.invisible-box:hover,
+.invisible-box {
+  transition: all ease 200ms;
+}
+.invisible-box:hover {
+  opacity: 1;
+}
+.invisible-box {
+  opacity: 0;
+}
+
+.color-yellow {
+  color: #f7b400 !important;
+}
+.btn-yellow {
+  padding: 12px 22px;
+  font-size: 18px;
+  background-color: #f9c200 !important;
+  color: #111 !important;
+}
+.box-stall {
+  border-top: 4px solid #555;
+  padding-top:6px;
+  height: 58px;
+}
+.box-think {
+  height: 162px;
+  /*background-color: #f4f4f4;*/
+}
+
+footer a {
+  color: #fff !important;
+}
+
+.btn-outline {
+  border: 5px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  padding: 2px 14px 8px 15px;
+}
+.btn-outline-blue {
+  border-color: #47BBEA;
+  color: #47BBEA;
+}
+
+.btn-special {
+  background-color: #00917f;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 2px;
+  padding: 8px 22px;
+  font-weight: 600;
+}
+.btn-purple {
+  background-color: #390334;
+  color: #fff;
+  font-size: 20px;
+}
+.border-out {
+  border-radius: 100%;
+}
+.border-out:hover,
+.border-out {
+  transition: all ease 400ms;
+}
+.border-out:hover {
+  box-shadow: 0 0 0 12px #276d55;
+
+}
+.btn-purple {
+  background: #fff;
+  color: #370236;
+  font-weight: 600;
+  box-shadow: 0 0 0 10px rgba(0,0,0,0.1);
+  margin: 12px 0;
+
+}
+.btn {
+  border-radius: 4rem;
+}
+.title{
+  font-size: 182px;
+  line-height: 162px;
+}
+.text-content{
+  font-size: 22px;
+}
+.seccion1{
+ position: absolute;
+ bottom: 0; 
+ width: 100%;
+}
+.subtitle{
+  font-size: 2.5rem;
+
+}
+.subtitle2{
+  font-size: 2.5rem;
+
+}
+.content3{
+  border-radius: 0 10rem 10rem 10rem;
+}
+.content6{
+  background-image: url(../../src/img/bg/deal/7.png);
+  background-size: contain;
+  background-position: left;
+  height: 400px;
+}
+
+.content-price{
+  background-image: url(../../src/img/bg/deal/4.png);
+}
+.content-price2{
+  background-image: url(../../src/img/bg/deal/content-1.png);
+}
+.content-img-3{
+  background-image: url(../../src/img/bg/deal/8.png);
+
+}
+
+@media only screen and (max-width: 1024px) {
+  .content-img{
+
+  }
+ .content-price{
+  
+  }
+  .content-price2{
+    background-image: url(../../src/img/bg/movil-2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .content-img-3{
+    background-image: url();
+  }
+  .title {
+    font-size: 49px;
+    line-height: 70px;
+  }
+  .subtitle{
+    padding-top: 5px;
+    font-size: 1rem;
+  }
+  .text-content{
+    font-size: 18px;
+  }
+  .text-content1{
+    color: white;
+    font-size: 18px;
+  }
+  .seccion1{
+    position: absolute;
+    bottom: 125px;
+    width: 100%;
+  }
+  .subtitle2{
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+  }
+  .content{
+    margin-right: 19px;
+    margin-left: 31px;
+    border-radius: 0 10rem 10rem 10rem;
+  }
+  .section-2 {
+    height: 232px !important;
+    min-height: 232px !important;
+  }
+  .content6{
+    background-image: url(../../src/img/bg/10.png);
+    background-size: cover;
+    height: 400px;
+    background-blend-mode: color-burn !important;;
+    background-color: #10101087 !important;
+  }
+  .media-img{
+    margin-left: -3px;
+    height: 84%;
+  }
+  .media-img-logos{
+    width: 54px;
+  }
+  .filter{
+    -webkit-filter: brightness(50%);
+    filter: brightness(50%);
+  }
+  .seccion-1{
+    background-color: #1a242b;
+    min-height: 200px;
+  }
+  .content-img{
+    background-color: white;
+  }
+  .content-img2{
+    background-image: url(../../src/img/bg/movil-2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .content-img1{
+    background-image: url(../../src/img/bg/movil-1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .title {
+      font-size: 50px;
+      line-height: 79px;
+  }
+}
+
+.box-user-image {
+  background-image: url(https://www.futexperto.com/src/img/logo.png);
+  width: 42px;
+  height: 42px;
+  display: inline-block;
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: -12px;
+  border: 2px solid #07A;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  background-color: #ff8100;
+  background-blend-mode: multiply;
+}
+.play{
+    padding: 35px;
+    margin-top: 20px;
+}
+nav, .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+nav {
+    font-size: 21px;
+}
+.header nav a {
+  color: #f09300 !important;
+}

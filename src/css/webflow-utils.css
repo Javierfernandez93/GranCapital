@@ -1,0 +1,93 @@
+.gdropdown-show,
+.gdropdown
+{
+  transition: all ease 200ms;
+}
+.gdropdown {
+  box-shadow: 0 12px 12px rgba(0,0,0,0.05);
+  border-color: transparent;
+}
+.gdropdown {
+  display: none;
+}
+.gdropdown-show .card-body {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.gdropdown-show {
+  display: block;
+  position: absolute;
+  width: 30rem;
+  z-index: 100001;
+  animation: easeIn ease-out 400ms forwards;
+}
+
+@keyframes easeIn {
+  0% {
+    opacity: 0.4;
+    margin-top: -40px;
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px)
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+
+/* inspector-dimensions */
+.gdimensions {
+  position: relative;
+}
+.gdimensions-input,
+.gdimensions-input:active,
+.gdimensions-input:focus {
+  border: none;
+  outline: none;
+  color: white;
+}
+.gdimensions-input {
+  width: 1.5rem;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+  background-color: transparent;
+}
+.gdimensions-border:hover,
+.gdimensions-middle:hover,
+.gdimensions-padding:hover,
+.gdimensions-margin:hover {
+  background-color: rgba(0,0,0,0.1); 
+}
+.gdimensions-border,
+.gdimensions-middle,
+.gdimensions-padding,
+.gdimensions-border:hover,
+.gdimensions-middle:hover,
+.gdimensions-padding:hover,
+.gdimensions-margin,
+.gdimensions-margin:hover
+{
+  transition: all ease 200ms;
+}
+.gdimensions-border:before,
+.gdimensions-padding:before,
+.gdimensions-margin:before {
+  top: 0.1rem;
+  color: white;
+  position: absolute;
+  font-size: 12px;
+}
+.gdimensions-border:before {
+  content: 'Border';
+}
+.gdimensions-padding:before {
+  content: 'Padding';
+}
+.gdimensions-margin:before {
+  left: 12px;
+  content: 'Margin';
+}

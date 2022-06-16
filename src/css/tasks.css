@@ -1,0 +1,32 @@
+.task button {
+  padding: 1rem;
+}
+
+.form-control-flush:focus {
+    box-shadow: none !important;
+}
+
+.form-control-flush {
+	font-size: 17px !important;
+}
+table .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle,
+table .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
+  border-radius: 0 !important;
+}
+
+.border-top,
+.border-bottom {
+	border-color: #edf2f8 !important;
+}
+
+.card-body-special-alert
+{
+	padding: 12px 6px !important;
+}
+.nav-link:hover {
+	opacity: 1;
+}
+.table thead th {
+	/* background-color: #0b73ff !important;
+	color: white; */
+}

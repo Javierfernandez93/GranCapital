@@ -1,0 +1,35 @@
+.chat-item-selected .h2 {
+  color: #fff;
+}
+.chat-item-selected {
+  background: rgb(45,123,229);
+background: linear-gradient(45deg, rgba(45,123,229,1) 0%, rgba(15,69,143,1) 100%);
+}
+.chat-item:hover {
+  cursor: pointer;
+}
+.chat-item,
+.chat-item:hover {
+  transition: all ease 300ms;
+}
+#ask-templates 
+{
+	position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 10;
+}
+.chat-item img {
+  filter: invert(0.35);
+}
+.chat-item-selected img {
+  filter: invert(1);
+}
+.chat-item-selected .text-success,
+.chat-item-selected .text-muted {
+	color: #fff !important;
+}
+.bg-gray {
+    background-color: #f0f0f0 !important;
+}

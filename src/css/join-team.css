@@ -1,0 +1,63 @@
+textarea {
+}
+
+input.form-control {
+    display: block !important;
+    width: 100% !important;
+    height: calc(1.5em + 1rem + 2px) !important;
+    padding: .5rem .75rem !important;
+    font-size: .9375rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #12263f !important;
+    background-color: #fff !important;
+    background-clip: padding-box !important;
+    border: 1px solid #d2ddec !important;
+    border-radius: .375rem !important;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+}
+.display-5,
+.display-3,
+.display-4,
+#proyect-name {
+  transition: all ease 500ms;
+}
+
+.private-proyect-bg .display-3,
+.private-proyect-bg .display-2,
+.private-proyect-bg .sticky-footer {
+  color: #fff;
+}
+#content-wrapper,
+.private-proyect-bg {
+  transition: all ease 200ms;
+}
+.private-proyect-bg {
+  animation: changeColor 500ms forwards; 
+}
+
+@keyframes changeColor {
+  to {
+    background-color: #36425a;
+  }
+}
+
+.h-hide {
+  opacity: 0;
+  max-height: 0;
+}
+.h-normal {
+  opacity: 1;
+  max-height: 500px;
+  transition: all 500ms ease;
+}
+
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 9;
+  bottom: 0;
+  display: inline-block;
+}

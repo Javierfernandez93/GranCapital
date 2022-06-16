@@ -1,0 +1,27 @@
+.bg-primary-g
+{
+  	background: rgb(22,117,238);
+	background: linear-gradient(90deg, rgba(22,117,238,1) 0%, rgba(58,141,243,1) 48%, rgba(90,167,248,1) 100%);
+}
+
+.avatar-product {
+    width: 13rem !important;
+    height: 13rem !important;
+}
+.avatar-product  .avatar-img {
+    object-fit: contain !important;
+}
+
+
+.input-ghost:focus,
+.input-ghost:active
+{
+    outline: none;
+    border: 0;
+    border-bottom: 2px solid #cbcbcb;
+}
+.input-ghost
+{
+    border: none;
+    border-bottom: 2px solid transparent;
+}

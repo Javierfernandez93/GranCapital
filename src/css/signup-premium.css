@@ -1,0 +1,56 @@
+body {
+  background-attachment: fixed;
+  background-size: cover;
+}
+.box-step-container {
+  overflow: hidden;
+  border-radius: 5px;
+  border-right: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+  background-color: #fff;
+  box-shadow: 0 12px 12px rgba(0,0,0,0.1);
+}
+.box-step {
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: middle;
+}
+.box {
+  background-color: #fff;
+  border-radius: 4px;
+}
+label {
+  font-size: 12px;
+  margin: 0;
+  color: #454545;
+}
+.form-check-label {
+    font-size: 18px;
+}
+.box {
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    background: white;
+    box-shadow: 0px 25px 21px 10px rgba(0,0,0,0.08);
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 0 0 8px 8px;
+}
+
+.custom-select.is-valid, .form-control.is-valid, .was-validated .custom-select:valid, .was-validated .form-control:valid {
+    border-color: #20a4f1;
+}
+.text-success {
+    color: #20a4f1 !important;
+}
+.custom-select.is-valid:focus, .form-control.is-valid:focus, .was-validated .custom-select:valid:focus, .was-validated .form-control:valid:focus {
+    border-color: #20a4f1;
+}
+
+@media (max-width: 760px) {
+  .box {
+    border: none;
+    background: white;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

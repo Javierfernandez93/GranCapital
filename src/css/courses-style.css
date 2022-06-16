@@ -1,0 +1,23 @@
+#nav {
+    -webkit-animation: bgcolor ease-in 1300ms forwards;
+    animation: bgcolor ease-in 1300ms forwards;
+    animation-delay: 200ms;
+}
+body, #wrapper #content-wrapper {
+    background-color: #12263f !important;
+}
+.header-body {
+    border-bottom-color: #29445d !important;
+}
+#nav {
+    border-right-color: #29445d !important;
+}
+
+@keyframes bgcolor {
+	0% {
+		background-color: #0149b0;
+	}
+    100% {
+        background-color: #12263f;
+    }
+}

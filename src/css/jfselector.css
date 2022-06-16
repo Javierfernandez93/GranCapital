@@ -1,0 +1,67 @@
+.box-option li
+{
+	position: absolute;
+	background: #07A;
+	color: #fff;
+	width: 100.9%;
+	top: 0px;
+	text-align: left;
+	z-index: 10000;
+	border: 1px solid rgba(0,0,0,0.1);
+	left: -1px;
+	padding-left: 11px;
+
+}
+.box-option:before {
+    content: '\f107';
+    position: absolute;
+    border-radius: 0 2px 2px 0;
+    right: 0px;
+    z-index: 10003;
+    font-family: fontAwesome;
+    top: 0px;
+    color: #fff;
+    background-color: #02628c;
+    padding: 0px 9px;
+    font-size: 16px;
+}
+.box-option li:hover,
+.box-option:hover
+{
+	background-color: #02628c;
+}
+.box-option li:hover,
+.box-option:hover,
+.box-option li,
+.box-option
+{
+	transition: all ease 200ms;
+}
+.box-option
+{
+	list-style: none;
+	background-color: #07A;
+	width: 112%;
+	display: inline-block;
+	overflow: hidden;
+	border-radius: 2px;
+	padding: 12px 0 13px 0;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+	border: 1px solid rgba(0,0,0,0.1);
+	cursor: pointer;
+}
+.box-option-item-selected
+{
+	z-index: 10002 !important;
+}
+.box-option-show
+{
+	position: absolute;
+	left: 0;
+	height: 200px;
+	overflow-y: visible;
+}
+.box-option-item-show
+{
+	position: relative;
+}

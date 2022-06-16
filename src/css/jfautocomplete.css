@@ -1,0 +1,60 @@
+.box-autocomplete
+{
+    width: 100%;
+    position: absolute;
+    z-index: 100001;
+    background: #fff;
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: -3px;
+    border-right: 1px solid #3C763D;
+    border-left: 1px solid #3C763D;
+    /*border-bottom: 1px solid #3C763D;*/
+    border-radius: 0 0 5px 5px;
+}
+.box-message-autocomplete
+{
+  padding: 12px 0;
+}
+.box-autocomplete ul
+{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+.box-autocomplete li:hover,
+.box-autocomplete li
+{
+  transition: all ease 100ms;
+}
+.box-autocomplete li:hover
+{
+  background-color: #666;
+}
+.box-autocomplete li
+{
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  list-style: none;
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 22px;
+  background: #31A4A4;
+  color: #EEE;
+}
+.box-autocomplete-bold
+{
+  color: #fff;
+  display: inline-block;
+  font-weight: 900;
+}
+.box-autocomplete-coincidences
+{
+  text-align: center;
+  background-color: #666;
+  color: #fff;
+  width: 100%;
+  padding: 7px 22px;
+  line-height: 14px;
+}

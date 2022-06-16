@@ -1,0 +1,26 @@
+body {
+  background-attachment: fixed;
+  background-size: cover;
+}
+.box-step-container {
+  overflow: hidden;
+  border-radius: 5px;
+  border-right: 1px solid #e8e8e8;
+  border-top: 1px solid #e8e8e8;
+  background-color: #fff;
+  box-shadow: 0 12px 12px rgba(0,0,0,0.1);
+}
+.box-step {
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: middle;
+}
+.box {
+  background-color: #fff;
+  border-radius: 4px;
+}
+label {
+  font-size: 12px;
+  margin: 0;
+  color: #454545;
+}

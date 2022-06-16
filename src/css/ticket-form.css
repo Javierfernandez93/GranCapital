@@ -1,0 +1,90 @@
+.box-payu,
+.box-oxxo,
+.box-deposit,
+.box-deposit,
+.box-airtm,
+.box-paypal,
+.box-localbitcoin {
+  box-shadow: 0 12px 12px rgba(0,0,0,0.1);
+  border-radius: 6px;
+}
+.box-localbitcoin {
+  background: rgb(50,50,50);
+  background: linear-gradient(90deg, rgba(50,50,50,1) 0%, rgba(0,0,0,1) 60%);
+}
+.box-deposit {
+  background: rgb(28,28,32);
+  background: linear-gradient(135deg, rgba(28,28,32,1) 0%, rgba(50,33,59,1) 100%);
+}
+.box-airtm {
+  background: rgb(28,28,32);
+  background: linear-gradient(135deg, rgba(28,28,32,1) 0%, rgba(50,33,59,1) 100%);
+}
+.box-oxxo {
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 52%, rgba(227,227,227,1) 100%);
+}
+.box-bitso {
+  background: rgb(28,28,32);
+  background: linear-gradient(135deg, rgba(28,28,32,1) 0%, rgba(50,33,59,1) 100%);
+}
+.box-payu {
+  background: rgb(28,28,32);
+  background: linear-gradient(135deg, rgba(28,28,32,1) 0%, rgba(50,33,59,1) 100%);
+}
+.box-paypal {
+  background-color: #1470BA;
+  background: rgb(33,156,222);
+  background: linear-gradient(45deg, rgba(33,156,222,1) 0%, rgba(2,33,105,1) 100%);
+}
+.box-resume-paypal {
+  border-radius: 3px;
+  background: rgba(0,0,0,0.3);
+}
+.payu,
+.airtm,
+.deposit,
+.bitso,
+.localbitcoin,
+.paypal {
+  color: white;
+}
+.paypal form input[type=submit] {
+  background: #fff;
+  border-radius: 100%;
+  color: #1470BA;
+  font-size: 19px;
+  width: 100%;
+  outline: none;
+  margin: 0;
+  border: none;
+}
+.payu form input {
+    border: none;
+    margin: 0 auto;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+}
+.payu form {
+    background-color: transparent;
+}
+.button-paypal,
+.button-paypal:hover {
+  transition: all ease 400ms;
+}
+.button-paypal:hover {
+  background-color: #222;
+  text-decoration: none;
+}
+.button-paypal {
+  cursor: pointer;
+  text-decoration: none;
+  width: 100%;
+    background: #fff;
+    display: inline-block;
+    padding: 4px 22px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 4px;
+}

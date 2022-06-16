@@ -1,0 +1,64 @@
+.product-color-xl {
+	width: 64px;
+	height: 64px;
+}
+.product-color-md {
+	width: 42px;
+	height: 42px;
+}
+.product-color-sm {
+	width: 22px;
+	height: 22px;
+}
+.product-color-xs {
+	width: 16px;
+	height: 16px;
+}
+.product-color-xl,
+.product-color-md,
+.product-color-sm,
+.product-color-xs
+{
+	border-radius: 100%;
+	display: inline-block;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.image-upload {
+	border-radius: .75rem;
+	background-size: contain;
+    background-repeat: no-repeat;
+    height: 250px;
+    background-position: center;
+}
+.image-upload,
+.image-upload:hover
+{
+	transition: all ease 350ms;
+}
+.image-upload:hover 
+{
+	border: 3px solid rgba(0,0,0,0.1);
+}
+.image-upload {
+	cursor: pointer;
+}
+.simditor .simditor-toolbar > ul > li > .toolbar-item.toolbar-item-image {
+	
+}
+.no-publicated:after {
+	/*content: attr(data-message);*/
+    position: absolute;
+    background-color: #f00;
+    right: 0;
+    color: white;
+    padding: 5px 32px;
+    border-radius: 0 0 4px 4px;
+    right: 12px;
+    font-weight: 900;
+}
+.avatar-img-main {
+	object-fit: contain !important;
+}
+.select2-container {
+	width: 100% !important;
+}
