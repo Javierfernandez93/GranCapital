@@ -12,13 +12,15 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$Layout->init('Oficina virtual','index',"backoffice",'',TO_ROOT.'/');
+$Layout->init('Perfil de usuario','profile',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript(['notifications.css','backoffice.js']);
+$Layout->setScript([
+	'profile.vue.js'
+]);
 
 $Layout->setVar([
-	'route' => 'backoffice',
+    'route' => 'profile',
 	'UserLogin' => $UserLogin
 ]);
 $Layout();

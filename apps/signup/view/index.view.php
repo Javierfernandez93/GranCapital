@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
                         <div class="input-group mb-3">
-                            <input :autofocus="true" type="text" ref="name" v-model="user.names" class="form-control form-control-lg bg-light" @keydown.enter.exact.prevent="$refs.phone.focus()" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+                            <input :autofocus="true" type="text" ref="names" v-model="user.names" class="form-control form-control-lg bg-light" @keydown.enter.exact.prevent="$refs.phone.focus()" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
                         </div>
 
 						<div class="input-group mb-3">
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input :type="fieldPasswordType" ref="password" @keydown.enter.exact.prevent="doLogin" v-model="user.password" class="form-control form-control-lg bg-light" placeholder="contraseña" aria-label="contraseña" aria-describedby="basic-addon1">
+                            <input :type="fieldPasswordType" ref="password" @keydown.enter.exact.prevent="doSignup" v-model="user.password" class="form-control form-control-lg bg-light" placeholder="contraseña" aria-label="contraseña" aria-describedby="basic-addon1">
                             <button class="btn btn-primary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
                                 <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
                                 <i v-else class="bi bi-eye-slash"></i>
@@ -39,7 +39,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
 
-                        <button :disabled="!userComplete" class="btn btn-primary btn-lg w-100 mb-3" @click="doLogin" id="button">
+                        <button :disabled="!userComplete" class="btn btn-primary btn-lg w-100 mb-3" @click="doSignup" id="button">
                             Crear mi cuenta
                         </button>
 

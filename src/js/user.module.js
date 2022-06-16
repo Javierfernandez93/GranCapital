@@ -16,7 +16,15 @@ class User extends Http
     }    
     doSignup(data,callback)
     {
-        return this.call('../../app/application/recover_password.php',data,callback);
+        return this.call('../../app/application/do_signup.php',data,callback);
+    }    
+    getProfile(data,callback)
+    {
+        return this.call('../../app/application/get_profile.php',data,callback);
+    }    
+    uploadImageProfile(data,progress,callback)
+    {
+        return this.callFile('../../app/application/upload_image_profile.php',data,callback,progress);
     }    
 }
 
