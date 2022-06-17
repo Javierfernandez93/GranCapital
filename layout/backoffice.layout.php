@@ -220,10 +220,16 @@
                         </div>
                     </div>
                     <ul class="navbar-nav justify-content-end">
-                        <li class="nav-item d-flex align-items-center">
+                        <li class="nav-item d-flex pe-3 align-items-center">
                             <a href="javascript:;" class="nav-link  font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
-                                <span class="d-sm-inline d-none">Sign In</span>
+                                <span class="d-sm-inline d-none"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item d-flex pe-3 align-items-center">
+                            <a href="javascript:;" class="nav-link  font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
+                                <span class="d-sm-inline d-none"></span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">

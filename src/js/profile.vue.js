@@ -10,7 +10,7 @@ Vue.createApp({
                 email: null,
                 names: null,
                 image: null,
-                active: false,
+                plan: false,
                 has_card: false,
             },
             lastReferrals : {},

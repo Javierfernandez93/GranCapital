@@ -11,7 +11,7 @@ if($UserLogin->_loaded === true)
     $data["user"] = [
         'email' => $UserLogin->email,
         'names' => $UserLogin->_data['user_data']['names'],
-        'active' => true,
+        'plan' => $UserLogin->getPlan(),
         'has_card' => $UserLogin->hasCard(),
         'image' => $UserLogin->_data['user_account']['image'],
     ];

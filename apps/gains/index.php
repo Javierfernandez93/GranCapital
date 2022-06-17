@@ -16,7 +16,10 @@ $route = JFStudio\Router::Gains;
 $Layout->init(JFStudio\Router::getName($route),'index',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript(['notifications.css','backoffice.js']);
+$Layout->setScript([
+	'user.module.js',
+	'gains.vue.js'
+]);
 
 $Layout->setVar([
 	'route' =>  $route,

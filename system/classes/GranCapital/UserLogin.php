@@ -7,6 +7,8 @@ use HCStudio\Session;
 use HCStudio\Token;
 use HCStudio\Util;
 
+use GranCapital\UserPlan;
+
 class UserLogin extends Orm {
   protected $tblName  = 'user_login';
   private $session = false;
@@ -61,11 +63,6 @@ class UserLogin extends Orm {
   
   public function checkCS() {
     return $this->session->get('pid');
-  }
-
-  public function hasCard() : bool
-  { 
-    return (new UserCard)->hasCard($this->company_id);
   }
 
   public function setFieldSession($field_session = false) {
@@ -422,5 +419,21 @@ class UserLogin extends Orm {
   function checkRedirection()
   {
     // @todo
+  }
+
+  /* profile fun */  
+  public function getPlan()
+  {
+    return (new UserPlan)->getPlan($this->company_id);
+  }
+  
+  public function hasPlan() : bool
+  {
+    return (new UserPlan)->hasPlan($this->company_id);
+  }
+
+  public function hasCard() : bool
+  { 
+    return (new UserCard)->hasCard($this->company_id);
   }
 }

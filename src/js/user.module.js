@@ -29,6 +29,10 @@ class User extends Http
     getReferrals(data,callback)
     {
         return this.call('../../app/application/get_referrals.php',data,callback);
+    }
+    getProfits(data,callback)
+    {
+        return this.call('../../app/application/get_profits.php',data,callback);
     }    
     // callfile
     uploadImageProfile(data,progress,callback)

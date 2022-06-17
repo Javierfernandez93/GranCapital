@@ -26,10 +26,13 @@
                 <div class="col-auto my-auto text-end">
                     <div>Estatus</div>
                     <div>
-                        <span class="badge bg-primary" v-if="user.active">
-                            Usuario activo
+                        <span 
+                            v-if="user.plan"
+                            class="badge bg-primary">
+                            Activo en PLAN {{user.plan.name}}
                         </span>
-                        <span class="badge bg-secondary" v-else>
+                        <span v-else
+                            class="badge bg-secondary">
                             Usuario inactivo
                         </span>
                     </div>
