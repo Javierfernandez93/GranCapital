@@ -1,7 +1,7 @@
 <div class="container-fluid py-4" id="app">
     <profit-viewer></profit-viewer>
 
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">

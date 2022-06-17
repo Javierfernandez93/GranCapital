@@ -1,13 +1,19 @@
 import { User } from '../../src/js/user.module.js'
 
+/* vue */
+import { ProfitViewer } from '../../src/js/profitViewer.vue.js'
+
 Vue.createApp({
     components : { 
-        
+        ProfitViewer
     },
     data() {
         return {
             User : null,
-            profits : {},
+            gains : {
+                total : 0,
+                profits : {}
+            },
         }
     },
     watch : {
@@ -23,10 +29,12 @@ Vue.createApp({
             this.User.getProfits({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.profits = response.profits.map((profit)=>{
+                    this.gains.profits = response.profits.map((profit)=>{
                         profit['create_date'] = new Date(profit['create_date']*1000).toLocaleDateString()
                         return profit
                     })
+                    
+                    this.gains.total = this.gains.profits.reduce((a, b) => a + b['profit'], 0);
                 }
             })
         },

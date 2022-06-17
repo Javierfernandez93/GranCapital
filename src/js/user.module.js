@@ -34,6 +34,10 @@ class User extends Http
     {
         return this.call('../../app/application/get_profits.php',data,callback);
     }    
+    getProfitStats(data,callback)
+    {
+        return this.call('../../app/application/get_profit_stats.php',data,callback);
+    }    
     // callfile
     uploadImageProfile(data,progress,callback)
     {

@@ -1,3 +1,4 @@
+import { User } from '../../src/js/user.module.js'   
 
 const ProfitViewer = {
     name : 'profit-viewer',
@@ -5,22 +6,44 @@ const ProfitViewer = {
     emits : [],
     data() {
         return {
-            now : null,
+            User : null,
+            gainStats : {
+                investment : {
+                    total: 0,
+                    percentaje : 0
+                },
+                referral : {
+                    total : 0,
+                    percentaje : 0
+                },
+                newReferral : 0,
+                totalReferral : 0,
+            }
         }
     },
     watch : {
         
     },
     methods: {
-        
+        getProfitStats : function() {
+            this.User.getProfitStats({},(response)=>{
+                if(response.s == 1)
+                {
+                    Object.assign(this.gainStats,response.gainStats)
+                }
+            })
+        }
     },
     updated() {
     },
     mounted() 
     {   
+        this.User = new User
+
+        this.getProfitStats()
     },
     template : `
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -29,8 +52,13 @@ const ProfitViewer = {
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Ganancias por inversión</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $53,000
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                        $ {{gainStats.investment.total}}
+                                        <span v-if="gainStats.investment.percentaje > 0" class="text-success text-sm font-weight-bolder">
+                                            +{{gainStats.investment.percentaje}}%
+                                        </span>
+                                        <span v-else class="text-danger text-sm font-weight-bolder">
+                                            -{{gainStats.investment.percentaje}}%
+                                        </span>
                                     </h5>
                                 </div>
                             </div>
@@ -51,8 +79,13 @@ const ProfitViewer = {
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Ganancias por referidos</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        2,300
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                        $ {{gainStats.referral.percentaje}}
+                                        <span v-if="gainStats.referral.percentaje > 0" class="text-success text-sm font-weight-bolder">
+                                            +{{gainStats.referral.percentaje}}%
+                                        </span>
+                                        <span v-else class="text-danger text-sm font-weight-bolder">
+                                            -{{gainStats.referral.percentaje}}%
+                                        </span>
                                     </h5>
                                 </div>
                             </div>
@@ -73,8 +106,8 @@ const ProfitViewer = {
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Nuevos referidos</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        +3,462
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                        +{{gainStats.newReferral}}
+                                        <span class="d-none text-danger text-sm font-weight-bolder">-2%</span>
                                     </h5>
                                 </div>
                             </div>
@@ -95,8 +128,8 @@ const ProfitViewer = {
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Referidos</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $103,430
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
+                                        {{gainStats.totalReferral}}
+                                        <span class="d-none text-success text-sm font-weight-bolder">+5%</span>
                                     </h5>
                                 </div>
                             </div>
