@@ -7,6 +7,7 @@ class Router {
     const Profile = 2;
     const Gains = 3;
     const Referrals = 4;
+    const Signup = 5;
 
     static function getName(int $route = null)
     {
@@ -20,6 +21,8 @@ class Router {
                 return 'Ganancias';
             case self::Referrals:
                 return 'Referidos';
+            case self::Signup:
+                return 'Regístrate';
             default: 
                 return 'Sin nombre';
         }

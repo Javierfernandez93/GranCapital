@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center align-items-center vh-100" id="app">
-    <div class="col-12 col-xl-6 img-bg bg-primary h-100" style="background-image: url('../../src/img/bg.jpg')">
+    <div class="col-12 col-xl-6 img-bg bg-primary h-100 bg-cover" style="background-image: url('../../src/img/curved-images/curved14.jpg')">
     </div>
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">

@@ -31,3 +31,6 @@ body {
 .floating-nav a {
     color: white !important;
 }
+.bg-cover {
+    background-size: cover;
+}

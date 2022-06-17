@@ -29,6 +29,18 @@ Vue.createApp({
         },
     },
     methods: {
+        getReferral : function(user_login_id) {
+            console.log(user_login_id)
+
+            this.User.doSignup(this.user,(response)=>{
+                if(response.s == 1)
+                {
+                    window.location.href = '../../apps/backoffice'
+                } else if(response.r == "MAIL_ALREADY_EXISTS") {
+                    this.feedback = 'El correo proporcionado ya existe'
+                }
+            })
+        },
         toggleFieldPasswordType : function() {
             this.fieldPasswordType = this.fieldPasswordType == 'password' ? 'text' : 'password'
         },
@@ -56,6 +68,11 @@ Vue.createApp({
         this.User = new User
 
         $(this.$refs.phone).mask('00 0000-0000');
+
+        if(getParam('uid'))
+        {
+            this.getReferral(getParam('uid'))
+        }
 
     },
 }).mount('#app')

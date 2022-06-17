@@ -12,12 +12,16 @@
                     <div class="card-body">
                         <label>Nombre</label>
                         <div class="mb-3">
-                            <input :autofocus="true" type="text" ref="names" v-model="user.names" class="form-control" @keydown.enter.exact.prevent="$refs.phone.focus()" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
+                            <input 
+                                :class="user.names ? 'is-valid' : ''"
+                                :autofocus="true" type="text" ref="names" v-model="user.names" class="form-control" @keydown.enter.exact.prevent="$refs.phone.focus()" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1">
                         </div>
 
                         <label>Teléfono</label>
 						<div class="mb-3">
-                            <input type="text" ref="phone" v-model="user.phone" class="form-control" @keydown.enter.exact.prevent="$refs.email.focus()" placeholder="Teléfono" aria-label="Teléfono" aria-describedby="basic-addon1">
+                            <input 
+                                :class="user.phone ? 'is-valid' : ''"
+                                type="text" ref="phone" v-model="user.phone" class="form-control" @keydown.enter.exact.prevent="$refs.email.focus()" placeholder="Teléfono" aria-label="Teléfono" aria-describedby="basic-addon1">
                         </div>
                         
                         <label>Correo electrónico</label>
@@ -28,8 +32,14 @@
                         </div>
 
                         <label>Contraseña</label>
-                        <div class="mb-3">
-                            <input :type="fieldPasswordType" ref="password" @keydown.enter.exact.prevent="doSignup" v-model="user.password" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="basic-addon1">
+                        <div class="input-group mb-3">
+                            <input 
+                                :class="user.password ? 'is-valid' : ''"
+                                :type="fieldPasswordType" 
+                                ref="password" 
+                                @keydown.enter.exact.prevent="doSignup" 
+                                v-model="user.password" 
+                                style="height:41px;" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="basic-addon1">
                             <button class="btn btn-primary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
                                 <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
                                 <i v-else class="bi bi-eye-slash"></i>

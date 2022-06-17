@@ -11,7 +11,9 @@ if($UserLogin->_loaded === true) {
 $Session = new HCStudio\Session('sponsor');
  
 $Layout = JFStudio\Layout::getInstance();
-$Layout->init("Regístrate","index","two_columns","",TO_ROOT."/");
+
+$route = JFStudio\Router::Signup;
+$Layout->init(JFStudio\Router::getName($route),"index","two_columns","",TO_ROOT."/");
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
@@ -27,8 +29,6 @@ if(!empty(HCStudio\Util::getVarFromPGS('sponsor_id'))) {
 }
 
 $Layout->setVar([
-	"nav"=>'plan',
-	"black_theme"=>true,
 	'UserLogin' => $UserLogin,
 	'sponsor_id' => $sponsor_id,
 	'Country' => (new World\Country)
