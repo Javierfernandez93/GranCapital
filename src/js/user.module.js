@@ -10,9 +10,17 @@ class User extends Http
     {
         return this.call('../../app/application/do_login.php',data,callback);
     }    
+    changePassword(data,callback)
+    {
+        return this.call('../../app/application/change_password.php',data,callback);
+    }    
     recoverPassword(data,callback)
     {
         return this.call('../../app/application/recover_password.php',data,callback);
+    }    
+    getAuthToChangePassword(data,callback)
+    {
+        return this.call('../../app/application/get_auth_to_change_password.php',data,callback);
     }    
     doSignup(data,callback)
     {
@@ -29,6 +37,10 @@ class User extends Http
     getReferrals(data,callback)
     {
         return this.call('../../app/application/get_referrals.php',data,callback);
+    }
+    getReferral(data,callback)
+    {
+        return this.call('../../app/application/get_referral.php',data,callback);
     }
     getProfits(data,callback)
     {

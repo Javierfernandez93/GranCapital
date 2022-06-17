@@ -81,6 +81,7 @@ class Token {
 			return self::$IV_KEY;
 		}
 	}
+	
 	public function getToken($params = null) 
 	{
 		$key = $this->_makeKey();
@@ -95,6 +96,7 @@ class Token {
 			"token" => $token,
 		];
 	}
+
 	public function checkToken($params = null) 
 	{
 		if (isset($params['key'],$params['token']) === true) 

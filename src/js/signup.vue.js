@@ -11,6 +11,11 @@ Vue.createApp({
                 phone: null,
                 names: null,
                 password: null,
+                referral: {
+                    user_login_id: 0,
+                    names: '',
+                    image : ''
+                },
             },
             User : null,
             feedback : false,
@@ -30,14 +35,14 @@ Vue.createApp({
     },
     methods: {
         getReferral : function(user_login_id) {
-            console.log(user_login_id)
+            this.feedback = false
 
-            this.User.doSignup(this.user,(response)=>{
+            this.User.getReferral({user_login_id:user_login_id},(response)=>{
                 if(response.s == 1)
                 {
-                    window.location.href = '../../apps/backoffice'
-                } else if(response.r == "MAIL_ALREADY_EXISTS") {
-                    this.feedback = 'El correo proporcionado ya existe'
+                   Object.assign(this.user.referral,response.referral)
+                } else if(response.r == "NOT_DATA") {
+                    this.feedback = "No encontramos información del link de referido proporcionado"
                 }
             })
         },
@@ -67,7 +72,7 @@ Vue.createApp({
     {
         this.User = new User
 
-        $(this.$refs.phone).mask('00 0000-0000');
+        $(this.$refs.phone).mask('(00) 0000-0000');
 
         if(getParam('uid'))
         {

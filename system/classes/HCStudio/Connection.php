@@ -44,6 +44,10 @@ class Connection {
 		return $this->connection;
 	}
 
+	public static function getMainPath() : string {
+		return self::$protocol .'://'. self::$proyect_url;
+	}
+
 	public static function getInstance() {
       if(!self::$instance instanceof self) {
           self::$instance = new self;

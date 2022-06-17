@@ -6,4 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'PayPal' => array($vendorDir . '/paypal/rest-api-sdk-php/lib'),
+    'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
+    'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
+    'AfterShip' => array($vendorDir . '/aftership/aftership-php-sdk/src'),
+    'Smtpapi' => array($vendorDir . '/sendgrid/smtpapi/lib'),
+    'SendGrid' => array($baseDir . '/lib'),
+    'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
+    'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
 );

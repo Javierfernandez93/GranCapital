@@ -10,7 +10,8 @@ if($UserLogin->_loaded === true) {
 
 $Layout = JFStudio\Layout::getInstance();
 
-$Layout->init('Ingresa a tu oficina virtual','index',"two_columns",'',TO_ROOT.'/');
+$route = JFStudio\Router::Login;
+$Layout->init(JFStudio\Router::getName($route),'index',"two_columns",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([

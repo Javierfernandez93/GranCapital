@@ -8,6 +8,9 @@ class Router {
     const Gains = 3;
     const Referrals = 4;
     const Signup = 5;
+    const Login = 6;
+    const RecoverPassword = 7;
+    const NewPassword = 8;
 
     static function getName(int $route = null)
     {
@@ -23,6 +26,12 @@ class Router {
                 return 'Referidos';
             case self::Signup:
                 return 'Regístrate';
+            case self::Login:
+                return 'Iniciar sesión';
+            case self::RecoverPassword:
+                return 'Recuperar contraseña';
+            case self::NewPassword:
+                return 'Cambiar contraseña';
             default: 
                 return 'Sin nombre';
         }

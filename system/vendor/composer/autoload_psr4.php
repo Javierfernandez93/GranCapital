@@ -6,8 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Svg\\' => array($vendorDir . '/phenx/php-svg-lib/src/Svg'),
-    'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
-    'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
-    'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Facebook\\' => array($vendorDir . '/facebook/php-sdk-v4/src/Facebook'),
+    'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
 );

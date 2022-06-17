@@ -6,6 +6,7 @@ use HCStudio\Orm;
 use HCStudio\Session;
 use HCStudio\Token;
 use HCStudio\Util;
+use HCStudio\Connection;
 
 use GranCapital\UserPlan;
 
@@ -359,6 +360,7 @@ class UserLogin extends Orm {
     $UserLogin = new UserLogin;
     $UserLogin->email = $data['email'];
     $UserLogin->password = sha1($data['password']);
+    $UserLogin->signup_date = time();
     
     if($UserLogin->save())
     {
@@ -391,6 +393,16 @@ class UserLogin extends Orm {
             {
               $UserAccount = new UserAccount;
               $UserAccount->user_login_id = $UserLogin->company_id;
+              $UserAccount->image = UserAccount::DEFAULT_IMAGE;
+
+              if($data['referral'])
+              {
+                $UserReferral = new UserReferral;
+                $UserReferral->referral_id = $data['referral']['user_login_id'];
+                $UserReferral->user_login_id = $UserLogin->company_id;
+                $UserReferral->create_date = time();
+                $UserReferral->save();
+              }
 
               return $UserAccount->save();
             }
@@ -435,5 +447,42 @@ class UserLogin extends Orm {
   public function hasCard() : bool
   { 
     return (new UserCard)->hasCard($this->company_id);
+  }
+
+  public function getLanding() : string 
+  {
+    if($this->getId())
+    {
+      return Connection::getMainPath().'/apps/signup/?uid='.$this->company_id;
+    }
+  }
+
+  /* profile fun */  
+  public function getProfile(int $user_login_id = null)
+  {
+    if(isset($user_login_id) === true) 
+    {
+      $sql = "SELECT 
+                {$this->tblName}.email,
+                {$this->tblName}.user_login_id,
+                user_data.names,
+                user_account.image
+              FROM 
+                {$this->tblName}
+              LEFT JOIN
+                user_data 
+              ON 
+                user_data.user_login_id = {$this->tblName}.user_login_id
+              LEFT JOIN
+                user_account 
+              ON 
+                user_account.user_login_id = {$this->tblName}.user_login_id
+               
+              WHERE 
+                {$this->tblName}.user_login_id = '{$user_login_id}'
+              ";
+      
+      return $this->connection()->row($sql);
+    }
   }
 }

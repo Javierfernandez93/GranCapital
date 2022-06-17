@@ -23,6 +23,7 @@
                             <div class="input-group mb-3">
                                 <input 
                                     :type="fieldPasswordType"
+                                    :class="user.password ? 'is-valid' : ''"
                                     @keydown.enter.exact.prevent="doLogin"
                                     style="height:41px"
                                     type="password" ref="password" v-model="user.password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
@@ -31,15 +32,19 @@
                                     <i v-else class="bi bi-eye-slash"></i>
                                 </button>
                             </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                            </div>
-                            <div class="text-end">
-                                <a href="../../apps/login/forgotPassword">¿Olvidaste tu contraseña?</a>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" v-model="user.rememberMe" id="rememberMe" checked="">
+                                        <label class="form-check-label" for="rememberMe">Recordarme</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto text-end">
+                                    <a class="small" href="../../apps/login/forgotPassword">¿Olvidaste tu contraseña?</a>
+                                </div>
                             </div>
 
-                            <div v-show="feedback" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <div v-show="feedback" class="alert alert-secondary text-white alert-dismissible fade show" role="alert">
                                 {{ feedback }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
@@ -47,7 +52,7 @@
                                 <button
                                     :disabled="!userComplete" 
                                     @click="doLogin"
-                                    type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                                    type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Ingresar a mi cuenta</button>
                             </div>
                         </form>
                     </div>

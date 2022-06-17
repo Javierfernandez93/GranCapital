@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center align-items-center vh-100" id="app">
-    <div class="col-12 col-xl-6 img-bg h-100" style="background-image: url('../../src/img/bg.jpg')">
+    <div class="col-12 col-xl-6 bg-cover h-100" style="background-image: url('../../src/img/bg.jpg')">
     </div>
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">
@@ -28,7 +28,7 @@
 						<div class="mb-3">
                             <input 
                                 :class="isValidMail ? 'is-valid' : ''"
-                                type="email" ref="email" v-model="user.email" class="form-control" @keydown.enter.exact.prevent="$refs.password.focus()" placeholder="correo electrónico" aria-label="correo electrónico" aria-describedby="basic-addon1">
+                                type="email" ref="email" v-model="user.email" class="form-control" @keydown.enter.exact.prevent="$refs.password.focus()" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
                         </div>
 
                         <label>Contraseña</label>
@@ -39,13 +39,34 @@
                                 ref="password" 
                                 @keydown.enter.exact.prevent="doSignup" 
                                 v-model="user.password" 
-                                style="height:41px;" class="form-control" placeholder="contraseña" aria-label="contraseña" aria-describedby="basic-addon1">
+                                style="height:41px;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
                             <button class="btn btn-primary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
                                 <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
                                 <i v-else class="bi bi-eye-slash"></i>
                             </button>
                         </div>
-                        <div v-show="feedback" class="alert alert-warning alert-dismissible fade show" role="alert">
+
+                        <div
+                            v-if="user.referral.user_login_id"
+                            class="card card-body blur shadow-blur overflow-hidden">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar avatar-xl overflow-hidden img-upload position-relative">
+                                        <img class="w-100 border-radius-lg shadow-sm" :src="user.referral.image"/>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="small text-muted">Referido por:</div>
+                                    <div class="lead">
+                                        <div class="fw-semibold">{{user.referral.names}}</div>
+                                        <div class="text-muted">{{user.referral.email}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div v-show="feedback" class="alert alert-secondary text-white alert-dismissible fade show" role="alert">
+                            <div><strong>Aviso</strong></div>
                             {{ feedback }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>

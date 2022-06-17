@@ -212,24 +212,15 @@
                 </nav>
                 <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                    aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here..." onfocus="focused(this)"
-                                onfocusout="defocused(this)">
-                        </div>
+                        
                     </div>
                     <ul class="navbar-nav justify-content-end">
                         <li class="nav-item d-flex pe-3 align-items-center">
                             <a href="javascript:;" class="nav-link  font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
+
                                 <span class="d-sm-inline d-none"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item d-flex pe-3 align-items-center">
-                            <a href="javascript:;" class="nav-link  font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
-                                <span class="d-sm-inline d-none"></span>
+                                <img src="<?php echo $UserLogin->_data['user_account']['image'];?>" class="avatar avatar-sm me-3" alt="<?php echo $UserLogin->_data['user_data']['names'];?>">
+                                <a href="../../apps/backoffice"><?php echo $UserLogin->_data['user_data']['names'];?></a>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">

@@ -7,8 +7,6 @@ $UserLogin = new GranCapital\UserLogin;
 if($UserLogin->_loaded === true) {
 	HCStudio\Util::redirectTo(TO_ROOT . "/apps/backoffice/");
 }
-
-$Session = new HCStudio\Session('sponsor');
  
 $Layout = JFStudio\Layout::getInstance();
 
@@ -22,16 +20,8 @@ $Layout->setScript([
 	'signup.css'
 ]);
 
-$sponsor_id = $Session->get('sponsor_id');
-
-if(!empty(HCStudio\Util::getVarFromPGS('sponsor_id'))) {
-	$sponsor_id = HCStudio\Util::getVarFromPGS('sponsor_id');
-}
-
 $Layout->setVar([
 	'UserLogin' => $UserLogin,
-	'sponsor_id' => $sponsor_id,
 	'Country' => (new World\Country)
 ]);
-
 $Layout();

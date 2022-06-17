@@ -20150,6 +20150,7 @@ fieldset:disabled .btn {
 }
 
 .avatar {
+  object-fit: cover;
   color: #fff;
   display: inline-flex;
   align-items: center;

@@ -6,6 +6,8 @@ Vue.createApp({
     },
     data() {
         return {
+            mailSent: false,
+            // email: 'javier@gmail.com',
             email: null,
             User : null,
             feedback : false,
@@ -25,13 +27,11 @@ Vue.createApp({
             if(this.isValidMail)
             {
                 this.feedback = false
-
-                // dinamicLoader.showLoader($("#button"))
                 
                 this.User.recoverPassword({email:this.email},(response)=>{
                     if(response.s == 1)
                     {
-                        
+                        this.mailSent = true
                     } else if(response.r == "INVALID_PASSWORD") {
                         this.feedback = "Las contraseña indicada no es correcta. Intente nuevamente"
                     } else if(response.r == "INVALID_CREDENTIALS") {
