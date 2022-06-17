@@ -4,7 +4,7 @@
             <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../../src/img/business-3.jpg')"></div>
         </div>
     </div>
-    <div class="col-12 col-xl-6">
+    <div class="col-12 col-xl-6 animate__animated animate__bounceInLeft">
         <div class="row justify-content-center text-center">
             <div class="col-11 col-xl-7">
                 <div class="card text-start shadow p-3">

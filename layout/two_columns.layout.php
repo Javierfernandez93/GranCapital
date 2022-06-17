@@ -23,7 +23,7 @@
     <body>
         <div class="fixed-top animate__animated animate__bounceInDown">
             <div class="row justify-content-center">
-                <div class="col-2 col-xl-2">
+                <div class="col-4 col-xl-2">
                     <img src="../../src/img/logo.png" class="img-fluid"/>
                 </div>
             </div>

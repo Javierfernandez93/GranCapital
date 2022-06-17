@@ -12,7 +12,7 @@ if($data["email"])
     {
         if($token = getToken($data['email']))
         {
-            if(emailSent($data['email'],$token))
+            if(sendEmail($data['email'],$token))
             {
                 $data["s"] = 1;
                 $data["r"] = "SEND_OK";
@@ -44,7 +44,7 @@ function getToken(string $email = null) : string
     return "{$token['token']}[{$token['key']}]";
 }
 
-function emailSent(string $email = null,string $token = null) : bool
+function sendEmail(string $email = null,string $token = null) : bool
 {
     if(isset($email) === true)
     {

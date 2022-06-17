@@ -27,8 +27,8 @@ Vue.createApp({
     watch : {
         user : {
             handler() {
-                this.checkFields()
                 this.checkEmail()
+                this.checkFields()
             },
             deep: true
         },
@@ -65,7 +65,7 @@ Vue.createApp({
             this.isValidMail = isValidMail(this.user.email)
         },
         checkFields : function() {
-            this.userComplete = this.user.email && this.user.password
+            this.userComplete = this.isValidMail && this.user.password && this.user.phone && this.user.names
         }
     },
     mounted() 
