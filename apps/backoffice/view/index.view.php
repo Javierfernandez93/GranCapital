@@ -32,14 +32,23 @@
             </div>
         </div>
         <div class="col-lg-5">
-            <div class="card h-100 p-3">
-                <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                    style="background-image: url('../../src/img/ivancik.jpg');">
-                    <span class="mask bg-gradient-dark"></span>
-                    <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                        <h5 class="text-white font-weight-bolder mb-4 pt-2">Haz crecer tu grupo y gana</h5>
-                        <p class="text-white">Gran Capital te premia por referir usuarios activos.</p>
-                        Link personalizado
+            <div class="card h-100 p-3 overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../../src/img/ivancik.jpg');">
+                <span class="mask bg-gradient-dark"></span>
+                <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+                    <h5 class="text-white font-weight-bolder">Haz crecer tu grupo y gana</h5>
+                    <p class="text-white">Gran Capital te premia por referir usuarios activos.</p>
+                    
+                    <div v-if="landing">
+                        <div class="mb-3">
+                            <div class="text-light">Link personalizado</div>
+                            <div>
+                                <a class="text-white" :href="landing">{{landing}}</a>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" ref="landing" :data-text="landing" data-helper="Link de landing copiada" @click="copyLanding">
+                            Copiar Landing Page
+                        </button>
                     </div>
                 </div>
             </div>

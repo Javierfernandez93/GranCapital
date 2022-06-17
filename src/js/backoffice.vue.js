@@ -11,6 +11,7 @@ Vue.createApp({
         return {
             User : null,
             profits : {},
+            landing : null,
         }
     },
     watch : {
@@ -22,6 +23,9 @@ Vue.createApp({
         },
     },
     methods: {
+        copyLanding : function() {
+            copyToClipboardTextFromData(this.$refs.landing)
+        },
         getProfits : function() {
             this.User.getProfits({},(response)=>{
                 if(response.s == 1)
@@ -33,10 +37,19 @@ Vue.createApp({
                 }
             })
         },
+        getBackofficeVars : function() {
+            this.User.getBackofficeVars({},(response)=>{
+                if(response.s == 1)
+                {
+                    this.landing = response.landing
+                }
+            })
+        },
     },
     mounted() 
     {
         this.User = new User
         this.getProfits()
+        this.getBackofficeVars()
     },
 }).mount('#app')

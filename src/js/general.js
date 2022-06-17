@@ -531,3 +531,10 @@ function scrollTo(event,target,offset)
         scrollTop: $(target).offset().top + offset
     }, MEDIUM_TIME);
 }
+
+function copyToClipboardTextFromData(element) 
+{
+    navigator.clipboard.writeText($(element).data('text')).then(() => {
+        $(element).html($(element).data('helper'));
+    });    
+}

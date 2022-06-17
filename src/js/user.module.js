@@ -10,6 +10,10 @@ class User extends Http
     {
         return this.call('../../app/application/do_login.php',data,callback);
     }    
+    getBackofficeVars(data,callback)
+    {
+        return this.call('../../app/application/get_backoffice_vars.php',data,callback);
+    }    
     changePassword(data,callback)
     {
         return this.call('../../app/application/change_password.php',data,callback);

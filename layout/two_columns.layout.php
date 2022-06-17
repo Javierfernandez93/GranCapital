@@ -14,12 +14,20 @@
         <!-- Nucleo Icons -->
         <link href="../../src/css/nucleo-icons.css" rel="stylesheet" />
         <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="../../src/css/animate.css" rel="stylesheet" />
         
         <link href="<?php echo HCStudio\Connection::$protocol;?>://<?php echo HCStudio\Connection::$proyect_url;?>/src/css/general.css" rel="stylesheet" type="text/css">
         <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
         %css_scripts%
     </head>
     <body>
+        <div class="fixed-top animate__animated animate__bounceInDown">
+            <div class="row justify-content-center">
+                <div class="col-2 col-xl-2">
+                    <img src="../../src/img/logo.png" class="img-fluid"/>
+                </div>
+            </div>
+        </div>
         %content%
         
         <script src="<?php echo HCStudio\Connection::$protocol;?>://<?php echo HCStudio\Connection::$proyect_url;?>/src/js/jquery-3.1.1.js" type="text/javascript"></script>
