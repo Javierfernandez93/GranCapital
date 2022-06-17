@@ -1,12 +1,12 @@
 <div class="row d-flex justify-content-center align-items-center vh-100" id="app">
-    <div class="col-12 col-xl-6 bg-cover h-100 order-1" style="background-image: url('../../src/img/bg.jpg')">
+    <div class="col-12 col-xl-6 bg-cover h-100 order-1" style="background-image: url('../../src/img/city.jpg')">
     </div>
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">
             <div class="col-11 col-xl-6">
                 <div
                     v-if="paswordReseted == false" 
-                    class="card text-start card-plain">
+                    class="card text-start shadow p-3">
                     <div class="card-header bg-transparent border-0">
                         <div class="fs-4 fw-bold">Cambiar contraseña</div>
                         <div class="text-muted">Ingresa tu nueva contraseña para <span class="fw-semibold text-dark">{{user.email}}</span></div>
@@ -45,7 +45,7 @@
                 </div>    
                 <div
                     v-else
-                    class="card text-start card-plain">
+                    class="card text-start shadow p-3">
                     <div class="card-header bg-transparent border-0">
                         <div class="fs-4 fw-bold">Cambiar contraseña</div>
                         <div class="row align-items-center">

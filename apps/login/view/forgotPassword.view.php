@@ -1,12 +1,12 @@
 <div class="row d-flex justify-content-center align-items-center vh-100" id="app">
-    <div class="col-12 col-xl-6 bg-cover h-100 order-1" style="background-image: url('../../src/img/bg.jpg')">
+    <div class="col-12 col-xl-6 bg-cover h-100 order-1" style="background-image: url('../../src/img/city.jpg')">
     </div>
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">
             <div class="col-11 col-xl-6">
                 <div
                     v-if="mailSent == false" 
-                    class="card text-start card-plain">
+                    class="card text-start shadow p-3">
                     <div class="card-header bg-transparent border-0">
                         <div class="fs-4 fw-bold">Recuperar contraseña</div>
                         <div class="text-muted">Ingresa tus datos para continuar</div>
@@ -39,7 +39,7 @@
                 </div>    
                 <div
                     v-else
-                    class="card text-start card-plain">
+                    class="card text-start shadow p-3">
                     <div class="card-header bg-transparent border-0">
                         <div class="fs-4 fw-bold">Recuperar contraseña</div>
                     </div>
@@ -49,6 +49,12 @@
                         <div class="small text-muted">Si no ves el mensaje en tu bandeja de entrada, revisa en correos no deseados. El correo puede tardar en llegar hasta 5 minutos</div>
                     </div>
                     <div class="card-footer pt-0">
+                        
+                        <div v-show="feedback" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ feedback }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
                         <button :disabled="!mailSent" class="btn btn-lg btn-secondary w-100" @click="mailSent = false" id="button">
                             ¿No recibiste el correo?
                         </button>

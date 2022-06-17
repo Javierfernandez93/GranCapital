@@ -1,10 +1,13 @@
 <div class="row d-flex justify-content-center align-items-center vh-100" id="app">
-    <div class="col-12 col-xl-6 bg-cover h-100" style="background-image: url('../../src/img/bg.jpg')">
+    <div class="col-12 col-xl-6 img-bg bg-primary order-1">
+        <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../../src/img/business-3.jpg')"></div>
+        </div>
     </div>
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">
             <div class="col-11 col-xl-7">
-                <div class="card text-start card-plain">
+                <div class="card text-start shadow p-3">
                     <div class="card-header pb-0 text-left bg-transparent">
                         <h3 class="font-weight-bolder text-info text-gradient">Bienvenido a Gran Capital</h3>
                         <p class="mb-0">Ingresa tus datos para unirte</p>
@@ -40,7 +43,7 @@
                                 @keydown.enter.exact.prevent="doSignup" 
                                 v-model="user.password" 
                                 style="height:41px;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-                            <button class="btn btn-primary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
+                            <button class="btn btn-secondary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
                                 <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
                                 <i v-else class="bi bi-eye-slash"></i>
                             </button>
@@ -71,7 +74,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
     
-                        <button :disabled="!userComplete" class="btn bg-gradient-info w-100 mt-4 mb-0" @click="doSignup" id="button">
+                        <button :disabled="!userComplete" class="btn bg-gradient-success w-100 mt-4 mb-0" @click="doSignup" id="button">
                             Crear mi cuenta
                         </button>
 
