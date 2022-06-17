@@ -4,47 +4,60 @@
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">
             <div class="col-11 col-xl-6">
-                <div class="card border-0 p-4">
-                    <div class="card-header bg-transparent border-0">
-                        <div class="fs-3 fw-bold">Iniciar sesión</div>
+                <div class="card text-start card-plain">
+                    <div class="card-header pb-0 text-left bg-transparent">
+                        <h3 class="font-weight-bolder text-info text-gradient">Bienvenido de nuevo</h3>
+                        <p class="mb-0">Ingresa tus datos para iniciar sesión</p>
                     </div>
                     <div class="card-body">
+                        <form role="form">
+                            <label>Correo electrónico</label>
+                            <div class="mb-3">
+                                <input 
+                                    :autofocus="true"
+                                    :class="isValidMail ? 'is-valid' : ''"
+                                    @keydown.enter.exact.prevent="$refs.password.focus()"
+                                    type="email" ref="email" v-model="user.email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                            </div>
+                            <label>Contraseña</label>
+                            <div class="input-group mb-3">
+                                <input 
+                                    :type="fieldPasswordType"
+                                    @keydown.enter.exact.prevent="doLogin"
+                                    style="height:41px"
+                                    type="password" ref="password" v-model="user.password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                <button class="btn btn-primary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
+                                    <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
+                                    <i v-else class="bi bi-eye-slash"></i>
+                                </button>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                            </div>
+                            <div class="text-end">
+                                <a href="../../apps/login/forgotPassword">¿Olvidaste tu contraseña?</a>
+                            </div>
 
-                        <div class="input-group mb-3">
-                            <input 
-                                :autofocus="true"
-                                :class="isValidMail ? 'is-valid' : ''"
-                                type="email" ref="email" v-model="user.email" class="form-control form-control-lg bg-light" @keydown.enter.exact.prevent="$refs.password.focus()" placeholder="correo electrónico" aria-label="correo electrónico" aria-describedby="basic-addon1">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <input :type="fieldPasswordType" ref="password" @keydown.enter.exact.prevent="doLogin" v-model="user.password" class="form-control form-control-lg bg-light" placeholder="contraseña" aria-label="contraseña" aria-describedby="basic-addon1">
-                            <button class="btn btn-primary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
-                                <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
-                                <i v-else class="bi bi-eye-slash"></i>
-                            </button>
-                        </div>
-
-                        <div class="text-end">
-                            <a href="../../apps/login/forgotPassword">¿Olvidaste tu contraseña?</a>
-                        </div>
+                            <div v-show="feedback" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ feedback }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <div class="text-center">
+                                <button
+                                    :disabled="!userComplete" 
+                                    @click="doLogin"
+                                    type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-footer bg-transparent border-0">
-                        
-                        <div v-show="feedback" class="alert alert-warning alert-dismissible fade show" role="alert">
-                            {{ feedback }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-
-                        <button :disabled="!userComplete" class="btn btn-lg btn-primary w-100 mb-3" @click="doLogin" id="button">
-                            Ingresar
-                        </button>
-
-                        <a href="../../apps/signup/">
-                            Si no tienes una cuenta crea tu cuenta aquí
-                        </a>
+                    <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                        <p class="mb-4 text-sm mx-auto">
+                            ¿No tienes una cuenta?
+                            <a href="../../apps/signup" class="text-info text-gradient font-weight-bold">Regístrate aquí</a>
+                        </p>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
