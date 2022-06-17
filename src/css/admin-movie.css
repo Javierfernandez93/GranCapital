@@ -1,9 +1,0 @@
-.box-file:hover,
-.box-file {
-	transition: all ease 400ms;
-}
-.box-file {
-	cursor: pointer;
-	background-color: #f5f5f5;
-
-}

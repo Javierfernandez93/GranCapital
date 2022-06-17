@@ -1,7 +1,0 @@
-.box-transaction:hover
-.box-transaction {
-  transition: 100ms all ease;
-}
-.box-transaction:hover {
-  cursor: pointer;
-}
