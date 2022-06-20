@@ -1,6 +1,5 @@
 {
     "require": {
-        "google/cloud-vision": "^0.22.2",
-        "google/cloud-translate": "^1.2"
+        "phpmailer/phpmailer": "^6.6"
     }
 }
