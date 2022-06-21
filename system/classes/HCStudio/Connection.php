@@ -27,8 +27,8 @@ use RecursiveArrayIterator;
 class Connection {
 	# Variables privadas
 	private static $connections = [
-		// 'default' => ['localhost', 'epbdtbtjpc', '7G3eK5TMEe', 'epbdtbtjpc'], 
-		'default' => ['localhost', 'root', 'root', 'app_gran_capital'], 
+		'default' => ['localhost', 'epbdtbtjpc', '7G3eK5TMEe', 'epbdtbtjpc'], 
+		// 'default' => ['localhost', 'root', 'root', 'app_gran_capital'], 
 		'world' => ['localhost', 'cestjvgwxt', 'Jk3wJKDSj6', 'cestjvgwxt'], 
 	];
 
@@ -36,11 +36,11 @@ class Connection {
 	private $connection;
 	private $debug;
 	private $mysqli;
-	static  $protocol = 'http';
-	// static  $protocol = 'https';
+	// static  $protocol = 'http';
+	static  $protocol = 'https';
 	// static  $proyect_url = '192.168.100.237:8888/fsa';
-	// static  $proyect_url = 'grancapital.fund';
-	static  $proyect_url = 'localhost:8888/grancapital';
+	static  $proyect_url = 'grancapital.fund';
+	// static  $proyect_url = 'localhost:8888/grancapital';
 	static  $proyect_name = 'Gran Capital fund';
 
 	public function getConnectioName() {
