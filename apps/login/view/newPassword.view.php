@@ -1,5 +1,8 @@
 <div class="row d-flex justify-content-center align-items-center vh-100" id="app">
-    <div class="col-12 col-xl-6 bg-cover h-100 order-1" style="background-image: url('../../src/img/city.jpg')">
+    <div class="col-12 col-xl-6 img-bg bg-primary order-1">
+        <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../../src/img/city.jpg')"></div>
+        </div>
     </div>
     <div class="col-12 col-xl-6">
         <div class="row justify-content-center text-center">

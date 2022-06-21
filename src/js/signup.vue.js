@@ -17,6 +17,7 @@ Vue.createApp({
                     image : ''
                 },
             },
+            loading : false,
             User : null,
             feedback : false,
             isValidMail : false,
@@ -50,9 +51,12 @@ Vue.createApp({
             this.fieldPasswordType = this.fieldPasswordType == 'password' ? 'text' : 'password'
         },
         doSignup : function() {
+            this.loading = true
             this.feedback = false
             
             this.User.doSignup(this.user,(response)=>{
+                this.loading = false
+
                 if(response.s == 1)
                 {
                     window.location.href = '../../apps/backoffice'

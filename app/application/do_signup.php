@@ -38,39 +38,59 @@ if($data['email'])
 	$data['r'] = 'NOT_FIELD_SESSION_DATA';
 }
 
+
 function sendEmail(string $email = null,string $names = null) : bool
 {
     if(isset($email,$names) === true)
     {
-        require_once TO_ROOT . '/system/SendGrid/vendor/autoload.php';
+        require_once TO_ROOT . '/vendor/autoload.php';
         
-        $Mailer = new JFStudio\MailerSendGrid;
-		
-		$SendGrid = new \SendGrid("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");
-		$Email = new \SendGrid\Mail\Mail; 
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
-		$Layout = JFStudio\Layout::getInstance();
+        try {
+            $Layout = JFStudio\Layout::getInstance();
+            $Layout->init("","welcome","mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
 
-		$Layout->init("","recoverPassword","mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
+    		$Layout->setScript(['']);
 
-		$Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
-		$Layout->setScript(['']);
+            $Layout->setVar([
+                "email" => $email,
+                "names" => $names
+            ]);
 
-		$Layout->setVar([
-			"email" => $email,
-			"names" => $names
-		]);
+            //Server settings
+            // $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF;                      //Enable verbose debug output
+            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP(); //Send using SMTP
+            $mail->SMTPSecure = 'tls';
+            $mail->Host = 'smtp-relay.sendinblue.com'; //Set the SMTP server to send through
+            $mail->SMTPAuth = true; //Enable SMTP authentication
+            $mail->Username = 'javier.fernandez.pa93@gmail.com';
+            $mail->Password = 'YvCZ5jQSdGKWB98z';
+            // $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS; // Enable implicit TLS encryption
+            $mail->Port = 587; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-	  	$data = [
-	  		"subject" => "Bienvenido a bordo",
-	  		'mail_from' => 'admin@grancapital.found',
-	  		'name_from' => 'Gran Capital',
-			'name_to' => $names,
-			'mail_to' => $email,
-			'body' => $Layout->getHtml()
-		];
+            //Recipients
+            $mail->setFrom('grancapitalfound@gmail.com', 'GranCapital');
+            $mail->addAddress($email, $names);     //Add a recipient
 
-		return $Mailer->_sendMail($data,$Email,$SendGrid);
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->CharSet = 'UTF-8';
+            $mail->Subject = "Bienvenido a Gran Capital";
+            $mail->Body = $Layout->getHtml();
+            $mail->AltBody = strip_tags($Layout->getHtml());
+
+            return $mail->send();
+        } catch (Exception $e) {
+            
+        }
     }
 
     return false;

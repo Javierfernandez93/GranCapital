@@ -8,6 +8,7 @@ Vue.createApp({
         return {
             mailSent: false,
             // email: 'javier@gmail.com',
+            loading: false,
             email: null,
             User : null,
             feedback : false,
@@ -27,8 +28,10 @@ Vue.createApp({
             if(this.isValidMail)
             {
                 this.feedback = false
+                this.loading = true
                 
                 this.User.recoverPassword({email:this.email},(response)=>{
+                    this.loading = false
                     if(response.s == 1)
                     {
                         this.mailSent = true

@@ -35,8 +35,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
 
-                        <button :disabled="!isValidMail" class="btn btn-lg btn-primary w-100" @click="recoverPassword" id="button">
-                            Recuperar contraseña
+                        <button :disabled="!isValidMail || loading" class="btn btn-lg btn-primary w-100" @click="recoverPassword" id="button">
+                            <span v-if="!loading">
+                                Recuperar contraseña
+                            </span>
+                            <span v-else>
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </span>
                         </button>
                     </div>
                 </div>    

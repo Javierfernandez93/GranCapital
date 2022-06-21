@@ -74,8 +74,16 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
     
-                        <button :disabled="!userComplete" class="btn bg-gradient-success w-100 mt-4 mb-0" @click="doSignup" id="button">
-                            Crear mi cuenta
+                        <button :disabled="!userComplete || loading" class="btn bg-gradient-success w-100 mt-4 mb-0" @click="doSignup" id="button">
+                            
+                            <span v-if="!loading">
+                                Crear mi cuenta
+                            </span>
+                            <span v-else>
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </span>
                         </button>
 
                     </div>    
