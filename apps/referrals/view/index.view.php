@@ -46,6 +46,12 @@
                     </div>
                 </div>
             </div>
+            <div v-else>
+                <div class="alert alert-secondary text-white text-center">
+                    <div>No tienes afiliados, por favor comparte tu link personalizado para hacer crecer tu grupo de afiliados</div>
+                    <div class="fw-semibold fs-5">Puedes encontrar tu Link personalizado en tu <a class="text-white" href="../../apps/backoffice"><u>oficina virtual</u></a></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -51,6 +51,11 @@
                     </div>
                 </div>
             </div>
+            <div v-else>
+                <div class="alert alert-secondary text-white text-center">
+                    <div>No tenemos información sobre tus ganancias.</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

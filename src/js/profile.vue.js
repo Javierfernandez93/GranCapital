@@ -12,6 +12,9 @@ Vue.createApp({
                 image: null,
                 plan: false,
                 has_card: false,
+                referral_notification: true,
+                referral_email: true,
+                info_email: true,
             },
             lastReferrals : {},
         }
@@ -19,7 +22,7 @@ Vue.createApp({
     watch : {
         user : {
             handler() {
-                
+                this.editProfile()
             },
             deep: true
         },
@@ -30,6 +33,16 @@ Vue.createApp({
                 if(response.s == 1)
                 {
                     Object.assign(this.user, response.user)
+                    
+                    console.log(this.user)
+                }
+            })
+        },
+        editProfile : function() {
+            this.User.editProfile(this.user,(response)=>{
+                if(response.s == 1)
+                {
+                    
                 }
             })
         },
@@ -73,5 +86,7 @@ Vue.createApp({
         
         this.getProfile()
         this.getLastReferrals()
+
+        $(this.$refs.phone).mask('(00) 0000-0000');
     },
 }).mount('#app')
