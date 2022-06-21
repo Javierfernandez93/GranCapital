@@ -53,7 +53,7 @@ const ProfitViewer = {
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Ganancias por inversión</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         $ {{gainStats.investment.total}}
-                                        <span v-if="gainStats.investment.percentaje > 0" class="text-success text-sm font-weight-bolder">
+                                        <span v-if="gainStats.investment.percentaje >= 0" class="text-success text-sm font-weight-bolder">
                                             +{{gainStats.investment.percentaje}}%
                                         </span>
                                         <span v-else class="text-danger text-sm font-weight-bolder">
@@ -80,7 +80,7 @@ const ProfitViewer = {
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Ganancias por referidos</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         $ {{gainStats.referral.percentaje}}
-                                        <span v-if="gainStats.referral.percentaje > 0" class="text-success text-sm font-weight-bolder">
+                                        <span v-if="gainStats.referral.percentaje >= 0" class="text-success text-sm font-weight-bolder">
                                             +{{gainStats.referral.percentaje}}%
                                         </span>
                                         <span v-else class="text-danger text-sm font-weight-bolder">
