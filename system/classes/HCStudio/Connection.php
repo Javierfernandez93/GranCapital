@@ -35,7 +35,7 @@ class Connection {
 	private $connection;
 	private $debug;
 	private $mysqli;
-	static  $protocol = 'http';
+	static  $protocol = 'https';
 	// static  $proyect_url = '192.168.100.237:8888/fsa';
 	static  $proyect_url = 'grancapital.found';
 	static  $proyect_name = 'Gran Capital Found';
