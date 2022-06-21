@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <input 
                         v-model="query"
-                        :autofocus
+                        :autofocus="true"
                         type="text" class="form-control" placeholder="Buscar..."/>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -42,7 +42,22 @@
                                         </div>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-secondary">Inactivo</span>
+                                        <span 
+                                            v-if="user.catalog_plan_id">
+                                            <span class="badge badge-sm bg-primary">
+                                                Activo en plan {{user.plan_name}}
+                                            </span>
+                                            <span 
+                                                v-if="user.additional_profit > 0"
+                                                class="badge badge-sm bg-danger ms-1">
+                                                {{user.additional_profit}}% adicional
+                                            </span>
+                                        </span>
+                                        <span 
+                                            v-else 
+                                            class="badge badge-sm bg-secondary">
+                                            Inactivo
+                                        </span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>

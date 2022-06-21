@@ -1059,13 +1059,24 @@ class UserSupport extends Orm {
               user_login.signup_date,
               user_login.email,
               user_account.image,
-              user_data.names
+              user_data.names,
+              user_plan.additional_profit,
+              user_plan.catalog_plan_id,
+              catalog_plan.name as plan_name
             FROM
               user_login
             LEFT JOIN 
               user_data
             ON 
               user_data.user_login_id = user_login.user_login_id
+            LEFT JOIN 
+              user_plan
+            ON 
+              user_plan.user_login_id = user_login.user_login_id
+            LEFT JOIN 
+              catalog_plan
+            ON 
+              catalog_plan.catalog_plan_id = user_plan.catalog_plan_id
             LEFT JOIN 
               user_account
             ON 
@@ -1078,6 +1089,55 @@ class UserSupport extends Orm {
               ";
 
     return $this->connection()->rows($sql);
+  }
+  
+  public function getUser(int $user_login_id = null)
+  {
+    if(isset($user_login_id) === true)
+    {
+      $sql = "SELECT
+                user_login.user_login_id,
+                user_login.signup_date,
+                user_login.email,
+                user_account.image,
+                user_data.names,
+                user_contact.phone,
+                user_address.country_id,
+                user_plan.additional_profit,
+                user_plan.catalog_plan_id
+              FROM
+                user_login
+              LEFT JOIN 
+                user_data
+              ON 
+                user_data.user_login_id = user_login.user_login_id
+              LEFT JOIN 
+                user_plan
+              ON 
+                user_plan.user_login_id = user_login.user_login_id
+              LEFT JOIN 
+                user_account
+              ON 
+                user_account.user_login_id = user_login.user_login_id
+              LEFT JOIN 
+                user_address
+              ON 
+                user_address.user_login_id = user_login.user_login_id
+              LEFT JOIN 
+                user_contact
+              ON 
+                user_contact.user_login_id = user_login.user_login_id
+              WHERE 
+                user_login.status = '1'
+              AND 
+                user_login.user_login_id = '{$user_login_id}'
+              ORDER BY 
+                user_login.signup_date
+              DESC
+                ";
+
+      return $this->connection()->row($sql);
+    }
   }
 
   public function getAdministrators($filter = '')

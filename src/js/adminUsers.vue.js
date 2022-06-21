@@ -25,7 +25,7 @@ Vue.createApp({
     methods: {
         filterData : function() {
             this.users = this.usersAux
-            console.log(this.query)
+            
             this.users = this.users.filter((user)=>{
                 return user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase())
             })

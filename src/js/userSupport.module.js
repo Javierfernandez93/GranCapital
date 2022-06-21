@@ -18,6 +18,18 @@ class UserSupport extends Http
     {
         return this.call('../../app/application/delete_user.php',data,callback);
     } 
+    updatePlan(data,callback)
+    {
+        return this.call('../../app/application/update_plan.php',data,callback);
+    } 
+    getUserProfile(data,callback)
+    {
+        return this.call('../../app/application/get_user_profile.php',data,callback);
+    } 
+    getPlans(data,callback)
+    {
+        return this.call('../../app/application/get_plans.php',data,callback);
+    } 
     deleteSupportUser(data,callback)
     {
         return this.call('../../app/application/delete_support_user.php',data,callback);
