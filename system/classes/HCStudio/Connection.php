@@ -28,7 +28,7 @@ class Connection {
 	# Variables privadas
 	private static $connections = array(
 		'default' => ['localhost', 'epbdtbtjpc', '7G3eK5TMEe', 'epbdtbtjpc'], 
-		'default' => ['localhost', 'cestjvgwxt', 'Jk3wJKDSj6', 'cestjvgwxt'], 
+		'world' => ['localhost', 'cestjvgwxt', 'Jk3wJKDSj6', 'cestjvgwxt'], 
 	);
 
 	private static $instances;
