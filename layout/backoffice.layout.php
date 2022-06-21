@@ -224,16 +224,17 @@
                         </li>
                         <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link  p-0">
-                            </a><a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                            </a>
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
-                                    <i class="sidenav-toggler-line bg-white"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item dropdown px-2 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
+                            <a href="javascript:;" class="nav-link p-0" id="dropdownMenuButton"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>
                             </a>
