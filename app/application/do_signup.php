@@ -49,7 +49,6 @@ function sendEmail(string $email = null,string $names = null) : bool
     {
         require_once TO_ROOT . '/vendor/autoload.php';
         
-        //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
         try {
@@ -66,15 +65,15 @@ function sendEmail(string $email = null,string $names = null) : bool
 
             //Server settings
             // $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF;                      //Enable verbose debug output
-            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF;                      //Enable verbose debug output
             $mail->isSMTP(); //Send using SMTP
             $mail->SMTPSecure = 'tls';
-            $mail->Host = 'smtp-relay.sendinblue.com'; //Set the SMTP server to send through
+            $mail->Host = 'smtp.dreamhost.com'; //Set the SMTP server to send through
             $mail->SMTPAuth = true; //Enable SMTP authentication
-            $mail->Username = 'javier.fernandez.pa93@gmail.com';
-            $mail->Password = 'YvCZ5jQSdGKWB98z';
+            $mail->Username = 'noreply@zuum.link';
+            $mail->Password = 'vIX8gB5kQZtSVncR';
             // $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS; // Enable implicit TLS encryption
-            $mail->Port = 587; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Port = 465; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
             $mail->setFrom('grancapitalfound@gmail.com', 'GranCapital');

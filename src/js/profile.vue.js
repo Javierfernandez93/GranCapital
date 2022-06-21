@@ -11,11 +11,13 @@ Vue.createApp({
                 names: null,
                 image: null,
                 plan: false,
+                country_id: 159, // by default when loads is México
                 has_card: false,
                 referral_notification: true,
                 referral_email: true,
                 info_email: true,
             },
+            countries : {},
             lastReferrals : {},
         }
     },
@@ -34,7 +36,7 @@ Vue.createApp({
                 {
                     Object.assign(this.user, response.user)
                     
-                    console.log(this.user)
+                    Object.assign(this.countries, response.countries)
                 }
             })
         },

@@ -15,10 +15,14 @@ if($UserLogin->_loaded === true)
         'plan' => $UserLogin->getPlan(),
         'has_card' => $UserLogin->hasCard(),
         'image' => $UserLogin->_data['user_account']['image'],
+        'country_id' => $UserLogin->_data['user_address']['country_id'],
         'referral_notification' => $UserLogin->_data['user_account']['referral_notification'] ? true : false,
         'referral_email' => $UserLogin->_data['user_account']['referral_email'] ? true : false,
         'info_email' => $UserLogin->_data['user_account']['info_email'] ? true : false,
     ];
+
+    $Country = new World\Country;
+    $data["countries"] = $Country->getAllByWeb();
     $data["s"] = 1;
     $data["r"] = "LOGGED_OK";
 } else {

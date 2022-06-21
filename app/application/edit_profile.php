@@ -18,8 +18,14 @@ if($UserLogin->_loaded === true)
             {
                 if(updateUserAccount($data,$UserLogin->company_id))
                 {
-                    $data["s"] = 1;
-                    $data["r"] = "UPDATED_OK";
+                    if(updateUserAddress($data,$UserLogin->company_id))
+                    {
+                        $data["s"] = 1;
+                        $data["r"] = "UPDATED_OK";
+                    } else {
+                        $data["s"] = 0;
+                        $data["r"] = "NOT_UPDATED_USER_ADDRESS";
+                    }  
                 } else {
                     $data["s"] = 0;
                     $data["r"] = "NOT_UPDATED_USER_ACCOUNT";
@@ -80,6 +86,20 @@ function updateUserAccount($data = null,$company_id = null)
         $UserAccount->info_email = filter_var($data['info_email'], FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
         
         return $UserAccount->save();
+    }
+
+    return false;
+}
+
+function updateUserAddress($data = null,$company_id = null)
+{
+    $UserAddress = new GranCapital\UserAddress;   
+        
+    if($UserAddress->cargarDonde("user_login_id = ?",$company_id))
+    {
+        $UserAddress->country_id = $data['country_id'];
+        
+        return $UserAddress->save();
     }
 
     return false;

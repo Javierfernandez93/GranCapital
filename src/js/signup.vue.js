@@ -10,6 +10,7 @@ Vue.createApp({
                 email: null,
                 phone: null,
                 names: null,
+                country_id: 159, // loads by default México
                 password: null,
                 referral: {
                     user_login_id: 0,
@@ -17,6 +18,7 @@ Vue.createApp({
                     image : ''
                 },
             },
+            countries : {},
             loading : false,
             User : null,
             feedback : false,
@@ -65,6 +67,14 @@ Vue.createApp({
                 }
             })
         },
+        getCountries : function() {
+            this.User.getCountries(this.user,(response)=>{
+                if(response.s == 1)
+                {
+                    this.countries = response.countries
+                }
+            })
+        },
         checkEmail : function() {
             this.isValidMail = isValidMail(this.user.email)
         },
@@ -77,6 +87,7 @@ Vue.createApp({
         this.User = new User
 
         $(this.$refs.phone).mask('(00) 0000-0000');
+        this.getCountries()
 
         if(getParam('uid'))
         {

@@ -219,7 +219,7 @@
 
                                 <span class="d-sm-inline d-none"></span>
                                 <img src="<?php echo $UserLogin->_data['user_account']['image'];?>" class="avatar avatar-sm me-3" alt="<?php echo $UserLogin->_data['user_data']['names'];?>">
-                                <a href="../../apps/backoffice"><?php echo $UserLogin->_data['user_data']['names'];?></a>
+                                <a class="fw-semibold" href="../../apps/backoffice"><u><?php echo $UserLogin->_data['user_data']['names'];?></u></a>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">

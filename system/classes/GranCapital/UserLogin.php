@@ -387,7 +387,7 @@ class UserLogin extends Orm {
             $UserAddress->city = '';
             $UserAddress->state = '';
             $UserAddress->country = '';
-            $UserAddress->country_id = 159;
+            $UserAddress->country_id = $data['country_id'];
             
             if($UserAddress->save())
             {

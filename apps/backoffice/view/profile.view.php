@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-auto my-auto text-end">
-                    <div>Estatus</div>
+                    <div class="text-muted fw-semibold small">Estatus</div>
                     <div>
                         <span 
                             v-if="user.plan"
@@ -98,8 +98,20 @@
                                 <input type="text" v-model="user.names" class="form-control" placeholder="Nombre"/>
                             </li>
                             <li class="list-group-item border-0 ps-0 text-sm">
-                                <label>Celular</label>
-                                <input type="text" v-model="user.phone" ref="phone" class="form-control" placeholder="Celular"/>
+                                <label>Teléfono</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-select" v-model="user.country_id" aria-label="Selecciona tu país">
+                                            <option>Selecciona tu país</option>
+                                            <option v-for="country in countries" v-bind:value="country.country_id">
+                                                {{ country.nicename }} <span v-if="country.phone_code > 0">+ {{ country.phone_code }}</span>
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" v-model="user.phone" ref="phone" class="form-control" placeholder="Celular"/> 
+                                    </div>
+                                </div>
                             </li>
                             <li class="list-group-item border-0 ps-0 text-sm">
                                 <label>Correo electrónico</label>
@@ -116,7 +128,7 @@
                             <div class="col">
                                 <h6 class="mb-0">Últimos referidos</h6>
                             </div>
-                            <div class="col-auto">
+                            <div v-if="lastReferrals.length > 0" class="col-auto">
                                 <span class="badge bg-secondary">Cantidad {{lastReferrals.length}}</span>
                             </div>
                         </div>
