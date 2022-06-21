@@ -13,9 +13,9 @@ Vue.createApp({
                 plan: false,
                 country_id: 159, // by default when loads is México
                 has_card: false,
-                referral_notification: true,
-                referral_email: true,
-                info_email: true,
+                referral_notification: false,
+                referral_email: false,
+                info_email: false,
             },
             countries : {},
             lastReferrals : {},

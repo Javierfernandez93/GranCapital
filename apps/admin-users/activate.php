@@ -14,12 +14,12 @@ if($UserSupport->hasPermission('list_admin_stats') === false) {
 
 $Layout = JFStudio\Layout::getInstance();
 
-$route = JFStudio\Router::AdminAdministrators;
+$route = JFStudio\Router::AdmiActivation;
 $Layout->init(JFStudio\Router::getName($route),"index","admin","",TO_ROOT."/");
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
-	'adminAdministrators.vue.js',
+	'adminActivate.vue.js',
 	'userSupport.module.js'
 ]);
 

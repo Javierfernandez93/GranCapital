@@ -270,8 +270,8 @@ class UserSupport extends Orm {
 
   public function login($field_session = false,$field_control = false) {
     $field_session = ($field_session) ? $field_session : Util::getVarFromPGS($this->field_session,false);
-    $field_control = ($field_control) ? $field_control : Util::getVarFromPGS($this->field_control,false);
-    
+    $field_control = ($field_control) ? $field_control : sha1(Util::getVarFromPGS($this->field_control,false));
+
     $this->cargarDonde("{$this->field_session}=? AND {$this->field_control}=?",[$field_session,$field_control]);
     
     return $this->doLogin();
@@ -372,7 +372,12 @@ class UserSupport extends Orm {
 
   public function loginRequest() {
     if(isset($_GET[$this->field_session]) || isset($_POST[$this->field_session]))
-      if(isset($_GET[$this->field_control]) || isset($_POST[$this->field_control])) return true;
+    {
+      if(isset($_GET[$this->field_control]) || isset($_POST[$this->field_control])) 
+      {
+        return true;
+      }
+    }
 
     return false;
   }
@@ -1050,6 +1055,7 @@ class UserSupport extends Orm {
   public function getUsers($filter = '')
   {
     $sql = "SELECT
+              user_login.user_login_id,
               user_login.signup_date,
               user_login.email,
               user_account.image,
@@ -1066,6 +1072,28 @@ class UserSupport extends Orm {
               user_account.user_login_id = user_login.user_login_id
             WHERE 
               user_login.status = '1'
+            ORDER BY 
+              user_login.signup_date
+            DESC
+              ";
+
+    return $this->connection()->rows($sql);
+  }
+
+  public function getAdministrators($filter = '')
+  {
+    $sql = "SELECT
+              {$this->tblName}.{$this->tblName}_id,
+              {$this->tblName}.names,
+              {$this->tblName}.email,
+              {$this->tblName}.create_date
+            FROM
+              {$this->tblName}
+            WHERE 
+              {$this->tblName}.status = '1'
+            ORDER BY 
+              {$this->tblName}.create_date
+            DESC
               ";
 
     return $this->connection()->rows($sql);

@@ -2,6 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
+HCStudio\Util::redirectTo('../../apps/admin-users');
 
 $UserSupport = new GranCapital\UserSupport;
 
@@ -19,7 +20,9 @@ $route = JFStudio\Router::AdminUsers;
 $Layout->init(JFStudio\Router::getName($route),"index","admin","",TO_ROOT."/");
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript(['admin-stats.js']);
+$Layout->setScript([
+	'adminUsers.vue.js'
+]);
 
 $Layout->setVar([
 	'route' => $route,

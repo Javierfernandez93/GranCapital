@@ -2,17 +2,22 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$Layout = JFStudio\Layout::getInstance();
-$Layout->init(" » Ingresar","index","admin-login","",TO_ROOT."/");
-
 $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true) {
 	HCStudio\Util::redirectTo('../../apps/admin/');
 }
 
+$Layout = JFStudio\Layout::getInstance();
+
+$route = JFStudio\Router::AdminLogin;
+$Layout->init(JFStudio\Router::getName($route),"index","admin-login","",TO_ROOT."/");
+
+
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript(['admin-login.*']);
+$Layout->setScript([
+	'loginSupport.vue.js'
+]);
 
 $Layout->setVar("UserSupport",$UserSupport);
 $Layout();

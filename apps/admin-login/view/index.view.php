@@ -1,23 +1,39 @@
-<div class="row d-flex justify-content-center align-items-center h-100">
+<div class="row d-flex justify-content-center align-items-center vh-100" id="app">
   <div class="col-11 col-md-4 col-xl-3">
     <div class="card">
-      <div class="card-header text-center lead bg-white border-0">
-        <img src="../../src/img/logo-vect.png" class="img-fluid">
-      </div>
-
+      <div class="fs-5 text-center fw-semibold">Ingresa tus credenciales</div>
       <div class="card-body">
         <div class="form-floating mb-3">
-          <input type="email" autofocus class="form-control" onpaste="setEmail(this,13,'#password')" onkeyup="setEmail(this,event,'#password')" id="email" placeholder="name@example.com">
+          <input 
+            :autofocus="true"
+            :class="isValidMail ? 'is-valid' : ''"
+            @keydown.enter.exact.prevent="$refs.password.focus()"
+            ref="email"
+            v-model="user.email"
+            type="email" class="form-control" placeholder="name@example.com">
           <label for="email">Correo electrónico</label>
         </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" onpaste="setPassword(this,13,'#login')" onkeyup="setPassword(this,event,'#login')" id="password" placeholder="Password">
+
+        <div class="form-floating mb-3">
+          <input 
+            :type="fieldPasswordType"
+            :class="user.password ? 'is-valid' : ''"
+            @keydown.enter.exact.prevent="doLogin"
+            ref="password" 
+            v-model="user.password" 
+            type="password" class="form-control" placeholder="Password">
           <label for="password">Contraseña</label>
         </div>
-      </div>
 
-      <div class="card-footer d-flex justify-content-center bg-white border-0">
-        <button class="btn btn-primary w-100 btn-block btn-lg badge-pill" id="login" disabled onclick="login(this)">Ingresar</button>
+        <div v-show="feedback" class="alert alert-secondary text-white alert-dismissible fade show" role="alert">
+            {{ feedback }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      
+        <button 
+          :disabled="!userComplete" 
+          @click="doLogin"
+          class="btn btn-primary w-100 btn-block btn-lg badge-pill" type="button">Ingresar</button>
       </div>
     </div>        
   </div>
