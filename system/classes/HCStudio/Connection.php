@@ -37,8 +37,8 @@ class Connection {
 	private $mysqli;
 	static  $protocol = 'https';
 	// static  $proyect_url = '192.168.100.237:8888/fsa';
-	static  $proyect_url = 'grancapital.found';
-	static  $proyect_name = 'Gran Capital Found';
+	static  $proyect_url = 'grancapital.fund';
+	static  $proyect_name = 'Gran Capital fund';
 
 	public function getConnectioName() {
 		return $this->connection;
