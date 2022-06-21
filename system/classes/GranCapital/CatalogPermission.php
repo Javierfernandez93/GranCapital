@@ -3,7 +3,6 @@
 namespace GranCapital;
 
 use HCStudio\Orm;
-use HCStudio\Util;
 
 class CatalogPermission extends Orm {
 	protected $tblName = 'catalog_permission';

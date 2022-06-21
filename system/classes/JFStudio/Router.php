@@ -12,6 +12,12 @@ class Router {
     const RecoverPassword = 7;
     const NewPassword = 8;
 
+    /* admin */
+    const AdminUsers = 9;
+    const AdminActivations = 10;
+    const AdminAdministrators = 11;
+    const AdminBrokers = 12;
+
     static function getName(int $route = null)
     {
         switch ($route) 
@@ -32,6 +38,14 @@ class Router {
                 return 'Recuperar contraseña';
             case self::NewPassword:
                 return 'Cambiar contraseña';
+            case self::AdminUsers:
+                return 'Usuarios';
+            case self::AdminActivations:
+                return 'Activaciones';
+            case self::AdminAdministrators:
+                return 'Administradores';
+            case self::AdminBrokers:
+                return 'Brokers';
             default: 
                 return 'Sin nombre';
         }

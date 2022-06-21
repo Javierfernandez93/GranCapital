@@ -7,11 +7,10 @@ use HCStudio\Session;
 use HCStudio\Token;
 use HCStudio\Util;
 
-use FSA\BeneficiaryPerUser;
-use FSA\CatalogUserType;
-use FSA\PermissionPerUserSupport;
-use FSA\UserType;
-use FSA\UserLogin;
+use GranCapital\CatalogUserType;
+use GranCapital\PermissionPerUserSupport;
+use GranCapital\UserType;
+use GranCapital\UserLogin;
 
 class UserSupport extends Orm {
   protected $tblName  = 'user_support';
@@ -125,7 +124,7 @@ class UserSupport extends Orm {
   }
 
   public function logoutRequest() {
-    $logout = ($logout) ? $logout : Util::getVarFromPGS('logout');
+    $logout = ($logout) ? $logout : Util::getVarFromPGS('adminLogout');
 
     if($logout) return $this->logout();
   }
@@ -1046,5 +1045,29 @@ class UserSupport extends Orm {
     }
 
     return false;
+  }
+
+  public function getUsers($filter = '')
+  {
+    $sql = "SELECT
+              user_login.signup_date,
+              user_login.email,
+              user_account.image,
+              user_data.names
+            FROM
+              user_login
+            LEFT JOIN 
+              user_data
+            ON 
+              user_data.user_login_id = user_login.user_login_id
+            LEFT JOIN 
+              user_account
+            ON 
+              user_account.user_login_id = user_login.user_login_id
+            WHERE 
+              user_login.status = '1'
+              ";
+
+    return $this->connection()->rows($sql);
   }
 }

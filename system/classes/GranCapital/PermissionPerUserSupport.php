@@ -3,9 +3,8 @@
 namespace GranCapital;
 
 use HCStudio\Orm;
-use HCStudio\Util;
 
-use FSA\CatalogPermission;
+use GranCapital\CatalogPermission;
 
 class PermissionPerUserSupport extends Orm {
 	protected $tblName = 'permission_per_user_support';

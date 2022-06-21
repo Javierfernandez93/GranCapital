@@ -5,8 +5,8 @@ namespace GranCapital;
 use HCStudio\Orm;
 use HCStudio\Util;
 
-use FSA\LoanPerUser;
-use FSA\Balance;
+use GranCapital\LoanPerUser;
+use GranCapital\Balance;
 
 class PaymentPerLoan extends Orm {
 	protected $tblName = 'payment_per_loan';

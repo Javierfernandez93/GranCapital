@@ -5,9 +5,9 @@ namespace GranCapital;
 use HCStudio\Orm;
 use HCStudio\Util;
 
-use FSA\CommissionAmmountPerSeller;
-use FSA\CatalogCommission;
-use FSA\LoanPerUser;
+use GranCapital\CommissionAmmountPerSeller;
+use GranCapital\CatalogCommission;
+use GranCapital\LoanPerUser;
 
 class CommissionPerSeller extends Orm {
 	protected $tblName = 'commission_per_seller';
