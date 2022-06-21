@@ -17,7 +17,7 @@
         <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
         <link href="../../src/css/animate.css" rel="stylesheet" />
         
-        <link href="<?php echo HCStudio\Connection::$protocol;?>://<?php echo HCStudio\Connection::$proyect_url;?>/src/css/general.css" rel="stylesheet" type="text/css">
+        <link href="../../src/css/general.css" rel="stylesheet" type="text/css">
         <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
         %css_scripts%
     </head>
