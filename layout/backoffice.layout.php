@@ -323,7 +323,7 @@
 
         %content%
 
-        <footer class="container footer pt-3 fixed-bottom">
+        <footer class="container footer pt-3 fixesd-bottom">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-lg-between">
                     <div class="col-lg-6 mb-lg-0 mb-4">
@@ -340,20 +340,7 @@
                     <div class="col-lg-6">
                         <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                             <li class="nav-item">
-                                <a href="https://grancapital.fund/" class="nav-link text-muted" target="_blank">Grand
-                                    Capital</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://grancapital.fund//presentation" class="nav-link text-muted"
-                                    target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://grancapital.fund//blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://grancapital.fund//license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
+                                <a href="" class="nav-link text-muted" target="_blank">Grand Capital</a>
                             </li>
                         </ul>
                     </div>
