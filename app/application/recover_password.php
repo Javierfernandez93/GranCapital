@@ -50,7 +50,6 @@ function sendEmail(string $email = null,string $token = null) : bool
     {
         require_once TO_ROOT . '/vendor/autoload.php';
         
-        //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
         try {
@@ -60,33 +59,29 @@ function sendEmail(string $email = null,string $token = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
+            $CatalogMailController = GranCapital\CatalogMailController::init(1);        
+
             $Layout->setVar([
                 "email" => $email,
                 "token" => $token
             ]);
 
-           //Server settings
-            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF;                      //Enable verbose debug output
-            // $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP(); //Send using SMTP
+            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF; // PHPMailer\PHPMailer\SMTP::DEBUG_SERVER
+            $mail->isSMTP(); 
             // $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
-            $mail->SMTPAuth = true; //Enable SMTP authentication
-            $mail->Username = 'grancapitalfound@gmail.com';
-            $mail->Password = 'thntkfhgfpmxwxzx';
-            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; // Enable implicit TLS encryption
-            $mail->Port = 587; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Host = $CatalogMailController->host;
+            $mail->SMTPAuth = true; 
+            $mail->Username = $CatalogMailController->mail;
+            $mail->Password =  $CatalogMailController->password;
+            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; 
+            $mail->Port = $CatalogMailController->port; 
 
             //Recipients
-            $mail->setFrom('grancapitalfound@gmail.com', 'GranCapital');
-            $mail->addAddress($email, 'Joe PHPMailer\PHPMailer\PHPMailerUser');     //Add a recipient
-
-            //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+            $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
+            $mail->addAddress($email, 'Gran Capital User');     
 
             //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->isHTML(true);                                
             $mail->CharSet = 'UTF-8';
             $mail->Subject = "Recuperar contraseña";
             $mail->Body = $Layout->getHtml();

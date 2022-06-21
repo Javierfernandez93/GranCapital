@@ -12,7 +12,7 @@ if($data['email'])
     {
         if($UserLogin->doSignup($data))
         {
-            if(sendEmail($data['email'],$data['names']))
+            if(sendEmailUser($data['email'],$data['names']))
             {
                 $data['email_sent'] = true;
             }
@@ -34,7 +34,7 @@ if($data['email'])
             $data['s'] = 0;
             $data['r'] = 'ERROR_ON_SIGNUP';
         }
-    } else {r
+    } else {
         $data['s'] = 0;
         $data['r'] = 'MAIL_ALREADY_EXISTS';
     }
@@ -43,7 +43,34 @@ if($data['email'])
 	$data['r'] = 'NOT_FIELD_SESSION_DATA';
 }
 
-function sendEmail(string $email = null,string $names = null) : bool
+function sendEmailSponsor(string $user_login_id = null,string $names = null) : bool
+{
+    if(isset($user_login_id,$names) === true)
+    {
+        $UserLogin = new GranCapital\UserLogin;
+
+        if($email = $UserLogin->getEmail($user_login_id))
+        {
+            return sendEmail($email,$names,'Nuevo afiliado en Gran Capital','partnerWelcome');
+        }
+    }
+
+    return false;
+}
+
+function sendEmailUser(string $email = null,string $names = null) : bool
+{
+    if(isset($email,$names) === true)
+    {
+        return sendEmail($email,$names,'Bienvenido a bordo','welcome');
+    }
+
+    return false;
+}
+
+
+
+function sendEmail(string $email = null,string $names = null,string $subject = null,string $view = null) : bool
 {
     if(isset($email,$names) === true)
     {
@@ -53,39 +80,36 @@ function sendEmail(string $email = null,string $names = null) : bool
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("","welcome","mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("",$view,"mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
+
+            $CatalogMailController = GranCapital\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "email" => $email,
                 "names" => $names
             ]);
 
-            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF;                      //Enable verbose debug output
-            // $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP(); //Send using SMTP
+            $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF; // PHPMailer\PHPMailer\SMTP::DEBUG_SERVER
+            $mail->isSMTP(); 
             // $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
-            $mail->SMTPAuth = true; //Enable SMTP authentication
-            $mail->Username = 'grancapitalfound@gmail.com';
-            $mail->Password = 'thntkfhgfpmxwxzx            ';
-            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; // Enable implicit TLS encryption
-            $mail->Port = 587; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Host = $CatalogMailController->host;
+            $mail->SMTPAuth = true; 
+            $mail->Username = $CatalogMailController->mail;
+            $mail->Password =  $CatalogMailController->password;
+            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; 
+            $mail->Port = $CatalogMailController->port; 
 
             //Recipients
-            $mail->setFrom('grancapitalfound@gmail.com', 'GranCapital');
-            $mail->addAddress($email, $names);     //Add a recipient
-
-            //Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+            $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
+            $mail->addAddress($email, $names);     
 
             //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->isHTML(true);                                  
             $mail->CharSet = 'UTF-8';
-            $mail->Subject = "Bienvenido a Gran Capital";
+            $mail->Subject = $subject;
             $mail->Body = $Layout->getHtml();
             $mail->AltBody = strip_tags($Layout->getHtml());
 
@@ -98,60 +122,5 @@ function sendEmail(string $email = null,string $names = null) : bool
     return false;
 }
 
-function sendEmailSponsor(string $user_login_id = null,string $names = null) : bool
-{
-    if(isset($user_login_id,$names) === true)
-    {
-        $UserLogin = new GranCapital\UserLogin;
-
-        if($email = $UserLogin->getEmail($user_login_id))
-        {
-            require_once TO_ROOT . '/vendor/autoload.php';
-            
-            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-
-            try {
-                    $Layout = JFStudio\Layout::getInstance();
-                    $Layout->init("","partnerWelcome","mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
-
-                    $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
-                    $Layout->setScript(['']);
-
-                    $Layout->setVar([
-                        "email" => $email,
-                        "names" => $names
-                    ]);
-
-                    $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_OFF;                      //Enable verbose debug output
-                    // $mail->SMTPDebug = PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                    $mail->isSMTP(); //Send using SMTP
-                    // $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-                    $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
-                    $mail->SMTPAuth = true; //Enable SMTP authentication
-                    $mail->Username = 'grancapitalfound@gmail.com';
-                    $mail->Password = 'thntkfhgfpmxwxzx            ';
-                    $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; // Enable implicit TLS encryption
-                    $mail->Port = 587; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                    //Recipients
-                    $mail->setFrom('grancapitalfound@gmail.com', 'GranCapital');
-                    $mail->addAddress($email, $names);     //Add a recipient
-
-                    //Content
-                    $mail->isHTML(true);                                  //Set email format to HTML
-                    $mail->CharSet = 'UTF-8';
-                    $mail->Subject = "Nuevo afiliado en Gran Capital";
-                    $mail->Body = $Layout->getHtml();
-                    $mail->AltBody = strip_tags($Layout->getHtml());
-
-                    return $mail->send();
-            } catch (Exception $e) {
-                
-            }
-        }
-    }
-
-    return false;
-}
 
 echo json_encode($data);
