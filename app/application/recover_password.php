@@ -73,7 +73,7 @@ function sendEmail(string $email = null,string $token = null) : bool
             $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
             $mail->SMTPAuth = true; //Enable SMTP authentication
             $mail->Username = 'grancapitalfound@gmail.com';
-            $mail->Password = 'thntkfhgfpmxwxzx            ';
+            $mail->Password = 'thntkfhgfpmxwxzx';
             $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; // Enable implicit TLS encryption
             $mail->Port = 587; // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 

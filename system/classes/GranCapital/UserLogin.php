@@ -414,6 +414,23 @@ class UserLogin extends Orm {
     return false;
   }
 
+  public function getEmail(int $user_login_id = null) 
+  {
+    if (isset($user_login_id) === true) 
+    {
+      $sql = "SELECT 
+                {$this->tblName}.email
+              FROM 
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.user_login_id = '{$user_login_id}'
+              ";
+      return $this->connection()->field($sql); 
+    }
+
+    return false;
+  }
+
   public function getNames($user_support_id = false) 
   {
     if (isset($user_support_id) === true) {
