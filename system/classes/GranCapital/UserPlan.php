@@ -55,4 +55,26 @@ class UserPlan extends Orm {
 
     return false;
   }
+ 
+  public function getActivePlans() 
+  {
+    $sql = "SELECT
+              {$this->tblName}.{$this->tblName}_id,
+              {$this->tblName}.additional_profit,
+              {$this->tblName}.user_login_id,
+              catalog_plan.catalog_plan_id,
+              catalog_plan.profit,
+              catalog_plan.name
+            FROM 
+              {$this->tblName}
+            LEFT JOIN 
+              catalog_plan 
+            ON 
+              catalog_plan.catalog_plan_id = {$this->tblName}.catalog_plan_id
+            WHERE 
+              {$this->tblName}.status = '1'
+            ";
+
+    return $this->connection()->rows($sql);
+  }
 }
