@@ -55,7 +55,7 @@ function filterData($brokers = null)
         $brokers[$key]['real_gain'] = HCStudio\Util::getPercentaje($brokers[$key]['gain'],$broker['fee']*100);
 
         // getting gain percentaje
-        $brokers[$key]['percentaje_gain'] = number_format(($brokers[$key]['real_gain'] / $broker['capital']) * 100,2);
+        $brokers[$key]['percentaje_gain'] = $broker['capital'] ? number_format(($brokers[$key]['real_gain'] / $broker['capital']) * 100,2) : 0;
 
         // new capital
         $brokers[$key]['new_capital'] = $broker['capital'] + $brokers[$key]['real_gain'];

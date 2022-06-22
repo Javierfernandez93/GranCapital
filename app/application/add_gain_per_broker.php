@@ -12,19 +12,7 @@ if($UserSupport->_loaded === true)
     {
         if($data['broker_id'])
         {
-            $GainPerBroker = new GranCapital\GainPerBroker;
-            
-            if($gain_per_broker_id = $GainPerBroker->getGainPerDayId($data['broker_id']))
-            {
-                $GainPerBroker->cargarDonde("gain_per_broker_id = ?",$gain_per_broker_id);
-            } else {
-                $GainPerBroker->broker_id = $data['broker_id'];
-                $GainPerBroker->create_date = time();
-            }
-
-            $GainPerBroker->gain = $data['gain'];
-
-            if($GainPerBroker->save())
+            if(GranCapital\GainPerBroker::addGain($data['broker_id'],$data['gain']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";

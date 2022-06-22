@@ -5,6 +5,10 @@ namespace GranCapital;
 use HCStudio\Orm;
 
 class Broker extends Orm {
+	const DELETE = -1;
+	const INACTIVE = 0;
+	const ACTIVE = 1;
+
 	protected $tblName = 'broker';
 	public function __construct() {
 		parent::__construct();
@@ -15,11 +19,12 @@ class Broker extends Orm {
 		$sql = "SELECT 
 					{$this->tblName}.{$this->tblName}_id,
 					{$this->tblName}.name,
-					{$this->tblName}.fee
+					{$this->tblName}.fee,
+					{$this->tblName}.status
 				FROM 
 					{$this->tblName}
 				WHERE 
-					{$this->tblName}.status = '1'
+					{$this->tblName}.status IN ('".self::ACTIVE."','".self::INACTIVE."')
 				";
 		
 		return $this->connection()->rows($sql);

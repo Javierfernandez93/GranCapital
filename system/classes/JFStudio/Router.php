@@ -21,6 +21,9 @@ class Router {
     const AdminBrokers = 12;
     const AdminLogin = 13;
     const AdmiActivation = 14;
+    const AdminBrokersEdit = 16;
+    const AdminBrokersAdd = 17;
+    const AdminBrokersCapitals = 18;
 
     static function getName(int $route = null)
     {
@@ -54,6 +57,12 @@ class Router {
                 return 'Administradores';
             case self::AdminBrokers:
                 return 'Brokers';
+            case self::AdminBrokersEdit:
+                return 'Editar broker';
+            case self::AdminBrokersAdd:
+                return 'Añadir broker';
+            case self::AdminBrokersAdd:
+                return 'Capital invertido';
             case self::AdminLogin:
                 return 'Iniciar sesión admin';
             case self::AdmiActivation:

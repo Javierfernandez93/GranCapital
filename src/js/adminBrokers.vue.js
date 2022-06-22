@@ -39,8 +39,24 @@ Vue.createApp({
                 return broker.name.toLowerCase().includes(this.query.toLowerCase())
             })
         },
-        deleteUser : function(company_id) {
-            this.UserSupport.deleteUser({company_id:company_id},(response)=>{
+        inactiveBroker : function(broker_id) {
+            this.UserSupport.inactiveBroker({broker_id:broker_id},(response)=>{
+                if(response.s == 1)
+                {
+                    this.getBrokers()
+                }
+            })
+        },
+        activeBroker : function(broker_id) {
+            this.UserSupport.activeBroker({broker_id:broker_id},(response)=>{
+                if(response.s == 1)
+                {
+                    this.getBrokers()
+                }
+            })
+        },
+        deleteBroker : function(broker_id) {
+            this.UserSupport.deleteBroker({broker_id:broker_id},(response)=>{
                 if(response.s == 1)
                 {
                     this.getBrokers()
@@ -136,8 +152,11 @@ Vue.createApp({
                 this.totals['new_capital'] += parseFloat(broker['new_capital']);
             })
         },
-        goToEdit : function(company_id) {
-            window.location.href = '../../apps/admin-users/edit?ulid='+company_id
+        viewCapitals : function(broker_id) {
+            window.location.href = '../../apps/admin-brokers/capitals?bid='+broker_id
+        },
+        goToEdit : function(broker_id) {
+            window.location.href = '../../apps/admin-brokers/edit?bid='+broker_id
         },
         getBrokers : function() {
             this.UserSupport.getBrokers({},(response)=>{

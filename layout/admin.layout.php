@@ -93,7 +93,7 @@
                         <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::AdminAdministrators);?></span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-none">
                     <a class="nav-link <?php if($route == JFStudio\Router::AdminActivations){?>active<?php } ?>" href="../../apps/admin-activations">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -121,7 +121,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($route == JFStudio\Router::AdminBrokers){?>active<?php } ?>" href="../../apps/admin-brokers">
+                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminBrokers,JFStudio\Router::AdminBrokersEdit,JFStudio\Router::AdminBrokersAdd])){?>active<?php } ?>" href="../../apps/admin-brokers">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"

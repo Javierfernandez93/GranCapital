@@ -19,14 +19,14 @@ if($UserSupport->hasPermission('list_client') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 
-$route = JFStudio\Router::AdminBrokersAdd;
+$route = JFStudio\Router::AdminBrokersCapitals;
 $Layout = JFStudio\Layout::getInstance();
-$Layout->init(JFStudio\Router::getName($route),"add","admin","",TO_ROOT."/");
+$Layout->init(JFStudio\Router::getName($route),"capitals","admin","",TO_ROOT."/");
 
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
-	'adminAddBroker.vue.js'
+	'adminCapitalBroker.vue.js'
 ]);
 
 $Layout->setVar([

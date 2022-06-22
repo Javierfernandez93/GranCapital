@@ -12,19 +12,7 @@ if($UserSupport->_loaded === true)
     {
         if($data['broker_id'])
         {
-            $CapitalPerBroker = new GranCapital\CapitalPerBroker;
-            
-            if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($data['broker_id']))
-            {
-                $CapitalPerBroker->cargarDonde("capital_per_broker_id = ?",$capital_per_broker_id);
-            } else {
-                $CapitalPerBroker->broker_id = $data['broker_id'];
-                $CapitalPerBroker->create_date = time();
-            }
-
-            $CapitalPerBroker->capital = $data['capital'];
-
-            if($CapitalPerBroker->save())
+            if(GranCapital\CapitalPerBroker::addCapital($data['broker_id'],$data['capital']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";

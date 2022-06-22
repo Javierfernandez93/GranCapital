@@ -1,25 +1,49 @@
-<div class="page-title-box">
-    <div class="container-fluid">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12 col-xl-10">
-                <div class="row">
-                     <div class="col-12">
-                         <div class="page-title">
-                             <h4>Administración</h4>
-                             <ol class="breadcrumb m-0">
-                                 <li class="breadcrumb-item"><a href="../../apps/admin-client">Clientes</a></li>
-                                 <li class="breadcrumb-item active"><a>Dar de alta cliente</a></li>
-                             </ol>
-                         </div>
-                     </div>
-                </div>
-            </div>
+<div class="container-fluid py-4" id="app">
+    <div class="card">
+        <div class="card-header pb-0 px-3"> 
+            <h6 class="mb-0">Añadir broker</h6>
         </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div class="page-content-wrapper">
-        <div id="response"></div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label>Broker</label>
+                <input 
+                    :autofocus="true"
+                    :class="broker.name ? 'is-valid' : ''"
+                    @keydown.enter.exact.prevent="$refs.fee.focus()"
+                    v-model="broker.name"
+                    ref="name"
+                    type="text" class="form-control" placeholder="nombre">
+            </div>
+            <div class="mb-3">
+                <label>Fee</label>
+                <input 
+                    v-model="broker.fee"
+                    :class="broker.name ? 'is-valid' : ''"
+                    @keydown.enter.exact.prevent="$refs.capital.focus()"
+                    ref="fee"
+                    type="text" class="form-control" placeholder="0%">
+            </div>
+            <div class="mb-3">
+                <label>Capital inicial</label>
+                <input 
+                    v-model="broker.capital"
+                    @keydown.enter.exact.prevent="$refs.gain.focus()"
+                    ref="capital"
+                    type="number" class="form-control" placeholder="$0">
+            </div>
+            <div class="mb-3">
+                <label>Ganancia inicial</label>
+                <input 
+                    v-model="broker.gain"
+                    @keydown.enter.exact.prevent="saveBroker"
+                    ref="gain"
+                    type="number" class="form-control" placeholder="$0">
+            </div>
+        
+            <button 
+                :disabled="!brokerComplete"
+                ref="button"
+                type="submit" class="btn btn-primary" @click="saveBroker">Guardar broker</button>
+        </div>
     </div>
 </div>

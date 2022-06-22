@@ -15,7 +15,10 @@
                                 <span class="text-uppercase text-primary">operación del {{day}}</span>
                             </div>
                         </div>
-                        <div class="col-auto"><span class="badge bg-primary">Total de brokers {{Object.keys(brokers).length}}</span></div>
+                        <div class="col-auto text-end">
+                            <div><a href="../../apps/admin-brokers/add" type="button" class="btn btn-success btn-sm">Añadir broker</a></div>
+                            <div><span class="badge bg-secondary">Total de brokers {{Object.keys(brokers).length}}</span></div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-header pb-0">
@@ -42,6 +45,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="broker in brokers"
+                                    :class="!broker.status ? 'opacity-25' : ''"
                                     class="text-center">
                                     <td>
                                         <h6 class="mb-0 text-sm">{{broker.name}}</h6>
@@ -81,12 +85,15 @@
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                 
                                             </button>
-                                            <ul class="dropdown-menu">
-                                                <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Ver montos invertidos</button></li>
+                                            <ul class="dropdown-menu shadow">
+                                                <li><button class="dropdown-item" @click="viewCapitals(broker.broker_id)">Ver montos invertidos</button></li>
                                                 <li><button class="dropdown-item" @click="addCapital(broker)">Añadir monto invertido</button></li>
-                                                <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
+                                                <li><button class="dropdown-item" @click="goToEdit(broker.broker_id)">Editar</button></li>
+                                                <!-- <li><hr class="dropdown-divider"></li>
+                                                <li v-if="!broker.status"><button class="dropdown-item" @click="inactiveBroker(broker.broker_id)">Inactivar</button></li>
+                                                <li v-if="broker.status"><button class="dropdown-item" @click="activeBroker(broker.broker_id)">Activar</button></li> -->
                                                 <li><hr class="dropdown-divider"></li>
-                                                <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
+                                                <li><button class="dropdown-item" @click="deleteBroker(broker.broker_id)">Eliminar</button></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -98,25 +105,25 @@
                                 <tr class="text-center">
                                     <td class="border-bottom-0 border-top"></td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        $ {{totals.capital.numberFormat(2)}}
+                                        <h6 class="mb-0 text-sm">$ {{totals.capital.numberFormat(2)}}</h6>
                                     </td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        {{totals.portfolio.numberFormat(2)}} %
+                                        <h6 class="mb-0 text-sm">{{totals.portfolio.numberFormat(2)}} %</h6>
                                     </td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        $ {{totals.gain.numberFormat(2)}}
+                                        <h6 class="mb-0 text-sm">$ {{totals.gain.numberFormat(2)}}</h6>
                                     </td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        {{totals.fee}} %
+                                        <h6 class="mb-0 text-sm">{{totals.fee.numberFormat(2)}} %</h6>
                                     </td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        $ {{totals.real_gain.numberFormat(2)}}
+                                        <h6 class="mb-0 text-sm">$ {{totals.real_gain.numberFormat(2)}}</h6>
                                     </td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        {{totals.percentaje_gain.numberFormat(2)}}%
+                                        <h6 class="mb-0 text-sm">{{totals.percentaje_gain.numberFormat(2)}}%</h6>
                                     </td>
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
-                                        $ {{totals.new_capital.numberFormat(2)}}
+                                        <h6 class="mb-0 text-sm">$ {{totals.new_capital.numberFormat(2)}}</h6>
                                     </td>
                                     <td class="border-bottom-0 border-top"></td>
                                 </tr>

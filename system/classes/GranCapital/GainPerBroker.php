@@ -40,6 +40,23 @@ class GainPerBroker extends Orm {
         return false;
 	}
 	
+    public static function addGain(int $broker_id = null,float $gain = null) : bool
+    {
+        $GainPerBroker = new GainPerBroker;
+            
+        if($gain_per_broker_id = $GainPerBroker->getGainPerDayId($broker_id))
+        {
+            $GainPerBroker->cargarDonde("gain_per_broker_id = ?",$gain_per_broker_id);
+        } else {
+            $GainPerBroker->broker_id = $broker_id;
+            $GainPerBroker->create_date = time();
+        }
+
+        $GainPerBroker->gain = $gain;
+
+        return $GainPerBroker->save();
+    }
+
     public function getGainPerDayId(int $broker_id = null)
 	{
         if(isset($broker_id) === true)
