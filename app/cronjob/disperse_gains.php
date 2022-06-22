@@ -24,7 +24,7 @@ foreach ($active_plans as $active_plan)
 
         if($ProfitPerUser->insertGain($active_plan['user_plan_id'],GranCapital\CatalogProfit::INVESTMENT,$gain))
         {
-            GranCapital\NotificationPerUser::push($active_plan['user_plan_id'],"Hemos enviado $ {$gain} USD, a tu cuenta, por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
+            GranCapital\NotificationPerUser::push($active_plan['user_plan_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
         }
     }
 }

@@ -22,6 +22,10 @@ class UserSupport extends Http
     {
         return this.call('../../app/application/update_plan.php',data,callback);
     } 
+    getBrokers(data,callback)
+    {
+        return this.call('../../app/application/get_brokers.php',data,callback);
+    } 
     getUserProfile(data,callback)
     {
         return this.call('../../app/application/get_user_profile.php',data,callback);
