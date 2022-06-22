@@ -17,7 +17,7 @@ Vue.createApp({
             this.User.getPlans({},(response)=>{
                 if(response.s == 1)
                 {
-                    Object.assign(this.plans, response.plans)
+                    this.plans = response.plans
                 }
             })
         },

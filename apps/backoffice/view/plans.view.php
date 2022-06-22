@@ -26,15 +26,15 @@
                                             <i class="bi bi-graph-up-arrow text-primary"></i>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h1 class="mb-0 text-sm">PLAN {{plan.name}}</h1>
+                                            <h3 class="mb-0 text-sm">PLAN {{plan.name}}</h3>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                   {{plan.profit}} <i class="bi bi-percent"></i>
+                                    <h3 class="mb-0 text-sm">{{plan.profit}} <i class="bi bi-percent"></i></h3>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <i class="bi bi-currency-dollar"></i> {{plan.name}} USD 
+                                    <h3 class="mb-0 text-sm"><i class="bi bi-currency-dollar"></i> {{plan.name.numberFormat()}} USD </h3>
                                 </td>
                             </tr>
                         </tbody>
