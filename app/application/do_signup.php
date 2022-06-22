@@ -10,16 +10,26 @@ if($data['email'])
 
     if($UserLogin->isUniqueMail($data['email']))
     {
-        if($UserLogin->doSignup($data))
+        if($user_login_id = $UserLogin->doSignup($data))
         {
             if(sendEmailUser($data['email'],$data['names']))
             {
                 $data['email_sent'] = true;
             }
 
+            if(sendPushUser($user_login_id,$data['names']))
+            {
+                $data['push_sent'] = true;
+            }
+
             if(sendEmailSponsor($data['referral']['user_login_id'],$data['names']))
             {
-                $data['email_sent'] = true;
+                $data['email_sponsor_sent'] = true;
+            }
+
+            if(sendPushSponsor($data['referral']['user_login_id'],$data['names']))
+            {
+                $data['push_sponsor_sent'] = true;
             }
 
             if($UserLogin->login($data['email'],sha1($data['password'])))
@@ -41,6 +51,21 @@ if($data['email'])
 } else {
 	$data['s'] = 0;
 	$data['r'] = 'NOT_FIELD_SESSION_DATA';
+}
+
+function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
+{
+    return GranCapital\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+}
+
+function sendPushUser(string $user_login_id = null,string $names = null) : bool
+{
+    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Gran Capital",GranCapital\CatalogNotification::ACCOUNT);
+}
+
+function sendPushSponsor(string $user_login_id = null,string $names = null) : bool
+{
+    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",GranCapital\CatalogNotification::REFERRAL);
 }
 
 function sendEmailSponsor(string $user_login_id = null,string $names = null) : bool

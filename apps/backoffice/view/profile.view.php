@@ -93,6 +93,11 @@
                     </div>
                     <div class="card-body p-3">
                         <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 text-sm">
+                                <label>ID de afiliado</label>
+                                <input type="text" readonly v-model="user.company_id" disabled class="form-control" placeholder="Email"/>
+                            </li>
+
                             <li class="list-group-item border-0 ps-0 pt-0 text-sm">
                                 <label>Nombre</label>
                                 <input type="text" v-model="user.names" class="form-control" placeholder="Nombre"/>
@@ -357,3 +362,4 @@
         </div>
     </div>
 </div>
+<!-- <iframe src="https://trade.mql5.com/trade?servers=SomeBroker1-Demo,SomeBroker1-Live,SomeBroker2-Demo,SomeBroker2-Live&trade_server=SomeBroker-Demo&startup_mode=open_demo&lang=es&save_password=off"allowfullscreen="allowfullscreen" style="width: 100%; height: 100%; border: none;" class="vh-100"></iframe> -->

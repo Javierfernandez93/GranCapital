@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($route == JFStudio\Router::Backoffice){?>active<?php } ?>"
+                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::Backoffice,JFStudio\Router::Notifications])){?>active<?php } ?>"
                         href="../../apps/backoffice">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -234,7 +234,11 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown px-2 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link p-0" id="dropdownMenuButton"
+                            <a href="../../apps/backoffice/notifications" class="nav-link p-0" id="dropdownMenuButton"
+                                >
+                                <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>
+                            </a>    
+                            <!-- <a href="../../apps/backoffice/notifications" class="nav-link p-0" id="dropdownMenuButton"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>
                             </a>
@@ -314,7 +318,7 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
                     </ul>
                 </div>

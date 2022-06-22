@@ -14,6 +14,10 @@ class User extends Http
     {
         return this.call('../../app/application/get_backoffice_vars.php',data,callback);
     }    
+    getNotifications(data,callback)
+    {
+        return this.call('../../app/application/get_notifications.php',data,callback);
+    }
     editProfile(data,callback)
     {
         return this.call('../../app/application/edit_profile.php',data,callback);

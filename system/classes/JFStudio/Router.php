@@ -11,6 +11,7 @@ class Router {
     const Login = 6;
     const RecoverPassword = 7;
     const NewPassword = 8;
+    const Notifications = 15;
 
     /* admin */
     const AdminUsers = 9;
@@ -40,6 +41,8 @@ class Router {
                 return 'Recuperar contraseña';
             case self::NewPassword:
                 return 'Cambiar contraseña';
+            case self::Notifications:
+                return 'Notificaciones';
             case self::AdminUsers:
                 return 'Usuarios';
             case self::AdminActivations:

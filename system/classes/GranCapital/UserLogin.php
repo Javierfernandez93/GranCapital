@@ -404,7 +404,10 @@ class UserLogin extends Orm {
                 $UserReferral->save();
               }
 
-              return $UserAccount->save();
+              if($UserAccount->save())
+              {
+                return $UserLogin->company_id;
+              }
             }
           }
         }

@@ -7,6 +7,7 @@ Vue.createApp({
     data() {
         return {
             user: {
+                company_id: null,
                 email: null,
                 names: null,
                 image: null,

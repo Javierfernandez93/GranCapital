@@ -9,6 +9,7 @@ $UserLogin = new GranCapital\UserLogin;
 if($UserLogin->_loaded === true)
 {
     $data["user"] = [
+        'company_id' => $UserLogin->company_id,
         'email' => $UserLogin->email,
         'phone' => $UserLogin->_data['user_contact']['phone'],
         'names' => $UserLogin->_data['user_data']['names'],
