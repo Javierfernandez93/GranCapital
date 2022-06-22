@@ -22,6 +22,14 @@ class UserSupport extends Http
     {
         return this.call('../../app/application/update_plan.php',data,callback);
     } 
+    addCapitalToBroker(data,callback)
+    {
+        return this.call('../../app/application/add_capital_to_broker.php',data,callback);
+    }
+    addGainPerBroker(data,callback)
+    {
+        return this.call('../../app/application/add_gain_per_broker.php',data,callback);
+    }
     getBrokers(data,callback)
     {
         return this.call('../../app/application/get_brokers.php',data,callback);

@@ -16,6 +16,25 @@ class UserReferral extends Orm {
     return $this->getReferrals($referral_id," ORDER BY {$this->tblName}.create_date DESC LIMIT 5 ");
   }
 
+  public function getReferralCount(int $referral_id = null,string $filter = '') 
+  {
+    if(isset($referral_id) === true) 
+    {
+      $sql = "SELECT 
+                COUNT({$this->tblName}.user_login_id) as c
+              FROM 
+                {$this->tblName} 
+              WHERE 
+                {$this->tblName}.referral_id = '{$referral_id}' 
+              AND 
+                {$this->tblName}.status = '1'
+                {$filter}
+              ";
+
+      return $this->connection()->field($sql);
+    }
+  }
+
   public function getReferrals(int $referral_id = null,string $filter = '') 
   {
     if(isset($referral_id) === true) 

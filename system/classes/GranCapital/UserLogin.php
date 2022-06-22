@@ -505,4 +505,15 @@ class UserLogin extends Orm {
       return $this->connection()->row($sql);
     }
   }
+
+  /* profile fun */  
+  public function getReferralCount()
+  {
+    if($this->getId())
+    {
+      return (new UserReferral)->getReferralCount($this->company_id);
+    }
+
+    return 0;
+  }
 }

@@ -8,9 +8,11 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
+    $data['day'] = $data['day'] ? $data['day'] : date("Y/m/d");
+
     $Broker = new GranCapital\Broker;
 
-    if($brokers = $Broker->getAll())
+    if($brokers = $Broker->getAll($data['day']))
     {
         $data["data"] = filterData($brokers);
         $data["s"] = 1;
@@ -41,11 +43,13 @@ function filterData($brokers = null)
     // getting % portfolio
     foreach($brokers as $key => $broker)
     {
+        $gain = $GainPerBroker->getGainPerDay($broker['broker_id']);
+
         // calculating portfolio
         $brokers[$key]['portfolio'] = number_format(($broker['capital']/$brokers_data['totals']['capital'])*100,2);
         
         // getting gain 
-        $brokers[$key]['gain'] = $GainPerBroker->getGainPerDay($broker['broker_id']);
+        $brokers[$key]['gain'] = $gain ? $gain : 0;
         
         // getting gain witout fee
         $brokers[$key]['real_gain'] = HCStudio\Util::getPercentaje($brokers[$key]['gain'],$broker['fee']*100);
@@ -59,16 +63,6 @@ function filterData($brokers = null)
 
 
     $brokers_data['brokers'] = $brokers;
-
-    // totals
-    $brokers_data['totals']['portfolio'] = array_sum(array_column($brokers,'portfolio'));
-    $brokers_data['totals']['gain'] = array_sum(array_column($brokers,'gain'));
-    $brokers_data['totals']['fee'] = array_sum(array_column($brokers,'fee'));
-    $brokers_data['totals']['real_gain'] = array_sum(array_column($brokers,'real_gain'));
-    $brokers_data['totals']['percentaje_gain'] = array_sum(array_column($brokers,'percentaje_gain'));
-    $brokers_data['totals']['new_capital'] = array_sum(array_column($brokers,'new_capital'));
-
-    // d($brokers_data);
 
     return $brokers_data;
 }

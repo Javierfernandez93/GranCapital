@@ -35,3 +35,6 @@ body {
 .bg-cover {
     background-size: cover;
 }
+.c-pointer {
+    cursor: pointer;
+}

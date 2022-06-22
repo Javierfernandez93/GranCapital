@@ -341,6 +341,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/jquery-3.1.1.js" type="text/javascript"></script>
     <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/general.js?t=1" type="text/javascript"></script>
+    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/alertCtrl.js?t=1" type="text/javascript"></script>
 
     <script>
     var win = navigator.platform.indexOf('Win') > -1;

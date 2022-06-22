@@ -9,6 +9,7 @@ Vue.createApp({
         return {
             UserSupport : null,
             totals : {},
+            day : null,
             brokers : {},
             brokersAux : {},
             query : null,
@@ -19,6 +20,13 @@ Vue.createApp({
         {
             handler() {
                 this.filterData()
+            },
+            deep : true
+        },
+        brokers : 
+        {
+            handler() {
+                this.calculateData()
             },
             deep : true
         }
@@ -39,8 +47,94 @@ Vue.createApp({
                 }
             })
         },
+        addGainPerBroker : function(broker) {
+
+            this.UserSupport.addGainPerBroker({gain:broker.gain,broker_id:broker.broker_id},(response) => {
+                if(response.s == 1)
+                {
+                    
+                }
+            })
+
+            this.toggleEditing(broker);
+        },
+        toggleEditing : function(broker) {
+            broker['editing'] = broker['editing'] != undefined ? !broker['editing'] : true
+        },
         goToActivatePlan : function(company_id) {
             window.location.href = '../../apps/admin-users/activate?ulid='+company_id
+        },
+        resetTotals : function() {
+            Object.assign(this.totals, {
+                fee: 0,
+                gain: 0,
+                new_capital: 0,
+                percentaje_gain: 0,
+                portfolio: 0,
+                real_gain: 0
+            })
+        },
+        calculateData : function() {
+            this.calculateVars()
+            this.calculateTotals()
+        },
+        calculateVars : function() {
+            this.brokers.map((broker) => {
+                // getting gain witout fee
+                broker['real_gain'] = broker['fee'] == 0 ? broker['gain'] : broker['fee'] * broker['gain']
+
+                // getting gain percentaje
+                broker['percentaje_gain'] = (broker['real_gain'] / broker['capital']) * 100
+
+                // new capital
+                broker['new_capital'] = broker['capital'] + broker['real_gain']
+            })
+        },
+        addCapital : function(broker) {
+            const alert = alertCtrl.create({
+                title: `añade el monto para ${broker.name}`,
+                subTitle: "monto a invertir",
+                inputs : [
+                  {
+                    type: 'number',
+                    placeholder: '$0',
+                    name: 'capital',
+                    id:'capital'
+                  }  
+                ],
+                buttons: [
+                    { 
+                        text: 'Aceptar',
+                        handler: data => {
+                            this.UserSupport.addCapitalToBroker({capital:data.capital,broker_id:broker.broker_id},(response) => {
+                                if(response.s == 1)
+                                {
+                                    this.getBrokers()
+                                }
+                            })
+                        }              
+                    },
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel', 
+                        handler: data => {
+                        }
+                    },  
+                ]
+            });
+          
+            alertCtrl.present(alert.modal);
+        },
+        calculateTotals : function() {
+            this.resetTotals()
+            this.brokers.map((broker) => {
+                this.totals['portfolio'] += parseFloat(broker['portfolio']);
+                this.totals['gain'] += broker['gain'] ? parseFloat(broker['gain']) : 0;
+                this.totals['fee'] += parseFloat(broker['fee']);
+                this.totals['real_gain'] += parseFloat(broker['real_gain']);
+                this.totals['percentaje_gain'] += parseFloat(broker['percentaje_gain']);
+                this.totals['new_capital'] += parseFloat(broker['new_capital']);
+            })
         },
         goToEdit : function(company_id) {
             window.location.href = '../../apps/admin-users/edit?ulid='+company_id
@@ -49,17 +143,12 @@ Vue.createApp({
             this.UserSupport.getBrokers({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.totals = response.data.totals
-                    this.brokersAux = response.data.brokers.map((broker)=>{
-                        broker['create_date'] = new Date(broker['create_date']*1000).toLocaleDateString()
-                        broker['capital'] = number_format(broker['capital'],2)
-                        broker['gain'] = number_format(broker['gain'],2)
-                        broker['real_gain'] = number_format(broker['real_gain'],2)
-                        broker['new_capital'] = number_format(broker['new_capital'],2)
-                        return broker
-                    })
-
+                    this.day = response.day
+                    this.totals.capital = response.data.totals.capital
+                    this.brokersAux = response.data.brokers
                     this.brokers = this.brokersAux
+
+                    this.calculateData()
                 }
             })
         },
