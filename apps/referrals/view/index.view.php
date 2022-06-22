@@ -33,12 +33,11 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                        <p class="text-xs text-secondary mb-0">Organization</p>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-secondary small">Inactivo</span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                                        <p class="text-xs text-secondary mb-0">{{referral.signup_date}}</p>
                                     </td>
                                 </tr>
                             </tbody>
