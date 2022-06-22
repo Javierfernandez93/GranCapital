@@ -8,6 +8,7 @@ Vue.createApp({
     data() {
         return {
             UserSupport : null,
+            totals : {},
             brokers : {},
             brokersAux : {},
             query : null,
@@ -26,8 +27,8 @@ Vue.createApp({
         filterData : function() {
             this.brokers = this.brokersAux
             
-            this.brokers = this.users.filter((broker)=>{
-                return broker.names.toLowerCase().includes(this.query.toLowerCase()) || broker.email.toLowerCase().includes(this.query.toLowerCase())
+            this.brokers = this.brokersAux.filter((broker)=>{
+                return broker.name.toLowerCase().includes(this.query.toLowerCase())
             })
         },
         deleteUser : function(company_id) {
@@ -48,9 +49,14 @@ Vue.createApp({
             this.UserSupport.getBrokers({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.brokersAux = response.users.map((user)=>{
-                        user['signup_date'] = new Date(user['signup_date']*1000).toLocaleDateString()
-                        return user
+                    this.totals = response.data.totals
+                    this.brokersAux = response.data.brokers.map((broker)=>{
+                        broker['create_date'] = new Date(broker['create_date']*1000).toLocaleDateString()
+                        broker['capital'] = number_format(broker['capital'],2)
+                        broker['gain'] = number_format(broker['gain'],2)
+                        broker['real_gain'] = number_format(broker['real_gain'],2)
+                        broker['new_capital'] = number_format(broker['new_capital'],2)
+                        return broker
                     })
 
                     this.brokers = this.brokersAux

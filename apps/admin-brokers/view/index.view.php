@@ -1,6 +1,5 @@
 <div class="container-fluid py-4" id="app">
     <div class="row">
-        
         <div class="col-12">
             <div
                 v-if="Object.keys(brokers).length > 0"
@@ -11,32 +10,54 @@
                         <div class="col-auto"><span class="badge bg-primary">Total de brokers {{Object.keys(brokers).length}}</span></div>
                     </div>
                 </div>
+                <div class="card-header pb-0">
+                    <input 
+                        :autofocus="true"
+                        v-model="query"
+                        type="text" class="form-control" placeholder="Buscar..."/>
+                </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Miembro desde</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Broker</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto invertido</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">% portafolio</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia bruta</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fee</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia neta</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">% ganado</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nuevo saldo</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="administrator in administrators">
+                                <tr v-for="broker in brokers"
+                                    class="text-center">
                                     <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img :src="administrator.image" class="avatar avatar-sm me-3" :alt="administrator.names">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{administrator.names}}</h6>
-                                                <p class="text-xs text-secondary mb-0">{{administrator.email}}</p>
-                                            </div>
-                                        </div>
+                                        <h6 class="mb-0 text-sm">{{broker.name}}</h6>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-xs font-weight-bold mb-0">Fecha</p>
-                                        <p class="text-xs text-secondary mb-0">{{administrator.create_date}}</p>
+                                        <h6 class="mb-0 text-sm">$ {{broker.capital}} </h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 text-sm">{{broker.portfolio}} %</h6>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <h6 class="mb-0 text-sm">$ {{broker.gain}}<h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 text-sm">{{broker.fee}}</h6>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <h6 class="mb-0 text-sm">$ {{broker.real_gain}} </h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 text-sm">{{broker.percentaje_gain}}</h6>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <h6 class="mb-0 text-sm">{{broker.new_capital}}</h6>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <div class="btn-group">
@@ -44,6 +65,7 @@
                                                 
                                             </button>
                                             <ul class="dropdown-menu">
+                                                <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Ver montos invertidos</button></li>
                                                 <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
@@ -53,6 +75,33 @@
                                     
                                 </tr>
                             </tbody>
+
+                            <tfoot>
+                                <tr class="text-center">
+                                    <td></td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        $ {{totals.capital}}
+                                    </td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        {{totals.portfolio}} %
+                                    </td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        $ {{totals.gain}}
+                                    </td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        {{totals.fee}} %
+                                    </td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        $ {{totals.real_gain.numberFormat()}}
+                                    </td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        {{totals.percentaje_gain}}%
+                                    </td>
+                                    <td class="align-middle fw-semibold text-center">
+                                        $ {{totals.new_capital}}
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
