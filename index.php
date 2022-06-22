@@ -2,4 +2,4 @@
 
 require_once TO_ROOT . "system/core.php";
 
-HCStudio\Util::redirectTo('apps/home/');
+HCStudio\Util::redirectTo('apps/signup/');
