@@ -1,5 +1,5 @@
 <div class="container-fluid py-4" id="app">
-    <div v-if="notifications">
+    <div v-if="notifications.length > 0">
         <div v-for="notification in notifications"
             class="card mb-3">
             <div class="card-body">
