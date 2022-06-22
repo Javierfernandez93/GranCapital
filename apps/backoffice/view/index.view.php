@@ -12,7 +12,7 @@
                                 <h5 class="font-weight-bolder">¿Estás preparado para ganar?</h5>
                                 <p class="mb-5">Gran capital te ofrece varios esquemas de ganancias.</p>
                                 <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
-                                    href="javascript:;">
+                                    href="../../apps/backoffice/plans">
                                     Leer más
                                     <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                                 </a>

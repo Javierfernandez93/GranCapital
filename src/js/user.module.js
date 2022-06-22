@@ -18,6 +18,10 @@ class User extends Http
     {
         return this.call('../../app/application/get_notifications.php',data,callback);
     }
+    getPlans(data,callback)
+    {
+        return this.call('../../app/application/get_plans.php',data,callback);
+    }
     editProfile(data,callback)
     {
         return this.call('../../app/application/edit_profile.php',data,callback);

@@ -1,18 +1,21 @@
 <div class="container-fluid py-4" id="app">
     <div v-if="notifications.length > 0">
-        <div v-for="notification in notifications"
+        <div 
             class="card mb-3">
             <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <i v-html="notification.extra"></i>
-                    </div>
-                    <div class="col">
-                        <div class="fw-semibold text-dark small">{{notification.kind}}</div>
-                        <div>{{notification.message}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <span class="badge bg-primary">{{notification.create_date}}</span>
+                <div class="timeline timeline-one-side">
+                    <div 
+                        v-for="notification in notifications"
+                        class="timeline-block mb-3">
+                        <div class="align-items-center">
+                            <span class="timeline-step">
+                                <i v-html="notification.extra"></i>
+                            </span>
+                            <div class="timeline-content">
+                                <div class="fw-semibold text-dark small">{{notification.kind}} <span class="badge bg-light text-secondary small">{{notification.create_date}}</span></div>
+                                <div>{{notification.message}}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,11 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new GranCapital\UserSupport;
+// $UserSupport = new GranCapital\UserSupport;
+// $UserLogin = new GranCapital\UserLogin;
 
-if($UserSupport->_loaded === true)
+if(true)
 {
     $CatalogPlan = new GranCapital\CatalogPlan;
+
     if($plans = $CatalogPlan->getAll())
     {
         $data["plans"] = $plans;
