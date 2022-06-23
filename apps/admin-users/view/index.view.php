@@ -25,24 +25,48 @@
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
-                                <tr>
-                                    <th @click="sortData(columns.company_id)" class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
-                                        <i class="bi bi-filter-square-fill"></i> <u>ID</u>
+                                <tr class="align-items-center">
+                                    <th @click="sortData(columns.company_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.company_id.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">ID</u>
                                     </th>
                                     <th 
                                         @click="sortData(columns.names)"
-                                        class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
-                                        <i class="bi bi-filter-square-fill"></i> <u>Usuario</u>
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.names.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Usuario</u>
                                     </th>
                                     <th 
                                         @click="sortData(columns.plan_name)"
-                                        class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
-                                        <i class="bi bi-filter-square-fill"></i> <u>Estatus</u>
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.plan_name.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Plan</u>
                                     </th>
                                     <th 
                                         @click="sortData(columns.signup_date)"
-                                        class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
-                                        <i class="bi bi-filter-square-fill"></i> <u>Miembro desde</u>
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.signup_date.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Miembro desde</u>
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
                                 </tr>
