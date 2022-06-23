@@ -135,7 +135,7 @@
                 <div v-else
                     class="card-body">
                     <div class="alert alert-secondary text-white text-center">
-                        <div>No tenemos usuarios aún</div>
+                        <div>No tenemos brokers aún</div>
                     </div>
                 </div>
             </div>
