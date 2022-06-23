@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($route == JFStudio\Router::AdminUsers){?>active<?php } ?>"
+                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminUsers,JFStudio\Router::AdminUserEdit,JFStudio\Router::AdminUserAdd,JFStudio\Router::AdmiActivation])){?>active<?php } ?>"
                         href="../../apps/admin-users">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($route == JFStudio\Router::AdminAdministrators){?>active<?php } ?>" href="../../apps/admin-administrators">
+                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminAdministrators,JFStudio\Router::AdminAdministratorsAdd,JFStudio\Router::AdminAdministratorsEdit])){?>active<?php } ?>" href="../../apps/admin-administrators">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -121,7 +121,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminBrokers,JFStudio\Router::AdminBrokersEdit,JFStudio\Router::AdminBrokersAdd])){?>active<?php } ?>" href="../../apps/admin-brokers">
+                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminBrokers,JFStudio\Router::AdminBrokersEdit,JFStudio\Router::AdminBrokersAdd,JFStudio\Router::AdminBrokersCapitals])){?>active<?php } ?>" href="../../apps/admin-brokers">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"

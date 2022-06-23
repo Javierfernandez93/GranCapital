@@ -2,15 +2,30 @@
     <div class="row">
         <div class="col-12">
             <div
-                v-if="Object.keys(administrators).length > 0"
                 class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="row align-items-center">
-                        <div class="col fw-semibold text-dark">Administradores</div>
-                        <div class="col-auto"><span class="badge bg-primary">Total de Administradores {{Object.keys(administrators).length}}</span></div>
+                        <div class="col-auto">
+                            <i class="bi bi-pie-chart-fill"></i>
+                        </div>
+                        <div class="col fw-semibold text-dark">
+                            <div class="small">Administradores</div>
+                        </div>
+                        <div class="col-auto text-end">
+                            <div><a href="../../apps/admin-administrators/add" type="button" class="btn btn-success btn-sm">Añadir adminstrador</a></div>
+                            <div><span class="badge bg-secondary">Total de administradores {{Object.keys(administrators).length}}</span></div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+                <div class="card-header pb-0">
+                    <input 
+                        :autofocus="true"
+                        v-model="query"
+                        type="text" class="form-control" placeholder="Buscar..."/>
+                </div>
+                <div 
+                    v-if="Object.keys(administrators).length > 0"
+                    class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
@@ -25,7 +40,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img :src="administrator.image" class="avatar avatar-sm me-3" :alt="administrator.names">
+                                                <img src="../../src/img/user/user.png" class="avatar avatar-sm me-3" :alt="administrator.names">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{administrator.names}}</h6>
@@ -42,10 +57,10 @@
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                 
                                             </button>
-                                            <ul class="dropdown-menu">
-                                                <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
+                                            <ul class="dropdown-menu shadow">
+                                                <li><button class="dropdown-item" @click="goToEdit(administrator.user_support_id)">Editar</button></li>
                                                 <li><hr class="dropdown-divider"></li>
-                                                <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
+                                                <li><button class="dropdown-item" @click="deleteAdministrator(administrator.user_support_id)">Eliminar</button></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -55,10 +70,10 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div v-else>
-                <div class="alert alert-secondary text-white text-center">
-                    <div>No tenemos usuarios aún</div>
+                <div v-else>
+                    <div class="alert alert-secondary text-white text-center">
+                        <div>No tenemos administradores aún</div>
+                    </div>
                 </div>
             </div>
         </div>

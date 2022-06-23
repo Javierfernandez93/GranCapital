@@ -14,7 +14,7 @@ if($UserSupport->_loaded === true)
 
         if($UserLogin->cargarDonde("company_id = ?",$data['company_id'])) 
         {
-            $UserLogin->status = 0;
+            $UserLogin->status = GranCapital\UserLogin::DELETED;
 
             if($UserLogin->save())
             {

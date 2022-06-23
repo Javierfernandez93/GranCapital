@@ -87,7 +87,6 @@
                         </div>
     
                         <button :disabled="!userComplete || loading" class="btn bg-gradient-success w-100 mt-4 mb-0" @click="doSignup" id="button">
-                            
                             <span v-if="!loading">
                                 Crear mi cuenta
                             </span>

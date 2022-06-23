@@ -24,6 +24,10 @@ class Router {
     const AdminBrokersEdit = 16;
     const AdminBrokersAdd = 17;
     const AdminBrokersCapitals = 18;
+    const AdminUserEdit = 19;
+    const AdminUserAdd = 20;
+    const AdminAdministratorsAdd = 21;
+    const AdminAdministratorsEdit = 21;
 
     static function getName(int $route = null)
     {
@@ -51,10 +55,18 @@ class Router {
                 return 'Notificaciones';
             case self::AdminUsers:
                 return 'Usuarios';
+            case self::AdminUserEdit:
+                return 'Editar usuario';
+            case self::AdminUserAdd:
+                return 'Añadir usuario';
             case self::AdminActivations:
                 return 'Activaciones';
             case self::AdminAdministrators:
                 return 'Administradores';
+            case self::AdminAdministratorsAdd:
+                return 'Añadir administrador';
+            case self::AdminAdministratorsEdit:
+                return 'Editar administrador';
             case self::AdminBrokers:
                 return 'Brokers';
             case self::AdminBrokersEdit:

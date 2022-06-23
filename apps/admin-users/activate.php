@@ -8,7 +8,7 @@ if($UserSupport->_loaded === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');
 }
 
-if($UserSupport->hasPermission('list_admin_stats') === false) {
+if($UserSupport->hasPermission('activate_plan') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 

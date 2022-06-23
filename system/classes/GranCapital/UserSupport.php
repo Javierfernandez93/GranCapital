@@ -400,7 +400,7 @@ class UserSupport extends Orm {
   }
 
   public function isUniqueMail($email = false) {
-    $sql = "SELECT mail FROM user_login WHERE user_login.email = '{$email}' LIMIT 1";
+    $sql = "SELECT email FROM user_support WHERE user_support.email = '{$email}' LIMIT 1";
     return ($this->connection()->field($sql)) ? false : true;
   }
 
@@ -922,26 +922,15 @@ class UserSupport extends Orm {
     {
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id,
-                LOWER(CONCAT_WS(' ',{$this->tblName}.names,{$this->tblName}.last_name,{$this->tblName}.sur_name)) as name,
                 {$this->tblName}.names,
                 {$this->tblName}.last_name,
                 {$this->tblName}.sur_name,
                 {$this->tblName}.email,
                 {$this->tblName}.gender,
                 {$this->tblName}.phone,
-                {$this->tblName}.cellular,
-                user_support_address.address,
-                user_support_address.city,
-                user_support_address.zip_code,
-                user_support_address.colony,
-                user_support_address.state,
-                user_support_address.country_id
+                {$this->tblName}.cellular
               FROM
                 {$this->tblName}
-              LEFT JOIN 
-                user_support_address
-              ON 
-                user_support_address.user_support_id = {$this->tblName}.user_support_id
               WHERE
                 {$this->tblName}.user_support_id = '{$user_support_id}'
               AND 

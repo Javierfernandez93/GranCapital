@@ -1,23 +1,27 @@
 <div class="container-fluid py-4" id="app">
     <div class="row">
-        
         <div class="col-12">
-            <div
-                v-if="Object.keys(users).length > 0"
-                class="card mb-4">
+            <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="row align-items-center">
-                        <div class="col fw-semibold text-dark">Usuarios</div>
-                        <div class="col-auto"><span class="badge bg-primary">Total de usuarios {{Object.keys(users).length}}</span></div>
+                        <div class="col-auto">
+                            <i class="bi bi-pie-chart-fill"></i>
+                        </div>
+                        <div class="col fw-semibold text-dark">
+                            <div class="small">Usuarios</div>
+                        </div>
+                        <div class="col-auto text-end">
+                            <div><a href="../../apps/admin-users/add" type="button" class="btn btn-success btn-sm">Añadir usuario</a></div>
+                            <div><span class="badge bg-secondary">Total de usuarios {{Object.keys(users).length}}</span></div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-header">
-                    <input 
-                        v-model="query"
-                        :autofocus="true"
-                        type="text" class="form-control" placeholder="Buscar..."/>
+                    <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+                <div
+                    v-if="Object.keys(users).length > 0" 
+                    class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
@@ -42,36 +46,33 @@
                                         </div>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span 
-                                            v-if="user.catalog_plan_id">
+                                        <span v-if="user.catalog_plan_id">
                                             <span class="badge badge-sm bg-primary">
                                                 Activo en plan {{user.plan_name}}
                                             </span>
-                                            <span 
-                                                v-if="user.additional_profit > 0"
-                                                class="badge badge-sm bg-danger ms-1">
+                                            <span v-if="user.additional_profit > 0" class="badge badge-sm bg-danger ms-1">
                                                 {{user.additional_profit}}% adicional
                                             </span>
                                         </span>
-                                        <span 
-                                            v-else 
-                                            class="badge badge-sm bg-secondary">
+                                        <span v-else class="badge badge-sm bg-secondary">
                                             Inactivo
                                         </span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>
-                                        <p class="text-xs text-secondary mb-0">{{user.signup_date}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{user.signup_date.formatDate()}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                
+
                                             </button>
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu shadow">
                                                 <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
                                                 <li><button class="dropdown-item" @click="goToActivatePlan(user.user_login_id)">Activar plan</button></li>
-                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
                                                 <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
                                             </ul>
                                         </div>
@@ -81,10 +82,11 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div v-else>
-                <div class="alert alert-secondary text-white text-center">
-                    <div>No tenemos usuarios aún</div>
+                <div v-else
+                    class="card-body">
+                    <div class="alert alert-secondary text-white text-center">
+                        <div>No tenemos usuarios aún</div>
+                    </div>
                 </div>
             </div>
         </div>

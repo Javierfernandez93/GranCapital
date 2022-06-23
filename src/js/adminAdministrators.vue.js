@@ -14,7 +14,7 @@ Vue.createApp({
     watch : {
     },
     methods: {
-        deleteUser : function(user_support_id) {
+        deleteAdministrator : function(user_support_id) {
             this.UserSupport.deleteSupportUser({user_support_id:user_support_id},(response)=>{
                 if(response.s == 1)
                 {
@@ -23,7 +23,7 @@ Vue.createApp({
             })
         },
         goToEdit : function(company_id) {
-            window.location.href = '../../apps/admin-users/edit?ulid='+company_id
+            window.location.href = '../../apps/admin-administrators/edit?usid='+company_id
         },
         getAdministrators : function() {
             this.UserSupport.getAdministrators({},(response)=>{

@@ -11,6 +11,7 @@ use HCStudio\Connection;
 use GranCapital\UserPlan;
 
 class UserLogin extends Orm {
+  const DELETED = -1;
   protected $tblName  = 'user_login';
   private $session = false;
   private $_token   = false;

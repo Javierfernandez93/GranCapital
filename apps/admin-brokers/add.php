@@ -8,14 +8,7 @@ if($UserSupport->_loaded === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');
 }
 
-$user_support_id = HCStudio\Util::getVarFromPGS('usid');
-
-if($user_support_id && $UserSupport->hasPermission('list_clients_per_seller') === false) 
-{
-	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
-}
-
-if($UserSupport->hasPermission('list_client') === false) {
+if($UserSupport->hasPermission('add_broker') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 

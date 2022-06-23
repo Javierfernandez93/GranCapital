@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-12">
             <div
-                v-if="Object.keys(brokers).length > 0"
                 class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="row align-items-center">
@@ -27,7 +26,9 @@
                         v-model="query"
                         type="text" class="form-control" placeholder="Buscar..."/>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+                <div 
+                    v-if="Object.keys(brokers).length > 0"
+                    class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
@@ -131,10 +132,11 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div v-else>
-                <div class="alert alert-secondary text-white text-center">
-                    <div>No tenemos usuarios aún</div>
+                <div v-else
+                    class="card-body">
+                    <div class="alert alert-secondary text-white text-center">
+                        <div>No tenemos usuarios aún</div>
+                    </div>
                 </div>
             </div>
         </div>

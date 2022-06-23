@@ -2,19 +2,25 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$Layout = JFStudio\Layout::getInstance();
-$Layout->init(" » Editar cliente","edit","admin","",TO_ROOT."/");
-
 $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');
 }
 
+
+$route = JFStudio\Router::AdminUserEdit;
+$Layout = JFStudio\Layout::getInstance();
+$Layout->init(JFStudio\Router::getName($route),"edit","admin","",TO_ROOT."/");
+
 $Layout->setScriptPath(TO_ROOT . '/src/');
-$Layout->setScript(['jquery.mask.js','signature_pad.min.js','client-object.js','admin-client-edit.js','admin-signature.css']);
+$Layout->setScript([
+	'jquery.mask.js',
+	'adminEditUser.vue.js'
+]);
 
 $Layout->setVar([
+	'route' => $route,
 	'UserSupport' => $UserSupport
 ]);
 $Layout();
