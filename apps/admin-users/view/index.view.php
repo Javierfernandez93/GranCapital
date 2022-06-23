@@ -26,14 +26,32 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estatus</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Miembro desde</th>
+                                    <th @click="sortData(columns.company_id)" class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
+                                        <i class="bi bi-filter-square-fill"></i> <u>ID</u>
+                                    </th>
+                                    <th 
+                                        @click="sortData(columns.names)"
+                                        class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
+                                        <i class="bi bi-filter-square-fill"></i> <u>Usuario</u>
+                                    </th>
+                                    <th 
+                                        @click="sortData(columns.plan_name)"
+                                        class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
+                                        <i class="bi bi-filter-square-fill"></i> <u>Estatus</u>
+                                    </th>
+                                    <th 
+                                        @click="sortData(columns.signup_date)"
+                                        class="text-center c-pointer text-uppercase text-primary text-xs font-weight-bolder opacity-7">
+                                        <i class="bi bi-filter-square-fill"></i> <u>Miembro desde</u>
+                                    </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="user in users">
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="font-weight-bold mb-0">{{user.company_id}}</p>
+                                    </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>

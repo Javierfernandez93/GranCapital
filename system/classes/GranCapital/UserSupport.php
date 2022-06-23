@@ -1046,6 +1046,7 @@ class UserSupport extends Orm {
     $sql = "SELECT
               user_login.user_login_id,
               user_login.signup_date,
+              user_login.company_id,
               user_login.email,
               user_account.image,
               user_data.names,

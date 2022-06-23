@@ -11,6 +11,25 @@ Vue.createApp({
             users: {},
             usersAux: {},
             query: null,
+            columns: { // 0 DESC , 1 ASC 
+                company_id : {
+                    name: 'company_id',
+                    desc: false,
+                },
+                signup_date : {
+                    name: 'signup_date',
+                    desc: false,
+                },
+                names : {
+                    name: 'names',
+                    desc: false,
+                    alphabetically: true,
+                },
+                plan_name : {
+                    name: 'plan_name',
+                    desc: false,
+                },
+            }
         }
     },
     watch: {
@@ -23,6 +42,21 @@ Vue.createApp({
         }
     },
     methods: {
+        sortData: function (column) {
+            this.users.sort((a,b) => {
+                const _a = column.desc ? a : b
+                const _b = column.desc ? b : a
+
+                if(column.alphabetically)
+                {
+                    return _a[column.name].localeCompare(_b[column.name])
+                } else {
+                    return _a[column.name] - _b[column.name]
+                }
+            });
+
+            column.desc = !column.desc
+        },
         filterData: function () {
             this.users = this.usersAux
 
@@ -48,6 +82,12 @@ Vue.createApp({
                 if (response.s == 1) {
                     this.usersAux = response.users
                     this.users = this.usersAux
+
+                    // this.users.sort((a,b) => {
+                    //     return a['signup_date'] - b['signup_date']
+                    // });
+
+                    // this.users.reverse();
                 }
             })
         },
