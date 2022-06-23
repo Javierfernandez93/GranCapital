@@ -74,7 +74,7 @@
             <button 
                 :disabled="!userComplete"
                 ref="button"
-                type="submit" class="btn btn-primary" @click="saveUser">Actualizar usuario</button>
+                type="submit" class="btn btn-primary" @click="saveUser">Guardar usuario</button>
         </div>
     </div>
 </div>
