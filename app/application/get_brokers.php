@@ -58,7 +58,7 @@ function filterData($brokers = null)
         $brokers[$key]['percentaje_gain'] = $broker['capital'] ? number_format(($brokers[$key]['real_gain'] / $broker['capital']) * 100,2) : 0;
 
         // new capital
-        $brokers[$key]['new_capital'] = $broker['capital'] + $brokers[$key]['real_gain'];
+        $brokers[$key]['new_capital'] = $broker['capital'] + $brokers[$key]['gain'];
     }
 
 
