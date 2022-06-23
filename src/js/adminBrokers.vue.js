@@ -148,9 +148,11 @@ Vue.createApp({
                 this.totals['gain'] += broker['gain'] ? parseFloat(broker['gain']) : 0;
                 this.totals['fee'] += parseFloat(broker['fee']);
                 this.totals['real_gain'] += parseFloat(broker['real_gain']);
-                this.totals['percentaje_gain'] += parseFloat(broker['percentaje_gain']);
                 this.totals['new_capital'] += parseFloat(broker['new_capital']);
             })
+
+            // fixing
+            this.totals['percentaje_gain'] = this.totals['real_gain'] / this.totals['capital'];
         },
         viewCapitals : function(broker_id) {
             window.location.href = '../../apps/admin-brokers/capitals?bid='+broker_id
