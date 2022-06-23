@@ -30,13 +30,42 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Miembro desde</th>
+                                    <th @click="sortData(columns.user_support_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.user_support_id.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">#</u>
+                                    </th>
+                                    <th @click="sortData(columns.names)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.names.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Usuario</u>
+                                    </th>
+                                    <th @click="sortData(columns.names)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.names.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Miembro desde</u>
+                                    </th>
+                                    
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="administrator in administrators">
+                                    <td class="align-middle text-center text-sm">
+                                        {{administrator.user_support_id}}
+                                    </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
