@@ -25,13 +25,42 @@
                     type="text" class="form-control" placeholder="Email">
             </div>
             <div class="mb-3">
-                <label>Contraseña</label>
+                <label>Contraseña</label>       
                 <input 
                     v-model="user.password"
                     :class="user.password ? 'is-valid' : ''"
                     @keydown.enter.exact.prevent="$refs.phone.focus()"
                     ref="password"
                     type="text" class="form-control" placeholder="Password">
+            </div>
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <label>Referido por</label>
+                    <input 
+                        v-model="user.referral.user_login_id"
+                        :class="user.referral.user_login_id ? 'is-valid' : ''"
+                        @keydown.enter.exact.prevent="$refs.signup_date.focus()"
+                        ref="referral_id"
+                        type="text" class="form-control" placeholder="Referido por">
+                </div>
+                <div class="col">
+                    <label>Nombre</label>
+                    <input 
+                        v-model="user.referral.names"
+                        :class="user.referral.names ? 'is-valid' : ''"
+                        @keydown.enter.exact.prevent="$refs.signup_date.focus()"
+                        ref="referral_id"
+                        type="text" class="form-control" placeholder="Referido por">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Fecha de ingreso</label>
+                <input 
+                    v-model="user.signup_date"
+                    :class="user.signup_date ? 'is-valid' : ''"
+                    @keydown.enter.exact.prevent="$refs.phone.focus()"
+                    ref="signup_date"
+                    type="date" class="form-control" placeholder="Fecha de ingreso">
             </div>
             <div class="mb-3">
                 <label>Teléfono</label>
@@ -44,7 +73,7 @@
             </div>
         
             <button 
-                :disabled="!brokerComplete"
+                :disabled="!userComplete"
                 ref="button"
                 type="submit" class="btn btn-primary" @click="updateUser">Actualizar usuario</button>
         </div>

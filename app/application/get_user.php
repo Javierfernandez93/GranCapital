@@ -10,7 +10,8 @@ if($UserSupport->_loaded === true)
 {
     if($data['user_login_id'])
     {
-        $data["user"] = $UserSupport->getUser($data['user_login_id']);
+        $data["user"] = formatDate($UserSupport->getUser($data['user_login_id']));
+        $data["user_referral_id"] = $UserSupport->getUserReferralId($data['user_login_id']);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
@@ -20,6 +21,16 @@ if($UserSupport->_loaded === true)
 } else {
 	$data["s"] = 0;
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
+}
+
+function formatDate(array $user = null) : array
+{
+    if(isset($user['signup_date']))
+    {
+        $user['signup_date'] = date("Y-m-d",$user['signup_date']);
+    }
+
+    return $user;
 }
 
 echo json_encode($data);

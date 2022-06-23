@@ -49,6 +49,9 @@ class UserSupport extends Http {
     editAdministrator(data, callback) {
         return this.call('../../app/application/edit_administrator.php', data, callback);
     }
+    getReferral(data, callback) {
+        return this.call('../../app/application/get_referral.php', data, callback);
+    }
     getCountries(data, callback) {
         return this.call('../../app/application/get_countries.php', data, callback);
     }

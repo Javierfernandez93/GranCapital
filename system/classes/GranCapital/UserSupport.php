@@ -1081,6 +1081,11 @@ class UserSupport extends Orm {
     return $this->connection()->rows($sql);
   }
   
+  public function getUserReferralId(int $user_login_id = null)
+  {
+    return (new UserReferral)->getUserReferralId($user_login_id);
+  }
+
   public function getUser(int $user_login_id = null)
   {
     if(isset($user_login_id) === true)

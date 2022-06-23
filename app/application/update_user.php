@@ -18,8 +18,14 @@ if($UserSupport->_loaded === true)
                 {
                     if(updateUserAddress($data['user']))
                     {
-                        $data["s"] = 1;
-                        $data["r"] = "UPDATED_OK";
+                        if(updateUserReferral($data['user']))
+                        {
+                            $data["s"] = 1;
+                            $data["r"] = "UPDATED_OK";
+                        } else {
+                            $data["s"] = 0;
+                            $data["r"] = "NOT_UPDATED_USER_REFERRAL";
+                        }  
                     } else {
                         $data["s"] = 0;
                         $data["r"] = "NOT_UPDATED_USER_ADDRESS";
@@ -112,8 +118,23 @@ function updateUserLogin($data = null) : bool
     {
         $UserLogin->email = $data['email'];
         $UserLogin->password = $data['password'] ? sha1($data['password']) : $UserLogin->password;
+        $UserLogin->signup_date = $data['signup_date'] ? strtotime($data['signup_date']) : $UserLogin->signup_date;
         
         return $UserLogin->save();
+    }
+
+    return false;
+}
+
+function updateUserReferral($data = null) : bool
+{
+    $UserReferral = new GranCapital\UserReferral;   
+        
+    if($UserReferral->cargarDonde("user_login_id = ?",$data['user_login_id']))
+    {
+        $UserReferral->referral_id = $data['referral']['user_login_id'];
+        
+        return $UserReferral->save();
     }
 
     return false;

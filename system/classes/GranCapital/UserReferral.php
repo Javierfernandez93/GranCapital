@@ -35,6 +35,24 @@ class UserReferral extends Orm {
     }
   }
 
+  public function getUserReferralId(int $user_login_id = null) 
+  {
+    if(isset($user_login_id) === true) 
+    {
+      $sql = "SELECT 
+                {$this->tblName}.referral_id
+              FROM 
+                {$this->tblName} 
+              WHERE 
+                {$this->tblName}.user_login_id = '{$user_login_id}' 
+              AND 
+                {$this->tblName}.status = '1'
+              ";
+
+      return $this->connection()->field($sql);
+    }
+  }
+
   public function getReferrals(int $referral_id = null,string $filter = '') 
   {
     if(isset($referral_id) === true) 
