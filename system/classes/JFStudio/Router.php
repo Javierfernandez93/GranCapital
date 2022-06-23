@@ -13,6 +13,7 @@ class Router {
     const NewPassword = 8;
     const Notifications = 15;
     const Plans = 16;
+    const TradingView = 22;
 
     /* admin */
     const AdminUsers = 9;
@@ -53,6 +54,8 @@ class Router {
                 return 'Planes';
             case self::Notifications:
                 return 'Notificaciones';
+            case self::TradingView:
+                return 'Visualización de terminal';
             case self::AdminUsers:
                 return 'Usuarios';
             case self::AdminUserEdit:
