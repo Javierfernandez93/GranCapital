@@ -33,15 +33,79 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Broker</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto invertido</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">% portafolio</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia bruta</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fee</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia neta</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">% ganado</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nuevo saldo</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
+                                    <th @click="sortData(columns.name)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.name.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">Broker</u>
+                                    </th>
+                                    <th @click="sortData(columns.capital)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.capital.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">Monto invertido</u>
+                                    </th>
+                                    <th @click="sortData(columns.portfolio)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.portfolio.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">% portafolio</u>
+                                    </th>
+                                    <th @click="sortData(columns.gain)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.gain.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">Ganancia bruta</u>
+                                    </th>
+                                    <th @click="sortData(columns.fee)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.fee.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">Fee</u>
+                                    </th>
+                                    <th @click="sortData(columns.real_gain)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.real_gain.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">Ganancia neta</u>
+                                    </th>
+                                    <th @click="sortData(columns.percentaje_gain)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.percentaje_gain.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">% ganado</u>
+                                    </th>
+                                    <th @click="sortData(columns.new_capital)" class="text-center c-pointer text-uppercase text-xxs text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.new_capital.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm">Nuevo saldo</u>
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opc</th>
                                 </tr>
                             </thead>
                             <tbody>

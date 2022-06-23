@@ -13,6 +13,42 @@ Vue.createApp({
             brokers : {},
             brokersAux : {},
             query : null,
+            columns: { // 0 DESC , 1 ASC 
+                name : {
+                    name: 'name',
+                    desc: false,
+                    alphabetically: true,
+                },
+                capital : {
+                    name: 'capital',
+                    desc: true,
+                },
+                portfolio : {
+                    name: 'portfolio',
+                    desc: false,
+                    alphabetically: true,
+                },
+                gain : {
+                    name: 'gain',
+                    desc: false,
+                },
+                fee : {
+                    name: 'fee',
+                    desc: false,
+                },
+                real_gain : {
+                    name: 'real_gain',
+                    desc: false,
+                },
+                percentaje_gain : {
+                    name: 'percentaje_gain',
+                    desc: false,
+                },
+                new_capital : {
+                    name: 'new_capital',
+                    desc: false,
+                },
+            }
         }
     },
     watch : {
@@ -32,6 +68,21 @@ Vue.createApp({
         }
     },
     methods: {
+        sortData: function (column) {
+            this.brokers.sort((a,b) => {
+                const _a = column.desc ? a : b
+                const _b = column.desc ? b : a
+
+                if(column.alphabetically)
+                {
+                    return _a[column.name].localeCompare(_b[column.name])
+                } else {
+                    return _a[column.name] - _b[column.name]
+                }
+            });
+
+            column.desc = !column.desc
+        },
         filterData : function() {
             this.brokers = this.brokersAux
             
