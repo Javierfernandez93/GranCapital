@@ -8,7 +8,7 @@ $UserLogin = new GranCapital\UserLogin;
 
 if($UserLogin->_loaded === true)
 {
-    if($data['withdraw_method_id'])
+    if($data['catalog_withdraw_method_id'])
     {
         if($data['ammount'])
         {
@@ -18,7 +18,7 @@ if($UserLogin->_loaded === true)
             {
                 if($data["balance"] <= $UserWallet->getBalance())
                 {
-                    if($UserWallet->doTransaction($data['ammount'],GranCapital\Transaction::WITHDRAW,null,$data['withdraw_method_id']))
+                    if($UserWallet->doTransaction($data['ammount'],GranCapital\Transaction::WITHDRAW,null,$data['catalog_withdraw_method_id']))
                     {
                         $data["s"] = 1;
                         $data["r"] = "DATA_OK";
@@ -40,7 +40,7 @@ if($UserLogin->_loaded === true)
         }
     } else {
         $data["s"] = 0;
-        $data["r"] = "NOT_WITHDRAW_METHOD_ID";
+        $data["r"] = "NOT_CATALOG_WITHDRAW_METHOD_ID";
     }
 } else {
 	$data["s"] = 0;

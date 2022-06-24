@@ -49,10 +49,10 @@
                                 <label>
                                     Método de retiro
                                 </label>
-                                <select class="form-control" v-model="withdraw.withdraw_method_id">
-                                    <option>Método de retiro</option>
-                                    <option v-for="withdraw_method in withdraw_methods" v-bind:value="withdraw_method.withdraw_method_id">
-                                        {{withdraw_method.name}}
+                                <select class="form-control" v-model="withdraw.catalog_withdraw_method_id">
+                                    <option value="0">Método de retiro</option>
+                                    <option v-for="withdraw_method in withdraw_methods" v-bind:value="withdraw_method.catalog_withdraw_method_id">
+                                        {{withdraw_method.method}} - {{withdraw_method.account}}
                                     </option>
                                 </select>
                             </div>
@@ -78,27 +78,46 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-6 d-flex align-items-center">
-                                    <h6 class="mb-0">Payment Method</h6>
+                                    <h6 class="mb-0">Método de retiro</h6>
                                 </div>
-                                <div class="col-6 text-end">
+                                <div class="col-6 text-end d-none">
                                     <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add New Card</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
-                                <div class="col-md-6 mb-md-0 mb-4">
+                                <div
+                                    v-for="all_withdraw_method in all_withdraw_methods"
+                                    class="col-md-6 mb-4">
                                     <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                                         <img class="w-10 me-3 mb-0" src="../../src/img/logos/mastercard.png" alt="logo">
-                                        <h6 class="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;7852</h6>
-                                        <i class="fas fa-pencil-alt ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" aria-hidden="true" aria-label="Edit Card"></i><span class="sr-only">Edit Card</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                                        <img class="w-10 me-3 mb-0" src="../../src/img/logos/visa.png" alt="logo">
-                                        <h6 class="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;5248</h6>
-                                        <i class="fas fa-pencil-alt ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" aria-hidden="true" aria-label="Edit Card"></i><span class="sr-only">Edit Card</span>
+                                        <div>
+                                            <div><h6 class="mb-0 text-xxs text-secondary">{{all_withdraw_method.method}}</h6></div>
+                                            <div v-if="!all_withdraw_method.editing"
+                                                @click="toggleEditing(all_withdraw_method)">
+                                                <div v-if="all_withdraw_method.account"
+                                                    class="text-truncate">
+                                                    <h6 class="mb-0">{{all_withdraw_method.account}}</h6>
+                                                </div>
+                                                <div v-else>
+                                                    Configurar cuenta
+                                                </div>
+                                            </div>
+                                            <div v-else>
+                                                <input 
+                                                    v-model="all_withdraw_method.account"
+                                                    @keydown.enter.exact.prevent="editWithdrawMethod(all_withdraw_method)"
+                                                    type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <span 
+                                            v-if="!all_withdraw_method.editing"
+                                            @click="toggleEditing(all_withdraw_method)"
+                                            class="ms-auto">
+                                            <i class="fas fa-pencil-alt text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" aria-hidden="true" aria-label="Edit Card"></i>
+                                            <span class="sr-only">Editar tarjeta</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

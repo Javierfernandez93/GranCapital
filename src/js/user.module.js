@@ -19,6 +19,9 @@ class User extends Http {
     doWithdraw(data, callback) {
         return this.call('../../app/application/do_withdraw.php', data, callback);
     }
+    editWithdrawMethod(data, callback) {
+        return this.call('../../app/application/edit_withdraw_method.php', data, callback);
+    }
     getWithdraws(data, callback) {
         return this.call('../../app/application/get_withdraws.php', data, callback);
     }

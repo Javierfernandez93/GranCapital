@@ -11,11 +11,12 @@ Vue.createApp({
             user: {
                 names: null,
             },
+            all_withdraw_methods: {},
             withdraw_methods: {},
             withdraws: {},
             balance: 0,
             withdraw: {
-                withdraw_method_id: null,
+                catalog_withdraw_method_id: 0,
                 ammount: null,
             }
         }
@@ -23,7 +24,7 @@ Vue.createApp({
     watch: {
         withdraw: {
             handler() {
-                this.withdrawComplete = this.withdraw.withdraw_method_id != null && (this.withdraw.ammount > 0 && this.withdraw.ammount <= this.balance)
+                this.withdrawComplete = this.withdraw.catalog_withdraw_method_id != null && (this.withdraw.ammount > 0 && this.withdraw.ammount <= this.balance)
             },
             deep: true,
         },
@@ -51,11 +52,27 @@ Vue.createApp({
                 }
             })
         },
+        editWithdrawMethod: function (all_withdraw_method) {
+
+            this.User.editWithdrawMethod(all_withdraw_method, (response)=>{
+                if(response.s == 1)
+                {
+                    this.toggleEditing(all_withdraw_method)
+                    this.getWithdraws()
+                }
+            })
+        },
+        toggleEditing: function (all_withdraw_method) {
+            all_withdraw_method.editing = !all_withdraw_method.editing
+        },
         getProfile: function () {
             this.User.getProfile({ include_witdraw_methods: true }, (response) => {
                 if (response.s == 1) {
                     Object.assign(this.user, response.user)
-                    this.withdraw_methods = response.withdraw_methods
+                    this.all_withdraw_methods = response.withdraw_methods
+                    this.withdraw_methods = this.all_withdraw_methods.filter((withdraw_method) => {
+                        return withdraw_method.account
+                    })
                 }
             })
         },

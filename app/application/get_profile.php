@@ -26,18 +26,7 @@ if($UserLogin->_loaded === true)
 
     if($data['include_witdraw_methods'])
     {
-        $data['withdraw_methods'] =[
-            0 => [
-                'withdraw_method_id' => 1,
-                'name' => 'Bitcoin B2B',
-                'data' => '1alb09jsddofj0923ui1023jjnkj21',
-            ],
-            1 => [
-                'withdraw_method_id' => 2,
-                'name' => 'PayPal',
-                'data' => 'leqjl93@hotmail.com',
-            ]
-        ];
+        $data['withdraw_methods'] = (new GranCapital\WithdrawMethodPerUser)->getAll($UserLogin->company_id);
     }
 
     if($data['include_countries'])

@@ -30,6 +30,7 @@ class Router {
     const AdminUserAdd = 20;
     const AdminAdministratorsAdd = 21;
     const AdminAdministratorsEdit = 21;
+    const AdminTransactions = 24;
 
     static function getName(int $route = null)
     {
@@ -85,6 +86,8 @@ class Router {
                 return 'Iniciar sesión admin';
             case self::AdmiActivation:
                 return 'Activar en plan';
+            case self::AdminTransactions:
+                return 'Transacciones';
             default: 
                 return 'Sin nombre';
         }
