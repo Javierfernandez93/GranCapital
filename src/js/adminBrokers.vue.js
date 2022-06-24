@@ -115,7 +115,6 @@ Vue.createApp({
             })
         },
         addGainPerBroker : function(broker) {
-
             this.UserSupport.addGainPerBroker({gain:broker.gain,broker_id:broker.broker_id},(response) => {
                 if(response.s == 1)
                 {

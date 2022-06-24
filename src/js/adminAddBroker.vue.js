@@ -21,8 +21,6 @@ Vue.createApp({
         broker : 
         {
             handler() {
-                console.log(this.broker.name != null)
-                console.log(this.broker.fee != null)
                 this.brokerComplete = this.broker.name != null && this.broker.fee != null
             },
             deep : true

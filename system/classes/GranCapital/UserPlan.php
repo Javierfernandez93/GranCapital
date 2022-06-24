@@ -55,6 +55,26 @@ class UserPlan extends Orm {
 
     return false;
   }
+  
+  public function getUserId($user_plan_id = null) 
+  {
+    if(isset($user_plan_id) === true)
+    {
+      $sql = "SELECT
+                {$this->tblName}.user_login_id
+              FROM 
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.user_plan_id = '{$user_plan_id}'
+              AND 
+                {$this->tblName}.status = '1'
+              ";
+
+      return $this->connection()->field($sql);
+    }
+
+    return false;
+  }
  
   public function getActivePlans() 
   {

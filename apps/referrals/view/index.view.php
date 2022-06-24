@@ -16,7 +16,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estatus</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto invertido</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Miembro desde</th>
                                 </tr>
                             </thead>
@@ -34,13 +34,29 @@
                                         </div>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-secondary small">Inactivo</span>
+                                        <span v-if="referral.plan"  
+                                            class="badge badge-sm bg-primary small">
+                                            $ {{referral.plan.name.numberFormat(2)}}
+                                        </span>
+                                        <span v-else>
+                                            Sin monto
+                                        </span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-xs text-secondary mb-0">{{referral.signup_date}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{referral.signup_date.formatDate()}}</p>
                                     </td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="align-middle text-center text-sm">
+                                        <h6>Total</h6>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <h6>$ {{totals.total_capital.numberFormat(2)}}</h6>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

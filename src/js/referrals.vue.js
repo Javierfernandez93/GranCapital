@@ -1,41 +1,51 @@
 import { User } from './user.module.js'
 
 Vue.createApp({
-    components : { 
-        
+    components: {
+
     },
     data() {
         return {
             referrals: {},
-            User : null
+            totals: {
+                total_capital: 0
+            },
+            User: null
         }
     },
-    watch : {
-        user : {
+    watch: {
+        user: {
             handler() {
 
             },
             deep: true
         },
     },
-    methods: { 
-        getReferrals : function() {
-            this.User.getReferrals({},(response)=>{
-                if(response.s == 1)
-                {
-                    this.referrals = response.referrals.map((referral)=>{
-                        referral.signup_date = new Date(referral.signup_date*1000).toLocaleDateString()
-                        return referral
-                    })
-                }
+    methods: {
+        getTotals: function () {
+            console.log(this.referrals)
+            this.referrals.map((user)=>{
+                this.totals.total_capital += user.plan ? parseFloat(user.plan.name) : 0
+            })
+        },
+        getReferrals: function () {
+            return new Promise((resolve) => {
+                this.User.getReferrals({}, (response) => {
+                    if (response.s == 1) {
+                        this.referrals = response.referrals
+
+                        resolve()
+                    }
+                })
             })
         }
     },
-    mounted() 
-    {
+    mounted() {
         console.log(1)
         this.User = new User
 
-        this.getReferrals()
+        this.getReferrals().then(()=>{
+            this.getTotals()
+        })
     },
 }).mount('#app')

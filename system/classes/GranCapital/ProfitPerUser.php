@@ -5,6 +5,9 @@ namespace GranCapital;
 use HCStudio\Orm;
 use HCStudio\Util;
 
+use GranCapital\UserPlan;
+use GranCapital\UserWallet;
+
 class ProfitPerUser extends Orm {
   protected $tblName  = 'profit_per_user';
 
@@ -60,7 +63,20 @@ class ProfitPerUser extends Orm {
     $ProfitPerUser->profit = $profit;
     $ProfitPerUser->create_date = time();
 
-    return $ProfitPerUser->save();
+    if($ProfitPerUser->save())
+    {
+      $UserPlan = new UserPlan;
+
+      if($user_login_id = $UserPlan->getUserId($user_plan_id))
+      {
+        $UserWallet = new UserWallet;
+
+        if($UserWallet->getSafeWallet($user_login_id))
+        {
+          return $UserWallet->doTransaction($profit,$catalog_profit_id,$ProfitPerUser->getId());
+        }
+      }
+    }
   }
 
   public function hasProfitToday($user_plan_id = null) 

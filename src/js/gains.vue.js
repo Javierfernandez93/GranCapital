@@ -4,44 +4,77 @@ import { User } from '../../src/js/user.module.js'
 import { ProfitViewer } from '../../src/js/profitViewer.vue.js'
 
 Vue.createApp({
-    components : { 
+    components: {
         ProfitViewer
     },
     data() {
         return {
-            User : null,
-            gains : {
-                total : 0,
-                profits : {}
+            User: null,
+            profits: {},
+            totals: {
+                total_gain: 0
             },
+            columns: { // 0 DESC , 1 ASC 
+                create_date: {
+                    name: 'create_date',
+                    desc: false,
+                },
+                profit: {
+                    name: 'profit',
+                    desc: true,
+                },
+                name: {
+                    name: 'name',
+                    desc: true,
+                    alphabetically: true,
+                },
+            }
         }
     },
-    watch : {
-        user : {
+    watch: {
+        user: {
             handler() {
-                
+
             },
             deep: true
         },
     },
     methods: {
-        getProfits : function() {
-            this.User.getProfits({},(response)=>{
-                if(response.s == 1)
-                {
-                    this.gains.profits = response.profits.map((profit)=>{
-                        profit['create_date'] = new Date(profit['create_date']*1000).toLocaleDateString()
-                        return profit
-                    })
-                    
-                    this.gains.total = this.gains.profits.reduce((a, b) => a + b['profit'], 0);
+        sortData: function (column) {
+            this.profits.sort((a, b) => {
+                const _a = column.desc ? a : b
+                const _b = column.desc ? b : a
+
+                if (column.alphabetically) {
+                    return _a[column.name].localeCompare(_b[column.name])
+                } else {
+                    return _a[column.name] - _b[column.name]
                 }
+            });
+
+            column.desc = !column.desc
+        },
+        calculateTotals: function () {
+            this.profits.map((profit) => {
+                this.totals.total_gain += profit.profit ? parseFloat(profit.profit) : 0;
+            })
+        },
+        getProfits: function () {
+            return new Promise((resolve) => {
+                this.User.getProfits({}, (response) => {
+                    if (response.s == 1) {
+                        this.profits = response.profits
+                    }
+
+                    resolve()
+                })
             })
         },
     },
-    mounted() 
-    {
+    mounted() {
         this.User = new User
-        this.getProfits()
+        this.getProfits().then(() => {
+            this.calculateTotals()
+        })
     },
 }).mount('#app')

@@ -32,7 +32,7 @@ Vue.createApp({
     },
     methods: {
         getProfile : function() {
-            this.User.getProfile({},(response)=>{
+            this.User.getProfile({include_countries:true},(response)=>{
                 if(response.s == 1)
                 {
                     Object.assign(this.user, response.user)

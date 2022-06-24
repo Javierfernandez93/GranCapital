@@ -23,7 +23,27 @@ if($UserLogin->_loaded === true)
     ];
 
     $Country = new World\Country;
-    $data["countries"] = $Country->getAllByWeb();
+
+    if($data['include_witdraw_methods'])
+    {
+        $data['withdraw_methods'] =[
+            0 => [
+                'withdraw_method_id' => 1,
+                'name' => 'Bitcoin B2B',
+                'data' => '1alb09jsddofj0923ui1023jjnkj21',
+            ],
+            1 => [
+                'withdraw_method_id' => 2,
+                'name' => 'PayPal',
+                'data' => 'leqjl93@hotmail.com',
+            ]
+        ];
+    }
+
+    if($data['include_countries'])
+    {
+        $data["countries"] = $Country->getAllByWeb();
+    }
     $data["s"] = 1;
     $data["r"] = "LOGGED_OK";
 } else {

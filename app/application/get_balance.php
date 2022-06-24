@@ -4,21 +4,20 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-// $UserSupport = new GranCapital\UserSupport;
-// $UserLogin = new GranCapital\UserLogin;
+$UserLogin = new GranCapital\UserLogin;
 
-if(true)
+if($UserLogin->_loaded === true)
 {
-    $CatalogPlan = new GranCapital\CatalogPlan;
-
-    if($plans = $CatalogPlan->getAll())
+    $UserWallet = new GranCapital\UserWallet;
+    
+    if($UserWallet->getSafeWallet($UserLogin->company_id))
     {
-        $data["plans"] = $plans;
+        $data["balance"] = $UserWallet->getBalance();
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
         $data["s"] = 0;
-        $data["r"] = "NOT_PLANS";
+        $data["r"] = "NOT_WALLET";
     }
 } else {
 	$data["s"] = 0;

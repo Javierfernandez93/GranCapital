@@ -12,7 +12,7 @@ if($UserLogin->_loaded === true)
     
     if($referrals = $UserReferral->getReferrals($UserLogin->company_id))
     {
-        $data['referrals'] = $referrals;
+        $data['referrals'] = formatData($referrals);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
@@ -22,6 +22,18 @@ if($UserLogin->_loaded === true)
 } else {
 	$data["s"] = 0;
 	$data["r"] = "INVALID_CREDENTIALS";
+}
+
+function formatData(array $referrals = null) : array {
+
+    $UserPlan = new GranCapital\UserPlan;
+
+    $referrals = array_map(function($referral) use ($UserPlan) {
+        $referral['plan'] = $UserPlan->getPlan($referral['user_login_id']);
+        return $referral;
+    },$referrals);
+
+    return $referrals;
 }
 
 echo json_encode($data);
