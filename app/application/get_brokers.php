@@ -8,7 +8,7 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
-    $data['day'] = $data['day'] ? $data['day'] : date("Y/m/d");
+    $data['day'] = $data['day'] ? date("Y/m/d",strtotime($data['day'])) : date("Y/m/d");
 
     $Broker = new GranCapital\Broker;
 

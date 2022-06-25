@@ -10,8 +10,22 @@
                         </div>
                         <div class="col fw-semibold text-dark">
                             <div class="small">Brokers</div>
-                            <div v-if="day">
-                                <span class="text-uppercase text-primary">operación del {{day}}</span>
+                        
+                            <div v-if="date.day">
+                                <span class="text-uppercase">operación del 
+                                    <span 
+                                        v-if="!date.editing"
+                                        @click="toggleDateEditing"
+                                        class="text-primary cursor-pointer"> 
+                                        <u>{{date.day}}</u>
+                                    </span>
+                                    <span v-else>
+                                        <input 
+                                            v-model="date.day"
+                                            @change="getBrokersByDate"
+                                            type="date" class="form-control"/>
+                                    </span>
+                                </span>
                             </div>
                         </div>
                         <div class="col-auto text-end">

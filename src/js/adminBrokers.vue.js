@@ -9,7 +9,10 @@ Vue.createApp({
         return {
             UserSupport : null,
             totals : {},
-            day : null,
+            date : {
+                editing: false,
+                day: null
+            },
             brokers : {},
             brokersAux : {},
             query : null,
@@ -82,6 +85,13 @@ Vue.createApp({
             });
 
             column.desc = !column.desc
+        },
+        getBrokersByDate : function() {
+            this.getBrokers()
+            this.toggleDateEditing()
+        },
+        toggleDateEditing : function() {
+            this.date.editing = !this.date.editing 
         },
         filterData : function() {
             this.brokers = this.brokersAux
@@ -211,10 +221,10 @@ Vue.createApp({
             window.location.href = '../../apps/admin-brokers/edit?bid='+broker_id
         },
         getBrokers : function() {
-            this.UserSupport.getBrokers({},(response)=>{
+            this.UserSupport.getBrokers({day:this.date.day},(response)=>{
                 if(response.s == 1)
                 {
-                    this.day = response.day
+                    this.date.day = response.day
                     this.totals.capital = response.data.totals.capital
                     this.brokersAux = response.data.brokers
                     this.brokers = this.brokersAux
