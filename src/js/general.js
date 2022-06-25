@@ -580,6 +580,10 @@ Number.prototype.formatDate = function () {
   return new Date(this * 1000).toLocaleDateString();
 };
 
+String.prototype.formatDate = function () {
+  return new Date(this * 1000).toLocaleDateString();
+};
+
 Number.prototype.formatFullDate = function () {
   return new Date(this * 1000).toLocaleTimeString("es-ES",{ hour: 'numeric', minute: 'numeric', hour12: true, day: 'numeric', month: 'long'})
 };

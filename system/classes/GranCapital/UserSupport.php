@@ -1050,9 +1050,11 @@ class UserSupport extends Orm {
               user_login.email,
               user_account.image,
               user_data.names,
+              user_plan.ammount,
               user_plan.additional_profit,
               user_plan.catalog_plan_id,
-              catalog_plan.name as plan_name
+              catalog_plan.name as plan_name,
+              catalog_plan.profit
             FROM
               user_login
             LEFT JOIN 
@@ -1073,6 +1075,7 @@ class UserSupport extends Orm {
               user_account.user_login_id = user_login.user_login_id
             WHERE 
               user_login.status = '1'
+            GROUP BY user_login.user_login_id
             ORDER BY 
               user_login.signup_date
             DESC
@@ -1098,6 +1101,8 @@ class UserSupport extends Orm {
                 user_data.names,
                 user_contact.phone,
                 user_address.country_id,
+                user_plan.ammount,
+                user_plan.sponsor_profit,
                 user_plan.additional_profit,
                 user_plan.catalog_plan_id
               FROM

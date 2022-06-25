@@ -7,7 +7,7 @@
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
             <div class="row gx-4">
                 <div class="col-auto">
-                    <div class="avatar avatar-xl overflow-hidden img-upload position-relative" @click="openFileManager">
+                    <div class="avatar avatar-xl avatar-editable overflow-hidden img-upload position-relative" @click="openFileManager">
                         <img :src="user.image" :alt="user.name" class="w-100 border-radius-lg shadow-sm">
                         <input class="d-none" ref="file" @change="uploadFile($event)" capture="filesystem" type="file"
                             accept=".jpg, .png, .jpeg" />
@@ -122,6 +122,27 @@
                                 <label>Correo electrónico</label>
                                 <input type="text" v-model="user.email" :disabled="true" class="form-control" placeholder="Email"/>
                             </li>
+                            <li 
+                                v-if="user.referral"
+                                class="list-group-item border-0 ps-0 text-sm">
+                                <label clas="mb-3">Patrocinador</label>
+                                <div class="row align-items-center px-3">
+                                    <div class="col-auto">
+                                        <div class="avatar">
+                                            <img :src="user.referral.image" class="border-radius-lg shadow"/>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h6 class="mb-0 text-sm">
+                                            {{user.referral.names}}
+                                        </h6>
+                                        <p class="mb-0 text-xs">{{user.referral.email}}</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="badge bg-primary">ID {{user.referral.user_login_id}} </span>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -140,7 +161,7 @@
                     </div>
                     <div
                         v-if="lastReferrals.length > 0"
-                        class="card-body p-3">
+                        class="card-body p-4">
                         <ul class="list-group">
                             <li v-for="lastReferral of lastReferrals" class="list-group-item border-0 px-0 mb-2">
                                 <div class="row align-items-center">

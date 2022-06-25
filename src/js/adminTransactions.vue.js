@@ -8,7 +8,7 @@ Vue.createApp({
     data() {
         return {
             UserSupport : null,
-            administrators : {},
+            transactions : {},
             columns: { // 0 DESC , 1 ASC 
                 user_support_id : {
                     name: 'user_support_id',
@@ -44,25 +44,11 @@ Vue.createApp({
 
             column.desc = !column.desc
         },
-        deleteAdministrator : function(user_support_id) {
-            this.UserSupport.deleteSupportUser({user_support_id:user_support_id},(response)=>{
+        getUsersTransactions : function() {
+            this.UserSupport.getUsersTransactions({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.getAdministrators()
-                }
-            })
-        },
-        goToEdit : function(company_id) {
-            window.location.href = '../../apps/admin-administrators/edit?usid='+company_id
-        },
-        getAdministrators : function() {
-            this.UserSupport.getAdministrators({},(response)=>{
-                if(response.s == 1)
-                {
-                    this.administrators = response.administrators.map((administrator)=>{
-                        administrator['create_date'] = new Date(administrator['create_date']*1000).toLocaleDateString()
-                        return administrator
-                    })
+                    this.transactions = response.transactions
                 }
             })
         },
@@ -70,6 +56,6 @@ Vue.createApp({
     mounted() 
     {
         this.UserSupport = new UserSupport
-        this.getAdministrators()
+        this.getUsersTransactions()
     },
 }).mount('#app')

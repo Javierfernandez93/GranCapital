@@ -29,6 +29,10 @@ Vue.createApp({
                     name: 'plan_name',
                     desc: false,
                 },
+                ammount : {
+                    name: 'ammount',
+                    desc: false,
+                },
             }
         }
     },
@@ -82,12 +86,6 @@ Vue.createApp({
                 if (response.s == 1) {
                     this.usersAux = response.users
                     this.users = this.usersAux
-
-                    // this.users.sort((a,b) => {
-                    //     return a['signup_date'] - b['signup_date']
-                    // });
-
-                    // this.users.reverse();
                 }
             })
         },

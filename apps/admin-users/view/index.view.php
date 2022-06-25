@@ -58,6 +58,17 @@
                                         <u class="text-sm ms-2">Plan</u>
                                     </th>
                                     <th 
+                                        @click="sortData(columns.ammount)"
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.ammount.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Monto invertido</u>
+                                    </th>
+                                    <th 
                                         @click="sortData(columns.signup_date)"
                                         class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
                                         <span v-if="columns.signup_date.desc">
@@ -90,7 +101,7 @@
                                     <td class="align-middle text-center text-sm">
                                         <span v-if="user.catalog_plan_id">
                                             <span class="badge badge-sm bg-primary">
-                                                Activo en plan {{user.plan_name}}
+                                                Activo en plan {{user.plan_name}} - {{user.profit}}%
                                             </span>
                                             <span v-if="user.additional_profit > 0" class="badge badge-sm bg-danger ms-1">
                                                 {{user.additional_profit}}% adicional
@@ -99,6 +110,13 @@
                                         <span v-else class="badge badge-sm bg-secondary">
                                             Inactivo
                                         </span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span
+                                            v-if="user.ammount" 
+                                            class="text-xs text-dark mb-0">$ {{user.ammount.numberFormat(0)}}</span>
+                                        <span v-else 
+                                            class="text-xs text-dark mb-0">N/A</span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>

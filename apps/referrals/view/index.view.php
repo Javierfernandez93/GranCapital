@@ -36,7 +36,7 @@
                                     <td class="align-middle text-center text-sm">
                                         <span v-if="referral.plan"  
                                             class="badge badge-sm bg-primary small">
-                                            $ {{referral.plan.name.numberFormat(2)}}
+                                            $ {{referral.plan.ammount.numberFormat(2)}}
                                         </span>
                                         <span v-else>
                                             Sin monto

@@ -4,18 +4,20 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-if(true)
-{
-    $CatalogPlan = new GranCapital\CatalogPlan;
+$UserSupport = new GranCapital\UserSupport;
 
-    if($plans = $CatalogPlan->getAll())
+if($UserSupport->_loaded === true)
+{
+    $WithdrawPerUser = new GranCapital\WithdrawPerUser;
+    
+    if($transactions = $WithdrawPerUser->getAll())
     {
-        $data["plans"] = $plans;
+        $data["transactions"] = $transactions;
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
         $data["s"] = 0;
-        $data["r"] = "NOT_PLANS";
+        $data["r"] = "NOT_WITHDRAWS";
     }
 } else {
 	$data["s"] = 0;

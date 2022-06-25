@@ -48,7 +48,6 @@ class ProfitPerUser extends Orm {
   
   public function calculateProfit(float $profit = null,float $ammount = null) 
   {
-    // $rest_days = date("t") - date("d");
     $days_in_month = 20;
     $day_profit = $profit/$days_in_month;
 
@@ -77,11 +76,13 @@ class ProfitPerUser extends Orm {
         }
       }
     }
+
+    return false;
   }
 
-  public function hasProfitToday($user_plan_id = null) 
+  public function hasProfitToday(int $user_plan_id = null,int $catalog_profit_id = null) 
   {
-    if(isset($user_plan_id) === true)
+    if(isset($user_plan_id,$catalog_profit_id) === true)
     {
       $begin_of_day = strtotime("today");
       $end_of_day = strtotime("tomorrow") - 1;
@@ -92,6 +93,8 @@ class ProfitPerUser extends Orm {
                 {$this->tblName}
               WHERE 
                 {$this->tblName}.user_plan_id = '{$user_plan_id}'
+              AND 
+                {$this->tblName}.catalog_profit_id = '{$catalog_profit_id}'
               AND 
                 {$this->tblName}.create_date
               BETWEEN 

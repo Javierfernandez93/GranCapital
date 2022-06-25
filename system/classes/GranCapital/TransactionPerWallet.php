@@ -13,11 +13,17 @@ class TransactionPerWallet extends Orm {
        parent::__construct();
     }
 
-    public function doTransaction(int $user_wallet_id = null,float $ammount = null,int $transaction_id = null, $profit_per_user_id = null) 
+    public function doTransaction(int $user_wallet_id = null,float $ammount = null,int $transaction_id = null, $profit_per_user_id = null,bool $load_previus = false) 
     {
         if(isset($user_wallet_id,$ammount,$transaction_id) === true)
         {
             $TransactionPerWallet = new TransactionPerWallet;
+
+            if($load_previus)
+            {
+                $TransactionPerWallet->cargarDonde("user_wallet_id = ? AND transaction_id = ?",[$user_wallet_id,$transaction_id]);
+            }
+            
             $TransactionPerWallet->user_wallet_id = $user_wallet_id;
             $TransactionPerWallet->ammount = $ammount;
             $TransactionPerWallet->transaction_id = $transaction_id;
@@ -47,11 +53,14 @@ class TransactionPerWallet extends Orm {
                         {$this->tblName}.status = '1'
                         {$filter}
                     ";
-
-            return $this->connection()->field($sql);
+                    
+            if($ammount = $this->connection()->field($sql))
+            { 
+                return $ammount;
+            }
         }
 
-        return false;
+        return 0;
     }
     
     public function getWithdraws(int $user_wallet_id = null, string $filter = null)

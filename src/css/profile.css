@@ -1,7 +1,7 @@
-.avatar:hover:before {
+.avatar-editable:hover:before {
     opacity: 1;
 }
-.avatar:before {
+.avatar-editable:before {
     content: 'Cambiar imagen';
     position: absolute;
     cursor: pointer;
@@ -22,8 +22,8 @@
     object-fit: cover;
 }
 
-.avatar:before,
-.avatar:hover,
-.avatar:hover:before {
+.avatar-editable:before,
+.avatar-editable:hover,
+.avatar-editable:hover:before {
     transition: all ease-in-out 200ms;
 }

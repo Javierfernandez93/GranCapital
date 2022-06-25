@@ -30,4 +30,22 @@ class WithdrawPerUser extends Orm
 
         return false;
     }
+    
+    public function getAll() 
+    {
+        $sql = "SELECT 
+                    {$this->tblName}.{$this->tblName}_id,
+                    transaction_per_wallet.ammount
+                FROM 
+                    {$this->tblName}
+                LEFT JOIN 
+                    transaction_per_wallet
+                ON 
+                    transaction_per_wallet.transaction_per_wallet_id = {$this->tblName}.transaction_per_wallet_id
+                WHERE 
+                    {$this->tblName}.status != '0'
+                ";
+
+        return $this->connection()->rows($sql);
+    }
 }

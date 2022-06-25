@@ -20,6 +20,7 @@ if($UserLogin->_loaded === true)
         'referral_notification' => $UserLogin->_data['user_account']['referral_notification'] ? true : false,
         'referral_email' => $UserLogin->_data['user_account']['referral_email'] ? true : false,
         'info_email' => $UserLogin->_data['user_account']['info_email'] ? true : false,
+        'referral' => $UserLogin->getReferral(),
     ];
 
     $Country = new World\Country;

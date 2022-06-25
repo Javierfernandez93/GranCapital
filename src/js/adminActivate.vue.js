@@ -10,36 +10,43 @@ Vue.createApp({
             UserSupport : null,
             user : {
                 user_login_id : null,
-                signup_date : null,
+                signup_date : 0,
                 email : null,
                 image : null,
                 names : null,
                 phone : null,
                 country_id : 159, // México country is loaded by default 
+                ammount : 0,
                 catalog_plan_id : 0
             },
-            selectedPlan: {},
+            selectedPlan: {
+                name: 0
+            },
             plans : {},
         }
     },
     watch : {
         user: {
             handler() {
-                this.getPlan(this.user.catalog_plan_id)
+                this.getPlan(this.user.ammount)
             },
             deep : true
         }
     },
     methods: {
-        getPlan : function(catalog_plan_id) {
-            this.selectedPlan = this.plans.filter((plan)=>{
-                return plan.catalog_plan_id == catalog_plan_id
-            })[0]
+        getPlan : function(ammount) {
+            for(let i = 0; i < this.plans.length; i++) 
+            {  
+                const nextVal = this.plans[i+1] != undefined ? parseFloat(this.plans[i+1].name) : Infinity
 
-            console.log(this.selectedPlan)
+                if(ammount >= parseFloat(this.plans[i].name) && ammount < nextVal)
+                {
+                    this.selectedPlan = this.plans[i]
+                }
+            }
         },
         updatePlan : function() {
-            this.UserSupport.updatePlan({user_login_id:this.user.user_login_id,catalog_plan_id:this.selectedPlan.catalog_plan_id,additional_profit:this.user.additional_profit},(response)=>{
+            this.UserSupport.updatePlan({user_login_id:this.user.user_login_id,catalog_plan_id:this.selectedPlan.catalog_plan_id,additional_profit:this.user.additional_profit,ammount:this.user.ammount,sponsor_profit:this.user.sponsor_profit},(response)=>{
                 if(response.s == 1)
                 {
                     this.$refs.button.innerText = 'Actualizado con éxito'

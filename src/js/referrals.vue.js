@@ -23,9 +23,8 @@ Vue.createApp({
     },
     methods: {
         getTotals: function () {
-            console.log(this.referrals)
             this.referrals.map((user)=>{
-                this.totals.total_capital += user.plan ? parseFloat(user.plan.name) : 0
+                this.totals.total_capital += user.plan ? parseFloat(user.plan.ammount) : 0
             })
         },
         getReferrals: function () {

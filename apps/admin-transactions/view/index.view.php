@@ -9,11 +9,11 @@
                             <i class="bi bi-pie-chart-fill"></i>
                         </div>
                         <div class="col fw-semibold text-dark">
-                            <div class="small">Administradores</div>
+                            <div class="small">Transacciones</div>
                         </div>
                         <div class="col-auto text-end">
-                            <div><a href="../../apps/admin-administrators/add" type="button" class="btn btn-success btn-sm">Añadir adminstrador</a></div>
-                            <div><span class="badge bg-secondary">Total de administradores {{Object.keys(administrators).length}}</span></div>
+                            
+                            <div><span class="badge bg-secondary">Total de transacciones {{Object.keys(transactions).length}}</span></div>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         type="text" class="form-control" placeholder="Buscar..."/>
                 </div>
                 <div 
-                    v-if="Object.keys(administrators).length > 0"
+                    v-if="Object.keys(transactions).length > 0"
                     class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
@@ -62,24 +62,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="administrator in administrators">
+                                <tr v-for="transaction in transactions">
                                     <td class="align-middle text-center text-sm">
-                                        {{administrator.user_support_id}}
+                                        {{transaction.ammount}}
                                     </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="../../src/img/user/user.png" class="avatar avatar-sm me-3" :alt="administrator.names">
+                                                <img src="../../src/img/user/user.png" class="avatar avatar-sm me-3" :alt="transaction.ammount">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{administrator.names}}</h6>
-                                                <p class="text-xs text-secondary mb-0">{{administrator.email}}</p>
+                                                <h6 class="mb-0 text-sm">{{transaction.ammount}}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{transaction.ammount}}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>
-                                        <p class="text-xs text-secondary mb-0">{{administrator.create_date}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{transaction.ammount}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <div class="btn-group">
@@ -101,7 +101,7 @@
                 </div>
                 <div v-else>
                     <div class="alert alert-secondary text-white text-center">
-                        <div>No tenemos administradores aún</div>
+                        <div>No tenemos transacciones aún</div>
                     </div>
                 </div>
             </div>

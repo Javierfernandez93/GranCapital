@@ -37,6 +37,7 @@ class UserPlan extends Orm {
     {
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id,
+                {$this->tblName}.ammount,
                 catalog_plan.name
               FROM 
                 {$this->tblName}
@@ -75,12 +76,34 @@ class UserPlan extends Orm {
 
     return false;
   }
+  
+  public function getUserPlanId($user_login_id = null) 
+  {
+    if(isset($user_login_id) === true)
+    {
+      $sql = "SELECT
+                {$this->tblName}.user_plan_id
+              FROM 
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.user_login_id = '{$user_login_id}'
+              AND 
+                {$this->tblName}.status = '1'
+              ";
+
+      return $this->connection()->field($sql);
+    }
+
+    return false;
+  }
  
   public function getActivePlans() 
   {
     $sql = "SELECT
               {$this->tblName}.{$this->tblName}_id,
               {$this->tblName}.additional_profit,
+              {$this->tblName}.ammount,
+              {$this->tblName}.sponsor_profit,
               {$this->tblName}.user_login_id,
               catalog_plan.catalog_plan_id,
               catalog_plan.profit,

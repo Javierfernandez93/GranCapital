@@ -8,10 +8,24 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
-    if(updatePlan($data['user_login_id'],$data['catalog_plan_id'],$data['additional_profit']))
+    if(updatePlan($data['user_login_id'],$data['catalog_plan_id'],$data['ammount'],$data['additional_profit'],$data['sponsor_profit']))
     {
-        $data["s"] = 1;
-        $data["r"] = "DATA_OK";
+        $UserWallet = new GranCapital\UserWallet;
+        
+        if($UserWallet->getSafeWallet(($data['user_login_id'])))
+        {
+            if($UserWallet->doTransaction($data['ammount'],GranCapital\Transaction::DEPOSIT))
+            {
+                $data["s"] = 1;
+                $data["r"] = "DATA_OK";
+            } else {
+                $data['r'] = "NOT_TRANSACTION_MADE";
+                $data['s'] = 0;    
+            }
+        } else {
+            $data['r'] = "NOT_WALLET";
+            $data['s'] = 0;
+        }
     } else {
         $data['r'] = "DATA_ERROR";
         $data['s'] = 0;
@@ -21,7 +35,7 @@ if($UserSupport->_loaded === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function updatePlan(int $user_login_id,int $catalog_plan_id,$additional_profit = null) : bool
+function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount,float $additional_profit = null,float $sponsor_profit = null) : bool
 {
     $UserPlan = new GranCapital\UserPlan;
     
@@ -30,7 +44,10 @@ function updatePlan(int $user_login_id,int $catalog_plan_id,$additional_profit =
         $UserPlan->user_login_id = $user_login_id;
         $UserPlan->create_date = time();
     }
+
+    $UserPlan->ammount = $ammount;
     $UserPlan->catalog_plan_id = $catalog_plan_id;
+    $UserPlan->sponsor_profit = $sponsor_profit;
     $UserPlan->additional_profit = $additional_profit ? $additional_profit : 0;
     
     return $UserPlan->save();

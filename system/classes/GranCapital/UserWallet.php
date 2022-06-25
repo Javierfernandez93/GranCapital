@@ -34,7 +34,7 @@ class UserWallet extends Orm
 
       switch ($transaction_id) {
         case Transaction::DEPOSIT:
-          return $TransacionPerWallet->doTransaction($this->getId(), $ammount, $transaction_id, $profit_per_user_id);
+          return $TransacionPerWallet->doTransaction($this->getId(), $ammount, $transaction_id, $profit_per_user_id, true);
         case Transaction::INVESTMENT:
           return $TransacionPerWallet->doTransaction($this->getId(), $ammount, $transaction_id, $profit_per_user_id);
         case Transaction::REFERRAL_INVESTMENT:

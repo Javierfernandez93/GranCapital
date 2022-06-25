@@ -12,8 +12,6 @@ if($UserLogin->_loaded === true)
     
     if($UserWallet->getSafeWallet($UserLogin->company_id))
     {
-        // d($UserWallet->getBalance(" AND transaction_per_wallet.transaction_id = '".GranCapital\Transaction::REFERRAL_INVESTMENT."'"));
-
         $data["gainStats"] = [
             'investment' =>  [
                 'total' => $UserWallet->getBalance(" AND transaction_per_wallet.transaction_id = '".GranCapital\Transaction::INVESTMENT."'"),
@@ -23,7 +21,6 @@ if($UserLogin->_loaded === true)
                 'total' =>  $UserWallet->getBalance(" AND transaction_per_wallet.transaction_id = '".GranCapital\Transaction::REFERRAL_INVESTMENT."'"),
                 'percentaje' => 0
             ],
-            // 'newReferral' =>  $UserLogin->getReferralCount(),
             'totalReferral' =>  $UserLogin->getReferralCount(),
             'balance' =>  $UserWallet->getBalance(),
         ];

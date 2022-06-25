@@ -517,4 +517,14 @@ class UserLogin extends Orm {
 
     return 0;
   }
+  
+  public function getReferral()
+  {
+    if($this->getId())
+    {
+      return (new UserReferral)->getReferral($this->company_id);
+    }
+
+    return 0;
+  }
 }
