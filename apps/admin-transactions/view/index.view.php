@@ -128,7 +128,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div v-else>
+                    <div v-else class="card-body">
                         <div class="alert alert-secondary text-white text-center">
                             <div>No tenemos transacciones aún</div>
                         </div>

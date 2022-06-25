@@ -12,13 +12,13 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../../src/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../src/css/nucleo-icons.css" />
+    <link rel="stylesheet" href="../../src/css/nucleo-svg.css" />
     <!-- Font Awesome Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../src/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <link href="../../src/css/general.css" rel="stylesheet" />
-    <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../src/css/general.css" />
+    <link rel="stylesheet" href="../../src/css/nucleo-svg.css" />
     <!-- CSS Files -->
     
     <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
@@ -415,14 +415,14 @@
         </footer>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="../../src/js/core/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!--   Core JS Files   -->
     <script src="../../src/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../../src/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../../src/js/plugins/chartjs.min.js"></script>
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/jquery-3.1.1.js" type="text/javascript"></script>
-    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/general.js" type="text/javascript"></script>
+    <script src="../../src/js/42d5adcbca.js" type="text/javascript"></script>
+    <script src="../../src/js/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="../../src/js/general.js" type="text/javascript"></script>
 
     <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -434,11 +434,11 @@
     }
     </script>
     <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script async defer src="../../src/js/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../src/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
     
-    <script src="https://unpkg.com/vue@3"></script>
+    <script src="../../src/js/vue.js"></script>
     
     %js_scripts%
 
