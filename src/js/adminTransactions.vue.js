@@ -19,6 +19,18 @@ Vue.createApp({
                     desc: false,
                     alphabetically: true,
                 },
+                ammount : {
+                    name: 'ammount',
+                    desc: false,
+                },
+                method : {
+                    name: 'method',
+                    desc: false,
+                },
+                account : {
+                    name: 'account',
+                    desc: false,
+                },
                 create_date : {
                     name: 'create_date',
                     desc: false,
@@ -43,6 +55,17 @@ Vue.createApp({
             });
 
             column.desc = !column.desc
+        },
+        applyWithdraw : function(user_login_id) {
+            
+            this.UserSupport.applyWithdraw({user_login_id: user_login_id},(response)=>{
+                if(response.s == 1)
+                {
+                    this.getUsersTransactions()
+                }
+            });
+        },
+        deleteWithdraw : function(user_wallet_id) {
         },
         getUsersTransactions : function() {
             this.UserSupport.getUsersTransactions({},(response)=>{

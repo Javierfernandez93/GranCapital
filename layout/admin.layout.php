@@ -385,7 +385,7 @@
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../src/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
     
-    <script src="https://unpkg.com/vue@3"></script>
+    <script src="../../src/js/vue.js"></script>
     
     %js_scripts%
 

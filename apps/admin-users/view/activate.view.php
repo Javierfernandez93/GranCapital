@@ -7,6 +7,10 @@
                         Usuario
                     </div>
                     <div class="mb-3">
+                        <div class="text-uppercase text-body text-xs font-weight-bolder">ID</div>
+                        <div>{{user.company_id}}</div>
+                    </div>
+                    <div class="mb-3">
                         <div class="text-uppercase text-body text-xs font-weight-bolder">Nombre</div>
                         <div>{{user.names}}</div>
                     </div>

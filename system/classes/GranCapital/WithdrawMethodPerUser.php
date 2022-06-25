@@ -54,4 +54,29 @@ class WithdrawMethodPerUser extends Orm {
             }
         }
 	}
+    
+    public function getMethod(int $user_login_id = null, int $catalog_withdraw_method_id = null) 
+    {
+        if(isset($user_login_id,$catalog_withdraw_method_id) === true)
+        {
+            $sql = "SELECT 
+                        {$this->tblName}.account,
+                        catalog_withdraw_method.method
+                    FROM 
+                        {$this->tblName}
+                    LEFT JOIN 
+                        catalog_withdraw_method
+                    ON 
+                        catalog_withdraw_method.catalog_withdraw_method_id = {$this->tblName}.catalog_withdraw_method_id
+                    WHERE 
+                        {$this->tblName}.user_login_id = '{$user_login_id}'
+                    AND 
+                        {$this->tblName}.catalog_withdraw_method_id = '{$catalog_withdraw_method_id}'
+                    ";
+
+            return $this->connection()->row($sql);
+        }
+
+        return false;
+    }
 }

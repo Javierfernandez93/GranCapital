@@ -50,7 +50,7 @@ class TransactionPerWallet extends Orm {
                     WHERE 
                         {$this->tblName}.user_wallet_id = '{$user_wallet_id}'
                     AND 
-                        {$this->tblName}.status = '1'
+                    {$this->tblName}.status IN ('".WithdrawPerUser::DEPOSITED."','".WithdrawPerUser::WAITING_FOR_DEPOSIT."')
                         {$filter}
                     ";
                     
@@ -82,7 +82,7 @@ class TransactionPerWallet extends Orm {
                     AND 
                         {$this->tblName}.transaction_id = '".Transaction::WITHDRAW."'
                     AND 
-                        {$this->tblName}.status = '1'
+                        {$this->tblName}.status IN ('".WithdrawPerUser::DEPOSITED."','".WithdrawPerUser::WAITING_FOR_DEPOSIT."')
                         {$filter}
                     ";
 
