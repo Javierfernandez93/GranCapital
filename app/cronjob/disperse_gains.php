@@ -2,7 +2,7 @@
 
 require_once TO_ROOT. "/system/core.php";
 
-GranCapital\NotificationPerUser::push(1,"Cron job testing",GranCapital\CatalogNotification::GAINS,"");
+GranCapital\NotificationPerUser::push(1,"Cron job testing ".date("Y-m-d H:i:s"),GranCapital\CatalogNotification::GAINS,"");
 
 // checking if actual day is btwn week
 if(date('N') < 6)
