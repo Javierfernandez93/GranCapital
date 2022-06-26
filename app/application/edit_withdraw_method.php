@@ -21,7 +21,8 @@ if($UserLogin->_loaded === true)
             $WithdrawMethodPerUser->create_date = time(); 
         }
         
-        $WithdrawMethodPerUser->account = $data['account']; 
+        $WithdrawMethodPerUser->account = $data['account'] ? $data['account'] : ''; 
+        $WithdrawMethodPerUser->wallet = $data['wallet'] ? $data['wallet'] : ''; 
 
         if($WithdrawMethodPerUser->save())
         {

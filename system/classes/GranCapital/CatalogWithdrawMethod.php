@@ -14,7 +14,8 @@ class CatalogWithdrawMethod extends Orm {
 	{
 		$sql = "SELECT 
 					{$this->tblName}.{$this->tblName}_id,
-					{$this->tblName}.method
+					{$this->tblName}.method,
+					{$this->tblName}.image
 				FROM 
 					{$this->tblName}
 				WHERE 

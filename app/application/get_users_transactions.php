@@ -33,6 +33,7 @@ function formatData($UserSupport = null, array $transactions = null) : array
         $method = $WithdrawMethodPerUser->getMethod($transaction['user_login_id'],$transaction['catalog_withdraw_method_id']);
         $transactions[$key]['method'] = $method['method'];
         $transactions[$key]['account'] = $method['account'];
+        $transactions[$key]['wallet'] = $method['wallet'];
 
         $user = $UserSupport->getUser($transaction['user_login_id']);
 

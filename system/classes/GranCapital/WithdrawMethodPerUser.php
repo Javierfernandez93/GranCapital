@@ -17,7 +17,8 @@ class WithdrawMethodPerUser extends Orm {
         if(isset($user_login_id,$catalog_withdraw_method_id) === true) 
         {
             $sql = "SELECT 
-                        {$this->tblName}.account
+                        {$this->tblName}.account,
+                        {$this->tblName}.wallet
                     FROM 
                         {$this->tblName}
                     WHERE 
@@ -28,7 +29,7 @@ class WithdrawMethodPerUser extends Orm {
                         {$this->tblName}.status = '1'
                     ";
             
-            return $this->connection()->field($sql);
+            return $this->connection()->row($sql);
         }
     }
 
@@ -42,7 +43,8 @@ class WithdrawMethodPerUser extends Orm {
             {
                 $catalogs_withdraw_methods = array_map(function($catalog_withdraw_method) use ($user_login_id) {
                     if($account = $this->getAccount($user_login_id,$catalog_withdraw_method['catalog_withdraw_method_id'])) {
-                        $catalog_withdraw_method['account'] = $account;
+                        $catalog_withdraw_method['account'] = $account['account'];
+                        $catalog_withdraw_method['wallet'] = $account['wallet'];
                     }
                     
                     $catalog_withdraw_method['editing'] = false;
@@ -61,6 +63,7 @@ class WithdrawMethodPerUser extends Orm {
         {
             $sql = "SELECT 
                         {$this->tblName}.account,
+                        {$this->tblName}.wallet,
                         catalog_withdraw_method.method
                     FROM 
                         {$this->tblName}

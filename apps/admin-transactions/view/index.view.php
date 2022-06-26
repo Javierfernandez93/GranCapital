@@ -67,7 +67,16 @@
                                         <span v-else>
                                             <i class="bi text-primary bi-arrow-down-square-fill"></i>
                                         </span>
-                                        <u class="text-sm ms-2">Cuenta</u>
+                                        <u class="text-sm ms-2">Alias cuenta</u>
+                                    </th>
+                                    <th @click="sortData(columns.account)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.account.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>
+                                        <span v-else>
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>
+                                        <u class="text-sm ms-2">Alias wallet</u>
                                     </th>
                                     
                                     <th @click="sortData(columns.create_date)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
@@ -105,6 +114,9 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <p class="mb-0">{{transaction.account}}</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <p class="mb-0">{{transaction.wallet}}</p>
                                     </td>
                                     <td class="align-middle text-center">
                                         <p class="mb-0">{{transaction.create_date.formatDate()}}</p>

@@ -39,7 +39,7 @@ Vue.createApp({
         doWithdraw: function () {
             this.User.doWithdraw(this.withdraw, (response) => {
                 if (response.s == 1) {
-                    this.getBalance().then(() => { 
+                    this.getBalance().then(() => {
                         this.getWithdraws()
                     })
                 }
@@ -53,12 +53,14 @@ Vue.createApp({
             })
         },
         editWithdrawMethod: function (all_withdraw_method) {
-
-            this.User.editWithdrawMethod(all_withdraw_method, (response)=>{
-                if(response.s == 1)
-                {
+            this.User.editWithdrawMethod(all_withdraw_method, (response) => {
+                if (response.s == 1) {
                     this.toggleEditing(all_withdraw_method)
-                    this.getWithdraws()
+                    
+                    this.getBalance().then(() => {
+                        this.getProfile()
+                        this.getWithdraws()
+                    })
                 }
             })
         },

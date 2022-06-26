@@ -91,24 +91,40 @@
                                     v-for="all_withdraw_method in all_withdraw_methods"
                                     class="col-md-6 mb-4">
                                     <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                                        <img class="w-10 me-3 mb-0" src="../../src/img/logos/mastercard.png" alt="logo">
-                                        <div>
+                                        <img class="w-10 me-3 mb-0" :src="all_withdraw_method.image" alt="logo">
+                                        <div class="w-100">
                                             <div><h6 class="mb-0 text-xxs text-secondary">{{all_withdraw_method.method}}</h6></div>
                                             <div v-if="!all_withdraw_method.editing"
                                                 @click="toggleEditing(all_withdraw_method)">
                                                 <div v-if="all_withdraw_method.account"
                                                     class="text-truncate">
-                                                    <h6 class="mb-0">{{all_withdraw_method.account}}</h6>
+                                                    <h6 class="mb-0">{{all_withdraw_method.account}} - {{all_withdraw_method.wallet}}</h6>
                                                 </div>
                                                 <div v-else>
                                                     Configurar cuenta
                                                 </div>
                                             </div>
                                             <div v-else>
-                                                <input 
-                                                    v-model="all_withdraw_method.account"
-                                                    @keydown.enter.exact.prevent="editWithdrawMethod(all_withdraw_method)"
-                                                    type="text" class="form-control"/>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label>Account alias</label>
+
+                                                        <input 
+                                                            v-model="all_withdraw_method.account"
+                                                            @keydown.enter.exact.prevent="editWithdrawMethod(all_withdraw_method)"
+                                                            placeholder="Account alias"
+                                                            type="text" class="form-control"/>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label>Wallet alias</label>
+
+                                                        <input 
+                                                            v-model="all_withdraw_method.wallet"
+                                                            @keydown.enter.exact.prevent="editWithdrawMethod(all_withdraw_method)"
+                                                            placeholder="Wallet alias"
+                                                            type="text" class="form-control"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <span 
