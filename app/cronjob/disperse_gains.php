@@ -2,6 +2,8 @@
 
 require_once TO_ROOT. "/system/core.php";
 
+GranCapital\NotificationPerUser::push(1,"Cron job testing",GranCapital\CatalogNotification::GAINS,"");
+
 // checking if actual day is btwn week
 if(date('N') < 6)
 {
@@ -11,14 +13,13 @@ if(date('N') < 6)
 
         $UserPlan = new GranCapital\UserPlan;
         
-        GranCapital\NotificationPerUser::push(1,"Cron job testing",GranCapital\CatalogNotification::GAINS,"");
         
         // if($active_plans = $UserPlan->getActivePlans())
         if(false)
         {
             $UserReferral = new GranCapital\UserReferral;
             $ProfitPerUser = new GranCapital\ProfitPerUser;
-            
+
             echo '----- inversement gains<br>';
             /* inversement gains */
             foreach ($active_plans as $active_plan)
