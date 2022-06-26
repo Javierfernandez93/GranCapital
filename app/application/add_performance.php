@@ -8,21 +8,15 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
-    if($data['gain'])
+    if($data['percentaje_gain'])
     {
-        if($data['broker_id'])
+        if(GranCapital\TradingPerformance::addPerformance(number_format($data['percentaje_gain'],2),$data['day']))
         {
-            if(GranCapital\GainPerBroker::addGain($data['broker_id'],$data['gain'],$data['day']))
-            {
-                $data["s"] = 1;
-                $data["r"] = "DATA_OK";
-            } else {
-                $data["s"] = 0;
-                $data["r"] = "NOT_USER_LOGIN_ID";
-            }
+            $data["s"] = 1;
+            $data["r"] = "DATA_OK";
         } else {
             $data["s"] = 0;
-            $data["r"] = "NOT_BROKER_ID";
+            $data["r"] = "NOT_USER_LOGIN_ID";
         }
     } else {
         $data["s"] = 0;

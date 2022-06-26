@@ -26,5 +26,8 @@
             <!-- 5004322812
             kvduend7 -->
         </div>
+        
     </div>
+
+    <iframe src="https://www.myfxbook.com/members/heliolagunae/helio-laguna/9536807"></iframe>
 </div>

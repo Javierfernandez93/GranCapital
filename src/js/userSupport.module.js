@@ -31,6 +31,9 @@ class UserSupport extends Http {
     getBrokerCapitals(data, callback) {
         return this.call('../../app/application/get_broker_capitals.php', data, callback);
     }
+    addPerformance(data, callback) {
+        return this.call('../../app/application/add_performance.php', data, callback);
+    }
     deleteCapital(data, callback) {
         return this.call('../../app/application/delete_capital.php', data, callback);
     }
@@ -39,6 +42,9 @@ class UserSupport extends Http {
     }
     applyWithdraw(data, callback) {
         return this.call('../../app/application/apply_withdraw.php', data, callback);
+    }
+    getBrokersData(data, callback) {
+        return this.call('../../app/application/get_brokers_data.php', data, callback);
     }
     deleteWithdraw(data, callback) {
         return this.call('../../app/application/delete_withdraw.php', data, callback);

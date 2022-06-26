@@ -8,13 +8,14 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
-    $data['day'] = $data['day'] ? date("Y/m/d",strtotime($data['day'])) : date("Y/m/d");
+    $data['today'] = date("Y-m-d");
+    $data['day'] = $data['day'] ? date("Y-m-d",strtotime($data['day'])) : $data['today'];
 
     $Broker = new GranCapital\Broker;
 
-    if($brokers = $Broker->getAll($data['day']))
+    if($brokers = $Broker->getAll())
     {
-        $data["data"] = filterData($brokers);
+        $data["data"] = filterData($brokers,$data['day']);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
@@ -26,14 +27,14 @@ if($UserSupport->_loaded === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function filterData($brokers = null)
+function filterData(array $brokers = null,string $day = null)
 {
     $CapitalPerBroker = new GranCapital\CapitalPerBroker;
     $GainPerBroker = new GranCapital\GainPerBroker;
 
     foreach ($brokers as $key => $broker)
     {
-        $capitals = $CapitalPerBroker->getAll($broker['broker_id']);
+        $capitals = $CapitalPerBroker->getAll($broker['broker_id'],$day);
 
         $brokers[$key]['capital'] = $capitals ? array_sum(array_column($capitals,"capital")) : 0;
     }
@@ -43,7 +44,7 @@ function filterData($brokers = null)
     // getting % portfolio
     foreach($brokers as $key => $broker)
     {
-        $gain = $GainPerBroker->getGainPerDay($broker['broker_id']);
+        $gain = $GainPerBroker->getGainPerDay($broker['broker_id'],$day);
 
         // calculating portfolio
         $brokers[$key]['portfolio'] = number_format(($broker['capital']/$brokers_data['totals']['capital'])*100,2);

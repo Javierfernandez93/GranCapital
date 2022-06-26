@@ -1,9 +1,12 @@
 import { UserSupport } from '../../src/js/userSupport.module.js'
 
 /* vue */
+import { StatsViewer } from '../../src/js/statsViewer.vue.js'
+import { ProfitViewer } from '../../src/js/profitViewer.vue.js'
 
 Vue.createApp({
-    components : { 
+    components : {
+        StatsViewer,ProfitViewer
     },
     data() {
         return {
@@ -11,6 +14,7 @@ Vue.createApp({
             totals : {},
             date : {
                 editing: false,
+                today: null,
                 day: null
             },
             brokers : {},
@@ -125,7 +129,14 @@ Vue.createApp({
             })
         },
         addGainPerBroker : function(broker) {
-            this.UserSupport.addGainPerBroker({gain:broker.gain,broker_id:broker.broker_id},(response) => {
+            this.UserSupport.addGainPerBroker({gain:broker.gain,broker_id:broker.broker_id,day:this.date.day},(response) => {
+                if(response.s == 1)
+                {
+                    
+                }
+            })
+            
+            this.UserSupport.addPerformance({percentaje_gain:this.totals.percentaje_gain,day:this.date.day},(response) => {
                 if(response.s == 1)
                 {
                     

@@ -23,7 +23,8 @@
                                         <input 
                                             v-model="date.day"
                                             @change="getBrokersByDate"
-                                            type="date" class="form-control"/>
+                                            :max="date.today"
+                                            type="date" class="form-control w-20 d-inline-flex"/>
                                     </span>
                                 </span>
                             </div>
@@ -219,4 +220,5 @@
             </div>
         </div>
     </div>
+    <stats-viewer></stats-viewer>
 </div>

@@ -10,13 +10,13 @@ class GainPerBroker extends Orm {
 		parent::__construct();
 	}
 
-	public function getGainPerDay(int $broker_id = null)
+	public function getGainPerDay(int $broker_id = null,string $day = null)
 	{
         if(isset($broker_id) === true)
         {
-            $begin_of_day = strtotime("today");
-            $end_of_day = strtotime("tomorrow") - 1;
-        
+            $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+            $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+            
             $sql = "SELECT 
                         {$this->tblName}.gain
                     FROM 
@@ -29,27 +29,26 @@ class GainPerBroker extends Orm {
                         {$begin_of_day}
                     AND 
                         {$end_of_day}
-
                     AND 
                         {$this->tblName}.broker_id = '{$broker_id}'
                     ";
-            
+                    
             return $this->connection()->field($sql);
         }
 
         return false;
 	}
 	
-    public static function addGain(int $broker_id = null,float $gain = null) : bool
+    public static function addGain(int $broker_id = null,float $gain = null,string $day = null) : bool
     {
         $GainPerBroker = new GainPerBroker;
             
-        if($gain_per_broker_id = $GainPerBroker->getGainPerDayId($broker_id))
+        if($gain_per_broker_id = $GainPerBroker->getGainPerDayId($broker_id,$day))
         {
             $GainPerBroker->cargarDonde("gain_per_broker_id = ?",$gain_per_broker_id);
         } else {
             $GainPerBroker->broker_id = $broker_id;
-            $GainPerBroker->create_date = time();
+            $GainPerBroker->create_date = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
         }
 
         $GainPerBroker->gain = $gain;
@@ -57,12 +56,12 @@ class GainPerBroker extends Orm {
         return $GainPerBroker->save();
     }
 
-    public function getGainPerDayId(int $broker_id = null)
+    public function getGainPerDayId(int $broker_id = null,string $day = null)
 	{
         if(isset($broker_id) === true)
         {
-            $begin_of_day = strtotime("today");
-            $end_of_day = strtotime("tomorrow") - 1;
+            $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+            $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
         
             $sql = "SELECT 
                         {$this->tblName}.{$this->tblName}_id

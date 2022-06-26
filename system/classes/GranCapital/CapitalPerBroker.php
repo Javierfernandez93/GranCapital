@@ -11,10 +11,12 @@ class CapitalPerBroker extends Orm {
 		parent::__construct();
 	}
 
-	public function getAll(int $broker_id = null)
+	public function getAll(int $broker_id = null,string $day = null)
 	{
         if(isset($broker_id) === true)
         {
+            $last_minute = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+            
             $sql = "SELECT 
                         {$this->tblName}.{$this->tblName}_id,
                         {$this->tblName}.capital,
@@ -25,8 +27,11 @@ class CapitalPerBroker extends Orm {
                         {$this->tblName}.status = '1'
                     AND 
                         {$this->tblName}.broker_id = '{$broker_id}'
+                    AND 
+                        {$this->tblName}.create_date < '{$last_minute}'
                     ORDER BY
                         {$this->tblName}.create_date 
+                    
                     DESC 
                     ";
             
