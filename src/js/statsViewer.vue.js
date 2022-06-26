@@ -104,10 +104,19 @@ const StatsViewer = {
                 </div>
             </div>
             <div class="card-header pb-0">
-                <input 
-                    :autofocus="true"
-                    v-model="query"
-                    type="text" class="form-control" placeholder="Buscar por fecha, rendimiento, promedio o extrapol..."/>
+                <div class="row">
+                    <div class="col">
+                        <input 
+                            :autofocus="true"
+                            v-model="query"
+                            type="text" class="form-control" placeholder="Buscar por fecha, rendimiento, promedio o extrapol..."/>
+                    </div>
+                    <div class="col-auto">
+                        <button 
+                            @click="getBrokersData"
+                            class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></button>
+                    </div>
+                </div>
             </div>
             <div 
                 v-if="Object.keys(performances).length > 0"

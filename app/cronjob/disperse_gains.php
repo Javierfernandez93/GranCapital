@@ -13,7 +13,6 @@ if(date('N') < 6)
 
         $UserPlan = new GranCapital\UserPlan;
         
-        
         // if($active_plans = $UserPlan->getActivePlans())
         if(false)
         {

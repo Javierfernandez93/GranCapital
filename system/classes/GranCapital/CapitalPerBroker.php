@@ -41,11 +41,11 @@ class CapitalPerBroker extends Orm {
         return false;
 	}
 	
-    public static function addCapital(int $broker_id = null,float $capital = null) : bool
+    public static function addCapital(int $broker_id = null,float $capital = null,string $day = null) : bool
     {
         $CapitalPerBroker = new CapitalPerBroker;
             
-        if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($broker_id))
+        if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($broker_id,$day))
         {
             $CapitalPerBroker->cargarDonde("capital_per_broker_id = ?",$capital_per_broker_id);
         } else {
@@ -58,12 +58,12 @@ class CapitalPerBroker extends Orm {
         return $CapitalPerBroker->save();
     }
 
-    public function getTodayCapital(int $broker_id = null)
+    public function getTodayCapital(int $broker_id = null,string $day = null)
 	{
         if(isset($broker_id) === true)
         {
-            $begin_of_day = strtotime("today");
-            $end_of_day = strtotime("tomorrow") - 1;
+            $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+            $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
 
             $sql = "SELECT 
                         {$this->tblName}.{$this->tblName}_id

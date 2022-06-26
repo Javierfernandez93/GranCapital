@@ -14,7 +14,8 @@ if($UserSupport->_loaded === true)
     $Broker = new GranCapital\Broker;
 
     if($brokers = $Broker->getAll())
-    {
+    {   
+        $data["operation_open"] = (new GranCapital\TradingPerformance)->isOperationOpen($data['day']);
         $data["data"] = filterData($brokers,$data['day']);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";

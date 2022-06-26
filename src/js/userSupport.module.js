@@ -34,6 +34,9 @@ class UserSupport extends Http {
     addPerformance(data, callback) {
         return this.call('../../app/application/add_performance.php', data, callback);
     }
+    closeOperation(data, callback) {
+        return this.call('../../app/application/close_operation.php', data, callback, null, null, 'POST');
+    }
     deleteCapital(data, callback) {
         return this.call('../../app/application/delete_capital.php', data, callback);
     }

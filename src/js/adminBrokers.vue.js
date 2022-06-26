@@ -17,6 +17,7 @@ Vue.createApp({
                 today: null,
                 day: null
             },
+            operation_open : false,
             brokers : {},
             brokersAux : {},
             query : null,
@@ -128,6 +129,15 @@ Vue.createApp({
                 }
             })
         },
+        closeOperation : function(broker) {
+            this.UserSupport.closeOperation({brokers:this.brokers,day:this.date.day},(response) => {
+                if(response.s == 1)
+                {
+                    this.$refs.operation_open.innerText = 'Operación cerrada con éxito'
+                    this.getBrokers()
+                }
+            })
+        },
         addGainPerBroker : function(broker) {
             this.UserSupport.addGainPerBroker({gain:broker.gain,broker_id:broker.broker_id,day:this.date.day},(response) => {
                 if(response.s == 1)
@@ -235,6 +245,7 @@ Vue.createApp({
             this.UserSupport.getBrokers({day:this.date.day},(response)=>{
                 if(response.s == 1)
                 {
+                    this.operation_open = response.operation_open
                     this.date.day = response.day
                     this.totals.capital = response.data.totals.capital
                     this.brokersAux = response.data.brokers

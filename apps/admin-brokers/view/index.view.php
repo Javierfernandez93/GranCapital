@@ -36,10 +36,21 @@
                     </div>
                 </div>
                 <div class="card-header pb-0">
-                    <input 
-                        :autofocus="true"
-                        v-model="query"
-                        type="text" class="form-control" placeholder="Buscar..."/>
+                    <div class="row">
+                        <div class="col">
+                            <input 
+                                :autofocus="true"
+                                v-model="query"
+                                type="text" class="form-control" placeholder="Buscar..."/>
+                        </div>
+                        <div class="col-auto">
+                            <button 
+                            :disabled="!operation_open" 
+                                @click="closeOperation"
+                                ref="operation_open"
+                                class="btn btn-success">Cerrar operación</button>
+                        </div>
+                    </div>
                 </div>
                 <div 
                     v-if="Object.keys(brokers).length > 0"
@@ -177,7 +188,7 @@
                                             </ul>
                                         </div>
                                     </td>
-                                    
+                                
                                 </tr>
                             </tbody>
 
@@ -205,7 +216,9 @@
                                     <td class="align-middle border-bottom-0 border-top fw-semibold text-center">
                                         <h6 class="mb-0 text-sm">$ {{totals.new_capital.numberFormat(2)}}</h6>
                                     </td>
-                                    <td class="border-bottom-0 border-top"></td>
+                                    <td class="border-bottom-0 border-top">
+                                        
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>
