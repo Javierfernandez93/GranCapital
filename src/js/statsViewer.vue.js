@@ -7,7 +7,9 @@ const StatsViewer = {
     data() {
         return {
             UserSupport : null,
+            performancesAux: {},
             performances: {},
+            query: null,
             columns : {
                 create_date : {
                     name: 'create_date',
@@ -21,14 +23,22 @@ const StatsViewer = {
         }
     },
     watch : {
-        brokers: {
+        query : 
+        {
             handler() {
-                
+                this.filterData()
             },
-            deep: true
+            deep : true
         }
     },
     methods: {
+        filterData : function() {
+            this.performances = this.performancesAux
+            
+            this.performances = this.performancesAux.filter((performance)=>{
+                return performance.create_date.formatDate().toLowerCase().includes(this.query.toLowerCase()) || performance.extrapol.toString().includes(this.query.toLowerCase()) || performance.average.toString().includes(this.query.toLowerCase()) || performance.performance.toString().includes(this.query.toLowerCase())
+            })
+        },
         sortData: function (column) {
             this.performances.sort((a,b) => {
                 const _a = column.desc ? a : b
@@ -65,7 +75,8 @@ const StatsViewer = {
             this.UserSupport.getBrokersData({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.performances = this.getData(response.performances)
+                    this.performancesAux = this.getData(response.performances)
+                    this.performances = this.performancesAux
                 }
             })
         }
@@ -79,6 +90,25 @@ const StatsViewer = {
     },
     template : `
         <div class="card mb-3">
+            <div class="card-header pb-0">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <i class="bi bi-pie-chart-fill"></i>
+                    </div>
+                    <div class="col fw-semibold text-dark">
+                        <div class="small">Estadísticas</div>
+                    </div>
+                    <div class="col-auto text-end">
+                        <div><span class="badge bg-secondary">Total de estadísticas {{Object.keys(performances).length}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header pb-0">
+                <input 
+                    :autofocus="true"
+                    v-model="query"
+                    type="text" class="form-control" placeholder="Buscar por fecha, rendimiento, promedio o extrapol..."/>
+            </div>
             <div 
                 v-if="Object.keys(performances).length > 0"
                 class="card-body px-0 pt-0 pb-2">
