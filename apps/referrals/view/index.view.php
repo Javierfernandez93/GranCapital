@@ -53,6 +53,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <td></td>
                                     <td class="align-middle text-center text-sm">
                                         <h6>Total</h6>
                                     </td>
