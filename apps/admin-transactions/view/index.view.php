@@ -127,11 +127,15 @@
 
                                             </button>
                                             <ul class="dropdown-menu shadow">
-                                                <li><button class="dropdown-item" @click="applyWithdraw(transaction.user_login_id)">Aplicada</button></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><button class="dropdown-item" @click="deleteWithdraw(transaction.user_login_id)">Eliminar</button></li>
+                                                <?php if($UserSupport->hasPermission('add_transaction')) { ?>
+                                                    <li><button class="dropdown-item" @click="applyWithdraw(transaction.user_login_id)">Aplicada</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('add_transaction')) { ?>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><button class="dropdown-item" @click="deleteWithdraw(transaction.user_login_id)">Eliminar</button></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </td>
