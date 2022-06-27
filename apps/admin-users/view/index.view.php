@@ -66,7 +66,7 @@
                                         <span v-else>    
                                             <i class="bi text-primary bi-arrow-down-square-fill"></i>
                                         </span>    
-                                        <u class="text-sm ms-2">Monto invertido</u>
+                                        <u class="text-sm ms-2">Monto inv.</u>
                                     </th>
                                     <th 
                                         @click="sortData(columns.signup_date)"
