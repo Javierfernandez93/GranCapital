@@ -83,7 +83,8 @@
                         <strong>Aviso</strong> El profit final para éste usuario:
                         <div>PLAN $ {{selectedPlan.name.numberFormat(0)}} = {{selectedPlan.profit}}% + </div>
                         <div>Profit adicional = {{user.additional_profit}}%</div>
-                        <div class="fw-semibold">Total = {{parseFloat(user.additional_profit) + parseFloat(selectedPlan.profit)}}% </div>
+                        <div>Profit sponsor = {{user.sponsor_profit}}%</div>
+                        <div class="fw-semibold">Total = {{parseFloat(user.additional_profit) + parseFloat(selectedPlan.profit) + parseFloat(user.sponsor_profit)}}% </div>
                     </div>
                     <button 
                         @click="updatePlan"
