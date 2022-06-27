@@ -5,12 +5,12 @@ require_once TO_ROOT. "/system/core.php";
 // GranCapital\NotificationPerUser::push(1,"Cron job testing ".date("Y-m-d H:i:s"),GranCapital\CatalogNotification::GAINS,"");
 
 $data = HCStudio\Util::getHeadersForWebService();
-$data['unix_time'] = strtotime($data['day']);
+$data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
 
 // checking if actual day is btwn week
 if(date('N',$data['unix_time']) < 6)
 {
-    if(date('H',$data['unix_time']) == '09')
+    if(date('H',$data['unix_time']) == '10')
     {
         $day = strtotime($data['day']);
 
