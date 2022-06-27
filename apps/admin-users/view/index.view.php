@@ -102,7 +102,7 @@
                                         <span v-if="user.catalog_plan_id">
                                             <div>
                                                 <span class="badge badge-sm bg-primary">
-                                                    Activo en plan {{user.plan_name}} - {{user.profit}}%
+                                                    PLAN {{user.plan_name}} - {{user.profit}}%
                                                 </span>
                                             </div>
                                             <div>
