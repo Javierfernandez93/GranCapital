@@ -22,7 +22,7 @@ if($active_plans = $UserPlan->getActivePlans())
                     $day = date("Y-m-d 09:00:00",strtotime("+{$i} days",$start_date));
 
                     $Curl = new JFStudio\Curl;
-                    $Curl->get('http://localhost:8888/grancapital/app/cronjob/disperse_gains.php',[
+                    $Curl->get('https://grancapital.fund/app/cronjob/disperse_gains.php',[
                         'day' => $day,
                         'user_login_id' => $active_plan['user_login_id']
                     ]);
