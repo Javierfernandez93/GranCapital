@@ -35,13 +35,23 @@ Vue.createApp({
     },
     methods: {
         getPlan: function (ammount) {
-            for (let i = 0; i < this.plans.length; i++) {
-                const nextVal = this.plans[i + 1] != undefined ? parseFloat(this.plans[i + 1].name) : Infinity
-
-                if (ammount >= parseFloat(this.plans[i].name) && ammount < nextVal) {
-                    this.selectedPlan = this.plans[i]
-                }
+            this.selectedPlan = {
+                name: 0
             }
+            
+            if(ammount >= parseFloat(this.plans[0].name))
+            {
+                for (let i = 0; i < this.plans.length; i++) {
+                    const nextVal = this.plans[i + 1] != undefined ? parseFloat(this.plans[i + 1].name) : Infinity
+    
+                    if (ammount >= parseFloat(this.plans[i].name) && ammount < nextVal) {
+                        this.selectedPlan = this.plans[i]
+                    }
+                }
+            } else {
+                this.selectedPlan = this.plans[0]
+            }
+
         },
         updatePlan: function () {
             this.UserSupport.updatePlan({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, additional_profit: this.user.additional_profit, ammount: this.user.ammount, sponsor_profit: this.user.sponsor_profit }, (response) => {

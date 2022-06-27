@@ -62,6 +62,7 @@ class UserReferral extends Orm {
                 user_data.names,
                 user_account.image,
                 user_login.signup_date,
+                user_login.company_id,
                 user_login.email
               FROM 
                 {$this->tblName} 
