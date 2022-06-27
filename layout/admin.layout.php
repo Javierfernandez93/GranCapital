@@ -17,7 +17,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../src/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../src/css/general.css" />
+    <link rel="stylesheet" href="../../src/css/general.css?t=1" />
     <link rel="stylesheet" href="../../src/css/nucleo-svg.css" />
     <!-- CSS Files -->
     
