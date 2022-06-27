@@ -133,7 +133,9 @@
                                             </button>
                                             <ul class="dropdown-menu shadow">
                                                 <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
-                                                <li><button class="dropdown-item" @click="goToActivatePlan(user.user_login_id)">Activar plan</button></li>
+                                                <?php if($UserSupport->hasPermission('activate_plan')) { ?>
+                                                    <li><button class="dropdown-item" @click="goToActivatePlan(user.user_login_id)">Activar plan</button></li>
+                                                <?php } ?>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
