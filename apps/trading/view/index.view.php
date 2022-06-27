@@ -20,9 +20,6 @@
                 </div>
             </div>
             <div class="card mb-3">
-                <div class="card-header">
-                    <h3>Operaciones realizadas</h3>
-                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4">
