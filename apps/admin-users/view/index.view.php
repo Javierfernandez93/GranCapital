@@ -100,12 +100,16 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span v-if="user.catalog_plan_id">
-                                            <span class="badge badge-sm bg-primary">
-                                                Activo en plan {{user.plan_name}} - {{user.profit}}%
-                                            </span>
-                                            <span v-if="user.additional_profit > 0" class="badge badge-sm bg-danger ms-1">
-                                                {{user.additional_profit}}% adicional
-                                            </span>
+                                            <div>
+                                                <span class="badge badge-sm bg-primary">
+                                                    Activo en plan {{user.plan_name}} - {{user.profit}}%
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span v-if="user.additional_profit > 0" class="badge badge-sm bg-danger ms-1">
+                                                    {{user.additional_profit}}% adicional
+                                                </span>
+                                            </div>
                                         </span>
                                         <span v-else class="badge badge-sm bg-secondary">
                                             Inactivo
