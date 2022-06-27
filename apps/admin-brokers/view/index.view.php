@@ -181,14 +181,22 @@
                                                 
                                             </button>
                                             <ul class="dropdown-menu shadow">
-                                                <li><button class="dropdown-item" @click="viewCapitals(broker.broker_id)">Ver montos invertidos</button></li>
-                                                <li><button class="dropdown-item" @click="addCapital(broker)">Añadir monto invertido</button></li>
-                                                <li><button class="dropdown-item" @click="goToEdit(broker.broker_id)">Editar</button></li>
+                                                <?php if($UserSupport->hasPermission('list_capitals')) { ?>
+                                                    <li><button class="dropdown-item" @click="viewCapitals(broker.broker_id)">Ver montos invertidos</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('add_capital')) { ?>
+                                                    <li><button class="dropdown-item" @click="addCapital(broker)">Añadir monto invertido</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('edit_broker')) { ?>
+                                                    <li><button class="dropdown-item" @click="goToEdit(broker.broker_id)">Editar</button></li>
+                                                <?php } ?>
                                                 <!-- <li><hr class="dropdown-divider"></li>
                                                 <li v-if="!broker.status"><button class="dropdown-item" @click="inactiveBroker(broker.broker_id)">Inactivar</button></li>
                                                 <li v-if="broker.status"><button class="dropdown-item" @click="activeBroker(broker.broker_id)">Activar</button></li> -->
                                                 <li><hr class="dropdown-divider"></li>
-                                                <li><button class="dropdown-item" @click="deleteBroker(broker.broker_id)">Eliminar</button></li>
+                                                <?php if($UserSupport->hasPermission('delete_broker')) { ?>
+                                                    <li><button class="dropdown-item" @click="deleteBroker(broker.broker_id)">Eliminar</button></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </td>
