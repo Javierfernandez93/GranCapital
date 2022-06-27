@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 
 require_once TO_ROOT. "/system/core.php";
 
-$start_date = strtotime('2022-06-20');
+$start_date = strtotime('2022-06-13');
 $diff_days = round((time() - $start_date) / (60 * 60 * 24));
 
 if($diff_days > 0)
@@ -19,7 +19,7 @@ if($diff_days > 0)
         $Curl = new JFStudio\Curl;
         $Curl->get('http://localhost:8888/grancapital/app/cronjob/disperse_gains.php',[
             'day' => $day,
-            'user_login_id' => 1
+            'user_login_id' => 32
         ]);
         
         $responses[] = [
