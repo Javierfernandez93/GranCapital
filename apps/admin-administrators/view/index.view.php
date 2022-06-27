@@ -87,9 +87,13 @@
                                                 
                                             </button>
                                             <ul class="dropdown-menu shadow">
-                                                <li><button class="dropdown-item" @click="goToEdit(administrator.user_support_id)">Editar</button></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><button class="dropdown-item" @click="deleteAdministrator(administrator.user_support_id)">Eliminar</button></li>
+                                                <?php if($UserSupport->hasPermission('edit_administrator')) { ?>
+                                                    <li><button class="dropdown-item" @click="goToEdit(administrator.user_support_id)">Editar</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('delete_administrator')) { ?>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><button class="dropdown-item" @click="deleteAdministrator(administrator.user_support_id)">Eliminar</button></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </td>

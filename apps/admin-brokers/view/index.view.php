@@ -30,7 +30,9 @@
                             </div>
                         </div>
                         <div class="col-auto text-end">
-                            <div><a href="../../apps/admin-brokers/add" type="button" class="btn btn-success btn-sm">Añadir broker</a></div>
+                            <?php if($UserSupport->hasPermission('add_broker')) { ?>
+                                <div><a href="../../apps/admin-brokers/add" type="button" class="btn btn-success btn-sm">Añadir broker</a></div>
+                            <?php } ?>
                             <div><span class="badge bg-secondary">Total de brokers {{Object.keys(brokers).length}}</span></div>
                         </div>
                     </div>
@@ -44,11 +46,13 @@
                                 type="text" class="form-control" placeholder="Buscar..."/>
                         </div>
                         <div class="col-auto">
-                            <button 
-                            :disabled="!operation_open" 
-                                @click="closeOperation"
-                                ref="operation_open"
-                                class="btn btn-success">Cerrar operación</button>
+                            <?php if($UserSupport->hasPermission('close_operation')) { ?>
+                                <button 
+                                :disabled="!operation_open" 
+                                    @click="closeOperation"
+                                    ref="operation_open"
+                                    class="btn btn-success">Cerrar operación</button>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
