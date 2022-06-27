@@ -12,24 +12,24 @@ Vue.createApp({
             usersAux: {},
             query: null,
             columns: { // 0 DESC , 1 ASC 
-                company_id : {
+                company_id: {
                     name: 'company_id',
                     desc: false,
                 },
-                signup_date : {
+                signup_date: {
                     name: 'signup_date',
                     desc: false,
                 },
-                names : {
+                names: {
                     name: 'names',
                     desc: false,
                     alphabetically: true,
                 },
-                plan_name : {
+                plan_name: {
                     name: 'plan_name',
                     desc: false,
                 },
-                ammount : {
+                ammount: {
                     name: 'ammount',
                     desc: false,
                 },
@@ -47,12 +47,11 @@ Vue.createApp({
     },
     methods: {
         sortData: function (column) {
-            this.users.sort((a,b) => {
+            this.users.sort((a, b) => {
                 const _a = column.desc ? a : b
                 const _b = column.desc ? b : a
 
-                if(column.alphabetically)
-                {
+                if (column.alphabetically) {
                     return _a[column.name].localeCompare(_b[column.name])
                 } else {
                     return _a[column.name] - _b[column.name]
@@ -65,13 +64,12 @@ Vue.createApp({
             this.users = this.usersAux
 
             this.users = this.users.filter((user) => {
-                return user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase())
+                return user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase()) || user.company_id.toString().includes(this.query.toLowerCase())
             })
         },
         getInBackoffice: function (company_id) {
-            this.UserSupport.getInBackoffice({company_id: company_id},(response)=>{
-                if(response.s == 1)
-                {
+            this.UserSupport.getInBackoffice({ company_id: company_id }, (response) => {
+                if (response.s == 1) {
                     window.location.href = '../../apps/backoffice'
                 }
             })

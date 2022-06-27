@@ -38,3 +38,6 @@ body {
 .c-pointer {
     cursor: pointer;
 }
+.table-responsive {
+    min-height: 250px;
+}

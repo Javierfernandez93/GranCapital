@@ -10,7 +10,7 @@ $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
 // checking if actual day is btwn week
 if(date('N',$data['unix_time']) < 6)
 {
-    if(date('H',$data['unix_time']) == '10')
+    if(date('H',$data['unix_time']) == '09')
     {
         $day = strtotime($data['day']);
 
