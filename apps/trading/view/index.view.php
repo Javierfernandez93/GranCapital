@@ -19,6 +19,24 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Operaciones realizadas</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="https://www.myfxbook.com/members/heliolagunae/helio-laguna/9536807"><img alt="widget" src="https://widgets.myfxbook.com/custom-widget?id=9536807&width=400&height=250&bart=0&linet=0&symbol=XAUUSD&magic=-1&title=helio laguna&titles=12&bgColor=ffffff&gridColor=bdbdbd&lineColor=ff0505&barColor=ffadad&bar1Color=ffadad&fontColor=525252&chartbgc=ffffff&equityColor=eff45a"/></a>
+                        </div>
+                        <div class="col-4">
+                            <a href="https://www.myfxbook.com/members/heliolagunae/gran-capital-arbitraje/9606953"><img alt="widget" src="https://widgets.myfxbook.com/custom-widget?id=9606953&width=400&height=250&bart=0&linet=0&symbol=XAUUSD&magic=-1&title=GranCapitalArbitraje&titles=12&bgColor=ffffff&gridColor=bdbdbd&lineColor=ff0505&barColor=ffadad&bar1Color=ffadad&fontColor=525252&chartbgc=ffffff&equityColor=eff45a"/></a>
+                        </div>
+                        <div class="col-4">
+                            <a href="https://www.myfxbook.com/members/heliolagunae/gran-capital-2/9606958"><img alt="widget" src="https://widgets.myfxbook.com/custom-widget?id=9606958&width=400&height=250&bart=0&linet=0&symbol=XAUUSD&magic=-1&title=GranCapital2&titles=12&bgColor=ffffff&gridColor=bdbdbd&lineColor=ff0505&barColor=ffadad&bar1Color=ffadad&fontColor=525252&chartbgc=ffffff&equityColor=eff45a"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="card">
                 <div class="card-header">
