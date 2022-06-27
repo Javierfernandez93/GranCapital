@@ -245,5 +245,8 @@
             </div>
         </div>
     </div>
-    <stats-viewer></stats-viewer>
+
+    <?php if($UserSupport->hasPermission('list_stats')) { ?>
+        <stats-viewer></stats-viewer>
+    <?php } ?>
 </div>
