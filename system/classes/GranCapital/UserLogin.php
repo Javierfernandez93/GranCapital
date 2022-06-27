@@ -527,4 +527,21 @@ class UserLogin extends Orm {
 
     return 0;
   }
+  
+  public function getSignupDate(int $company_id = null)
+  {
+    if(isset($company_id))
+    {
+      $sql = "SELECT
+                {$this->tblName}.signup_date
+              FROM
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.user_login_id = '{$company_id}'";
+
+      return $this->connection()->field($sql);
+    }
+
+    return 0;
+  }
 }

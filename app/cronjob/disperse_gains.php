@@ -37,22 +37,24 @@ if(date('N',$data['unix_time']) < 6)
                 {
                     $total_profit = $active_plan['profit']+$active_plan['additional_profit'];
                     
-                    $gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']);
-
-                    $data['report'][0]['profits'][] = [
-                        'user_login_id' => $active_plan['user_login_id'],
-                        'total_profit' => $total_profit,
-                        'plan' => [
-                            'active_plan' => $active_plan['name'],
-                            'ammount' => $active_plan['ammount'],
-                        ],
-                        'gain' => $gain
-                    ];
-
-                    if($ProfitPerUser->insertGain($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
+                    if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
                     {
-                        GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
+                        $data['report'][0]['profits'][] = [
+                            'user_login_id' => $active_plan['user_login_id'],
+                            'total_profit' => $total_profit,
+                            'plan' => [
+                                'active_plan' => $active_plan['name'],
+                                'ammount' => $active_plan['ammount'],
+                            ],
+                            'gain' => $gain
+                        ];
+    
+                        if($ProfitPerUser->insertGain($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
+                        {
+                            GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
+                        }
                     }
+
                 }
             }
 
@@ -70,22 +72,23 @@ if(date('N',$data['unix_time']) < 6)
                         {
                             $total_profit = $active_plan['sponsor_profit'];
                             
-                            $gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']);
-
-                            $data['report'][1]['profits'][] = [
-                                'referral_id' => $active_plan['user_login_id'],
-                                'user_login_id' => $referral['user_login_id'],
-                                'total_profit' => $total_profit,
-                                'plan' => [
-                                    'active_plan' => $active_plan['name'],
-                                    'ammount' => $active_plan['ammount'],
-                                ],
-                                'gain' => $gain
-                            ];
-                            
-                            if($ProfitPerUser->insertGain($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$gain,$day))
+                            if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
                             {
-                                GranCapital\NotificationPerUser::push($referral['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos de tus invitados",GranCapital\CatalogNotification::GAINS,"");
+                                $data['report'][1]['profits'][] = [
+                                    'referral_id' => $active_plan['user_login_id'],
+                                    'user_login_id' => $referral['user_login_id'],
+                                    'total_profit' => $total_profit,
+                                    'plan' => [
+                                        'active_plan' => $active_plan['name'],
+                                        'ammount' => $active_plan['ammount'],
+                                    ],
+                                    'gain' => $gain
+                                ];
+                                
+                                if($ProfitPerUser->insertGain($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$gain,$day))
+                                {
+                                    GranCapital\NotificationPerUser::push($referral['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos de tus invitados",GranCapital\CatalogNotification::GAINS,"");
+                                }
                             }
                         }
                     }

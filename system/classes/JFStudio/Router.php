@@ -57,7 +57,7 @@ class Router {
             case self::Notifications:
                 return 'Notificaciones';
             case self::TradingView:
-                return 'Visualización de terminal';
+                return 'Resultados del broker';
             case self::Wallet:
                 return 'Cartera electrónica';
             case self::AdminUsers:
