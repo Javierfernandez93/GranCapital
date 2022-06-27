@@ -47,7 +47,7 @@ function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount,float
 
     $UserPlan->ammount = $ammount;
     $UserPlan->catalog_plan_id = $catalog_plan_id;
-    $UserPlan->sponsor_profit = $sponsor_profit;
+    $UserPlan->sponsor_profit = $sponsor_profit ? $sponsor_profit : 0;
     $UserPlan->additional_profit = $additional_profit ? $additional_profit : 0;
     
     return $UserPlan->save();

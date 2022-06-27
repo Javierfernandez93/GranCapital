@@ -2,45 +2,62 @@
 
 require_once TO_ROOT. "/system/core.php";
 
-GranCapital\NotificationPerUser::push(1,"Cron job testing ".date("Y-m-d H:i:s"),GranCapital\CatalogNotification::GAINS,"");
+// GranCapital\NotificationPerUser::push(1,"Cron job testing ".date("Y-m-d H:i:s"),GranCapital\CatalogNotification::GAINS,"");
+
+$data = HCStudio\Util::getHeadersForWebService();
+$data['unix_time'] = strtotime($data['day']);
 
 // checking if actual day is btwn week
-if(date('N') < 6)
+if(date('N',$data['unix_time']) < 6)
 {
-    if(date('H') == '09')
+    if(date('H',$data['unix_time']) == '09')
     {
-        echo "starting... <br>";
+        $day = strtotime($data['day']);
+
+        $data['start_execution_time'] = microtime(true); 
+        $data['filter'] = $data['user_login_id'] ? " AND user_plan.user_login_id = '{$data['user_login_id']}'" : '';
 
         $UserPlan = new GranCapital\UserPlan;
         
-        // if($active_plans = $UserPlan->getActivePlans())
-        if(false)
+        // $data['active_plans'] = $UserPlan->getActivePlans();
+        // $data['active_plans'] = $UserPlan->getActivePlans($data['filter']);
+
+        if($active_plans = $UserPlan->getActivePlans($data['filter']))
         {
             $UserReferral = new GranCapital\UserReferral;
             $ProfitPerUser = new GranCapital\ProfitPerUser;
 
-            echo '----- inversement gains<br>';
+            $data['report'][0]['title'] = 'INVERSEMENT GAINS';
+            
             /* inversement gains */
             foreach ($active_plans as $active_plan)
             {
                 // if doesnt have profit then we add it 
-                if($ProfitPerUser->hasProfitToday($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT) == false)
+                if($ProfitPerUser->hasProfitToday($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$data['day']) == false)
                 {
                     $total_profit = $active_plan['profit']+$active_plan['additional_profit'];
                     
                     $gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']);
 
-                    echo "-- ID {$active_plan['user_login_id']} <br>";
-                    echo "   Profit {$total_profit} % - PLAN {$active_plan['name']} [Monto {$active_plan['ammount']} * $total_profit] = $ {$gain} Ganancia <br><br>";
+                    $data['report'][0]['profits'][] = [
+                        'user_login_id' => $active_plan['user_login_id'],
+                        'total_profit' => $total_profit,
+                        'plan' => [
+                            'active_plan' => $active_plan['name'],
+                            'ammount' => $active_plan['ammount'],
+                        ],
+                        'gain' => $gain
+                    ];
 
-                    if($ProfitPerUser->insertGain($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain))
+                    if($ProfitPerUser->insertGain($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
                     {
                         GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
                     }
                 }
             }
 
-            echo '----- Referral gains<br>';
+            $data['report'][1]['title'] = 'Referral GAINS';
+
             /* referral gains */
             foreach ($active_plans as $active_plan)
             {
@@ -49,16 +66,24 @@ if(date('N') < 6)
                 {
                     if($user_plan_id = $UserPlan->getUserPlanId($referral['user_login_id']))
                     {
-                        if($ProfitPerUser->hasProfitToday($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT) == false)
+                        if($ProfitPerUser->hasProfitToday($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$data['day']) == false)
                         {
                             $total_profit = $active_plan['sponsor_profit'];
                             
                             $gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']);
-                            
-                            echo "-- ID {$active_plan['user_login_id']} para el ID {$referral['user_login_id']} <br>";
-                            echo "   Profit {$total_profit} % - PLAN {$active_plan['name']} [Monto {$active_plan['ammount']} * $total_profit] = $ {$gain} Ganancia <br><br>";
 
-                            if($ProfitPerUser->insertGain($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$gain))
+                            $data['report'][1]['profits'][] = [
+                                'referral_id' => $active_plan['user_login_id'],
+                                'user_login_id' => $referral['user_login_id'],
+                                'total_profit' => $total_profit,
+                                'plan' => [
+                                    'active_plan' => $active_plan['name'],
+                                    'ammount' => $active_plan['ammount'],
+                                ],
+                                'gain' => $gain
+                            ];
+                            
+                            if($ProfitPerUser->insertGain($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$gain,$day))
                             {
                                 GranCapital\NotificationPerUser::push($referral['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos de tus invitados",GranCapital\CatalogNotification::GAINS,"");
                             }
@@ -68,10 +93,13 @@ if(date('N') < 6)
             }
         }
 
-        echo "end";
+        $data['end_execution_time'] = microtime(true); 
+        $data['total_execution_time'] = $data['end_execution_time'] - $data['start_execution_time']; 
     } else {
-        echo "Only works at 9:00 AM";
+        $data['m'] = "Only works at 9:00 AM";
     }
 } else {
-    echo "Weekend not working script";
+    $data['m'] = "Weekend not working script";
 }
+
+echo json_encode($data);

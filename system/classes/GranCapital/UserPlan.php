@@ -97,7 +97,7 @@ class UserPlan extends Orm {
     return false;
   }
  
-  public function getActivePlans() 
+  public function getActivePlans(string $filter = '') 
   {
     $sql = "SELECT
               {$this->tblName}.{$this->tblName}_id,
@@ -116,6 +116,7 @@ class UserPlan extends Orm {
               catalog_plan.catalog_plan_id = {$this->tblName}.catalog_plan_id
             WHERE 
               {$this->tblName}.status = '1'
+              {$filter}
             ";
 
     return $this->connection()->rows($sql);

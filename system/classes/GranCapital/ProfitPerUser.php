@@ -54,13 +54,13 @@ class ProfitPerUser extends Orm {
     return Util::getPercentaje($ammount,$day_profit);
   }
 
-  public function insertGain(int $user_plan_id = null,int $catalog_profit_id = null,float $profit = null) : bool
+  public function insertGain(int $user_plan_id = null,int $catalog_profit_id = null,float $profit = null,string $day = null) : bool
   {
     $ProfitPerUser = new ProfitPerUser;
     $ProfitPerUser->user_plan_id = $user_plan_id;
     $ProfitPerUser->catalog_profit_id = $catalog_profit_id;
     $ProfitPerUser->profit = $profit;
-    $ProfitPerUser->create_date = time();
+    $ProfitPerUser->create_date = $day ? $day : time();
 
     if($ProfitPerUser->save())
     {
@@ -80,12 +80,12 @@ class ProfitPerUser extends Orm {
     return false;
   }
 
-  public function hasProfitToday(int $user_plan_id = null,int $catalog_profit_id = null) 
+  public function hasProfitToday(int $user_plan_id = null,int $catalog_profit_id = null,string $day = null) 
   {
     if(isset($user_plan_id,$catalog_profit_id) === true)
     {
-      $begin_of_day = strtotime("today");
-      $end_of_day = strtotime("tomorrow") - 1;
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
 
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id
