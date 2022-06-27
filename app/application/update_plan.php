@@ -35,7 +35,7 @@ if($UserSupport->_loaded === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount,float $additional_profit = null,float $sponsor_profit = null) : bool
+function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount,$additional_profit = null,$sponsor_profit = null) : bool
 {
     $UserPlan = new GranCapital\UserPlan;
     
