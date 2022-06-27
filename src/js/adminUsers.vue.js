@@ -68,6 +68,15 @@ Vue.createApp({
                 return user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase())
             })
         },
+        getInBackoffice: function (company_id) {
+            this.UserSupport.getInBackoffice({company_id: company_id},(response)=>{
+                if(response.s == 1)
+                {
+                    window.location.href = '../../apps/backoffice'
+                }
+            })
+            console.log(company_id)
+        },
         deleteUser: function (company_id) {
             this.UserSupport.deleteUser({ company_id: company_id }, (response) => {
                 if (response.s == 1) {

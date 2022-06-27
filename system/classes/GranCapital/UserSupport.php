@@ -1089,6 +1089,25 @@ class UserSupport extends Orm {
     return (new UserReferral)->getUserReferralId($user_login_id);
   }
 
+  public function getUserCredentials(int $user_login_id = null)
+  {
+    if(isset($user_login_id) === true)
+    {
+      $sql = "SELECT
+                user_login.email,
+                user_login.password
+              FROM
+                user_login
+              WHERE 
+                user_login.status = '1'
+              AND 
+                user_login.user_login_id = '{$user_login_id}'
+                ";
+
+      return $this->connection()->row($sql);
+    }
+  }
+
   public function getUser(int $user_login_id = null)
   {
     if(isset($user_login_id) === true)

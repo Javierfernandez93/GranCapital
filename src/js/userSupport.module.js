@@ -19,6 +19,9 @@ class UserSupport extends Http {
     updatePlan(data, callback) {
         return this.call('../../app/application/update_plan.php', data, callback);
     }
+    getInBackoffice(data, callback) {
+        return this.call('../../app/application/get_in_backoffice.php', data, callback);
+    }
     addCapitalToBroker(data, callback) {
         return this.call('../../app/application/add_capital_to_broker.php', data, callback);
     }

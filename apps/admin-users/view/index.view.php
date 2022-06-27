@@ -132,14 +132,21 @@
 
                                             </button>
                                             <ul class="dropdown-menu shadow">
-                                                <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
+                                                <?php if($UserSupport->hasPermission('edit_user')) { ?>
+                                                    <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
+                                                <?php } ?>
                                                 <?php if($UserSupport->hasPermission('activate_plan')) { ?>
                                                     <li><button class="dropdown-item" @click="goToActivatePlan(user.user_login_id)">Activar plan</button></li>
                                                 <?php } ?>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
+                                                <?php if($UserSupport->hasPermission('backoffice_access')) { ?>
+                                                    <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('delete_user')) { ?>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </td>
