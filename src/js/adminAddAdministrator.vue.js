@@ -11,7 +11,7 @@ Vue.createApp({
             UserSupport: null,
             feedback: null,
             administrator: {
-                name: null,
+                names: null,
                 password: null,
                 email: null,
                 permissions: {},
@@ -22,7 +22,7 @@ Vue.createApp({
         administrator:
         {
             handler() {
-                this.administratorComplete = this.administrator.name != null && this.administrator.email != null && this.administrator.password != null
+                this.administratorComplete = this.administrator.names != null && this.administrator.email != null && this.administrator.password != null
             },
             deep: true
         }
