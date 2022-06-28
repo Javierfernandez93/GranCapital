@@ -7,6 +7,7 @@ use HCStudio\Util;
 
 use GranCapital\UserPlan;
 use GranCapital\UserWallet;
+use GranCapital\Transaction;
 
 class ProfitPerUser extends Orm {
   protected $tblName  = 'profit_per_user';
@@ -22,6 +23,7 @@ class ProfitPerUser extends Orm {
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id,
                 {$this->tblName}.create_date,
+                {$this->tblName}.description,
                 {$this->tblName}.profit,
                 catalog_profit.name
               FROM 
@@ -54,13 +56,15 @@ class ProfitPerUser extends Orm {
     return Util::getPercentaje($ammount,$day_profit);
   }
 
-  public function insertGain(int $user_plan_id = null,int $catalog_profit_id = null,float $profit = null,string $day = null) : bool
+  public function insertGain(int $user_plan_id = null,int $from_user_plan_id = null,int $catalog_profit_id = null,float $profit = null,string $day = null,$description = '') : bool
   {
     $ProfitPerUser = new ProfitPerUser;
     $ProfitPerUser->user_plan_id = $user_plan_id;
+    $ProfitPerUser->from_user_plan_id = $from_user_plan_id;
     $ProfitPerUser->catalog_profit_id = $catalog_profit_id;
     $ProfitPerUser->profit = $profit;
     $ProfitPerUser->create_date = $day ? $day : time();
+    $ProfitPerUser->description = $description;
 
     if($ProfitPerUser->save())
     {
@@ -68,6 +72,13 @@ class ProfitPerUser extends Orm {
 
       if($user_login_id = $UserPlan->getUserId($user_plan_id))
       {
+        // if($catalog_profit_id == Transaction::REFERRAL_INVESTMENT)
+        // {
+        //   $UserReferral = new UserReferral;
+          
+        //   $user_login_id = $UserReferral->getUserReferralId($user_plan_id);
+        // }
+
         $UserWallet = new UserWallet;
 
         if($UserWallet->getSafeWallet($user_login_id))
@@ -93,6 +104,39 @@ class ProfitPerUser extends Orm {
                 {$this->tblName}
               WHERE 
                 {$this->tblName}.user_plan_id = '{$user_plan_id}'
+              AND 
+                {$this->tblName}.catalog_profit_id = '{$catalog_profit_id}'
+              AND 
+                {$this->tblName}.create_date
+              BETWEEN 
+                {$begin_of_day}
+              AND 
+                {$end_of_day}
+              AND 
+                {$this->tblName}.status = '1'
+              ";
+
+      return $this->connection()->field($sql);
+    }
+
+    return false;
+  }
+  
+  public function hasProfitTodayForReferral(int $user_plan_id = null,int $from_user_plan_id = null,int $catalog_profit_id = null,string $day = null) 
+  {
+    if(isset($user_plan_id,$from_user_plan_id,$catalog_profit_id) === true)
+    {
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+
+      $sql = "SELECT
+                {$this->tblName}.{$this->tblName}_id
+              FROM 
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.user_plan_id = '{$user_plan_id}'
+              AND 
+                {$this->tblName}.from_user_plan_id = '{$from_user_plan_id}'
               AND 
                 {$this->tblName}.catalog_profit_id = '{$catalog_profit_id}'
               AND 

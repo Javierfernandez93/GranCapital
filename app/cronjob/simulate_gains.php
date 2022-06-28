@@ -4,7 +4,10 @@ require_once TO_ROOT. "/system/core.php";
 
 $UserPlan = new GranCapital\UserPlan;
 
-if($active_plans = $UserPlan->getActivePlans())
+$filter = ' AND user_plan.user_login_id IN(12,13,15,21,23,42,56)';
+// $filter = ' AND user_plan.user_login_id IN(21,23)';
+
+if($active_plans = $UserPlan->getActivePlans($filter))
 {
     $UserLogin = new GranCapital\UserLogin(false,false);
 
@@ -22,8 +25,9 @@ if($active_plans = $UserPlan->getActivePlans())
                     $day = date("Y-m-d 09:00:00",strtotime("+{$i} days",$start_date));
 
                     $Curl = new JFStudio\Curl;
-                    // $Curl->get('https://grancapital.fund/app/cronjob/disperse_gains.php',[
-                    $Curl->get('http://localhost:8888/grancapital/app/cronjob/disperse_gains.php',[
+
+                    // $Curl->get('http://localhost:8888/grancapital/app/cronjob/disperse_gains.php',[
+                    $Curl->get('https://grancapital.fund/app/cronjob/disperse_gains.php',[
                         'day' => $day,
                         'user_login_id' => $active_plan['user_login_id']
                     ]);

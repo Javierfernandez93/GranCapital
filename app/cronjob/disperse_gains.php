@@ -2,10 +2,12 @@
 
 require_once TO_ROOT. "/system/core.php";
 
-// GranCapital\NotificationPerUser::push(1,"Cron job testing ".date("Y-m-d H:i:s"),GranCapital\CatalogNotification::GAINS,"");
-
 $data = HCStudio\Util::getHeadersForWebService();
+
 $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
+$data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default
+
+// d($data);
 
 // checking if actual day is btwn week
 if(date('N',$data['unix_time']) < 6)
@@ -19,9 +21,6 @@ if(date('N',$data['unix_time']) < 6)
 
         $UserPlan = new GranCapital\UserPlan;
         
-        // $data['active_plans'] = $UserPlan->getActivePlans();
-        // $data['active_plans'] = $UserPlan->getActivePlans($data['filter']);
-
         if($active_plans = $UserPlan->getActivePlans($data['filter']))
         {
             $UserReferral = new GranCapital\UserReferral;
@@ -49,9 +48,12 @@ if(date('N',$data['unix_time']) < 6)
                             'gain' => $gain
                         ];
     
-                        if($ProfitPerUser->insertGain($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
+                        if($data['production'] == true)
                         {
-                            GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
+                            if($ProfitPerUser->insertGain($active_plan['user_plan_id'],$active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
+                            {
+                                GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
+                            }
                         }
                     }
 
@@ -60,40 +62,57 @@ if(date('N',$data['unix_time']) < 6)
 
             $data['report'][1]['title'] = 'Referral GAINS';
 
+            $UserLogin = new GranCapital\UserLogin(false,false);
+
             /* referral gains */
             foreach ($active_plans as $active_plan)
             {
-                // if doesnt have profit then we add it 
-                if($referral = $UserReferral->getReferral(($active_plan['user_plan_id'])))
+                // getting sponsor [refferal is sponsor here]
+                if($referral = $UserReferral->getReferral(($active_plan['user_login_id'])))
                 {
+                    // getting referral plan
                     if($user_plan_id = $UserPlan->getUserPlanId($referral['user_login_id']))
-                    {
-                        if($ProfitPerUser->hasProfitToday($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$data['day']) == false)
+                    {   
+                        // getting signup_date referral
+                        if($signup_date = $UserLogin->getSignupDate($referral['user_login_id']))
                         {
-                            $total_profit = $active_plan['sponsor_profit'];
-                            
-                            if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
+                            if($data['unix_time'] >= $signup_date)
                             {
-                                $data['report'][1]['profits'][] = [
-                                    'referral_id' => $active_plan['user_login_id'],
-                                    'user_login_id' => $referral['user_login_id'],
-                                    'total_profit' => $total_profit,
-                                    'plan' => [
-                                        'active_plan' => $active_plan['name'],
-                                        'ammount' => $active_plan['ammount'],
-                                    ],
-                                    'gain' => $gain
-                                ];
-                                
-                                if($ProfitPerUser->insertGain($user_plan_id,GranCapital\Transaction::REFERRAL_INVESTMENT,$gain,$day))
+                                if($ProfitPerUser->hasProfitTodayForReferral($user_plan_id,$active_plan['user_plan_id'],GranCapital\Transaction::REFERRAL_INVESTMENT,$data['day']) == false)
                                 {
-                                    GranCapital\NotificationPerUser::push($referral['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos de tus invitados",GranCapital\CatalogNotification::GAINS,"");
+                                    $total_profit = $active_plan['sponsor_profit'];
+                                    
+                                    if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
+                                    {
+                                        $data['report'][1]['profits'][] = [
+                                            'referral_id' => $active_plan['user_login_id'],
+                                            'user_login_id' => $referral['user_login_id'],
+                                            'total_profit' => $total_profit,
+                                            'plan' => [
+                                                'active_plan' => $active_plan['name'],
+                                                'ammount' => $active_plan['ammount'],
+                                            ],
+                                            'gain' => $gain
+                                        ];
+                                        
+                                        if($data['production'] == true)
+                                        {
+                                            $description = "Ganancias por referido ID {$active_plan['user_login_id']}";
+
+                                            if($ProfitPerUser->insertGain($user_plan_id,$active_plan['user_plan_id'],GranCapital\Transaction::REFERRAL_INVESTMENT,$gain,$day,$description))
+                                            {
+                                                GranCapital\NotificationPerUser::push($referral['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos de tus invitados",GranCapital\CatalogNotification::GAINS,"");
+                                            }
+                                        }
+                                    }
                                 }
                             }
+                            
                         }
                     }
                 }
             }
+
         }
 
         $data['end_execution_time'] = microtime(true); 
@@ -104,5 +123,7 @@ if(date('N',$data['unix_time']) < 6)
 } else {
     $data['m'] = "Weekend not working script";
 }
+
+// d($data);
 
 echo json_encode($data);

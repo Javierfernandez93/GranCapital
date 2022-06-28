@@ -57,6 +57,7 @@
                                     </td>
                                     <td>
                                         <h6 class="mb-0 text-sm">{{profit.name}}</h6>
+                                        <h6 class="mb-0 text-xs text-primary">{{profit.description}}</h6>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-success">Liberada</span>
