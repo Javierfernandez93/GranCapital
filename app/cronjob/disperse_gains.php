@@ -28,37 +28,37 @@ if(date('N',$data['unix_time']) < 6)
 
             // $data['report'][0]['title'] = 'INVERSEMENT GAINS';
             
-            // /* inversement gains */
-            // foreach ($active_plans as $active_plan)
-            // {
-            //     // if doesnt have profit then we add it 
-            //     if($ProfitPerUser->hasProfitToday($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$data['day']) == false)
-            //     {
-            //         $total_profit = $active_plan['profit']+$active_plan['additional_profit'];
+            /* inversement gains */
+            foreach ($active_plans as $active_plan)
+            {
+                // if doesnt have profit then we add it 
+                if($ProfitPerUser->hasProfitToday($active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$data['day']) == false)
+                {
+                    $total_profit = $active_plan['profit']+$active_plan['additional_profit'];
                     
-            //         if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
-            //         {
-            //             $data['report'][0]['profits'][] = [
-            //                 'user_login_id' => $active_plan['user_login_id'],
-            //                 'total_profit' => $total_profit,
-            //                 'plan' => [
-            //                     'active_plan' => $active_plan['name'],
-            //                     'ammount' => $active_plan['ammount'],
-            //                 ],
-            //                 'gain' => $gain
-            //             ];
+                    if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
+                    {
+                        $data['report'][0]['profits'][] = [
+                            'user_login_id' => $active_plan['user_login_id'],
+                            'total_profit' => $total_profit,
+                            'plan' => [
+                                'active_plan' => $active_plan['name'],
+                                'ammount' => $active_plan['ammount'],
+                            ],
+                            'gain' => $gain
+                        ];
     
-            //             if($data['production'] == true)
-            //             {
-            //                 if($ProfitPerUser->insertGain($active_plan['user_plan_id'],$active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
-            //                 {
-            //                     GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
-            //                 }
-            //             }
-            //         }
+                        if($data['production'] == true)
+                        {
+                            if($ProfitPerUser->insertGain($active_plan['user_plan_id'],$active_plan['user_plan_id'],GranCapital\Transaction::INVESTMENT,$gain,$day))
+                            {
+                                GranCapital\NotificationPerUser::push($active_plan['user_login_id'],"Hemos enviado $ {$gain} USD a tu cuenta por tus rendimientos",GranCapital\CatalogNotification::GAINS,"");
+                            }
+                        }
+                    }
 
-            //     }
-            // }
+                }
+            }
 
             $data['report'][1]['title'] = 'Referral GAINS';
 

@@ -15,6 +15,7 @@ class Router {
     const Plans = 16;
     const TradingView = 22;
     const Wallet = 23;
+    const Calculator = 25;
 
     /* admin */
     const AdminUsers = 9;
@@ -60,6 +61,8 @@ class Router {
                 return 'Resultados del broker';
             case self::Wallet:
                 return 'Cartera electrónica';
+            case self::Calculator:
+                return 'Calculadora';
             case self::AdminUsers:
                 return 'Usuarios';
             case self::AdminUserEdit:
