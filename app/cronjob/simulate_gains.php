@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $UserPlan = new GranCapital\UserPlan;
 
-$filter = ' AND user_plan.user_login_id IN(12,13,15,21,23,42,56)';
+$filter = ' AND user_plan.user_login_id IN(14)';
 // $filter = ' AND user_plan.user_login_id IN(21,23)';
 
 if($active_plans = $UserPlan->getActivePlans($filter))
