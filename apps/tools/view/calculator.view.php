@@ -3,7 +3,7 @@
 		<div class="col-12 col-lg-6">
 			<div class="card bg-gradient-dark mb-3">
 				<div class="card-header bg-transparent text-white">
-					<h5 class="text-white">Calculadora de ROI</h5>
+					<h5 class="text-white">Calculadora de interés compuesto</h5>
 				</div>
 				<div class="card-body">
 					<div class="row mb-3">
