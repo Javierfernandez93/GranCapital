@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 GranCapital\NotificationPerUser::push(1,"Prueba de cronjob",GranCapital\CatalogNotification::ACCOUNT,'');
 
-$data = HCStudio\Util::getHeadersForWebService();
+$data = HCStudio\Util::getVarFromPGS();
 
 $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
 $data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default
@@ -112,7 +112,6 @@ if(date('N',$data['unix_time']) < 6)
                     }
                 }
             }
-
         }
 
         $data['end_execution_time'] = microtime(true); 
