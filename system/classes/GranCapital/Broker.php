@@ -29,4 +29,19 @@ class Broker extends Orm {
 		
 		return $this->connection()->rows($sql);
 	}
+	
+	public function getActive()
+	{
+		$sql = "SELECT 
+					{$this->tblName}.{$this->tblName}_id,
+					{$this->tblName}.name,
+					{$this->tblName}.color
+				FROM 
+					{$this->tblName}
+				WHERE 
+					{$this->tblName}.status IN ('".self::ACTIVE."')
+				";
+		
+		return $this->connection()->rows($sql);
+	}
 }

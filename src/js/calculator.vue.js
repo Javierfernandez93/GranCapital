@@ -10,45 +10,73 @@ Vue.createApp({
     data() {
         return {
             User : null,
+            chart : null,
+            periods : ['Mes','Semestral','Año'],
             data : {
-                balance : null,
+                profit : null,
+                capitalFinal : null,
+                capital : null,
                 duration : null,
                 roi : null,
                 withdraws : null,
                 fee : null,
                 inflation : null,
-                result : null,
             },
-            landing : null,
+            results : [],
+            gains : null,
+            years : null,
         }
     },
     watch : {
         data : {
             handler() {
-                this.calculate()
+                this.calculateData()
             },
             deep: true
         },
     },
     methods: {
-        calculate : function() {
-            console.log("balance",this.data.balance)
-            console.log("pow",Math.pow(1 + this.data.roi,this.data.duration-1))
-            console.log("duration",this.data.duration -1)
+        calculateDataResults : function() {
+            return new Promise((resolve) => {
+                this.results = []
 
-            const n = 1 // number of coumpundings per year
-            this.data.result  = (this.data.balance * Math.pow((1 + (this.data.roi / (n * 100))), (n * this.data.duration)));
+                const n = 1 // number of coumpundings per year
+
+                for(let i = 0; i < this.data.duration; i++)
+                {
+                    const result = (this.data.capital * Math.pow((1 + (this.data.roi / (n * 100))), (n * i+1)));
+
+                    this.results.push({
+                        year: i+1,
+                        result: result,
+                        gain: result - this.data.capital,
+                    }) 
+                }
+                
+                resolve()
+            })
+        },
+        calculateData : function() {
+            this.calculateDataResults().then(() => {   
+                this.data.capitalFinal = this.results[this.results.length - 1].result
+                this.data.profit = (this.data.capitalFinal * 100) / this.data.capital
+            })
         },
         initChart : function() {
             const ctx = document.getElementById('myChart').getContext('2d');
-            
-            const myChart = new Chart(ctx, {
+
+            // if(this.chart)
+            // {
+            //     this.chart.destroy()
+            // }
+
+            this.chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    labels: this.years,
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        label: 'capital',
+                        data: this.gains,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

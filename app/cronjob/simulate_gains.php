@@ -26,8 +26,8 @@ if($active_plans = $UserPlan->getActivePlans($filter))
 
                     $Curl = new JFStudio\Curl;
 
-                    // $Curl->get('http://localhost:8888/grancapital/app/cronjob/disperse_gains.php',[
-                    $Curl->get('https://grancapital.fund/app/cronjob/disperse_gains.php',[
+                    // $Curl->get('https://grancapital.fund/app/cronjob/disperse_gains.php',[
+                    $Curl->get('http://localhost:8888/grancapital/app/cronjob/disperse_gains.php',[
                         'day' => $day,
                         'user_login_id' => $active_plan['user_login_id']
                     ]);

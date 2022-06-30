@@ -95,4 +95,17 @@ class WithdrawPerUser extends Orm
             return $this->connection()->rows($sql);
         }
     }
+    
+    public function getCountPending() 
+    {
+        $sql = "SELECT 
+                    COUNT({$this->tblName}.{$this->tblName}_id) as c
+                FROM 
+                    {$this->tblName}
+                WHERE 
+                    {$this->tblName}.status = '".self::WAITING_FOR_DEPOSIT."'
+                ";
+
+        return $this->connection()->field($sql);
+    }
 }

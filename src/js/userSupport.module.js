@@ -22,6 +22,9 @@ class UserSupport extends Http {
     getInBackoffice(data, callback) {
         return this.call('../../app/application/get_in_backoffice.php', data, callback);
     }
+    getStats(data, callback) {
+        return this.call('../../app/application/get_stats.php', data, callback);
+    }
     addCapitalToBroker(data, callback) {
         return this.call('../../app/application/add_capital_to_broker.php', data, callback);
     }

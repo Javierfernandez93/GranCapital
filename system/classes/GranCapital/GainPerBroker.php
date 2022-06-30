@@ -85,4 +85,24 @@ class GainPerBroker extends Orm {
 
         return false;
 	}
+    
+    public function getAllGainsPerBroker(int $broker_id = null)
+	{
+        if(isset($broker_id) === true)
+        {
+            $sql = "SELECT 
+                        {$this->tblName}.gain
+                    FROM 
+                        {$this->tblName}
+                    WHERE 
+                        {$this->tblName}.status = '1'
+                    AND 
+                        {$this->tblName}.broker_id = '{$broker_id}'
+                    ";
+            
+            return $this->connection()->column($sql);
+        }
+
+        return false;
+	}
 }

@@ -7,8 +7,6 @@ $data = HCStudio\Util::getHeadersForWebService();
 $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
 $data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default
 
-// d($data);
-
 // checking if actual day is btwn week
 if(date('N',$data['unix_time']) < 6)
 {

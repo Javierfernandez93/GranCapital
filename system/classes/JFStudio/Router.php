@@ -32,6 +32,7 @@ class Router {
     const AdminAdministratorsAdd = 21;
     const AdminAdministratorsEdit = 21;
     const AdminTransactions = 24;
+    const AdminDash = 26;
 
     static function getName(int $route = null)
     {
@@ -63,6 +64,8 @@ class Router {
                 return 'Cartera electrónica';
             case self::Calculator:
                 return 'Calculadora';
+            case self::AdminDash:
+                return 'Administrador';
             case self::AdminUsers:
                 return 'Usuarios';
             case self::AdminUserEdit:

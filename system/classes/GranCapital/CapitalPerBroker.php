@@ -41,6 +41,29 @@ class CapitalPerBroker extends Orm {
         return false;
 	}
 	
+    public function getAllPerBroker(int $broker_id = null)
+	{
+        if(isset($broker_id) === true)
+        {            
+            $sql = "SELECT 
+                        {$this->tblName}.capital
+                    FROM 
+                        {$this->tblName}
+                    WHERE 
+                        {$this->tblName}.status = '1'
+                    AND 
+                        {$this->tblName}.broker_id = '{$broker_id}'
+                    ORDER BY
+                        {$this->tblName}.create_date 
+                    DESC 
+                    ";
+            
+            return $this->connection()->column($sql);
+        }
+
+        return false;
+	}
+	
     public static function addCapital(int $broker_id = null,float $capital = null,string $day = null) : bool
     {
         $CapitalPerBroker = new CapitalPerBroker;
@@ -85,5 +108,44 @@ class CapitalPerBroker extends Orm {
         }
 
         return false;
+	}
+    
+    public function getLastCapitals(int $broker_id = null,int $start_date = null,int $end_date = null)
+    {
+        if(isset($broker_id) === true)
+        {
+            $sql = "SELECT 
+                        SUM({$this->tblName}.capital) as c
+                    FROM 
+                        {$this->tblName}
+                    WHERE 
+                        {$this->tblName}.broker_id = '{$broker_id}'
+                    AND 
+                        {$this->tblName}.create_date 
+                    BETWEEN
+                        {$start_date}
+                    AND 
+                        {$end_date}
+                    AND 
+                        {$this->tblName}.status = '1'
+                    ";
+
+            return $this->connection()->field($sql);
+        }
+
+        return false;
+    }
+
+    public function getTotalCapital()
+	{
+        $sql = "SELECT 
+                    SUM({$this->tblName}.capital) as c
+                FROM 
+                    {$this->tblName}
+                WHERE 
+                    {$this->tblName}.status = '1'
+                ";
+        
+        return $this->connection()->field($sql);
 	}
 }

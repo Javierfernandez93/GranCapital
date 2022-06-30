@@ -1178,4 +1178,17 @@ class UserSupport extends Orm {
 
     return $this->connection()->rows($sql);
   }
+  
+  public function getCountUsers()
+  {
+    $sql = "SELECT
+              COUNT(user_login.user_login_id) as c
+            FROM
+              user_login
+            WHERE 
+              user_login.status = '1'
+              ";
+
+    return $this->connection()->field($sql);
+  }
 }

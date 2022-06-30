@@ -91,4 +91,38 @@ class TransactionPerWallet extends Orm {
 
         return false;
     }
+    
+    public function getSum(string $filter = '')
+    {
+        $sql = "SELECT 
+                SUM({$this->tblName}.ammount) as a
+            FROM 
+                {$this->tblName}
+                {$filter}
+            AND 
+                {$this->tblName}.status IN ('1')
+            ";
+
+        if($total = $this->connection()->field($sql))
+        {
+            return $total;
+        }
+
+        return 0;
+    }
+
+    public function getAllDeposits()
+    {
+        return $this->getSum("WHERE {$this->tblName}.transaction_id = '".Transaction::DEPOSIT."'");
+    }
+
+    public function getAllWithdraws()
+    {
+        return $this->getSum("WHERE {$this->tblName}.transaction_id = '".Transaction::WITHDRAW."'");
+    }
+
+    public function getAllProfits()
+    {
+        return $this->getSum("WHERE {$this->tblName}.transaction_id IN ('".Transaction::INVESTMENT."','".Transaction::REFERRAL_INVESTMENT."')");
+    }
 }
