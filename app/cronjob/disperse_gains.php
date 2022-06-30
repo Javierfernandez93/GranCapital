@@ -4,10 +4,10 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
+GranCapital\NotificationPerUser::push(1,"Prueba de cronjob",GranCapital\CatalogNotification::ACCOUNT,'');
+
 $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
 $data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default
-
-GranCapital\NotificationPerUser::push(1,"Prueba de cronjob",GranCapital\CatalogNotification::ACCOUNT,'');
 
 // checking if actual day is btwn week
 if(date('N',$data['unix_time']) < 6)
