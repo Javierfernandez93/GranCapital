@@ -8,8 +8,8 @@ if($UserSupport->_loaded === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');
 }
 
-if($UserSupport->hasPermission('list_users') === false) {
-	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
+if($UserSupport->hasPermission('list_dash') === false) {
+	HCStudio\Util::redirectTo('../../apps/admin-users/');
 }
 
 $Layout = JFStudio\Layout::getInstance();

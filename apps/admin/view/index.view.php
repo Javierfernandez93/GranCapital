@@ -148,7 +148,7 @@
                 
                     <div class="row numbers">
                         <div class="col">
-                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">Inversion (AVG)</p>
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">Inversión (AVG)</p>
                             <h5 class="font-weight-bolder text-primary mb-0">
                                 $ {{ broker.capitalAvg.numberFormat(2) }} 
                             </h5>
