@@ -17,7 +17,6 @@ $Layout->init(JFStudio\Router::getName($route),'plans',"backoffice",'',TO_ROOT.'
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
-	'user.module.js',
 	'plans.vue.js'
 ]);
 

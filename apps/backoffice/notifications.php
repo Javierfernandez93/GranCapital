@@ -17,7 +17,6 @@ $Layout->init(JFStudio\Router::getName($route),'notifications',"backoffice",'',T
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
-	'user.module.js',
 	'notifications.vue.js'
 ]);
 

@@ -178,7 +178,7 @@ class Layout
 		}
 	}
 
-	public function replaceView($module = string,$haystack = string,$needle = string)
+	public function replaceView(string $module,string $haystack,string $needle)
 	{
 		return str_replace("%{$module}%",$haystack,$needle);
 	}
@@ -244,7 +244,7 @@ class Layout
 	# function:: add new module
 	# INPUT  = (String)$module_name = Module name
 	# OUTPUT = true or 1
-	public function setModule($name = string)
+	public function setModule(string $name)
 	{
 		if($name && !$this->modules["%{$name}%"]) $this->modules[] = "%{$name}%";
 
