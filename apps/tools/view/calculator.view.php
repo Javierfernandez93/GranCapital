@@ -1,6 +1,6 @@
 <div class="container-fluid py-4" id="app">
 	<div class="row justify-content-center">
-		<div class="col-6">
+		<div class="col-12 col-lg-6">
 			<div class="card bg-gradient-dark mb-3">
 				<div class="card-header bg-transparent text-white">
 					<h5 class="text-white">Calculadora de ROI</h5>
