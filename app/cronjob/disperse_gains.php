@@ -2,7 +2,7 @@
 
 require_once TO_ROOT. "/system/core.php";
 
-GranCapital\NotificationPerUser::push(1,"Prueba de cronjob",GranCapital\CatalogNotification::ACCOUNT,'');
+// GranCapital\NotificationPerUser::push(1,"Prueba de cronjob",GranCapital\CatalogNotification::ACCOUNT,'');
 
 $data = HCStudio\Util::getVarFromPGS();
 
