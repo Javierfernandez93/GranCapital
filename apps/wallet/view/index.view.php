@@ -77,7 +77,12 @@
                                     v-model="withdraw.ammount"
                                     type="number" class="form-control"  placeholder="$0"/>
                             </div>
-
+                            <div
+                                v-if="feedback" 
+                                class="alert alert-secondary text-white">
+                                <strong>Aviso</strong>
+                                <div>{{feedback}}</div>
+                            </div>
                             <button 
                                 :disabled="!withdrawComplete"
                                 @click="doWithdraw"

@@ -7,6 +7,7 @@ Vue.createApp({
     data() {
         return {
             User: null,
+            feedback: null,
             withdrawComplete: false,
             user: {
                 names: null,
@@ -37,8 +38,11 @@ Vue.createApp({
     },
     methods: {
         doWithdraw: function () {
+            this.feedback = false
+
             this.User.doWithdraw(this.withdraw, (response) => {
                 if (response.s == 1) {
+                    this.feedback = 'Retiro recibido, lo procesaremos en 7 días a partir de hoy'
                     this.getBalance().then(() => {
                         this.getWithdraws()
                     })
