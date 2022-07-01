@@ -1045,6 +1045,7 @@ class UserSupport extends Orm {
   {
     $sql = "SELECT
               user_login.user_login_id,
+              user_login.catalog_campaing_id,
               user_login.signup_date,
               user_login.company_id,
               user_login.email,
@@ -1075,6 +1076,7 @@ class UserSupport extends Orm {
               user_account.user_login_id = user_login.user_login_id
             WHERE 
               user_login.status = '1'
+              {$filter}
             GROUP BY user_login.user_login_id
             ORDER BY 
               user_login.signup_date

@@ -362,6 +362,7 @@ class UserLogin extends Orm {
     $UserLogin->email = $data['email'];
     $UserLogin->password = sha1($data['password']);
     $UserLogin->signup_date = time();
+    $UserLogin->catalog_campaing_id = (new CatalogCampaign)->getCatalogCampaing($data['utm']);
     
     if($UserLogin->save())
     {

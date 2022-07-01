@@ -93,6 +93,7 @@
                                                 <img :src="user.image" class="avatar avatar-sm me-3" :alt="user.names">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{user.catalog_campaing_id}}</h6>
                                                 <h6 class="mb-0 text-sm">{{user.names}}</h6>
                                                 <p class="text-xs text-secondary mb-0">{{user.email}}</p>
                                             </div>

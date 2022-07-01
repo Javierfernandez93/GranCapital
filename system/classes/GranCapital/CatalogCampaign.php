@@ -24,9 +24,12 @@ class CatalogCampaign extends Orm {
 						{$this->tblName}.status = '1'
 					";
 			
-			return $this->connection()->field($sql);
+			if($catalog_campaing_id = $this->connection()->field($sql))
+			{
+				return $catalog_campaing_id;
+			}
 		}
 
-		return false;
+		return 0;
 	}
 }

@@ -8,7 +8,9 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
-    if($users = $UserSupport->getUsers())
+    $filter = "AND user_login.catalog_campaing_id IN(".$UserSupport->campaing.")";
+
+    if($users = $UserSupport->getUsers($filter))
     {
         $data["users"] = $users;
         $data["s"] = 1;
