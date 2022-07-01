@@ -1,11 +1,11 @@
 <div class="container-fluid py-4" id="app">
-    <div class="alert c-pointer alert-info text-white" @click="openVideo">
+    <div class="alert shadow-xl c-pointer alert-info text-white" @click="openVideo">
         <div class="row align-items-center">
             <div class="col-auto">
                 <i class="bi bi-camera-video"></i>
             </div>
             <div class="col">
-                <div>Tutorial de retiros </div>
+                <div class="fw-bold text-white">Tutorial de retiros </div>
                 <div>Da clic aquí para ver el tutorial de retiros</div>
             </div>
         </div>
