@@ -409,7 +409,7 @@
     <script src="../../src/js/plugins/chartjs.min.js" type="text/javascript"></script>
     <script src="../../src/js/42d5adcbca.js" type="text/javascript"></script>
     <script src="../../src/js/jquery-3.1.1.js" type="text/javascript"></script>
-    <script src="../../src/js/general.js?t=1" type="text/javascript"></script>
+    <script src="../../src/js/general.js?t=2" type="text/javascript"></script>
     <script src="../../src/js/alertCtrl.js?t=1" type="text/javascript"></script>
 
     <script>

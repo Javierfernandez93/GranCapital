@@ -10,17 +10,51 @@ Vue.createApp({
     data() {
         return {
             User : null,
+            plans : {},
             chart : null,
-            periods : ['Mes','Semestral','Año'],
+            periods : [
+                {
+                    name: 'Año',
+                    namePlural: 'Años',
+                    aportationName: 'Anual',
+                    months: 12,
+                },
+                {
+                    name: 'Mes',
+                    namePlural: 'Meses',
+                    aportationName: 'Mensual',
+                    months: 1,
+                },
+                {
+                    name: 'Trimestre',
+                    namePlural: 'Trimestres',
+                    aportationName: 'Trimestral',
+                    months: 3,
+                },
+                {
+                    name: 'Semestre',
+                    namePlural: 'Semestres',
+                    aportationName: 'Semestral',
+                    months: 6,
+                }    
+            ],
             data : {
                 profit : null,
                 capitalFinal : null,
                 capital : null,
-                duration : null,
                 roi : null,
-                withdraws : null,
-                fee : null,
-                inflation : null,
+                duration : {
+                    quantity: null,
+                    every: 1 // months
+                }, // 
+                contribution : {
+                    ammount: null,
+                    every: 1 // months
+                }, // 
+                result: {
+                    profit: 0,
+                    capital: 0
+                },
             },
             results : [],
             gains : null,
@@ -36,79 +70,83 @@ Vue.createApp({
         },
     },
     methods: {
+        getPlanProfit: function (ammount) {
+            let profit = 0
+            
+            if(ammount >= parseFloat(this.plans[0].name))
+            {
+                for (let i = 0; i < this.plans.length; i++) {
+                    const nextVal = this.plans[i + 1] != undefined ? parseFloat(this.plans[i + 1].name) : Infinity
+    
+                    if (ammount >= parseFloat(this.plans[i].name) && ammount < nextVal) {
+                        profit = this.plans[i].profit
+                    }
+                }
+            } 
+
+            return profit
+
+        },
         calculateDataResults : function() {
             return new Promise((resolve) => {
                 this.results = []
-
-                const n = 1 // number of coumpundings per year
-
-                for(let i = 0; i < this.data.duration; i++)
+                
+                for(let i = 0; i < this.data.duration.every * this.data.duration.quantity; i++)
                 {
-                    const result = (this.data.capital * Math.pow((1 + (this.data.roi / (n * 100))), (n * i+1)));
+                    let capital = i == 0 ? this.data.capital : this.results[this.results.length - 1].newCapital
+                    const profit = this.getPlanProfit(capital)
+                    const contribution = (i+1) % this.data.contribution.every == 0 ? this.data.contribution.ammount : 0 
+                    
+                    const capitalInitial = capital
+                    capital += contribution
+                    const newCapital = capital * ((profit / 100) + 1)
 
                     this.results.push({
-                        year: i+1,
-                        result: result,
-                        gain: result - this.data.capital,
+                        period: i+1,
+                        capitalInitial: capitalInitial,
+                        contribution: contribution,
+                        capital: capital,
+                        profit: profit,
+                        gain: newCapital - capital,
+                        newCapital: newCapital,
                     }) 
                 }
+                
+                this.data.result.capital = this.results[this.results.length - 1].newCapital
+                this.data.result.profit = ((this.results[this.results.length - 1].newCapital * 100) / this.data.capital) - 100
                 
                 resolve()
             })
         },
-        calculateData : function() {
-            this.calculateDataResults().then(() => {   
-                this.data.capitalFinal = this.results[this.results.length - 1].result
-                this.data.profit = (this.data.capitalFinal * 100) / this.data.capital
+        getPlans : function() {
+            this.User.getPlans({}, (response) => {
+                if(response.s == 1)
+                {
+                    this.plans = response.plans
+                }
             })
         },
-        initChart : function() {
-            const ctx = document.getElementById('myChart').getContext('2d');
-
-            // if(this.chart)
-            // {
-            //     this.chart.destroy()
-            // }
-
-            this.chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: this.years,
-                    datasets: [{
-                        label: 'capital',
-                        data: this.gains,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+        calculateData : function() {
+            if(this.data.capital > 0)
+            {
+                // if(this.data.contribution.ammount > 0 && this.data.contribution.every > 0)
+                if(true)
+                {
+                    if(this.data.duration.quantity > 0 && this.data.duration.every > 0)
+                    {
+                        this.calculateDataResults().then(() => {   
+                            this.data.capitalFinal = this.results[this.results.length - 1].result
+                            this.data.profit = (this.data.capitalFinal * 100) / this.data.capital
+                        })
                     }
                 }
-            });
+            }
         },
     },
     mounted() 
     {
         this.User = new User
-        this.initChart()
+
+        this.getPlans()
     },
 }).mount('#app')

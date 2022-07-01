@@ -639,3 +639,17 @@ String.prototype.numberFormat = function (decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 };
+
+Array.prototype.inArray = function(needle)
+{
+  let key = -1
+  for(let i = 0; i < this.length; i++) 
+  {
+    if(this[i] === needle)
+    {
+      key = i
+    }
+  }
+
+  return key
+}

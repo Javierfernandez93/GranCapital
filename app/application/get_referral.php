@@ -13,7 +13,7 @@ if($UserLogin->_loaded === false || $UserSupport->_loaded === true)
     {
         $UserData = new GranCapital\UserData;
         
-        if($referral = $UserLogin->getProfile($data['user_login_id']))
+        if($referral = $UserLogin->getProfile($data['user_login_id'],$data['utm']))
         {
             $data['referral'] = $referral;
             $data["s"] = 1;

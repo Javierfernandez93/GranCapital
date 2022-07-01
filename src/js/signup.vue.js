@@ -17,6 +17,7 @@ Vue.createApp({
                     names: '',
                     image : ''
                 },
+                utm: false,
             },
             countries : {},
             loading : false,
@@ -40,7 +41,7 @@ Vue.createApp({
         getReferral : function(user_login_id) {
             this.feedback = false
 
-            this.User.getReferral({user_login_id:user_login_id},(response)=>{
+            this.User.getReferral({user_login_id:user_login_id,utm:this.user.utm},(response)=>{
                 if(response.s == 1)
                 {
                    Object.assign(this.user.referral,response.referral)
@@ -78,6 +79,11 @@ Vue.createApp({
         checkEmail : function() {
             this.isValidMail = isValidMail(this.user.email)
         },
+        getUtm : function() {
+            if(window.location.pathname.split('/').inArray('join') != -1) {
+                this.user.utm = 'join'
+            }
+        },
         checkFields : function() {
             this.userComplete = this.isValidMail && this.user.password && this.user.phone && this.user.names
         }
@@ -87,7 +93,9 @@ Vue.createApp({
         this.User = new User
 
         $(this.$refs.phone).mask('(00) 0000-0000');
+
         this.getCountries()
+        this.getUtm() // getting campaign
 
         if(getParam('uid'))
         {

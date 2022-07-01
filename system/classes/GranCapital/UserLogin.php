@@ -479,7 +479,7 @@ class UserLogin extends Orm {
   }
 
   /* profile fun */  
-  public function getProfile(int $user_login_id = null)
+  public function getProfile(int $user_login_id = null,int $catalog_campaing_id = null)
   {
     if(isset($user_login_id) === true) 
     {
@@ -498,9 +498,10 @@ class UserLogin extends Orm {
                 user_account 
               ON 
                 user_account.user_login_id = {$this->tblName}.user_login_id
-               
               WHERE 
                 {$this->tblName}.user_login_id = '{$user_login_id}'
+              AND  
+                {$this->tblName}.catalog_campaing_id = '{$catalog_campaing_id}'
               ";
       
       return $this->connection()->row($sql);

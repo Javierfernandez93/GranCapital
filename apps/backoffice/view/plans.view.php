@@ -26,7 +26,7 @@
                                             <i class="bi bi-graph-up-arrow text-primary"></i>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h3 class="mb-0 text-sm">PLAN {{plan.name}}</h3>
+                                            <h3 class="mb-0 text-sm">PLAN {{plan.name.numberFormat(0)}}</h3>
                                         </div>
                                     </div>
                                 </td>
