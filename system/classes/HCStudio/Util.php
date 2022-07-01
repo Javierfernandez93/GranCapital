@@ -23,7 +23,7 @@ class Util {
 	public static $username_streaming = "55A332A001N";
 	public static $password_streaming = "99e01032Axx";
 	public static $username = "@GRANCAPITAL";
-	public static $password = "@CAPITALGRAND2022";
+	public static $password = "@CAPITALGRAN2022";
 	public static $days = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 	public static $months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 	
