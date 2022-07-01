@@ -10,7 +10,7 @@ var alertCtrl = {
             d += performance.now(); 
         }
 
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var uuid = 'Zxxx-Axxx'.replace(/[xy]/g, function (c) {
             var r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
             return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
@@ -27,46 +27,102 @@ var alertCtrl = {
     create : function(options)  {
         var defaults = {
             title: "", 
-            subTitle: $("<p />"),
-            closeIcon: false, 
-            id: this.createUUID(), 
+            subTitle: false,
+            imgTop: false,
+            html: false,
+            closeButton: true,
+            id: this.createUUID(),
             open: function () { }, 
             buttons: [],
             inputs: [],
             size: 'modal-sm',
+            bgColor: 'bg-light',
         };
 
         this.settings = $.extend(true, {}, defaults, options);
 
-        var $modal = $("<div />").attr("id", this.settings.id).attr("role", "dialog").addClass("modal fade")
-                        .append($("<div />").addClass("modal-dialog modal-dialog-centered "+this.settings.size)
-                            .append($("<div />").addClass("modal-content text-center fw-bold")
-                                .append($("<div />").addClass("modal-header border-0")
-                                    .append($("<h4 />").addClass("modal-title").text(this.settings.title)))
-                                .append($("<div />").addClass("modal-body")
-                                    .append(this.settings.subTitle))
-                                .append($("<div />").addClass("modal-footer border-0")
-                                )
-                            )
-                        );
+        var $modal = $("<div />").attr("id", this.settings.id).attr("role", "dialog").addClass("modal fade").attr("tabindex","-1").attr("aria-lalledby",this.settings.id).attr("aria-modal","true");
+        
+        var $dialog = $("<div />").addClass("modal-dialog modal-dialog-centered "+this.settings.size);
+        var $content = $("<div />").addClass("modal-content "+this.settings.bgColor);
+
+        if(this.settings.imgTop)
+        {
+            var $imgTop = $("<img />").attr("src",this.settings.imgTop).addClass("card-img-top").attr("alt","model");
+
+            $content.append($imgTop);
+        }
+
+        $dialog.append($content);
+
+        var $header = $("<div />").addClass("modal-header border-0");
+        
+        if(this.settings.imgTop)
+        {
+            $header.addClass("floating d-flex justify-content-between w-100")
+        }
+        
+        var $rowHeader = $("<div />").addClass("row w-100");
+
+        if(this.settings.title)
+        {
+            var $col = $("<div />").addClass("col");
+            
+            $col.append($("<h4 />").addClass("modal-title").text(this.settings.title));
+
+            $rowHeader.append($col);
+        }
+
+        if(this.settings.closeButton)
+        {
+            var $colAuto = $("<div />").addClass("col-auto");
+
+            $colAuto.append($("<button />").attr("type", "button").addClass("close btn btn-outline-danger waves-effect waves-light").html('<i class="fas fa-times"></i>').click(function () { $modal.dismiss() }));
+            
+            $rowHeader.append($colAuto);
+        }
+
+        $header.append($rowHeader)
+
+        $content.append($header);
+
+        if(this.settings.subTitle)
+        {
+            $content.append($("<div />").addClass("modal-body").text(this.settings.subTitle));
+        }
+
+        if(this.settings.html)
+        {
+            $content.append($("<div />").addClass("modal-body").html(this.settings.html));
+        }
+
+        $content.append($("<div />").addClass("modal-footer border-0"));
+
+        if(this.settings.cssClass)
+        {
+            $content.find('.modal-footer').addClass(this.settings.cssClass);
+        }
+
+        $modal.append($dialog);
+        
         $modal.shown = false;
-        $modal.dismiss = function ()
+
+        $modal.dismiss = function(callback)
         {
             $modal.modal('hide');
 
             this.settings = $.extend(true, {}, defaults, options);
-            object_id=this.settings.id;
+            object_id = this.settings.id;
 
-            window.setTimeout(function (){
+            window.setTimeout(()=>{
                 $("body").removeClass("modal-open");
                 $(".responsive-bootstrap-toolkit").remove();
                 $(".modal-backdrop").remove();
                 $("#"+object_id).remove();
+
+                if(callback != undefined) { callback();}
             }, 500);
         }
-
-        if (this.settings.closeIcon)
-            $modal.find(".modal-header").prepend($("<button />").attr("type", "button").addClass("close").html("&times;").click(function () { $modal.dismiss() }));
 
         // add the buttons
         var $footer = $modal.find(".modal-footer");
@@ -77,15 +133,13 @@ var alertCtrl = {
         this.body = $body;
         this.footer = $footer;
 
-        for(var i=0; i < this.settings.inputs.length; i++)
-        {
+        for(var i=0; i < this.settings.inputs.length; i++) {
             this.addInput(this.settings.inputs[i]);
         }
 
-        for(var i=0; i < this.settings.buttons.length; i++)
-        {
+        for(var i=0; i < this.settings.buttons.length; i++)  {
             if(i == 0 && this.settings.buttons[i].class == undefined) {
-                this.settings.buttons[i].class = "btn-primary";
+                this.settings.buttons[i].class = "btn-primary rounded-pill px-3 waves-light waves-effect";
             }
 
             this.addbutton(this.settings.buttons[i]);
@@ -111,16 +165,16 @@ var alertCtrl = {
 
             if(input.type === "radio")
             {
-                let div = $("<div />").addClass("form-check");
+                let div = $("<div />").addClass("custom-control custom-radio pb-2 mb-2 border-bottom");
                 let _input = $("<input />").addClass("form-control underlined")
-                    .attr("class", "form-check-input")
+                    .attr("class", "custom-control-input")
                     .attr("id", id)
                     .attr("type", input.type)
                     .attr("name", input.name)
                     .attr("placeholder", input.placeholder)
-                    .attr("value",input.value);
+                    .val(input.value);
                 
-                let label = $("<label />").addClass("form-check-label")
+                let label = $("<label />").addClass("form-control underlined")
                     .attr("class", "custom-control-label")
                     .attr("for", id)
                     .text(input.text);
@@ -129,7 +183,7 @@ var alertCtrl = {
 
                 this.body.append(div);
             } else {
-                let div = $("<div />").addClass("form-group mb-1");
+                let div = $("<div />").addClass("form-group");
 
                 if(input.label != undefined)
                 { 
@@ -198,7 +252,7 @@ var alertCtrl = {
         inputs.forEach((input)=>{
             if(input.type == "radio")
             {
-                data[input.name] = $("input[name='"+input.name+"']:checked").val();
+                data[input.name] = $("input[name='"+input.name+"']").val();
             } else {
                 data[input.name] = $("#"+input.id).val();
             }

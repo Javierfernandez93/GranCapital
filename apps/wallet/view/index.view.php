@@ -1,4 +1,16 @@
 <div class="container-fluid py-4" id="app">
+    <div class="alert c-pointer alert-info text-white" @click="openVideo">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <i class="bi bi-camera-video"></i>
+            </div>
+            <div class="col">
+                <div>Tutorial de retiros </div>
+                <div>Da clic aquí para ver el tutorial de retiros</div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-8">
             <div class="row">
@@ -151,7 +163,7 @@
                         </div>
                         <div class="col-md-6 d-flex justify-content-end align-items-center">
                             <i class="far fa-calendar-alt me-2" aria-hidden="true"></i>
-                            <small>23 - 30 March 2020</small>
+                            <!-- <small>23 - 30 March 2020</small> -->
                         </div>
                     </div>
                 </div>

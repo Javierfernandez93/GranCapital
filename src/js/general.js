@@ -170,6 +170,29 @@ function alertMessage(mesage, element, title = false) {
   alertmesage(mesage, element, title);
 }
 
+function alertHtml(html,title,size)
+{
+    closeModal();
+
+    title = (title) ? title : null;
+    size = size ? size : 'modal-md';
+
+    let alert = alertCtrl.create({
+      title: title,
+      size: size,
+      html: html
+    });
+
+    alertCtrl.present(alert.modal);
+}
+
+function closeModal()
+{
+    if (alert != null) {
+        alert.modal.dismiss();
+    }
+}
+
 function alertmesage(mesage, element, title = false) {
   if (alert != null) {
     alert.modal.dismiss();

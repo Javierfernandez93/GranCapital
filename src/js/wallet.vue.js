@@ -45,6 +45,9 @@ Vue.createApp({
                 }
             })
         },
+        openVideo: function () {
+            alertHtml(`<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/3629c9fae3a843e7a356f000090b7ae5" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>`,'Retiros','modal-lg')
+        },
         getWithdraws: function () {
             this.User.getWithdraws({}, (response) => {
                 if (response.s == 1) {
