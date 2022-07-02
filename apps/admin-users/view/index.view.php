@@ -141,9 +141,6 @@
                                                 <?php if($UserSupport->hasPermission('backoffice_access')) { ?>
                                                     <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
                                                 <?php } ?>
-                                                <?php if($UserSupport->hasPermission('add_old_commission')) { ?>
-                                                    <li><button class="dropdown-item" @click="addOldComissions(user.user_login_id)">Correr comisiones pasadas</button></li>
-                                                <?php } ?>
                                                 <?php if($UserSupport->hasPermission('delete_user')) { ?>
                                                     <li>
                                                         <hr class="dropdown-divider">
