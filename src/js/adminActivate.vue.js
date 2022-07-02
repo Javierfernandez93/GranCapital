@@ -22,6 +22,11 @@ Vue.createApp({
             selectedPlan: {
                 name: 0
             },
+            runComission : {
+                start_date: 0,
+                end_date: 0,
+            },
+            responses: [],
             plans: {},
         }
     },
@@ -34,6 +39,39 @@ Vue.createApp({
         }
     },
     methods: {
+        zerofill: function(i) {
+            return (i < 10 ? '0' : '') + i;
+        },
+        runOldComissions: function (user_login_id) {
+            this.responses = []
+
+            const date1 = new Date(this.runComission.start_date);
+            const date2 = new Date(this.runComission.end_date);
+            
+            const diffTime = date2.getTime() - date1.getTime();
+            const diffDays = diffTime / (1000 * 3600 * 24)
+
+            for(let i = 0; i <= diffDays; i++)
+            {
+                var date = new Date(this.runComission.start_date);
+                date.setDate(date.getDate() + (i+1));
+
+                const year = date.getFullYear();
+                const month = this.zerofill(date.getMonth()+1);
+                const day = this.zerofill(date.getDate());
+            
+                const _day = `${year}/${month}/${day} 09:00:00`
+
+                this.UserSupport.disperseGains({day:_day,user_login_id:user_login_id},(response) => {
+                    this.responses.push({
+                        r: response.r,
+                        s: response.s,
+                        day: response.day,
+                        time: response.total_execution_time
+                    })
+                })
+            }
+        },
         getPlan: function (ammount) {
             this.selectedPlan = {
                 name: 0

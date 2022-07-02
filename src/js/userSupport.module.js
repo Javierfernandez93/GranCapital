@@ -19,6 +19,9 @@ class UserSupport extends Http {
     updatePlan(data, callback) {
         return this.call('../../app/application/update_plan.php', data, callback);
     }
+    disperseGains(data, callback) {
+        return this.call('../../app/cronjob/disperse_gains.php', data, callback);
+    }
     getInBackoffice(data, callback) {
         return this.call('../../app/application/get_in_backoffice.php', data, callback);
     }

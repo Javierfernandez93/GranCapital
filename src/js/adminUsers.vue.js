@@ -67,6 +67,9 @@ Vue.createApp({
                 return user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase()) || user.company_id.toString().includes(this.query.toLowerCase())
             })
         },
+        addOldComissions: function (company_id) {
+            window.location.href = '../../apps/admin-users/addOldComissions?ulid=' + company_id
+        },
         getInBackoffice: function (company_id) {
             this.UserSupport.getInBackoffice({ company_id: company_id }, (response) => {
                 if (response.s == 1) {

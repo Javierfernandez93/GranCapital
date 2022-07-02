@@ -33,6 +33,7 @@ class Router {
     const AdminAdministratorsEdit = 21;
     const AdminTransactions = 24;
     const AdminDash = 26;
+    const AdminAddOldComissions = 27;
 
     static function getName(int $route = null)
     {
@@ -94,6 +95,8 @@ class Router {
                 return 'Activar en plan';
             case self::AdminTransactions:
                 return 'Transacciones';
+            case self::AdminAddOldComissions:
+                return 'Añadir comisiones atrasadas';
             default: 
                 return 'Sin nombre';
         }
