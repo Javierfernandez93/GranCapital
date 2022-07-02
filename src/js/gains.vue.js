@@ -55,9 +55,12 @@ Vue.createApp({
             column.desc = !column.desc
         },
         calculateTotals: function () {
-            this.profits.map((profit) => {
-                this.totals.total_gain += profit.profit ? parseFloat(profit.profit) : 0;
-            })
+            if(this.profits.length > 0)
+            {
+                this.profits.map((profit) => {
+                    this.totals.total_gain += profit.profit ? parseFloat(profit.profit) : 0;
+                })
+            }
         },
         getProfits: function () {
             return new Promise((resolve) => {

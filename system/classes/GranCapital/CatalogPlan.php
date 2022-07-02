@@ -52,4 +52,34 @@ class CatalogPlan extends Orm {
 
 		return false;
 	}
+	
+	public function getCatalogPlanIdBetween(int $ammount = null)
+	{
+		if(isset($ammount) === true)
+		{
+			$catalog_plan_id = 0;
+
+			if($catalog_plans = $this->getAll())
+			{
+				if($ammount >= $catalog_plans[0]['name'])
+				{
+					foreach($catalog_plans as $key => $catalog_plan)
+					{
+						$nextVal = $$catalog_plans[$key+1] != null ? $catalog_plans[$key+1]['name'] : INF;
+		
+						if ($ammount >= $catalog_plan['name'] && $ammount < $nextVal) 
+						{
+							$catalog_plan_id = $catalog_plan['catalog_plan_id'];
+						}
+					}
+				} else {
+					$catalog_plan_id = $catalog_plans[0]['catalog_plan_id'];
+				}
+			}
+
+			return $catalog_plan_id;
+		}
+
+		return false;
+	}
 }
