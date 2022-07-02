@@ -35,6 +35,13 @@
             <?php if($UserSupport->hasPermission('add_old_commission')) { ?>
                 <div class="card">
                     <div class="card-body">
+                        <div class="fs-5 fw-semibold mb-3">
+                            Correr comisiones pasadas
+                        </div>
+
+                        <div class="alert alert-info text-white">
+                            Elige el rango de fechas que correrán las ganancias para éste usuario
+                        </div>
                         <div class="mb-3">
                             <label>Fecha inicio</label>
                             <input 
