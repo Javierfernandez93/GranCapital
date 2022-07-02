@@ -11,6 +11,8 @@ if($UserLogin->_loaded === false || $UserSupport->_loaded === true)
 {
     if($data['user_login_id'])
     {
+        $data['utm']  = $data['utm'] ? $data['utm'] : 0;
+        $data['utm']  = (new GranCapital\CatalogCampaign)->getCatalogCampaing($data['utm']);
         $UserData = new GranCapital\UserData;
         
         if($referral = $UserLogin->getProfile($data['user_login_id'],$data['utm']))
