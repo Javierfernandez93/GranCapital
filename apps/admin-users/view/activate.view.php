@@ -32,62 +32,64 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label>Fecha inicio</label>
-                        <input 
-                            v-model="runComission.start_date"
-                            type="date" class="form-control">
+            <?php if($UserSupport->hasPermission('add_old_commission')) { ?>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label>Fecha inicio</label>
+                            <input 
+                                v-model="runComission.start_date"
+                                type="date" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Fecha fin</label>
+                            <input 
+                                v-model="runComission.end_date"
+                                type="date" class="form-control">
+                        </div>
+                        <button 
+                            @click="runOldComissions(user.company_id)"
+                            ref="button"
+                            class="btn btn-primary" type="button">Correr ganancias</button>
                     </div>
-                    <div class="mb-3">
-                        <label>Fecha fin</label>
-                        <input 
-                            v-model="runComission.end_date"
-                            type="date" class="form-control">
-                    </div>
-                    <button 
-                        @click="runOldComissions(user.company_id)"
-                        ref="button"
-                        class="btn btn-primary" type="button">Correr ganancias</button>
-                </div>
 
-                <ul 
-                    v-if="responses.length > 0"
-                    class="list-group">
-                    <li v-for="response in responses" class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <span v-if="response.s == 1">
-                                    <i class="bi bi-bookmark-check text-success"></i>
-                                </span>
-                                <span v-else>
-                                    <i class="bi bi-exclamation text-danger"></i>
-                                </span>
-                            </div>
-                            <div class="col">
-                                <div class="small fw-semibold text-muted">
-                                    {{response.day}}
-                                </div>
-                                {{response.r}}
-                            </div>
-                            <div class="col-auto text-end small text-muted">
-                                <div>
-                                    Time
-                                </div>
-                                <div>
-                                    <span v-if="response.time">
-                                        {{response.time.numberFormat(2)}} segs.
+                    <ul 
+                        v-if="responses.length > 0"
+                        class="list-group">
+                        <li v-for="response in responses" class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <span v-if="response.s == 1">
+                                        <i class="bi bi-bookmark-check text-success"></i>
                                     </span>
                                     <span v-else>
-                                        N/A 
+                                        <i class="bi bi-exclamation text-danger"></i>
                                     </span>
                                 </div>
+                                <div class="col">
+                                    <div class="small fw-semibold text-muted">
+                                        {{response.day}}
+                                    </div>
+                                    {{response.r}}
+                                </div>
+                                <div class="col-auto text-end small text-muted">
+                                    <div>
+                                        Time
+                                    </div>
+                                    <div>
+                                        <span v-if="response.time">
+                                            {{response.time.numberFormat(2)}} segs.
+                                        </span>
+                                        <span v-else>
+                                            N/A 
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                </div>
+            <?php } ?>
         </div>
         <div class="col-12 col-xl-8">
             <div class="card">
