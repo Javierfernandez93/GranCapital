@@ -475,7 +475,9 @@ class UserLogin extends Orm {
   {
     if($this->getId())
     {
-      return Connection::getMainPath().'/apps/signup/?uid='.$this->company_id;
+      $utm = (new CatalogCampaign)->getUtm($this->catalog_campaing_id);
+      
+      return Connection::getMainPath().'/apps/'.$utm.'/?uid='.$this->company_id;
     }
   }
 
