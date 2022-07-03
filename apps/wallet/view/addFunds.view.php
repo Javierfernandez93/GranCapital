@@ -44,6 +44,10 @@
                                 </button>
                             </div>
                             <div v-else>
+                                <div class="alert alert-info text-white text-center">
+                                    <strong>Aviso</strong>
+                                    Haz clic en "IR A PAGAR" y sigue las instrucciones para fondear tu cuenta.
+                                </div>
                                 <div class="mb-3">
                                     <span class="text-xs">
                                         Cantidad (BTC)
