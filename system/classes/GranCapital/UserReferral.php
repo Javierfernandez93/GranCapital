@@ -83,6 +83,8 @@ class UserReferral extends Orm {
               AND 
                 {$this->tblName}.status = '1'
                 {$filter}
+              GROUP BY 
+                user_login.company_id
               ";
 
       return $this->connection()->rows($sql);
