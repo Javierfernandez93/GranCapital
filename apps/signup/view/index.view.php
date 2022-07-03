@@ -47,12 +47,12 @@
                         </div>
 
                         <label>Contraseña</label>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <input 
                                 :class="user.password ? 'is-valid' : ''"
                                 :type="fieldPasswordType" 
                                 ref="password" 
-                                @keydown.enter.exact.prevent="doSignup" 
+                                @keydown.enter.exact.prevent="$refs.passwordAgain.focus()" 
                                 v-model="user.password" 
                                 style="height:41px;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
                             <button class="btn btn-secondary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
@@ -60,6 +60,26 @@
                                 <i v-else class="bi bi-eye-slash"></i>
                             </button>
                         </div>
+                        
+                        <label>Contraseña de nuevo</label>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <input 
+                                    :class="user.password != null && user.password == user.passwordAgain ? 'is-valid' : 'is-invalid'"
+                                    :type="fieldPasswordType" 
+                                    ref="passwordAgain" 
+                                    @keydown.enter.exact.prevent="doSignup" 
+                                    v-model="user.passwordAgain" 
+                                    style="height:41px;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                                <button class="btn btn-secondary" type="button" id="button-addon2" @click="toggleFieldPasswordType">
+                                    <i v-if="fieldPasswordType == 'password'" class="bi bi-eye"></i>
+                                    <i v-else class="bi bi-eye-slash"></i>
+                                </button>
+                            </div>
+                            <small v-if="passwordFeedback != null" class="form-text text-muted" v-html="passwordFeedback">
+                            </small>
+                        </div>
+
 
                         <div
                             v-if="user.referral.user_login_id"

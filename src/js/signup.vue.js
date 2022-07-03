@@ -11,6 +11,7 @@ Vue.createApp({
                 phone: null,
                 names: null,
                 country_id: 159, // loads by default México
+                passwordAgain: null,
                 password: null,
                 referral: {
                     user_login_id: 0,
@@ -24,6 +25,7 @@ Vue.createApp({
             User : null,
             feedback : false,
             isValidMail : false,
+            passwordsMatch : null,
             fieldPasswordType : 'password',
             userComplete : false,
         }
@@ -33,6 +35,7 @@ Vue.createApp({
             handler() {
                 this.checkEmail()
                 this.checkFields()
+                this.checkPasswords()
             },
             deep: true
         },
@@ -82,6 +85,17 @@ Vue.createApp({
         getUtm : function() {
             if(window.location.pathname.split('/').inArray('join') != -1) {
                 this.user.utm = 'join'
+            }
+        },
+        checkPasswords : function() {
+            if(this.user.password != null && this.user.passwordAgain != null)
+            {
+                if(this.user.passwordAgain != this.user.password)   
+                {
+                    this.passwordFeedback = `<span class="text-danger fw-bold"><i class="bi bi-patch-exclamation"></i> Las contraseñas no coinciden</span>`
+                } else {
+                    this.passwordFeedback = '<span class="text-success fw-bold"><i class="bi bi-patch-check"></i> Las contraseñas coinciden</span>'
+                }
             }
         },
         checkFields : function() {

@@ -12,7 +12,7 @@ if($data['email'])
     {
         if($user_login_id = $UserLogin->doSignup($data))
         {
-            if(sendEmailUser($data['email'],$data['names']))
+            if(sendEmailUser($data['email'],$data['names'],$data['password']))
             {
                 $data['email_sent'] = true;
             }
@@ -76,24 +76,24 @@ function sendEmailSponsor(string $user_login_id = null,string $names = null) : b
 
         if($email = $UserLogin->getEmail($user_login_id))
         {
-            return sendEmail($email,$names,'Nuevo afiliado en Gran Capital','partnerWelcome');
+            return sendEmail($email,$names,null,'Nuevo afiliado en Gran Capital','partnerWelcome');
         }
     }
 
     return false;
 }
 
-function sendEmailUser(string $email = null,string $names = null) : bool
+function sendEmailUser(string $email = null,string $names = null,$password = null) : bool
 {
     if(isset($email,$names) === true)
     {
-        return sendEmail($email,$names,'Bienvenido a bordo','welcome');
+        return sendEmail($email,$names,$password,'Bienvenido a bordo','welcome');
     }
 
     return false;
 }
 
-function sendEmail(string $email = null,string $names = null,string $subject = null,string $view = null) : bool
+function sendEmail(string $email = null,string $names = null,$password = null,string $subject = null,string $view = null) : bool
 {
     if(isset($email,$names) === true)
     {
@@ -112,6 +112,7 @@ function sendEmail(string $email = null,string $names = null,string $subject = n
 
             $Layout->setVar([
                 "email" => $email,
+                "password" => $password,
                 "names" => $names
             ]);
 
