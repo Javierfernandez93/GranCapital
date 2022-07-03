@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?t=1'   
+import { User } from '../../src/js/user.module.js?t=2'   
 
 const ProfitViewer = {
     name : 'profit-viewer',
