@@ -93,8 +93,6 @@ function sendEmailUser(string $email = null,string $names = null) : bool
     return false;
 }
 
-
-
 function sendEmail(string $email = null,string $names = null,string $subject = null,string $view = null) : bool
 {
     if(isset($email,$names) === true)
@@ -146,6 +144,5 @@ function sendEmail(string $email = null,string $names = null,string $subject = n
 
     return false;
 }
-
 
 echo json_encode($data);

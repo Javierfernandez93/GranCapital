@@ -1161,6 +1161,21 @@ class UserSupport extends Orm {
       return $this->connection()->row($sql);
     }
   }
+  public function getUserEmail(int $user_login_id = null)
+  {
+    if(isset($user_login_id) === true)
+    {
+      $sql = "SELECT
+                user_login.email
+              FROM
+                user_login
+              WHERE 
+                user_login.user_login_id = '{$user_login_id}'
+                ";
+
+      return $this->connection()->field($sql);
+    }
+  }
 
   public function getAdministrators($filter = '')
   {

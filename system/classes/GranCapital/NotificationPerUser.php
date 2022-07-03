@@ -29,7 +29,7 @@ class NotificationPerUser extends Orm {
 		}
 	}
 	
-	public static function push(int $company_id = null,string $message = null,int $catalog_notification_id = null,$link = null) : bool
+	public static function push(int $company_id = null,string $message = null,int $catalog_notification_id = null,string $link = '') : bool
 	{
 		if(isset($company_id,$message,$catalog_notification_id) === true)
 		{
@@ -39,7 +39,7 @@ class NotificationPerUser extends Orm {
 			$NotificationPerUser->catalog_notification_id = $catalog_notification_id;
 			$NotificationPerUser->link = $link;
 			$NotificationPerUser->create_date = time();
-
+			
 			return $NotificationPerUser->save();
 		}
 
