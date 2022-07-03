@@ -1,6 +1,6 @@
 <div class="container-fluid py-4" id="app">
 
-    <div class="alert alert-info text-white">
+    <div class="alert d-none alert-info text-white">
         <div class="row d-flex align-items-center">
             <div class="col">
                 <strong>Aviso</strong>
