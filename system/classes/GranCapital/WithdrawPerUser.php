@@ -102,8 +102,14 @@ class WithdrawPerUser extends Orm
                     COUNT({$this->tblName}.{$this->tblName}_id) as c
                 FROM 
                     {$this->tblName}
+                LEFT JOIN 
+                    transaction_per_wallet
+                ON 
+                    transaction_per_wallet.transaction_per_wallet_id = {$this->tblName}.transaction_per_wallet_id
                 WHERE 
                     {$this->tblName}.status = '".self::WAITING_FOR_DEPOSIT."'
+                GROUP BY 
+                    transaction_per_wallet.user_wallet_id 
                 ";
 
         return $this->connection()->field($sql);
