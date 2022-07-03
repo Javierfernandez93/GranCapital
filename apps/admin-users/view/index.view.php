@@ -147,6 +147,12 @@
                                                     </li>
                                                     <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
                                                 <?php } ?>
+                                                <?php if($UserSupport->hasPermission('list_deposit')) { ?>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><button class="dropdown-item" @click="viewDeposits(user.user_login_id)">Ver fondeos</button></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </td>

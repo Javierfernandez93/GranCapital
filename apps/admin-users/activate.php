@@ -20,7 +20,6 @@ $Layout->init(JFStudio\Router::getName($route),"activate","admin","",TO_ROOT."/"
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
 	'adminActivate.vue.js',
-	'userSupport.module.js'
 ]);
 
 $Layout->setVar([

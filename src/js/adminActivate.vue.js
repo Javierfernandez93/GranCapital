@@ -17,6 +17,7 @@ Vue.createApp({
                 phone: null,
                 country_id: 159, // México country is loaded by default 
                 ammount: 0,
+                originalAmmount: 0,
                 catalog_plan_id: 0
             },
             selectedPlan: {
@@ -26,11 +27,28 @@ Vue.createApp({
                 start_date: 0,
                 end_date: 0,
             },
+            deposit: {
+                ammount: null,
+                originalAmmount: null,
+            },
             responses: [],
             plans: {},
         }
     },
     watch: {
+        deposit: {
+            handler() {
+                this.user.ammount = this.user.originalAmmount
+
+                if(this.deposit.ammount)
+                {
+                    this.user.ammount += parseFloat(this.deposit.ammount)
+
+                    this.getPlan(this.user.ammount)
+                }
+            },
+            deep: true
+        },
         user: {
             handler() {
                 this.getPlan(this.user.ammount)
@@ -72,6 +90,16 @@ Vue.createApp({
                 })
             }
         },
+        addDeposit: function () {
+            const ammount = this.user.ammount - this.user.originalAmmount
+
+            this.UserSupport.addDeposit({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, total_ammount: this.user.ammount, ammount: ammount }, (response) => {
+                if(response.s == 1)
+                {
+                    this.$refs.buttonAddDeposit.innerText = 'Depósito realizado'
+                }
+            })
+        },
         getPlan: function (ammount) {
             this.selectedPlan = {
                 name: 0
@@ -89,7 +117,6 @@ Vue.createApp({
             } else {
                 this.selectedPlan = this.plans[0]
             }
-
         },
         updatePlan: function () {
             this.UserSupport.updatePlan({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, additional_profit: this.user.additional_profit, ammount: this.user.ammount, sponsor_profit: this.user.sponsor_profit }, (response) => {
@@ -108,6 +135,8 @@ Vue.createApp({
                     }
 
                     Object.assign(this.user, response.user)
+
+                    this.user.originalAmmount = this.user.ammount
                 }
             })
         },

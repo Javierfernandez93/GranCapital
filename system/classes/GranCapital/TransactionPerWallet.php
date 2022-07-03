@@ -7,6 +7,7 @@ use HCStudio\Orm;
 use GranCapital\Transaction;
 
 class TransactionPerWallet extends Orm {
+    const DELETED = -1;
     protected $tblName = 'transaction_per_wallet';
 
     public function __construct() {
@@ -90,6 +91,35 @@ class TransactionPerWallet extends Orm {
         }
 
         return false;
+    }
+    
+    public function getDepositsByUser(int $user_wallet_id = null)
+    {
+        if(isset($user_wallet_id) === true)
+        {
+            $sql = "SELECT 
+                        {$this->tblName}.{$this->tblName}_id,
+                        {$this->tblName}.ammount,
+                        {$this->tblName}.create_date
+                    FROM 
+                        {$this->tblName}
+                    WHERE 
+                        {$this->tblName}.user_wallet_id = '{$user_wallet_id}'
+                    AND 
+                        {$this->tblName}.transaction_id = '".Transaction::DEPOSIT."'
+                    AND 
+                        {$this->tblName}.status = '1'
+                    ";
+
+            return $this->connection()->rows($sql);
+        }
+
+        return false;
+    }
+    
+    public function getSumDepositsByUser(int $user_wallet_id = null)
+    {
+        return $this->getSum("WHERE {$this->tblName}.user_wallet_id = '{$user_wallet_id}' AND {$this->tblName}.transaction_id = '".Transaction::DEPOSIT."'");
     }
     
     public function getSum(string $filter = '')

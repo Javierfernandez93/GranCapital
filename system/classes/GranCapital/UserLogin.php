@@ -9,6 +9,7 @@ use HCStudio\Util;
 use HCStudio\Connection;
 
 use GranCapital\UserPlan;
+use GranCapital\TransactionRequirementPerUser;
 
 class UserLogin extends Orm {
   const DELETED = -1;
@@ -532,6 +533,13 @@ class UserLogin extends Orm {
     return 0;
   }
   
+  public function getLastTransactions()
+  {
+    if($this->getId())
+    {
+      return (new TransactionRequirementPerUser)->getLastTransactions($this->company_id,"LIMIT 5");
+    }
+  }
   public function getSignupDate(int $company_id = null)
   {
     if(isset($company_id))

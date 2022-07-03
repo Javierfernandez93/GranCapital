@@ -70,6 +70,9 @@ Vue.createApp({
         addOldComissions: function (company_id) {
             window.location.href = '../../apps/admin-users/addOldComissions?ulid=' + company_id
         },
+        viewDeposits: function (company_id) {
+            window.location.href = '../../apps/admin-users/deposits?ulid=' + company_id
+        },
         getInBackoffice: function (company_id) {
             this.UserSupport.getInBackoffice({ company_id: company_id }, (response) => {
                 if (response.s == 1) {

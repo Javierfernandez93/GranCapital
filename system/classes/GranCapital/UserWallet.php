@@ -26,15 +26,35 @@ class UserWallet extends Orm
 
     return true;
   }
+  
+  public function getCompanyId(int $user_wallet_id = null)
+  {
+    if (isset($user_wallet_id) === true) 
+    {
+      $sql = "SELECT
+                {$this->tblName}.user_login_id
+              FROM 
+                {$this->tblName}
+              WHERE
+                {$this->tblName}.user_wallet_id = '{$user_wallet_id}'
+              AND 
+                {$this->tblName}.status = '1'
+              ";
 
-  public function doTransaction(float $ammount, int $transaction_id = null, int $profit_per_user_id = null,int $withdraw_method_id = null)
+      return $this->connection()->field($sql);
+    }
+
+    return true;
+  }
+
+  public function doTransaction(float $ammount, int $transaction_id = null, int $profit_per_user_id = null,int $withdraw_method_id = null,$load_previus = true)
   {
     if ($this->getId()) {
       $TransacionPerWallet = new TransactionPerWallet;
 
       switch ($transaction_id) {
         case Transaction::DEPOSIT:
-          return $TransacionPerWallet->doTransaction($this->getId(), $ammount, $transaction_id, $profit_per_user_id, true);
+          return $TransacionPerWallet->doTransaction($this->getId(), $ammount, $transaction_id, $profit_per_user_id, $load_previus);
         case Transaction::INVESTMENT:
           return $TransacionPerWallet->doTransaction($this->getId(), $ammount, $transaction_id, $profit_per_user_id);
         case Transaction::REFERRAL_INVESTMENT:
@@ -56,6 +76,15 @@ class UserWallet extends Orm
   {
     if ($this->getId()) {
       return (new TransactionPerWallet)->getWithdraws($this->getId(), $filter);
+    }
+
+    return false;
+  }
+
+  public function getDepositsByUser()
+  {
+    if ($this->getId()) {
+      return (new TransactionPerWallet)->getDepositsByUser($this->getId());
     }
 
     return false;

@@ -16,6 +16,7 @@ class Router {
     const TradingView = 22;
     const Wallet = 23;
     const Calculator = 25;
+    const AddFunds = 28;
 
     /* admin */
     const AdminUsers = 9;
@@ -34,6 +35,8 @@ class Router {
     const AdminTransactions = 24;
     const AdminDash = 26;
     const AdminAddOldComissions = 27;
+    const AdminDeposits = 29;
+    const AdminTransactionsList = 30;
 
     static function getName(int $route = null)
     {
@@ -64,6 +67,8 @@ class Router {
             case self::Wallet:
                 return 'Cartera electrónica';
             case self::Calculator:
+                return 'Calculadora';
+            case self::AddFunds:
                 return 'Calculadora';
             case self::AdminDash:
                 return 'Administrador';
@@ -97,7 +102,11 @@ class Router {
                 return 'Transacciones';
             case self::AdminAddOldComissions:
                 return 'Añadir comisiones atrasadas';
-            default: 
+            case self::AdminTransactionsList:
+                return 'Lista de fondeos';
+            case self::AdminDeposits:
+                return 'Ver fondeos';
+                default: 
                 return 'Sin nombre';
         }
     }

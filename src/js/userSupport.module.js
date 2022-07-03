@@ -19,6 +19,21 @@ class UserSupport extends Http {
     updatePlan(data, callback) {
         return this.call('../../app/application/update_plan.php', data, callback);
     }
+    addDeposit(data, callback) {
+        return this.call('../../app/application/add_deposit.php', data, callback);
+    }
+    addDeposit(data, callback) {
+        return this.call('../../app/application/add_deposit.php', data, callback);
+    }
+    deleteDeposit(data, callback) {
+        return this.call('../../app/application/delete_deposit.php', data, callback);
+    }
+    getDeposits(data, callback) {
+        return this.call('../../app/application/get_deposits.php', data, callback);
+    }
+    getTransactionsList(data, callback) {
+        return this.call('../../app/application/get_transactions_list.php', data, callback);
+    }
     disperseGains(data, callback) {
         return this.call('../../app/cronjob/disperse_gains.php', data, callback);
     }
@@ -54,6 +69,9 @@ class UserSupport extends Http {
     }
     applyWithdraw(data, callback) {
         return this.call('../../app/application/apply_withdraw.php', data, callback);
+    }
+    applyDeposit(data, callback) {
+        return this.call('../../app/application/apply_deposit.php', data, callback);
     }
     getBrokersData(data, callback) {
         return this.call('../../app/application/get_brokers_data.php', data, callback);

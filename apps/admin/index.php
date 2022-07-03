@@ -21,7 +21,6 @@ $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
 	'chart.js',
 	'adminDash.vue.js',
-	'userSupport.module.js'
 ]);
 
 $Layout->setVar([

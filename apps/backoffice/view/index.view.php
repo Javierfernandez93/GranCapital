@@ -1,4 +1,17 @@
 <div class="container-fluid py-4" id="app">
+
+    <div class="alert alert-info text-white">
+        <div class="row d-flex align-items-center">
+            <div class="col">
+                <strong>Aviso</strong>
+                <div class="fw-semibold fs-6">Ya puedes añadir capital a tu cuenta con coinpayments.net</div>
+            </div>
+            <div class="col-auto">
+                <a href="../../apps/wallet/addFunds" class="btn btn-light">Añadir fondos</a>
+            </div>
+        </div>
+    </div>
+
     <profit-viewer>
     </profit-viewer>
 
@@ -32,6 +45,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-5">
             <div class="card h-100 p-3 overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../../src/img/ivancik.jpg');">
                 <span class="mask bg-gradient-dark"></span>

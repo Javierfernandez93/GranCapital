@@ -16,6 +16,15 @@ class User extends Http {
     getBalance(data, callback) {
         return this.call('../../app/application/get_balance.php', data, callback);
     }
+    createTransactionRequirement(data, callback) {
+        return this.call('../../app/application/create_transaction_requirement.php', data, callback);
+    }
+    getLastTransactionsRequirement(data, callback) {
+        return this.call('../../app/application/get_last_transactions_requirement.php', data, callback);
+    }
+    getCurrencies(data, callback) {
+        return this.call('../../app/application/get_currencies.php', data, callback);
+    }
     doWithdraw(data, callback) {
         return this.call('../../app/application/do_withdraw.php', data, callback);
     }

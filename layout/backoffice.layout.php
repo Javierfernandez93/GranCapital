@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::Backoffice,JFStudio\Router::Notifications])){?>active<?php } ?>"
+                    <a class="nav-link <?php if(in_array($route,[JFStudio\Router::Backoffice,JFStudio\Router::Notifications,JFStudio\Router::AddFunds])){?>active<?php } ?>"
                         href="../../apps/backoffice">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
