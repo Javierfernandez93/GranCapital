@@ -107,7 +107,7 @@
                                         v-for="lastTransaction in lastTransactions"
                                         class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
-                                            <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                            <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-arrow-up" aria-hidden="true"></i>
                                             </button>
                                             <div class="d-flex flex-column">
