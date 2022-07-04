@@ -72,6 +72,27 @@ class UserWallet extends Orm
     return false;
   }
 
+  public function depositGains(float $ammount = null)
+  {
+    if (isset($ammount) === true) 
+    {
+      if ($this->getId()) 
+      {
+        $TransacionPerWallet = new TransactionPerWallet;
+
+          if($transaction_per_wallet_id = $TransacionPerWallet->doTransaction($this->getId(), -$ammount, Transaction::WITHDRAW))
+          {
+            if((new WithdrawPerUser)->doWithdraw($transaction_per_wallet_id,0,true)) // forcing withdraw
+            {
+              return $TransacionPerWallet->doTransaction($this->getId(), $ammount, Transaction::DEPOSIT, null, false);
+            }
+          }
+      }
+    }
+
+    return false;
+  }
+
   public function getWithdraws(string $filter = null)
   {
     if ($this->getId()) {

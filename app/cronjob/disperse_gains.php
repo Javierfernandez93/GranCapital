@@ -6,9 +6,9 @@ $data = HCStudio\Util::getVarFromPGS();
 
 $UserSupport = new GranCapital\UserSupport;
 
-if(($data['user'] == HCStudio\Util::$username && $data['password']) == HCStudio\Util::$password || $UserSupport->_loaded === true)
+if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\Util::$password) || $UserSupport->_loaded === true)
 {
-    GranCapital\NotificationPerUser::push(1,"Prueba de cronjob ".date("Y-m-d h:i:s"),GranCapital\CatalogNotification::ACCOUNT,'');
+    // GranCapital\NotificationPerUser::push(1,"Prueba de cronjob ".date("Y-m-d h:i:s"),GranCapital\CatalogNotification::ACCOUNT,'');
 
     $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
     $data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default

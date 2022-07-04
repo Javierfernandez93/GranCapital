@@ -17,14 +17,14 @@ class WithdrawPerUser extends Orm
         parent::__construct();
     }
 
-    public function doWithdraw(int $transaction_per_wallet_id = null,int $catalog_withdraw_method_id = null) : bool
+    public function doWithdraw(int $transaction_per_wallet_id = null,int $catalog_withdraw_method_id = null,bool $force = false) : bool
     {
         if(isset($transaction_per_wallet_id,$catalog_withdraw_method_id) === true)
         {
             $WithdrawPerUser = new WithdrawPerUser;
             $WithdrawPerUser->transaction_per_wallet_id = $transaction_per_wallet_id;
             $WithdrawPerUser->catalog_withdraw_method_id = $catalog_withdraw_method_id;
-            $WithdrawPerUser->status = self::WAITING_FOR_DEPOSIT;
+            $WithdrawPerUser->status = $force === true ? self::DEPOSITED : self::WAITING_FOR_DEPOSIT;
             $WithdrawPerUser->create_date = time();
 
             return $WithdrawPerUser->save();

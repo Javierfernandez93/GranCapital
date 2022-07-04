@@ -6,7 +6,7 @@ $data = HCStudio\Util::getVarFromPGS();
 
 $UserSupport = new GranCapital\UserSupport;
 
-if(($data['user'] == HCStudio\Util::$username && $data['password']) == HCStudio\Util::$password || $UserSupport->_loaded === true)
+if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\Util::$password) || $UserSupport->_loaded === true)
 {
     require_once TO_ROOT .'/vendor2/autoload.php';
 
@@ -28,41 +28,44 @@ if(($data['user'] == HCStudio\Util::$username && $data['password']) == HCStudio\
                     
                     if ($result['error'] == 'ok') 
                     { 
-                        // $result['result']['receivedf'] = $checkout_data['amount'];
-
-                        if($result['result']['receivedf'] == $checkout_data['amount'])
-                        {
-                            $UserWallet = new GranCapital\UserWallet;
-                            
-                            if($UserWallet->getSafeWallet(($transaction['user_login_id'])))
-                            {
-                                if($UserWallet->doTransaction($transaction['ammount'],GranCapital\Transaction::DEPOSIT,null,null,false))
+                        if($result['result']['status_text'] == CoinPayments\Api::COMPLETED)
+                        {   
+                            if($result['result']['status'] == $transaction['ammount'])
+                            {   
+                                $UserWallet = new GranCapital\UserWallet;
+                                
+                                if($UserWallet->getSafeWallet(($transaction['user_login_id'])))
                                 {
-                                    if($ammount = $TransactionPerWallet->getSumDepositsByUser($UserWallet->getId()))
+                                    if($UserWallet->doTransaction($transaction['ammount'],GranCapital\Transaction::DEPOSIT,null,null,false))
                                     {
-                                        $CatalogPlan = new GranCapital\CatalogPlan;
-
-                                        if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
+                                        if($ammount = $TransactionPerWallet->getSumDepositsByUser($UserWallet->getId()))
                                         {
-                                            if(updatePlan($transaction['user_login_id'],$catalog_plan_id,$ammount))
+                                            // d($result['result']['status']);
+
+                                            $CatalogPlan = new GranCapital\CatalogPlan;
+                                            
+                                            if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
                                             {
-                                                if(updateTransaction($transaction['transaction_requirement_per_user_id']))
+                                                if(updatePlan($transaction['user_login_id'],$catalog_plan_id,$ammount))
                                                 {
-                                                    $data["s"] = 1;
-                                                    $data["r"] = "DATA_OK";
+                                                    if(updateTransaction($transaction['transaction_requirement_per_user_id']))
+                                                    {
+                                                        $data["s"] = 1;
+                                                        $data["r"] = "DATA_OK";
+                                                    }
                                                 }
                                             }
                                         }
+                                    } else {
+                                        $data['r'] = "NOT_WALLET";
+                                        $data['s'] = 0;
                                     }
                                 } else {
-                                    $data['r'] = "NOT_WALLET";
+                                    $data['r'] = "DATA_ERROR";
                                     $data['s'] = 0;
                                 }
-                            } else {
-                                $data['r'] = "DATA_ERROR";
-                                $data['s'] = 0;
+                                
                             }
-                            
                         }
                     } else {
                         print 'Error: '.$result['error']."\n";
@@ -112,7 +115,7 @@ function updateTransaction(int $transaction_requirement_per_user_id = null)
                 $TransactionRequirementPerUser->validate_date = time();
                 $TransactionRequirementPerUser->validation_method = GranCapital\TransactionRequirementPerUser::CRONJOB;
 
-                $TransactionRequirementPerUser->save();
+                return $TransactionRequirementPerUser->save();
             }
         }
     }
