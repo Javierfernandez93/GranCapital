@@ -9,17 +9,18 @@ use GranCapital\UserPlan;
 use GranCapital\UserWallet;
 use GranCapital\Transaction;
 
-class ProfitPerUser extends Orm {
+class ProfitPerUser extends Orm
+{
   protected $tblName  = 'profit_per_user';
 
-  public function __construct() {
+  public function __construct()
+  {
     parent::__construct();
   }
 
-  public function getProfits($user_login_id = null) 
+  public function getProfits($user_login_id = null)
   {
-    if(isset($user_login_id) === true)
-    {
+    if (isset($user_login_id) === true) {
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id,
                 {$this->tblName}.create_date,
@@ -47,16 +48,29 @@ class ProfitPerUser extends Orm {
 
     return false;
   }
-  
-  public function calculateProfit(float $profit = null,float $ammount = null) 
-  {
-    $days_in_month = 20;
-    $day_profit = $profit/$days_in_month;
 
-    return Util::getPercentaje($ammount,$day_profit);
+  public function getWorkingDays()
+  {
+    $working_days = 0;
+
+    for ($i = 0; $i < date("t") - date("j"); $i++) {
+      $unix = strtotime("+" . ($i + 1) . " days");
+      if (date('N', $unix) < 6) {
+        $working_days++;
+      }
+    }
+
+    return $working_days;
   }
 
-  public function insertGain(int $user_plan_id = null,int $from_user_plan_id = null,int $catalog_profit_id = null,float $profit = null,string $day = null,$description = '') : bool
+  public function calculateProfit(float $profit = null, float $ammount = null)
+  {
+    $day_profit = $profit / $this->getWorkingDays();
+
+    return Util::getPercentaje($ammount, $day_profit);
+  }
+
+  public function insertGain(int $user_plan_id = null, int $from_user_plan_id = null, int $catalog_profit_id = null, float $profit = null, string $day = null, $description = ''): bool
   {
     $ProfitPerUser = new ProfitPerUser;
     $ProfitPerUser->user_plan_id = $user_plan_id;
@@ -66,24 +80,21 @@ class ProfitPerUser extends Orm {
     $ProfitPerUser->create_date = $day ? $day : time();
     $ProfitPerUser->description = $description;
 
-    if($ProfitPerUser->save())
-    {
+    if ($ProfitPerUser->save()) {
       $UserPlan = new UserPlan;
 
-      if($user_login_id = $UserPlan->getUserId($user_plan_id))
-      {
+      if ($user_login_id = $UserPlan->getUserId($user_plan_id)) {
         // if($catalog_profit_id == Transaction::REFERRAL_INVESTMENT)
         // {
         //   $UserReferral = new UserReferral;
-          
+
         //   $user_login_id = $UserReferral->getUserReferralId($user_plan_id);
         // }
 
         $UserWallet = new UserWallet;
 
-        if($UserWallet->getSafeWallet($user_login_id))
-        {
-          return $UserWallet->doTransaction($profit,$catalog_profit_id,$ProfitPerUser->getId());
+        if ($UserWallet->getSafeWallet($user_login_id)) {
+          return $UserWallet->doTransaction($profit, $catalog_profit_id, $ProfitPerUser->getId());
         }
       }
     }
@@ -91,12 +102,11 @@ class ProfitPerUser extends Orm {
     return false;
   }
 
-  public function hasProfitToday(int $user_plan_id = null,int $catalog_profit_id = null,string $day = null) 
+  public function hasProfitToday(int $user_plan_id = null, int $catalog_profit_id = null, string $day = null)
   {
-    if(isset($user_plan_id,$catalog_profit_id) === true)
-    {
-      $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
-      $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+    if (isset($user_plan_id, $catalog_profit_id) === true) {
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00", strtotime($day)));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59", strtotime($day)));
 
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id
@@ -121,13 +131,12 @@ class ProfitPerUser extends Orm {
 
     return false;
   }
-  
-  public function hasProfitTodayForReferral(int $user_plan_id = null,int $from_user_plan_id = null,int $catalog_profit_id = null,string $day = null) 
+
+  public function hasProfitTodayForReferral(int $user_plan_id = null, int $from_user_plan_id = null, int $catalog_profit_id = null, string $day = null)
   {
-    if(isset($user_plan_id,$from_user_plan_id,$catalog_profit_id) === true)
-    {
-      $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
-      $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+    if (isset($user_plan_id, $from_user_plan_id, $catalog_profit_id) === true) {
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00", strtotime($day)));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59", strtotime($day)));
 
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id
