@@ -108,7 +108,7 @@
                                         class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
                                             <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
-                                                <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i>
                                             </button>
                                             <div class="d-flex flex-column">
                                                 <h6 class="mb-1 text-dark text-sm">
