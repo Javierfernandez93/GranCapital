@@ -64,7 +64,7 @@ function getBrokersChartData(array &$data = null,CapitalPerBroker $CapitalPerBro
         {
             $capitals = $CapitalPerBroker->getAllPerBroker($broker['broker_id']);
             $gains = $GainPerBroker->getAllGainsPerBroker($broker['broker_id']);
-            $gains = $gains ? $gains : 0;
+            $gains = $gains ? $gains : [];
 
             $total_capital = array_sum($capitals);
             $total_gain = array_sum($gains);
