@@ -53,8 +53,12 @@ class ProfitPerUser extends Orm
   {
     $working_days = 0;
 
-    for ($i = 0; $i < date("t") - date("j"); $i++) {
-      $unix = strtotime("+" . ($i + 1) . " days");
+    $start_date = strtotime(date("Y-m-01"));
+
+    for ($i = 0; $i < date("t"); $i++) 
+    {
+      $unix = strtotime("+" . ($i + 1) . " days",$start_date);
+
       if (date('N', $unix) < 6) {
         $working_days++;
       }
@@ -67,7 +71,7 @@ class ProfitPerUser extends Orm
   {
     $day_profit = $profit / $this->getWorkingDays();
 
-    return Util::getPercentaje($ammount, $day_profit);
+    return round(Util::getPercentaje($ammount, $day_profit),2);
   }
 
   public function insertGain(int $user_plan_id = null, int $from_user_plan_id = null, int $catalog_profit_id = null, float $profit = null, string $day = null, $description = ''): bool
