@@ -11,7 +11,6 @@
                             <div class="small">Transacciones</div>
                         </div>
                         <div class="col-auto text-end">
-
                             <div><span class="badge bg-secondary">Total de transacciones {{Object.keys(transactions).length}}</span></div>
                         </div>
                     </div>

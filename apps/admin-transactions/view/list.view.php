@@ -126,8 +126,14 @@
                                         </span>
                                         <span v-else-if="transaction.status == 2"
                                             class="badge bg-success">
-                                            Validada
+                                            Aplicada
                                         </span>
+
+                                        <div v-if="transaction.apiResponse">
+                                            <div><span class="badge bg-secondary">Expira {{ transaction.apiResponse.time_expires.formatFullDate() }}</span></div>
+                                            <div><span class="badge bg-secondary">Dirección depósito  {{ transaction.apiResponse.payment_address }}</span></div>
+                                            <div><span class="badge bg-secondary">Estatus {{ transaction.apiResponse.status_text }}</span></div>
+                                        </div>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <div class="btn-group">
@@ -137,6 +143,12 @@
                                             <ul class="dropdown-menu shadow">
                                                 <?php if($UserSupport->hasPermission('apply_deposit')) { ?>
                                                     <li><button class="dropdown-item" @click="applyDeposit(transaction.transaction_requirement_per_user_id)">Aplicar fondeo</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('delete_deposit')) { ?>
+                                                    <li><button class="dropdown-item" @click="deleteDeposit(transaction.transaction_requirement_per_user_id)">Eliminar fondeo</button></li>
+                                                <?php } ?>
+                                                <?php if($UserSupport->hasPermission('view_deposit')) { ?>
+                                                    <li><button class="dropdown-item" @click="viewDeposit(transaction)">Ver fondeo</button></li>
                                                 <?php } ?>
                                             </ul>
                                         </div>

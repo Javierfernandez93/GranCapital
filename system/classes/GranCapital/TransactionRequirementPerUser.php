@@ -6,6 +6,7 @@ use HCStudio\Orm;
 
 class TransactionRequirementPerUser extends Orm {
     const PENDING = 1;
+    const DELETED = -1;
     const EXPIRED = 0;
     const VALIDATED = 2;
     

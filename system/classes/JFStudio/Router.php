@@ -69,7 +69,7 @@ class Router {
             case self::Calculator:
                 return 'Calculadora';
             case self::AddFunds:
-                return 'Calculadora';
+                return 'Añadir fondos';
             case self::AdminDash:
                 return 'Administrador';
             case self::AdminUsers:

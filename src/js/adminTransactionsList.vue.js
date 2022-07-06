@@ -101,6 +101,22 @@ Vue.createApp({
 
             column.desc = !column.desc
         },
+        viewDeposit: function (transaction) {
+            const { txn_id } = JSON.parse(transaction.checkout_data)
+
+            this.UserSupport.viewDeposit({ txn_id: txn_id }, (response) => {
+                if (response.s == 1) {
+                    transaction.apiResponse = response.apiResponse
+                }
+            });
+        },
+        deleteDeposit: function (transaction_requirement_per_user_id) {
+            this.UserSupport.deleteDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
+                if (response.s == 1) {
+                    this.getTransactionsList()
+                }
+            });
+        },
         applyDeposit: function (transaction_requirement_per_user_id) {
             this.UserSupport.applyDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
                 if (response.s == 1) {

@@ -58,6 +58,12 @@ class UserSupport extends Http {
     addPerformance(data, callback) {
         return this.call('../../app/application/add_performance.php', data, callback);
     }
+    deleteDeposit(data, callback) {
+        return this.call('../../app/application/delete_deposit.php', data, callback, null, null, 'POST');
+    }
+    viewDeposit(data, callback) {
+        return this.call('../../app/application/view_deposit.php', data, callback, null, null, 'POST');
+    }
     closeOperation(data, callback) {
         return this.call('../../app/application/close_operation.php', data, callback, null, null, 'POST');
     }
@@ -92,7 +98,7 @@ class UserSupport extends Http {
         return this.call('../../app/application/save_administrator.php', data, callback);
     }
     editAdministrator(data, callback) {
-        return this.call('../../app/application/edit_administrator.php', data, callback);
+        return this.call('../../app/application/edit_administrator.php', data, callback, null, null, 'POST');
     }
     getReferral(data, callback) {
         return this.call('../../app/application/get_referral.php', data, callback);
