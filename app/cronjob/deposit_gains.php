@@ -8,40 +8,49 @@ $UserSupport = new GranCapital\UserSupport;
 
 if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\Util::$password) || $UserSupport->_loaded === true)
 {
-    // st-1 tomar las ganancias 
-    // st-2 eliminar las ganancias (withdraw forzado)
-    // st-3 depositar las ganancias como fondeo
-    $TransactionPerWallet = new GranCapital\TransactionPerWallet;
-    $CatalogPlan = new GranCapital\CatalogPlan;
-    
-    $filter = " AND user_wallet.user_login_id = '9'";
-    $filter = "";
+    $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
+    $data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default
 
-    // st-1
-    if($transactions = $TransactionPerWallet->getAllGains($filter))
+    if(date('j',$data['unix_time']) == 6)
     {
-        foreach($transactions as $key => $transaction)
+        if(date('H',$data['unix_time']) == '09')
         {
-            if($transactions_for_translate = $TransactionPerWallet->getAllGainsList($transaction['user_wallet_id']))
-            {
-                $transactions[$key]['total_withdraws'] = $TransactionPerWallet->getTotalWithdraws($transaction['user_wallet_id']);
-                $transactions[$key]['total_to_deposit'] = $transaction['total_ammount'] + $transactions[$key]['total_withdraws'];
-                
-                $UserWallet = new GranCapital\UserWallet;
+            // gettingst-1 tomar las ganancias 
+            // st-2 eliminar las ganancias (withdraw forzado)
+            // st-3 depositar las ganancias como fondeo
+            $TransactionPerWallet = new GranCapital\TransactionPerWallet;
+            $CatalogPlan = new GranCapital\CatalogPlan;
+            
+            $filter = " AND user_wallet.user_login_id = '9'";
+            $filter = "";
 
-                if($UserWallet->getSafeWallet($transaction['user_login_id']))
+            // st-1
+            if($transactions = $TransactionPerWallet->getAllGains($filter))
+            {
+                foreach($transactions as $key => $transaction)
                 {
-                    if($UserWallet->depositGains($transactions[$key]['total_ammount']))
+                    if($transactions_for_translate = $TransactionPerWallet->getAllGainsList($transaction['user_wallet_id']))
                     {
-                        if($TransactionPerWallet->setTransactionsAsTranslated($transactions_for_translate))
+                        $transactions[$key]['total_withdraws'] = $TransactionPerWallet->getTotalWithdraws($transaction['user_wallet_id']);
+                        $transactions[$key]['total_to_deposit'] = $transaction['total_ammount'] + $transactions[$key]['total_withdraws'];
+                        
+                        $UserWallet = new GranCapital\UserWallet;
+
+                        if($UserWallet->getSafeWallet($transaction['user_login_id']))
                         {
-                            if($ammount = $TransactionPerWallet->getSumDepositsByUserWithWitdraws($transaction['user_wallet_id']))
+                            if($UserWallet->depositGains($transactions[$key]['total_ammount']))
                             {
-                                if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
+                                if($TransactionPerWallet->setTransactionsAsTranslated($transactions_for_translate))
                                 {
-                                    if(updatePlan($transaction['user_login_id'],$catalog_plan_id,$ammount))
+                                    if($ammount = $TransactionPerWallet->getSumDepositsByUserWithWitdraws($transaction['user_wallet_id']))
                                     {
-                                        $transactions[$key]['status'] = 1;
+                                        if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
+                                        {
+                                            if(updatePlan($transaction['user_login_id'],$catalog_plan_id,$ammount))
+                                            {
+                                                $transactions[$key]['status'] = 1;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -49,7 +58,15 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                     }
                 }
             }
+
+            $data['transactions'] = $transactions;
+         } else {
+            $data['s'] = 0;
+            $data['r'] = "SCRIPT_ONLY_WORKS_AT_NINE_MORNING";
         }
+    } else {
+        $data['s'] = 0;
+        $data['r'] = "SCRIPT_ONLY_WORKS_ON_6TH";
     }
 } else {
     $data['s'] = 0;
@@ -72,5 +89,4 @@ function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount) : bo
     return $UserPlan->save();
 }
 
-d($transactions);
-echo json_encode($transactions);
+echo json_encode($data);

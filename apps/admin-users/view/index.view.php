@@ -118,7 +118,7 @@
                                     <td class="align-middle text-center text-sm">
                                         <span
                                             v-if="user.ammount" 
-                                            class="text-xs text-dark mb-0">$ {{user.ammount.numberFormat(0)}}</span>
+                                            class="text-xs text-dark mb-0">$ {{user.ammount.numberFormat(2)}}</span>
                                         <span v-else 
                                             class="text-xs text-dark mb-0">N/A</span>
                                     </td>
