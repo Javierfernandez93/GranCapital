@@ -80,13 +80,13 @@ class UserWallet extends Orm
       {
         $TransacionPerWallet = new TransactionPerWallet;
 
-          if($transaction_per_wallet_id = $TransacionPerWallet->doTransaction($this->getId(), -$ammount, Transaction::WITHDRAW))
-          {
-            if((new WithdrawPerUser)->doWithdraw($transaction_per_wallet_id,0,true)) // forcing withdraw
-            {
+          // if($transaction_per_wallet_id = $TransacionPerWallet->doTransaction($this->getId(), -$ammount, Transaction::WITHDRAW))
+          // {
+          //   if((new WithdrawPerUser)->doWithdraw($transaction_per_wallet_id,0,true)) // forcing withdraw
+          //   {
               return $TransacionPerWallet->doTransaction($this->getId(), $ammount, Transaction::DEPOSIT, null, false);
-            }
-          }
+          //   }
+          // }
       }
     }
 
@@ -111,10 +111,10 @@ class UserWallet extends Orm
     return false;
   }
 
-  public function getBalance(string $filter = ''): float
+  public function getBalance(string $filter = '',string $status = null): float
   {
     if ($this->getId()) {
-      return (new TransactionPerWallet)->getBalance($this->getId(), $filter);
+      return (new TransactionPerWallet)->getBalance($this->getId(), $filter, $status);
     }
 
     return false;

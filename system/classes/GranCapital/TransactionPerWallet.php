@@ -8,6 +8,7 @@ use GranCapital\Transaction;
 
 class TransactionPerWallet extends Orm {
     const DELETED = -1;
+    const TRANSLATED = 3;
     protected $tblName = 'transaction_per_wallet';
 
     public function __construct() {
@@ -40,21 +41,24 @@ class TransactionPerWallet extends Orm {
         return false;
     }
    
-    public function getBalance(int $user_wallet_id = null,string $filter = '') : float
+    public function getBalance(int $user_wallet_id = null,string $filter = '',string $status = null) : float
     {
         if(isset($user_wallet_id) === true)
         {
+            $status = isset($status) === true ? $status : " AND  {$this->tblName}.status IN ('".WithdrawPerUser::DEPOSITED."','".WithdrawPerUser::WAITING_FOR_DEPOSIT."') ";
+
             $sql = "SELECT 
-                        SUM({$this->tblName}.ammount) as balance
+                        SUM({$this->tblName}.ammount) as c
                     FROM 
                         {$this->tblName}
                     WHERE 
                         {$this->tblName}.user_wallet_id = '{$user_wallet_id}'
-                    AND 
-                    {$this->tblName}.status IN ('".WithdrawPerUser::DEPOSITED."','".WithdrawPerUser::WAITING_FOR_DEPOSIT."')
+                        {$status}
                         {$filter}
                     ";
                     
+            // d($this->connection()->rows($sql));
+
             if($ammount = $this->connection()->field($sql))
             { 
                 return $ammount;
@@ -122,15 +126,24 @@ class TransactionPerWallet extends Orm {
         return $this->getSum("WHERE {$this->tblName}.user_wallet_id = '{$user_wallet_id}' AND {$this->tblName}.transaction_id = '".Transaction::DEPOSIT."'");
     }
     
-    public function getSum(string $filter = '')
+    public function getSumDepositsByUserWithWitdraws(int $user_wallet_id = null)
     {
+        $status = "AND {$this->tblName}.status IN ('".WithdrawPerUser::WAITING_FOR_DEPOSIT."','".WithdrawPerUser::DEPOSITED."')";
+
+        $withdraws = $this->getSum("WHERE {$this->tblName}.user_wallet_id = '{$user_wallet_id}' AND {$this->tblName}.transaction_id = '".Transaction::WITHDRAW."'",$status);
+
+        return $this->getSum("WHERE {$this->tblName}.user_wallet_id = '{$user_wallet_id}' AND {$this->tblName}.transaction_id = '".Transaction::DEPOSIT."'") + $withdraws;
+    }
+    
+    public function getSum(string $filter = '',string $status = null)
+    {
+        $status = isset($status) ? $status : " AND {$this->tblName}.status IN ('1')";
         $sql = "SELECT 
                 SUM({$this->tblName}.ammount) as a
             FROM 
                 {$this->tblName}
                 {$filter}
-            AND 
-                {$this->tblName}.status IN ('1')
+                {$status}
             ";
 
         if($total = $this->connection()->field($sql))
@@ -139,6 +152,115 @@ class TransactionPerWallet extends Orm {
         }
 
         return 0;
+    }
+    
+    public function getAllGains(string $filter = "")
+    {
+        $sql = "SELECT 
+                    SUM({$this->tblName}.ammount) as total_ammount,
+                    {$this->tblName}.user_wallet_id,
+                    user_wallet.user_login_id
+                FROM 
+                    {$this->tblName}
+                LEFT JOIN 
+                    user_wallet
+                ON 
+                    user_wallet.user_wallet_id = {$this->tblName}.user_wallet_id
+                WHERE 
+                    {$this->tblName}.transaction_id IN ('".Transaction::INVESTMENT."','".Transaction::REFERRAL_INVESTMENT."')
+                AND 
+                    {$this->tblName}.create_date
+                AND 
+                    {$this->tblName}.status IN ('".WithdrawPerUser::WAITING_FOR_DEPOSIT."')
+                    {$filter}
+                GROUP BY 
+                    user_wallet.user_wallet_id
+                ";
+
+        return $this->connection()->rows($sql);
+    }
+    
+    public function getTotalWithdraws(int $user_wallet_id = null)
+    {
+        if(isset($user_wallet_id) === true)
+        {
+            $sql = "SELECT 
+                        SUM({$this->tblName}.ammount) as total_ammount
+                    FROM 
+                        {$this->tblName}
+                    LEFT JOIN 
+                        user_wallet
+                    ON 
+                        user_wallet.user_wallet_id = {$this->tblName}.user_wallet_id
+                    WHERE 
+                        {$this->tblName}.transaction_id IN ('".Transaction::WITHDRAW."')
+                    AND 
+                        {$this->tblName}.user_wallet_id = '{$user_wallet_id}'
+                    AND 
+                        {$this->tblName}.status IN ('".WithdrawPerUser::DEPOSITED."','".WithdrawPerUser::WAITING_FOR_DEPOSIT."')
+                    ";
+
+            if($ammount = $this->connection()->field($sql))
+            {
+                return $ammount;
+            }
+        }
+
+        return 0;
+    }
+    
+    public function setTransactionsAsTranslated(array $transactions = null)
+    {
+        if(isset($transactions) === true)
+        {
+            $saved = 0;
+
+            foreach($transactions as $transaction)
+            {
+                $TransactionPerWallet = new TransactionPerWallet;
+                
+                if($TransactionPerWallet->cargarDonde("transaction_per_wallet_id = ?",$transaction['transaction_per_wallet_id']))
+                {
+                    $TransactionPerWallet->status = self::TRANSLATED;
+                    
+                    if($TransactionPerWallet->save())
+                    {
+                        $saved++;
+                    }
+                }
+            }
+
+            return $saved == sizeof($transactions);
+        }
+    }
+
+    public function getAllGainsList(int $user_wallet_id = null)
+    {
+        if(isset($user_wallet_id) === true)
+        {
+            $sql = "SELECT 
+                        {$this->tblName}.{$this->tblName}_id,
+                        {$this->tblName}.ammount,
+                        {$this->tblName}.user_wallet_id,
+                        user_wallet.user_login_id
+                    FROM 
+                        {$this->tblName}
+                    LEFT JOIN 
+                        user_wallet
+                    ON 
+                        user_wallet.user_wallet_id = {$this->tblName}.user_wallet_id
+                    WHERE
+                        {$this->tblName}.user_wallet_id = '{$user_wallet_id}'
+                    AND 
+                        {$this->tblName}.transaction_id IN ('".Transaction::INVESTMENT."','".Transaction::REFERRAL_INVESTMENT."')
+                    AND 
+                        {$this->tblName}.status IN ('".WithdrawPerUser::WAITING_FOR_DEPOSIT."')
+                    ";
+
+            return $this->connection()->rows($sql);
+        }
+
+        return false;
     }
 
     public function getAllDeposits()
