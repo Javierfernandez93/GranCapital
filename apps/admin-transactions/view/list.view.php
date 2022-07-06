@@ -148,7 +148,7 @@
                                                     <li><button class="dropdown-item" @click="deleteDeposit(transaction.transaction_requirement_per_user_id)">Eliminar fondeo</button></li>
                                                 <?php } ?>
                                                 <?php if($UserSupport->hasPermission('view_deposit')) { ?>
-                                                    <li><button class="dropdown-item" @click="viewDeposit(transaction)">Ver fondeo</button></li>
+                                                    <li><button class="dropdown-item" @click="viewDeposit(transaction)">Ver info fondeo (API)</button></li>
                                                 <?php } ?>
                                             </ul>
                                         </div>
