@@ -1,4 +1,8 @@
-<?php define("TO_ROOT", "../../");
+<?php
+
+use Google\Protobuf\Field\Kind;
+
+ define("TO_ROOT", "../../");
 
 require_once TO_ROOT. "/system/core.php";
 
@@ -12,7 +16,9 @@ if($UserSupport->_loaded === true)
     {
         if($data['broker_id'])
         {
-            if(GranCapital\CapitalPerBroker::addCapital($data['broker_id'],$data['capital'],$data['day']))
+            $data['kind'] = GranCapital\CapitalPerBroker::CAPITAL;
+            
+            if(GranCapital\CapitalPerBroker::addCapital($data['broker_id'],$data['capital'],$data['day'],$data['kind']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";

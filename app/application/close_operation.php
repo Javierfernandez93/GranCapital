@@ -57,7 +57,7 @@ function saveNewCapitals(array $brokers = null,string $day = null) : bool
     {
         $CapitalPerBroker = new GranCapital\CapitalPerBroker;
         
-        if($CapitalPerBroker->addCapital($broker['broker_id'],$broker['gain'],$day))
+        if($CapitalPerBroker->addCapital($broker['broker_id'],$broker['gain'],$day,GranCapital\CapitalPerBroker::BROKER_GAIN))
         {
             $saved++;
         }

@@ -6,6 +6,8 @@ use HCStudio\Orm;
 
 class CapitalPerBroker extends Orm {
     const DELETED = -1;
+    const BROKER_GAIN = 1;
+    const CAPITAL = 2;
 	protected $tblName = 'capital_per_broker';
 	public function __construct() {
 		parent::__construct();
@@ -64,25 +66,26 @@ class CapitalPerBroker extends Orm {
         return false;
 	}
 	
-    public static function addCapital(int $broker_id = null,float $capital = null,string $day = null) : bool
+    public static function addCapital(int $broker_id = null,float $capital = null,string $day = null,int $kind = null) : bool
     {
         
         $CapitalPerBroker = new CapitalPerBroker;
         
-        if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($broker_id,$day))
+        if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($broker_id,$day,$kind))
         {
-            $CapitalPerBroker->cargarDonde("capital_per_broker_id = ?",$capital_per_broker_id);
+            $CapitalPerBroker->cargarDonde("capital_per_broker_id = ? AND kind = ?",[$capital_per_broker_id,$kind]);
         } else {
             $CapitalPerBroker->broker_id = $broker_id;
             $CapitalPerBroker->create_date = isset($day) ? strtotime($day) : time();
         }
         
+        $CapitalPerBroker->kind = $kind;
         $CapitalPerBroker->capital = $capital;
 
         return $CapitalPerBroker->save();
     }
 
-    public function getTodayCapital(int $broker_id = null,string $day = null)
+    public function getTodayCapital(int $broker_id = null,string $day = null,int $kind = null)
 	{
         if(isset($broker_id) === true)
         {
@@ -97,6 +100,8 @@ class CapitalPerBroker extends Orm {
                         {$this->tblName}.broker_id = '{$broker_id}'
                     AND 
                         {$this->tblName}.status = '1'
+                    AND 
+                        {$this->tblName}.kind = '{$kind}'
                     AND 
                         {$this->tblName}.create_date
                     BETWEEN 
