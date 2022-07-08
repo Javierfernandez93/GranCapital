@@ -75,10 +75,6 @@ Vue.createApp({
             const DATA_COUNT = 7;
             const NUMBER_CFG = [123, 123, 123, 123, 123];
 
-            console.log(response);
-
-            // const labels = Utils.months({count: 7});
-
             let datasets = [];
             response.brokers.map((broker) => {
                 datasets.push({
@@ -135,10 +131,6 @@ Vue.createApp({
         },
         initChartPie: function (response) {
             const ctx = document.getElementById("myChartPie").getContext("2d");
-
-            console.log(response.pie.brokersNames)
-            console.log(response.pie.brokersColors)
-            console.log(response.pie.data)
             const data = {
                 labels: response.pie.brokersNames,
                 datasets: [
@@ -171,8 +163,8 @@ Vue.createApp({
         },
         calculateAdvancedStats: function () {
             console.log(this.stats)
-            this.stats.gainsPerDay.percentaje = this.stats.gainsPerDay.ammount > 0 ? (this.stats.gainsPerDay.ammount * 100)/this.stats.totalCapital : 0
-            this.stats.profitsPerDay.percentaje = this.stats.profitsPerDay.ammount > 0 ? (this.stats.profitsPerDay.ammount * 100)/this.stats.totalCapital : 0
+            this.stats.gainsPerDay.percentaje = this.stats.gainsPerDay.ammount != null ? (this.stats.gainsPerDay.ammount * 100)/this.stats.totalCapital : 0
+            this.stats.profitsPerDay.percentaje = this.stats.profitsPerDay.ammount != null ? (this.stats.profitsPerDay.ammount * 100)/this.stats.totalCapital : 0
 
             this.stats.gains.percentaje = this.stats.gains.ammount > 0 ? (this.stats.gains.ammount * 100)/this.stats.totalCapital : 0
             this.stats.profits.percentaje = this.stats.profits.ammount > 0 ? (this.stats.profits.ammount * 100)/this.stats.totalCapital : 0

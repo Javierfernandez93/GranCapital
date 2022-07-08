@@ -47,7 +47,7 @@ class GainPerBroker extends Orm {
             $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
             
             $sql = "SELECT 
-                        SUM({$this->tblName}.gain) as g
+                        SUM({$this->tblName}.gain) as gain
                     FROM 
                         {$this->tblName}
                     WHERE 
@@ -60,10 +60,13 @@ class GainPerBroker extends Orm {
                         {$end_of_day}
                     ";
                     
-            return $this->connection()->field($sql);
+            if($gain = $this->connection()->field($sql))
+            {
+                return $gain;
+            }
         }
 
-        return false;
+        return 0;
 	}
     
     public function getAllGains()

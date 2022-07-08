@@ -70,10 +70,13 @@ class ProfitPerUser extends Orm
                   {$end_of_day}
               ";
 
-      return $this->connection()->field($sql);
+      if($profit = $this->connection()->field($sql))
+      {
+        return $profit;
+      }
     }
 
-    return false;
+    return 0;
   }
   public function getAllProfits()
   {
