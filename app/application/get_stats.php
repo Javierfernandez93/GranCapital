@@ -1,9 +1,4 @@
-<?php
-
-use GranCapital\CapitalPerBroker;
-use GranCapital\GainPerBroker;
-
- define("TO_ROOT", "../../");
+<?php define("TO_ROOT", "../../");
 
 require_once TO_ROOT. "/system/core.php";
 
@@ -14,7 +9,6 @@ $UserSupport = new GranCapital\UserSupport;
 if($UserSupport->_loaded === true)
 {
     $data['day'] = date("Y-m-d");
-    $data['day'] = date("2022-07-07");
 
     $GainPerBroker = new GranCapital\GainPerBroker;
     $ProfitPerUser = new GranCapital\ProfitPerUser;
@@ -53,7 +47,7 @@ if($UserSupport->_loaded === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function getBrokersChartData(array &$data = null,CapitalPerBroker $CapitalPerBroker = null)
+function getBrokersChartData(array &$data = null,GranCapital\CapitalPerBroker $CapitalPerBroker = null)
 {
     $Broker = new GranCapital\Broker;
     $GainPerBroker = new GranCapital\GainPerBroker;
