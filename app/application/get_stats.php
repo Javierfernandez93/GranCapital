@@ -13,6 +13,9 @@ $UserSupport = new GranCapital\UserSupport;
 
 if($UserSupport->_loaded === true)
 {
+    $data['day'] = date("Y-m-d");
+    $GainPerBroker = new GranCapital\GainPerBroker;
+    $ProfitPerUser = new GranCapital\ProfitPerUser;
     $CapitalPerBroker = new GranCapital\CapitalPerBroker;
     
     getBrokersChartData($data,$CapitalPerBroker);
@@ -26,10 +29,21 @@ if($UserSupport->_loaded === true)
         'totalWithdraws' => $TransactionPerWallet->getAllWithdraws(),
         'totalProfits' => $TransactionPerWallet->getAllProfits(),
         'pendingWithdraws' => $WithdrawPerUser->getCountPending(),
+        'gainsPerDay' => [
+            'ammount' => $GainPerBroker->getGainsPerDay($data['day'])
+        ],
+        'profitsPerDay' => [
+            'ammount' => $ProfitPerUser->getProfitsPerDay($data['day'])
+        ],
+        'gains' => [
+            'ammount' => $GainPerBroker->getAllGains()
+        ],
+        'profits' => [
+            'ammount' => $ProfitPerUser->getAllProfits()
+        ],
         'totalUsers' => $UserSupport->getCountUsers()
     ];
 
-    // d($data);
     $data["s"] = 1;
     $data["r"] = "DATA_OK";
 } else {

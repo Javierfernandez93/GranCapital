@@ -48,6 +48,45 @@ class ProfitPerUser extends Orm
 
     return false;
   }
+  
+  public function getProfitsPerDay(string $day = null)
+  {
+    if (isset($day) === true) {
+
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+      
+      $sql = "SELECT
+                SUM({$this->tblName}.profit) as profit
+              FROM 
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.status = '1'
+              AND 
+                {$this->tblName}.create_date
+              BETWEEN 
+                  {$begin_of_day}
+              AND 
+                  {$end_of_day}
+              ";
+
+      return $this->connection()->field($sql);
+    }
+
+    return false;
+  }
+  public function getAllProfits()
+  {
+    $sql = "SELECT
+              SUM({$this->tblName}.profit) as profit
+            FROM 
+              {$this->tblName}
+            WHERE 
+              {$this->tblName}.status = '1'
+            ";
+
+    return $this->connection()->field($sql);
+  }
 
   public function getWorkingDays()
   {

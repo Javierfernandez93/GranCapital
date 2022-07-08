@@ -11,6 +11,7 @@ Vue.createApp({
             users: {},
             usersAux: {},
             query: null,
+            total: 0,
             columns: { // 0 DESC , 1 ASC 
                 company_id: {
                     name: 'company_id',
@@ -94,11 +95,19 @@ Vue.createApp({
         goToEdit: function (company_id) {
             window.location.href = '../../apps/admin-users/edit?ulid=' + company_id
         },
+        getTotals: function () {
+            this.users.map((user)=>{
+                this.total += user.ammount != null ? parseFloat(user.ammount) : 0
+            })
+
+        },
         getUsers: function () {
             this.UserSupport.getUsers({}, (response) => {
                 if (response.s == 1) {
                     this.usersAux = response.users
                     this.users = this.usersAux
+
+                    this.getTotals()
                 }
             })
         },

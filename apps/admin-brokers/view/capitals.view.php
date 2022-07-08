@@ -30,6 +30,7 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto invertido</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
@@ -38,6 +39,9 @@
                         <tbody>
                             <tr v-for="capital in capitals"
                             class="text-center">
+                                <td>
+                                    {{capital.capital_per_broker_id}}
+                                </td>
                                 <td>
                                     <h6 class="mb-0 text-sm">$ {{capital.capital.numberFormat(2)}}</h6>
                                 </td>

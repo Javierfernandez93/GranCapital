@@ -270,7 +270,8 @@ class TransactionPerWallet extends Orm {
 
     public function getAllWithdraws()
     {
-        return $this->getSum("WHERE {$this->tblName}.transaction_id = '".Transaction::WITHDRAW."'");
+        $status = "AND {$this->tblName}.status IN ('1','2')";
+        return $this->getSum("WHERE {$this->tblName}.transaction_id = '".Transaction::WITHDRAW."'",$status);
     }
 
     public function getAllProfits()

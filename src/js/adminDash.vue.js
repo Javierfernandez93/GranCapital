@@ -13,8 +13,25 @@ Vue.createApp({
                 totalDeposit: 0,
                 totalWithdraws: 0,
                 totalProfits: 0,
+                profits: 0,
                 pendingWithdraws: 0,
                 totalUsers: 0,
+                gainsPerDay: {
+                    ammount : 0,
+                    percentaje: 0
+                },
+                profitsPerDay: {
+                    ammount : 0,
+                    percentaje: 0
+                },
+                gains: {
+                    ammount : 0,
+                    percentaje: 0
+                },
+                profits: {
+                    ammount : 0,
+                    percentaje: 0
+                },
             },
         };
     },
@@ -152,6 +169,14 @@ Vue.createApp({
 
             const myChart = new Chart(ctx, config);
         },
+        calculateAdvancedStats: function () {
+            console.log(this.stats)
+            this.stats.gainsPerDay.percentaje = this.stats.gainsPerDay.ammount > 0 ? (this.stats.gainsPerDay.ammount * 100)/this.stats.totalCapital : 0
+            this.stats.profitsPerDay.percentaje = this.stats.profitsPerDay.ammount > 0 ? (this.stats.profitsPerDay.ammount * 100)/this.stats.totalCapital : 0
+
+            this.stats.gains.percentaje = this.stats.gains.ammount > 0 ? (this.stats.gains.ammount * 100)/this.stats.totalCapital : 0
+            this.stats.profits.percentaje = this.stats.profits.ammount > 0 ? (this.stats.profits.ammount * 100)/this.stats.totalCapital : 0
+        },
         getBrokersPercentajeData: function (response) {
             let brokers = []
 
@@ -172,6 +197,8 @@ Vue.createApp({
                     if (response.s == 1) {
                         this.stats = response.stats;
                         this.brokers = this.getBrokersPercentajeData(response);
+                        
+                        this.calculateAdvancedStats();
 
                         resolve(response);
                     }

@@ -203,7 +203,7 @@ Vue.createApp({
                     { 
                         text: 'Aceptar',
                         handler: data => {
-                            this.UserSupport.addCapitalToBroker({capital:data.capital,broker_id:broker.broker_id},(response) => {
+                            this.UserSupport.addCapitalToBroker({capital:data.capital,broker_id:broker.broker_id,day:this.date.day},(response) => {
                                 if(response.s == 1)
                                 {
                                     this.getBrokers()

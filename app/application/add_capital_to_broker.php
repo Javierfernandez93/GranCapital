@@ -12,7 +12,7 @@ if($UserSupport->_loaded === true)
     {
         if($data['broker_id'])
         {
-            if(GranCapital\CapitalPerBroker::addCapital($data['broker_id'],$data['capital']))
+            if(GranCapital\CapitalPerBroker::addCapital($data['broker_id'],$data['capital'],$data['day']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";

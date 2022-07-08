@@ -133,9 +133,134 @@
         </div>
     </div>
 
+    <div
+        class="row mb-5">
+        <div class="col-xl-3">
+            <div class="card bg-gradient-success">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5 class="text-white">
+                            Tradings brokers <small class="text-white text-xs">(hoy)</small>
+                            <span class="text-white text-sm font-weight-bolder d-none">
+                                1 % 
+                            </span>
+                        </h5>
+                    </div>
+
+                    <div class="row numbers">
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-white font-weight-bold">Total</p>
+                            <h5 class="font-weight-bolder text-white mb-0">
+                                $ {{ stats.gainsPerDay.ammount.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-white font-weight-bold">%</p>
+                            <h5 class="font-weight-bolder text-white mb-0">
+                                {{ stats.gainsPerDay.percentaje.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>
+                            Profits usuarios <small class="text-muted text-xs">(hoy)</small>
+                            <span class="text-success text-sm font-weight-bolder d-none">
+                                1 % 
+                            </span>
+                        </h5>
+                    </div>
+
+                    <div class="row numbers">
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">Total</p>
+                            <h5 class="font-weight-bolder text-primary mb-0">
+                                $ {{ stats.profitsPerDay.ammount.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">%</p>
+                            <h5 class="font-weight-bolder text-primary mb-0">
+                                {{ stats.profitsPerDay.percentaje.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>
+                            Tradings brokers <small class="text-muted text-xs">(general)</small>
+                            <span class="text-success text-sm font-weight-bolder d-none">
+                                1 % 
+                            </span>
+                        </h5>
+                    </div>
+
+                    <div class="row numbers">
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">Total</p>
+                            <h5 class="font-weight-bolder text-primary mb-0">
+                                $ {{ stats.gains.ammount.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">%</p>
+                            <h5 class="font-weight-bolder text-primary mb-0">
+                                {{ stats.gains.percentaje.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h5>
+                            Profits usuarios <small class="text-muted text-xs">(general)</small>
+                            <span class="text-success text-sm font-weight-bolder d-none">
+                                1 % 
+                            </span>
+                        </h5>
+                    </div>
+
+                    <div class="row numbers">
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">Total</p>
+                            <h5 class="font-weight-bolder text-primary mb-0">
+                                $ {{ stats.profits.ammount.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <p class="text-sm mb-0 text-capitalize text-dark font-weight-bold">%</p>
+                            <h5 class="font-weight-bolder text-primary mb-0">
+                                {{ stats.profits.percentaje.numberFormat(2) }} 
+                            </h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div v-if="brokers" class="row">
         <div v-for="broker in brokers"
-            class="col">
+            class="col-xl-3 mb-3">
             <div class="card bg-gradient-lisght">
                 <div class="card-body">
                     <div class="mb-3">

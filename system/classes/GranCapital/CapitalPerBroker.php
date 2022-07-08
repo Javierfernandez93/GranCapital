@@ -15,12 +15,13 @@ class CapitalPerBroker extends Orm {
 	{
         if(isset($broker_id) === true)
         {
-            $last_minute = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+            $last_minute = isset($day) ? strtotime(date("Y-m-d 23:59:59",strtotime($day))) : time();
             
             $sql = "SELECT 
                         {$this->tblName}.{$this->tblName}_id,
                         {$this->tblName}.capital,
-                        {$this->tblName}.create_date
+                        {$this->tblName}.create_date,
+                        FROM_UNIXTIME({$this->tblName}.create_date) as c
                     FROM 
                         {$this->tblName}
                     WHERE 
@@ -28,10 +29,9 @@ class CapitalPerBroker extends Orm {
                     AND 
                         {$this->tblName}.broker_id = '{$broker_id}'
                     AND 
-                        {$this->tblName}.create_date < '{$last_minute}'
+                        {$this->tblName}.create_date <= '{$last_minute}'
                     ORDER BY
                         {$this->tblName}.create_date 
-                    
                     DESC 
                     ";
             
@@ -66,16 +66,17 @@ class CapitalPerBroker extends Orm {
 	
     public static function addCapital(int $broker_id = null,float $capital = null,string $day = null) : bool
     {
+        
         $CapitalPerBroker = new CapitalPerBroker;
-            
+        
         if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($broker_id,$day))
         {
             $CapitalPerBroker->cargarDonde("capital_per_broker_id = ?",$capital_per_broker_id);
         } else {
             $CapitalPerBroker->broker_id = $broker_id;
-            $CapitalPerBroker->create_date = time();
+            $CapitalPerBroker->create_date = isset($day) ? strtotime($day) : time();
         }
-
+        
         $CapitalPerBroker->capital = $capital;
 
         return $CapitalPerBroker->save();

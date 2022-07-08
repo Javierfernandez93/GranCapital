@@ -14,7 +14,7 @@ if($UserSupport->_loaded === true)
         
         if($TradingPerformance->isOperationOpen($data['day']))
         {
-            if(saveNewCapitals($data['brokers']))
+            if(saveNewCapitals($data['brokers'],$data['day']))
             {
                 if(closeOperation($data['day']))
                 {
@@ -43,12 +43,15 @@ if($UserSupport->_loaded === true)
 
 function closeOperation(string $day = null) : bool
 {
+    // return true;
     return (new GranCapital\TradingPerformance)->closeOperation($day);
 }
 
 function saveNewCapitals(array $brokers = null,string $day = null) : bool
 {
     $saved = 0;
+
+    $day = date("Y-m-d H:i:s",strtotime("+1 day",strtotime($day)));
 
     foreach ($brokers as $broker) 
     {

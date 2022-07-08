@@ -37,6 +37,8 @@ function filterData(array $brokers = null,string $day = null)
     {
         $capitals = $CapitalPerBroker->getAll($broker['broker_id'],$day);
 
+        // d($capitals);
+
         $brokers[$key]['capital'] = $capitals ? array_sum(array_column($capitals,"capital")) : 0;
     }
 

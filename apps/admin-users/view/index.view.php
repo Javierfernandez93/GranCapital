@@ -158,6 +158,14 @@
                                     </td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total </td>
+                                    <td>{{total.numberFormat(2)}}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
