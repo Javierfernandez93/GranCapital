@@ -68,7 +68,6 @@ class CapitalPerBroker extends Orm {
 	
     public static function addCapital(int $broker_id = null,float $capital = null,string $day = null,int $kind = null) : bool
     {
-        
         $CapitalPerBroker = new CapitalPerBroker;
         
         if($capital_per_broker_id = $CapitalPerBroker->getTodayCapital($broker_id,$day,$kind))

@@ -14,6 +14,8 @@ $UserSupport = new GranCapital\UserSupport;
 if($UserSupport->_loaded === true)
 {
     $data['day'] = date("Y-m-d");
+    $data['day'] = date("2022-07-07");
+
     $GainPerBroker = new GranCapital\GainPerBroker;
     $ProfitPerUser = new GranCapital\ProfitPerUser;
     $CapitalPerBroker = new GranCapital\CapitalPerBroker;

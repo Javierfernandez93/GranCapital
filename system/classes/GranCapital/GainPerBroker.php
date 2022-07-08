@@ -40,16 +40,38 @@ class GainPerBroker extends Orm {
 	}
 
     public function getGainsPerDay(string $day = null)
+    {
+        $result = 0;
+
+        if($gains_per_day = $this->_getGainsPerDay($day))
+        {
+            $result = array_reduce($gains_per_day, function($carry,$item){
+                $carry += $item['fee'] > 0 ? $item['gain'] * $item['fee'] : $item['gain']; 
+
+                return $carry;
+            });
+        }
+
+        return $result;
+    }
+
+    public function _getGainsPerDay(string $day = null)
 	{
         if(isset($day) === true)
         {
             $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
             $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
             
-            $sql = "SELECT 
-                        SUM({$this->tblName}.gain) as gain
+            $sql = "SELECT
+                        {$this->tblName}.broker_id, 
+                        SUM({$this->tblName}.gain) as gain,
+                        broker.fee
                     FROM 
                         {$this->tblName}
+                    LEFT JOIN
+                        broker 
+                    ON 
+                        broker.broker_id = {$this->tblName}.broker_id
                     WHERE 
                         {$this->tblName}.status = '1'
                     AND 
@@ -58,28 +80,54 @@ class GainPerBroker extends Orm {
                         {$begin_of_day}
                     AND 
                         {$end_of_day}
+                    GROUP BY 
+                        {$this->tblName}.broker_id
                     ";
                     
-            if($gain = $this->connection()->field($sql))
+            if($gains = $this->connection()->rows($sql))
             {
-                return $gain;
+                return $gains;
             }
         }
 
-        return 0;
+        return false;
 	}
     
     public function getAllGains()
 	{
+        $result = 0;
+
+        if($gains_per_day = $this->_getAllGains())
+        {
+            $result = array_reduce($gains_per_day, function($carry,$gain){
+                $carry += $gain['fee'] > 0 ? $gain['gain'] * $gain['fee'] : $gain['gain']; 
+
+                return $carry;
+            });
+        }
+
+        return $result;
+	}
+    
+    public function _getAllGains()
+	{
         $sql = "SELECT 
-                    SUM({$this->tblName}.gain) as g
+                    SUM({$this->tblName}.gain) as gain,
+                    broker.broker_id,
+                    broker.fee
                 FROM 
                     {$this->tblName}
+                LEFT JOIN   
+                    broker 
+                ON 
+                    broker.broker_id = {$this->tblName}.broker_id
                 WHERE 
                     {$this->tblName}.status = '1'
+                GROUP BY 
+                    {$this->tblName}.broker_id
                 ";
                 
-        return $this->connection()->field($sql);
+        return $this->connection()->rows($sql);
 	}
 	
     public static function addGain(int $broker_id = null,float $gain = null,string $day = null) : bool
