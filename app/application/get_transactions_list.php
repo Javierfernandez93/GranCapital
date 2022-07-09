@@ -10,7 +10,7 @@ if($UserSupport->_loaded === true)
 {
     $TransactionRequirementPerUser = new GranCapital\TransactionRequirementPerUser;
 
-    if(in_array($data['status'],[GranCapital\TransactionRequirementPerUser::PENDING,GranCapital\TransactionRequirementPerUser::EXPIRED,GranCapital\TransactionRequirementPerUser::VALIDATED]))
+    if(in_array($data['status'],[GranCapital\TransactionRequirementPerUser::PENDING,GranCapital\TransactionRequirementPerUser::EXPIRED,GranCapital\TransactionRequirementPerUser::VALIDATED,GranCapital\TransactionRequirementPerUser::DELETED]))
     {
         $data['filter'] = " WHERE transaction_requirement_per_user.status = '".$data['status']."'";
     }

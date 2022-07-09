@@ -124,6 +124,10 @@
                                             class="badge bg-danger">
                                             Expirada
                                         </span>
+                                        <span v-else-if="transaction.status == -1"
+                                            class="badge bg-danger">
+                                            Eliminada
+                                        </span>
                                         <span v-else-if="transaction.status == 2"
                                             class="badge bg-success">
                                             Aplicada
@@ -142,10 +146,10 @@
                                             </button>
                                             <ul class="dropdown-menu shadow">
                                                 <?php if($UserSupport->hasPermission('apply_deposit')) { ?>
-                                                    <li><button class="dropdown-item" @click="applyDeposit(transaction.transaction_requirement_per_user_id)">Aplicar fondeo</button></li>
+                                                    <li v-if="transaction.status == 1"><button class="dropdown-item" @click="applyDeposit(transaction.transaction_requirement_per_user_id)">Aplicar fondeo</button></li>
                                                 <?php } ?>
                                                 <?php if($UserSupport->hasPermission('delete_deposit')) { ?>
-                                                    <li><button class="dropdown-item" @click="deleteDeposit(transaction.transaction_requirement_per_user_id)">Eliminar fondeo</button></li>
+                                                    <li v-if="transaction.status == 1"><button class="dropdown-item" @click="deleteDeposit(transaction.transaction_requirement_per_user_id)">Eliminar fondeo</button></li>
                                                 <?php } ?>
                                                 <?php if($UserSupport->hasPermission('view_deposit')) { ?>
                                                     <li><button class="dropdown-item" @click="viewDeposit(transaction)">Ver info fondeo (API)</button></li>

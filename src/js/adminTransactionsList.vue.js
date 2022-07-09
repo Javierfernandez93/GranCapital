@@ -16,11 +16,15 @@ Vue.createApp({
                 },
                 {
                     name: 'Todas',
-                    status: -1
+                    status: -2
                 },
                 {
-                    name: 'Canceladas',
+                    name: 'Expiradas',
                     status: 0
+                },
+                {
+                    name: 'Eliminadas',
+                    status: -1
                 },
                 {
                     name: 'Pendientes',

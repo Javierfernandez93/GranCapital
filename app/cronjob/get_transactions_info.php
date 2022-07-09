@@ -66,6 +66,12 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                                 }
                                 
                             }
+                        } else if($result['result']['status'] == -1) {
+                            if(expireTransaction($transaction['transaction_requirement_per_user_id']))
+                            {
+                                $data["s"] = 1;
+                                $data["r"] = "DATA_OK";
+                            }
                         }
                     } else {
                         print 'Error: '.$result['error']."\n";
@@ -114,6 +120,24 @@ function updateTransaction(int $transaction_requirement_per_user_id = null)
                 $TransactionRequirementPerUser->status = GranCapital\TransactionRequirementPerUser::VALIDATED;
                 $TransactionRequirementPerUser->validate_date = time();
                 $TransactionRequirementPerUser->validation_method = GranCapital\TransactionRequirementPerUser::CRONJOB;
+
+                return $TransactionRequirementPerUser->save();
+            }
+        }
+    }
+}
+
+function expireTransaction(int $transaction_requirement_per_user_id = null)
+{
+    if(isset($transaction_requirement_per_user_id) === true)
+    {
+        $TransactionRequirementPerUser = new GranCapital\TransactionRequirementPerUser;
+        
+        if($TransactionRequirementPerUser->isPending($transaction_requirement_per_user_id))
+        {   
+            if($TransactionRequirementPerUser->cargarDonde("transaction_requirement_per_user_id = ?",$transaction_requirement_per_user_id))
+            {
+                $TransactionRequirementPerUser->status = GranCapital\TransactionRequirementPerUser::EXPIRED;
 
                 return $TransactionRequirementPerUser->save();
             }
