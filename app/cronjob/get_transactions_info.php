@@ -30,7 +30,7 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                     { 
                         if($result['result']['status_text'] == CoinPayments\Api::COMPLETED)
                         {   
-                            if($result['result']['status'] == $transaction['ammount'])
+                            if($result['result']['status'] == 100)
                             {   
                                 $UserWallet = new GranCapital\UserWallet;
                                 
