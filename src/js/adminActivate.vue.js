@@ -121,7 +121,7 @@ Vue.createApp({
         updatePlan: function () {
             this.UserSupport.updatePlan({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, additional_profit: this.user.additional_profit, ammount: this.user.ammount, sponsor_profit: this.user.sponsor_profit }, (response) => {
                 if (response.s == 1) {
-                    this.$refs.button.innerText = 'Actualizado con éxito'
+                    this.$refs.buttonPlan.innerText = 'Actualizado con éxito'
                 } else if(response.r == 'PROFIT_EXCEDS_MAX_LIMIT') {
                     alertMessage(`La suma de los profits excede el máximo que se puede otorgar (${response.MAX_PROFIT} %). Ingresa porcentajes menores al máximo.`)
                 }

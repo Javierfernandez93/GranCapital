@@ -72,7 +72,7 @@
                
                 <?php if($UserSupport->hasPermission('list_users')) { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminUsers,JFStudio\Router::AdminUserEdit,JFStudio\Router::AdminUserAdd,JFStudio\Router::AdmiActivation])){?>active<?php } ?>"
+                        <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminUsers,JFStudio\Router::AdminDeposits,JFStudio\Router::AdminUserEdit,JFStudio\Router::AdminUserAdd,JFStudio\Router::AdmiActivation])){?>active<?php } ?>"
                             href="../../apps/admin-users">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

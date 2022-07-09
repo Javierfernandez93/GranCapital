@@ -96,7 +96,7 @@
                         <div>Profit sponsor = {{user.sponsor_profit}}%</div>
                         <div class="fw-semibold">Total = {{parseFloat(user.additional_profit) + parseFloat(selectedPlan.profit) + parseFloat(user.sponsor_profit)}}% </div>
                     </div>
-                    <button @click="updatePlan" ref="button" class="btn btn-primary" type="button">Guardar/Actualizar</button>
+                    <button @click="updatePlan" ref="buttonPlan" class="btn btn-primary" type="button">Guardar/Actualizar</button>
                 </div>
             </div>
         </div>

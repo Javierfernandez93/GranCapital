@@ -91,11 +91,11 @@ class ProfitPerUser extends Orm
     return $this->connection()->field($sql);
   }
 
-  public function getWorkingDays()
+  public function getWorkingDays(string $day = null)
   {
     $working_days = 0;
 
-    $start_date = strtotime(date("Y-m-01"));
+    $start_date = strtotime(date("Y-m-01",strtotime($day)));
 
     for ($i = 0; $i < date("t"); $i++) 
     {
@@ -109,9 +109,9 @@ class ProfitPerUser extends Orm
     return $working_days;
   }
 
-  public function calculateProfit(float $profit = null, float $ammount = null)
+  public function calculateProfit(float $profit = null, float $ammount = null,string $day = null)
   {
-    $day_profit = $profit / $this->getWorkingDays();
+    $day_profit = $profit / $this->getWorkingDays($day);
 
     return round(Util::getPercentaje($ammount, $day_profit),2);
   }

@@ -40,7 +40,7 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                     {
                         $total_profit = $active_plan['profit']+$active_plan['additional_profit'];
                         
-                        if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
+                        if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount'],$data['day']))
                         {
                             $data['report'][0]['profits'][] = [
                                 'user_login_id' => $active_plan['user_login_id'],
@@ -86,7 +86,7 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                                     {
                                         $total_profit = $active_plan['sponsor_profit'];
                                         
-                                        if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount']))
+                                        if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount'],$data['day']))
                                         {
                                             $data['report'][1]['profits'][] = [
                                                 'referral_id' => $active_plan['user_login_id'],
