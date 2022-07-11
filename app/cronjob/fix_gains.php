@@ -27,7 +27,7 @@ if (($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\
                 if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount'],$data['day']))
                 {
                     $total_gain += $gain;
-                    
+
                     echo "--- Usuario {$active_plan['user_login_id']} <br>";
                     echo "PROFIT {$total_profit} % y monto $ {$active_plan['ammount']} - Ganará {$gain} y ganó {$active_plan['gain']}";
 
@@ -70,7 +70,6 @@ if (($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\
 
 function updateProfit($profit_per_user_id = null,$profit = null)
 {
-    return true;
     $ProfitPerUser = new GranCapital\ProfitPerUser;
     
     if($ProfitPerUser->cargarDonde("profit_per_user_id = ?",$profit_per_user_id))
@@ -84,7 +83,6 @@ function updateProfit($profit_per_user_id = null,$profit = null)
 
 function updateTransaction($profit_per_user_id = null,$ammount = null)
 {
-    return true;
     $TransactionPerWallet = new GranCapital\TransactionPerWallet;
 
     if($TransactionPerWallet->cargarDonde("profit_per_user_id = ?",$profit_per_user_id))
