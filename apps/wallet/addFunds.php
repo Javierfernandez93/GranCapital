@@ -11,7 +11,7 @@ require_once TO_ROOT . "/system/core.php";
 // 	$cps_api = new CoinpaymentsAPI($private_key, $public_key, 'json');
 // 	// $information = $cps_api->GetBasicInfo();
 	
-// 	$req = 'CPGG13BAZT5QCEVGB2E08FOIMH';
+// 	$req = 'CPGG46RUQZQ7WMHTKZ3K3EQ9LF';
 // 	$result = $cps_api->GetTxInfoSingle($req);
 	
 // 	if ($result['error'] == 'ok') {

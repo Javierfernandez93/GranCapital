@@ -115,18 +115,88 @@ Vue.createApp({
             });
         },
         deleteDeposit: function (transaction_requirement_per_user_id) {
-            this.UserSupport.deleteDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
-                if (response.s == 1) {
-                    this.getTransactionsList()
-                }
-            });
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                subTitle: "¿Estás seguro de eliminar éste depósito?",
+                buttons: [
+                    {
+                        text: "Sí, eliminar",
+                        role: "cancel",
+                        class: 'btn-danger',
+                        handler: (data) => {
+                            this.UserSupport.deleteDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
+                                if (response.s == 1) {
+                                    this.getTransactionsList()
+                                }
+                            });
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
+            })
+
+            alertCtrl.present(alert.modal);
+           
+        },
+        reactiveDeposit: function (transaction_requirement_per_user_id) {
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                subTitle: "¿Estás seguro de reactivar éste depósito?",
+                buttons: [
+                    {
+                        text: "Sí, reactivar",
+                        role: "cancel",
+                        handler: (data) => {
+                            this.UserSupport.reactiveDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
+                                if (response.s == 1) {
+                                    this.getTransactionsList()
+                                }
+                            });
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
+            })
+
+            alertCtrl.present(alert.modal);
         },
         applyDeposit: function (transaction_requirement_per_user_id) {
-            this.UserSupport.applyDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
-                if (response.s == 1) {
-                    this.getTransactionsList()
-                }
-            });
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                subTitle: "¿Estás seguro de aplicar éste depósito?",
+                buttons: [
+                    {
+                        text: "Sí, fondear",
+                        class: 'btn-success',
+                        role: "cancel",
+                        handler: (data) => {
+                            this.UserSupport.applyDeposit({ transaction_requirement_per_user_id: transaction_requirement_per_user_id }, (response) => {
+                                if (response.s == 1) {
+                                    this.getTransactionsList()
+                                }
+                            });
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
+            })
+
+            alertCtrl.present(alert.modal);
         },
         getTransactionsList: function () {
             this.transactions = {}

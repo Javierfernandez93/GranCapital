@@ -32,7 +32,7 @@
                                         <span v-else>    
                                             <i class="bi text-primary bi-arrow-down-square-fill"></i>
                                         </span>    
-                                        <u class="text-sm ms-2">ID</u>
+                                        <u class="text-sm ms-2">#</u>
                                     </th>
                                     <th 
                                         @click="sortData(columns.ammount)"
@@ -69,7 +69,7 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>
-                                        <p class="text-xs text-secondary mb-0">{{transaction.create_date.formatDate()}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{transaction.create_date.formatFullDate()}}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <div class="btn-group">
@@ -78,7 +78,7 @@
                                             </button>
                                             <ul class="dropdown-menu shadow">
                                                 <?php if($UserSupport->hasPermission('delete_deposit')) { ?>
-                                                    <li><button class="dropdown-item" @click="deleteDeposit(transaction.transaction_per_wallet_id)">Eliminar depósito</button></li>
+                                                    <li><button class="dropdown-item" @click="deleteTransaction(transaction.transaction_per_wallet_id)">Eliminar fondeo</button></li>
                                                 <?php } ?>
                                             </ul>
                                         </div>

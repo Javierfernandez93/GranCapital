@@ -12,23 +12,29 @@ if($UserSupport->_loaded === true)
     
     if($CatalogPlan->isAviableProfit($data['catalog_plan_id'],$data['additional_profit'],$data['sponsor_profit']))
     {
-        if(updatePlan($data['user_login_id'],$data['catalog_plan_id'],$data['ammount'],$data['additional_profit'],$data['sponsor_profit']))
-        {
-            $UserWallet = new GranCapital\UserWallet;
-            
-            if($UserWallet->getSafeWallet(($data['user_login_id'])))
+        $UserWallet = new GranCapital\UserWallet;
+                
+        if($UserWallet->getSafeWallet($data['user_login_id']))
+        {   
+            $data['deposit'] = $data['ammount'] - $data['originalAmmount'];
+
+            if($data['deposit'] > 0)
             {
-                if($UserWallet->doTransaction($data['ammount'],GranCapital\Transaction::DEPOSIT))
+                if($UserWallet->doTransaction($data['deposit'],GranCapital\Transaction::DEPOSIT,null,null,false))
                 {
-                    $data["s"] = 1;
-                    $data["r"] = "DATA_OK";
-                } else {
-                    $data['r'] = "NOT_TRANSACTION_MADE";
-                    $data['s'] = 0;    
+                    $data["transaction_done"] = true;
                 }
+            }
+
+            $UserPlan = new GranCapital\UserPlan;
+
+            if($UserPlan->setPlan($UserWallet->user_login_id,$data['additional_profit'],$data['sponsor_profit']))
+            {   
+                $data["s"] = 1;
+                $data["r"] = "DATA_OK";
             } else {
-                $data['r'] = "NOT_WALLET";
-                $data['s'] = 0;
+                $data["s"] = 0;
+                $data["r"] = "NOT_UPDATE_PLAN";
             }
         } else {
             $data['r'] = "DATA_ERROR";
@@ -42,24 +48,6 @@ if($UserSupport->_loaded === true)
 } else {
 	$data["s"] = 0;
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
-}
-
-function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount,$additional_profit = null,$sponsor_profit = null) : bool
-{
-    $UserPlan = new GranCapital\UserPlan;
-    
-    if(!$UserPlan->cargarDonde("user_login_id = ?",$user_login_id))
-    {
-        $UserPlan->user_login_id = $user_login_id;
-        $UserPlan->create_date = time();
-    }
-
-    $UserPlan->ammount = $ammount;
-    $UserPlan->catalog_plan_id = $catalog_plan_id;
-    $UserPlan->sponsor_profit = $sponsor_profit ? $sponsor_profit : 0;
-    $UserPlan->additional_profit = $additional_profit ? $additional_profit : 0;
-    
-    return $UserPlan->save();
 }
 
 echo json_encode($data);

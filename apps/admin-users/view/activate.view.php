@@ -168,9 +168,16 @@
                 <div class="card bg-gradient-light mb-3">
                     <div class="card-header bg-transparent pb-0 px-3">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col">
                                 <h6 class="mb-0">Añadir depósito</h6>
                             </div>
+                            <?php if($UserSupport->hasPermission('list_deposit')) { ?>
+                                <div class="col-auto">
+                                    <button class="btn btn-secondary btn-sm" @click="viewDeposits(user.user_login_id)">
+                                        Ver fondeos
+                                    </button>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="card-body">

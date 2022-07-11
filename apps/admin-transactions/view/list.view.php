@@ -154,6 +154,9 @@
                                                 <?php if($UserSupport->hasPermission('view_deposit')) { ?>
                                                     <li><button class="dropdown-item" @click="viewDeposit(transaction)">Ver info fondeo (API)</button></li>
                                                 <?php } ?>
+                                                <?php if($UserSupport->hasPermission('apply_deposit')) { ?>
+                                                    <li v-if="transaction.status == -1 || transaction.status == 0"><button class="dropdown-item" @click="reactiveDeposit(transaction.transaction_requirement_per_user_id)">Reactivar fondeo</button></li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </td>

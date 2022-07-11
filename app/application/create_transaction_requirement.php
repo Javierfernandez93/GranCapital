@@ -22,7 +22,7 @@ if($UserLogin->_loaded === true)
             {
                 $data['transaction_requirement_per_user_id'] = $TransactionRequirementPerUser->getId();
 
-                if($checkoutData = createTransaction($data))
+                if($checkoutData = createTransaction($UserLogin->email,$data))
                 {
                     $TransactionRequirementPerUser->txn_id = $checkoutData['txn_id'];
                     $TransactionRequirementPerUser->checkout_data = json_encode($checkoutData);
@@ -57,7 +57,7 @@ if($UserLogin->_loaded === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function createTransaction(array $data = null)
+function createTransaction(string $email = null,array $data = null)
 {
     require_once TO_ROOT .'/vendor2/autoload.php';
 
@@ -71,7 +71,7 @@ function createTransaction(array $data = null)
             'amount' => $data['ammount'],
             'currency1' => 'TUSD',
             'currency2' => 'BTC',
-            'buyer_email' => 'javier.fernandez.pa93@gmail.com',
+            'buyer_email' => $email,
             'item_name' => 'Fondos en Gran Capital',
             'item_number' => (string)$data['transaction_requirement_per_user_id'],
             'address' => '', // leave blank send to follow your settings on the Coin Settings page

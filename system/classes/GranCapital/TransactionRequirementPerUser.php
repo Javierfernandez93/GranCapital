@@ -109,4 +109,9 @@ class TransactionRequirementPerUser extends Orm {
     {
         return $this->checkTransactionStatus($transaction_requirement_per_user_id," AND {$this->tblName}.status = '".self::PENDING."'");
     }
+    
+    public function isAviableToReactive(int $transaction_requirement_per_user_id = null) : bool
+    {
+        return $this->checkTransactionStatus($transaction_requirement_per_user_id," AND {$this->tblName}.status IN ('".self::DELETED."','".self::EXPIRED."')");
+    }
 }

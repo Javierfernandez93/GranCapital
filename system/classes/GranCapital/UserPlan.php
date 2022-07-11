@@ -4,6 +4,10 @@ namespace GranCapital;
 
 use HCStudio\Orm;
 
+use GranCapital\UserWallet;
+use GranCapital\TransactionPerWallet;
+use GranCapital\CatalogPlan;
+
 class UserPlan extends Orm {
   protected $tblName  = 'user_plan';
 
@@ -31,13 +35,15 @@ class UserPlan extends Orm {
     return false;
   }
 
-  public function getPlan($user_login_id = null) 
+  public function getPlan(int $user_login_id = null) 
   {
     if(isset($user_login_id) === true)
     {
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id,
                 {$this->tblName}.ammount,
+                {$this->tblName}.additional_profit,
+                catalog_plan.profit,
                 catalog_plan.name
               FROM 
                 {$this->tblName}
@@ -96,7 +102,7 @@ class UserPlan extends Orm {
 
     return false;
   }
- 
+
   public function getActivePlans(string $filter = '') 
   {
     $sql = "SELECT
@@ -120,5 +126,61 @@ class UserPlan extends Orm {
             ";
 
     return $this->connection()->rows($sql);
+  }
+
+  public function calculateProfit(int $user_login_id = null,$additional_profit = null,int $catalog_plan_id = null) 
+  {
+    if($actual_plan = $this->getPlan($user_login_id))
+    {
+      if($next_profit = (new CatalogPlan)->getProfit($catalog_plan_id))
+      {
+        if($actual_plan['additional_profit'] + $actual_plan['profit'] > $next_profit)
+        {
+          $additional_profit = ($actual_plan['additional_profit'] + $actual_plan['profit']) - $next_profit;
+
+          return $additional_profit;
+        }
+      }
+    }
+
+    return $additional_profit;
+  }
+
+  public function setPlan(int $user_login_id = null,$additional_profit = null,$sponsor_profit = null) : bool
+  {
+    if(isset($user_login_id) === true)
+    {
+      $UserWallet = new UserWallet;
+
+      if($UserWallet->getSafeWallet($user_login_id))
+      {
+        $TransactionPerWallet = new TransactionPerWallet;
+
+        $ammount = $TransactionPerWallet->getSumDepositsByUser($UserWallet->getId());
+        
+        $CatalogPlan = new CatalogPlan;
+
+        if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
+        {
+          $UserPlan = new UserPlan;
+
+          if(!$UserPlan->cargarDonde("user_login_id = ?",$user_login_id))
+          {
+              $UserPlan->user_login_id = $user_login_id;
+              $UserPlan->create_date = time();
+          }
+
+          $UserPlan->additional_profit = $this->calculateProfit($user_login_id,$additional_profit,$catalog_plan_id);
+          $UserPlan->sponsor_profit = $sponsor_profit ? $sponsor_profit : $UserPlan->sponsor_profit;
+
+          $UserPlan->ammount = $ammount;
+          $UserPlan->catalog_plan_id = $ammount > 0 ? $catalog_plan_id : 0;
+          
+          return $UserPlan->save();
+        }
+      }
+    }
+
+    return false;
   }
 }

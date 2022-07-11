@@ -28,6 +28,12 @@ class UserSupport extends Http {
     deleteDeposit(data, callback) {
         return this.call('../../app/application/delete_deposit.php', data, callback);
     }
+    reactiveDeposit(data, callback) {
+        return this.call('../../app/application/reactive_deposit.php', data, callback);
+    }
+    deleteTransaction(data, callback) {
+        return this.call('../../app/application/delete_transaction.php', data, callback);
+    }
     getDeposits(data, callback) {
         return this.call('../../app/application/get_deposits.php', data, callback);
     }

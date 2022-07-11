@@ -20,47 +20,35 @@ if($UserSupport->_loaded === true)
 
                 $UserWallet = new GranCapital\UserWallet;
                 
-                if($UserWallet->getSafeWallet(($TransactionRequirementPerUser->user_login_id)))
+                if($UserWallet->getSafeWallet($TransactionRequirementPerUser->user_login_id))
                 {
                     if($UserWallet->doTransaction($TransactionRequirementPerUser->ammount,GranCapital\Transaction::DEPOSIT,null,null,false))
                     {
-                        if($ammount = $TransactionPerWallet->getSumDepositsByUser($UserWallet->getId()))
+                        $UserPlan = new GranCapital\UserPlan;
+
+                        if($UserPlan->setPlan($UserWallet->user_login_id))
                         {
-                            $CatalogPlan = new GranCapital\CatalogPlan;
-
-                            if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
+                            if(updateTransaction($data['transaction_requirement_per_user_id']))
                             {
-                                if(updatePlan($TransactionRequirementPerUser->user_login_id,$catalog_plan_id,$ammount))
+                                if(sendPush($TransactionRequirementPerUser->user_login_id,'Hemos fondeado tu cuenta',GranCapital\CatalogNotification::ACCOUNT))
                                 {
-                                    if(updateTransaction($data['transaction_requirement_per_user_id']))
-                                    {
-                                        if(sendPush($TransactionRequirementPerUser->user_login_id,'Hemos fondeado tu cuenta',GranCapital\CatalogNotification::ACCOUNT))
-                                        {
-                                            $data["push_sent"] = true;
-                                        }
-
-                                        if(sendEmail($UserSupport->getUserEmail($TransactionRequirementPerUser->user_login_id),$TransactionRequirementPerUser->ammount))
-                                        {
-                                            $data["email_sent"] = true;
-                                        }
-
-                                        $data["s"] = 1;
-                                        $data["r"] = "DATA_OK";
-                                    } else {
-                                        $data["s"] = 0;
-                                        $data["r"] = "TRANSACTION_NOT_UPDATED";
-                                    }
-                                } else {
-                                    $data["s"] = 0;
-                                    $data["r"] = "NOT_UPDATE_PLAN";
+                                    $data["push_sent"] = true;
                                 }
+
+                                if(sendEmail($UserSupport->getUserEmail($TransactionRequirementPerUser->user_login_id),$TransactionRequirementPerUser->ammount))
+                                {
+                                    $data["email_sent"] = true;
+                                }
+
+                                $data["s"] = 1;
+                                $data["r"] = "DATA_OK";
                             } else {
                                 $data["s"] = 0;
-                                $data["r"] = "NOT_CATALOG_PLAN_ID";
+                                $data["r"] = "TRANSACTION_NOT_UPDATED";
                             }
                         } else {
                             $data["s"] = 0;
-                            $data["r"] = "NOT_AMMOUNT";
+                            $data["r"] = "NOT_UPDATE_PLAN";
                         }
                     } else {
                         $data['r'] = "NOT_WALLET";
@@ -85,22 +73,6 @@ if($UserSupport->_loaded === true)
 } else {
     $data['s'] = 0;
     $data['r'] = "INVALID_CREDENTIALS";
-}
-
-function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount) : bool
-{
-    $UserPlan = new GranCapital\UserPlan;
-    
-    if(!$UserPlan->cargarDonde("user_login_id = ?",$user_login_id))
-    {
-        $UserPlan->user_login_id = $user_login_id;
-        $UserPlan->create_date = time();
-    }
-
-    $UserPlan->ammount = $ammount;
-    $UserPlan->catalog_plan_id = $catalog_plan_id;
-    
-    return $UserPlan->save();
 }
 
 function updateTransaction(int $transaction_requirement_per_user_id = null) : bool

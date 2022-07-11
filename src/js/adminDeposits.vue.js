@@ -51,6 +51,10 @@ Vue.createApp({
 
             column.desc = !column.desc
         },
+        init: function () {
+            this.transactionsAux = {};
+            this.transactions = {};
+        },
         filterData: function () {
             this.transactions = this.transactionsAux
 
@@ -58,14 +62,37 @@ Vue.createApp({
                 return transaction.transaction_per_wallet_id.toString().includes(this.query) || transaction.ammount.toString().includes(this.query) || transaction.create_date.formatDate().includes(this.query) 
             })
         },
-        deleteDeposit: function (transaction_per_wallet_id) {
-            this.UserSupport.deleteDeposit({transaction_per_wallet_id:transaction_per_wallet_id}, (response) => {
-                if (response.s == 1) {
-                    this.getDeposits(response.user_login_id)
-                }
+        deleteTransaction: function (transaction_per_wallet_id) {
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                subTitle: "¿Estás seguro de eliminar éste fondeo?. Se recalculará el plan del usuario",
+                buttons: [
+                    {
+                        text: "Sí, eliminar",
+                        role: "cancel",
+                        class: 'btn-danger',
+                        handler: (data) => {
+                            this.UserSupport.deleteTransaction({ transaction_per_wallet_id: transaction_per_wallet_id }, (response) => {
+                                if (response.s == 1) {
+                                    this.getDeposits(getParam("ulid"))
+                                }
+                            });
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
             })
+
+            alertCtrl.present(alert.modal); 
         },
         getDeposits: function (user_login_id) {
+            this.init()
+
             this.UserSupport.getDeposits({user_login_id:user_login_id}, (response) => {
                 if (response.s == 1) {
                     this.transactionsAux = response.transactions

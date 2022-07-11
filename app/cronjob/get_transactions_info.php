@@ -30,31 +30,26 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                     { 
                         if($result['result']['status_text'] == CoinPayments\Api::COMPLETED)
                         {   
-                            if($result['result']['status'] == 100)
+                            if($result['result']['status'] == CoinPayments\Api::OK)
                             {   
                                 $UserWallet = new GranCapital\UserWallet;
                                 
-                                if($UserWallet->getSafeWallet(($transaction['user_login_id'])))
+                                if($UserWallet->getSafeWallet($transaction['user_login_id']))
                                 {
                                     if($UserWallet->doTransaction($transaction['ammount'],GranCapital\Transaction::DEPOSIT,null,null,false))
                                     {
-                                        if($ammount = $TransactionPerWallet->getSumDepositsByUser($UserWallet->getId()))
-                                        {
-                                            // d($result['result']['status']);
+                                        $UserPlan = new GranCapital\UserPlan;
 
-                                            $CatalogPlan = new GranCapital\CatalogPlan;
-                                            
-                                            if($catalog_plan_id = $CatalogPlan->getCatalogPlanIdBetween($ammount))
+                                        if($UserPlan->setPlan($UserWallet->user_login_id))
+                                        {
+                                            if(updateTransaction($transaction['transaction_requirement_per_user_id']))
                                             {
-                                                if(updatePlan($transaction['user_login_id'],$catalog_plan_id,$ammount))
-                                                {
-                                                    if(updateTransaction($transaction['transaction_requirement_per_user_id']))
-                                                    {
-                                                        $data["s"] = 1;
-                                                        $data["r"] = "DATA_OK";
-                                                    }
-                                                }
-                                            }
+                                                $data["s"] = 1;
+                                                $data["r"] = "DATA_OK";
+                                            } 
+                                        } else {
+                                            $data["s"] = 0;
+                                            $data["r"] = "NOT_UPDATE_PLAN";
                                         }
                                     } else {
                                         $data['r'] = "NOT_WALLET";
@@ -64,7 +59,6 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
                                     $data['r'] = "DATA_ERROR";
                                     $data['s'] = 0;
                                 }
-                                
                             }
                         } else if($result['result']['status'] == -1) {
                             if(expireTransaction($transaction['transaction_requirement_per_user_id']))
@@ -89,22 +83,6 @@ if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\U
 } else {
     $data['s'] = 0;
     $data['r'] = "INVALID_CREDENTIALS";
-}
-
-function updatePlan(int $user_login_id,int $catalog_plan_id,float $ammount) : bool
-{
-    $UserPlan = new GranCapital\UserPlan;
-    
-    if(!$UserPlan->cargarDonde("user_login_id = ?",$user_login_id))
-    {
-        $UserPlan->user_login_id = $user_login_id;
-        $UserPlan->create_date = time();
-    }
-
-    $UserPlan->ammount = $ammount;
-    $UserPlan->catalog_plan_id = $catalog_plan_id;
-    
-    return $UserPlan->save();
 }
 
 function updateTransaction(int $transaction_requirement_per_user_id = null)

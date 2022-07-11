@@ -13,4 +13,5 @@ class Api
 
 	const COMPLETED = 'Complete';
 	const CANCELED_TIME_OUT = -1;
+	const OK = 100;
 }

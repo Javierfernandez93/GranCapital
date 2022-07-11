@@ -93,12 +93,35 @@ Vue.createApp({
         addDeposit: function () {
             const ammount = this.user.ammount - this.user.originalAmmount
 
-            this.UserSupport.addDeposit({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, total_ammount: this.user.ammount, ammount: ammount }, (response) => {
-                if(response.s == 1)
-                {
-                    this.$refs.buttonAddDeposit.innerText = 'Depósito realizado'
-                }
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                subTitle: "¿Estás seguro de añadir éste fondeo?. Se recalculará el plan del usuario",
+                buttons: [
+                    {
+                        text: "Sí, añadir depósito",
+                        role: "cancel",
+                        class: 'btn-success',
+                        handler: (data) => {
+                            this.UserSupport.addDeposit({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, total_ammount: this.user.ammount, ammount: ammount }, (response) => {
+                                if(response.s == 1)
+                                {
+                                    this.$refs.buttonAddDeposit.innerText = 'Depósito realizado'
+
+                                    this.getUserProfile(getParam('ulid'))
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
             })
+
+            alertCtrl.present(alert.modal); 
         },
         getPlan: function (ammount) {
             this.selectedPlan = {
@@ -118,14 +141,41 @@ Vue.createApp({
                 this.selectedPlan = this.plans[0]
             }
         },
+        viewDeposits: function (company_id) {
+            window.location.href = '../../apps/admin-users/deposits?ulid=' + company_id
+        },
         updatePlan: function () {
-            this.UserSupport.updatePlan({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, additional_profit: this.user.additional_profit, ammount: this.user.ammount, sponsor_profit: this.user.sponsor_profit }, (response) => {
-                if (response.s == 1) {
-                    this.$refs.buttonPlan.innerText = 'Actualizado con éxito'
-                } else if(response.r == 'PROFIT_EXCEDS_MAX_LIMIT') {
-                    alertMessage(`La suma de los profits excede el máximo que se puede otorgar (${response.MAX_PROFIT} %). Ingresa porcentajes menores al máximo.`)
-                }
+
+            let message = this.user.originalAmmount != this.user.ammount ? '. <br><b>Aviso importante: Monto invertido ha sido modificado por lo cual se actualizará la diferencia como un fondeo</br>' : ''
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                html: "¿Estás seguro de guardar/actualizar ésta activación?"+ message,
+                buttons: [
+                    {
+                        text: "Sí, actualizar plan",
+                        role: "cancel",
+                        class: 'btn-success',
+                        handler: (data) => {
+                            this.UserSupport.updatePlan({ user_login_id: this.user.user_login_id, catalog_plan_id: this.selectedPlan.catalog_plan_id, additional_profit: this.user.additional_profit, originalAmmount: this.user.originalAmmount ,ammount: this.user.ammount, sponsor_profit: this.user.sponsor_profit }, (response) => {
+                                if (response.s == 1) {
+                                    this.$refs.buttonPlan.innerText = 'Actualizado con éxito'
+                                } else if(response.r == 'PROFIT_EXCEDS_MAX_LIMIT') {
+                                    alertMessage(`La suma de los profits excede el máximo que se puede otorgar (${response.MAX_PROFIT} %). Ingresa porcentajes menores al máximo.`)
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
             })
+
+            alertCtrl.present(alert.modal); 
+            
         },
         getUserProfile: function (user_login_id) {
             this.UserSupport.getUserProfile({ user_login_id: user_login_id }, (response) => {
