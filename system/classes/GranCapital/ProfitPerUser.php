@@ -78,6 +78,51 @@ class ProfitPerUser extends Orm
 
     return 0;
   }
+
+  public function getAllProfitsPerDay(string $day = null)
+  {
+    if (isset($day) === true) {
+
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00",strtotime($day)));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59",strtotime($day)));
+      
+      $sql = "SELECT
+                {$this->tblName}.{$this->tblName}_id,
+                {$this->tblName}.user_plan_id,
+                {$this->tblName}.profit as gain,
+                user_plan.user_login_id,
+                user_plan.ammount,
+                user_plan.additional_profit,
+                catalog_plan.profit 
+              FROM 
+                {$this->tblName}
+              LEFT JOIN 
+                user_plan 
+              ON 
+                user_plan.user_plan_id = {$this->tblName}.user_plan_id
+              LEFT JOIN 
+                catalog_plan 
+              ON 
+                catalog_plan.catalog_plan_id = user_plan.catalog_plan_id
+              WHERE 
+                {$this->tblName}.status = '1'
+              AND 
+                {$this->tblName}.create_date
+              BETWEEN 
+                  {$begin_of_day}
+              AND 
+                  {$end_of_day}
+              ";
+
+      if($profit = $this->connection()->rows($sql))
+      {
+        return $profit;
+      }
+    }
+
+    return 0;
+  }
+
   public function getAllProfits()
   {
     $sql = "SELECT
