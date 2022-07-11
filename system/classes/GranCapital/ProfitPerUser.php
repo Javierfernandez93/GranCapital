@@ -7,7 +7,6 @@ use HCStudio\Util;
 
 use GranCapital\UserPlan;
 use GranCapital\UserWallet;
-use GranCapital\Transaction;
 
 class ProfitPerUser extends Orm
 {
@@ -89,25 +88,17 @@ class ProfitPerUser extends Orm
       $sql = "SELECT
                 {$this->tblName}.{$this->tblName}_id,
                 {$this->tblName}.user_plan_id,
-                {$this->tblName}.profit as gain,
-                user_plan.user_login_id,
-                user_plan.ammount,
-                user_plan.additional_profit,
-                catalog_plan.profit 
+                {$this->tblName}.catalog_profit_id,
+                {$this->tblName}.from_user_plan_id,
+                {$this->tblName}.profit as gain
               FROM 
                 {$this->tblName}
-              LEFT JOIN 
-                user_plan 
-              ON 
-                user_plan.user_plan_id = {$this->tblName}.user_plan_id
-              LEFT JOIN 
-                catalog_plan 
-              ON 
-                catalog_plan.catalog_plan_id = user_plan.catalog_plan_id
               WHERE 
                 {$this->tblName}.status = '1'
               AND 
-                {$this->tblName}.catalog_profit_id = '1'
+                -- {$this->tblName}.catalog_profit_id IN ('1','2')
+                -- {$this->tblName}.catalog_profit_id IN ('1')
+                {$this->tblName}.catalog_profit_id IN ('2')
               AND 
                 {$this->tblName}.create_date
               BETWEEN 

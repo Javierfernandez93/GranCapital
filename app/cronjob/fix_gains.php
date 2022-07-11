@@ -17,38 +17,49 @@ if (($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\
     {
         if (date('H', $data['unix_time']) == '09') 
         {
+            $UserPlan = new GranCapital\UserPlan;
+            
             $ProfitPerUser = new GranCapital\ProfitPerUser;
             $active_plans = $ProfitPerUser->getAllProfitsPerDay($data['day']);
+            // $active_plans = [$active_plans[0]];
 
             foreach($active_plans as $key => $active_plan)
             {
-                $total_profit = $active_plan['profit']+$active_plan['additional_profit'];
+                $user_plan_id = $active_plan['catalog_profit_id'] == 1 ? $active_plan['user_plan_id'] : $active_plan['from_user_plan_id'];
+                
+                $user_login_id = $UserPlan->getUserId($user_plan_id);
 
-                if($gain = $ProfitPerUser->calculateProfit($total_profit,$active_plan['ammount'],$data['day']))
+                if($plan = $UserPlan->getPlan($user_login_id))
                 {
-                    $total_gain += $gain;
+                    $total_profit = $active_plan['catalog_profit_id'] == 1 ? $plan['profit']+$plan['additional_profit'] : $plan['sponsor_profit'];
 
-                    echo "--- Usuario {$active_plan['user_login_id']} <br>";
-                    echo "PROFIT {$total_profit} % y monto $ {$active_plan['ammount']} - Ganará {$gain} y ganó {$active_plan['gain']}";
-
-                    if($gain != $active_plan['gain'])
+                    if($gain = $ProfitPerUser->calculateProfit($total_profit,$plan['ammount'],$data['day']))
                     {
-                        echo " [NO COINCIDE]";
+                        $total_gain += $gain;
+                        $type = $active_plan['catalog_profit_id'] == 1 ? 'Inversion' : 'Referido';
+                    
+                        echo "--- Usuario {$user_login_id} -- {$type}<br>";
+                        echo "PROFIT {$total_profit} % y monto $ {$plan['ammount']} - Ganará {$gain} y ganó {$active_plan['gain']}";
 
-                        if(updateProfit($active_plan['profit_per_user_id'],$gain))
+                        if($gain != $active_plan['gain'])
                         {
-                            if(updateTransaction($active_plan['profit_per_user_id'],$gain))
-                            {
-                                echo " [ACTUALIZADO]";
-                            } else {
-                                echo " [ERROR2]";
-                            }
-                        } else {
-                            echo " [ERROR1]";
-                        }
-                    }
+                            echo " [NO COINCIDE]";
 
-                    echo "<br>";
+                            if(updateProfit($active_plan['profit_per_user_id'],$gain))
+                            {
+                                if(updateTransaction($active_plan['profit_per_user_id'],$gain))
+                                {
+                                    echo " [ACTUALIZADO]";
+                                } else {
+                                    echo " [ERROR2]";
+                                }
+                            } else {
+                                echo " [ERROR1]";
+                            }
+                        }
+
+                        echo "<br>";
+                    }
                 }
             }
 
@@ -70,6 +81,7 @@ if (($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\
 
 function updateProfit($profit_per_user_id = null,$profit = null)
 {
+    // return true;
     $ProfitPerUser = new GranCapital\ProfitPerUser;
     
     if($ProfitPerUser->cargarDonde("profit_per_user_id = ?",$profit_per_user_id))
@@ -83,6 +95,7 @@ function updateProfit($profit_per_user_id = null,$profit = null)
 
 function updateTransaction($profit_per_user_id = null,$ammount = null)
 {
+    // return true;
     $TransactionPerWallet = new GranCapital\TransactionPerWallet;
 
     if($TransactionPerWallet->cargarDonde("profit_per_user_id = ?",$profit_per_user_id))

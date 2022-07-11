@@ -43,6 +43,7 @@ class UserPlan extends Orm {
                 {$this->tblName}.{$this->tblName}_id,
                 {$this->tblName}.ammount,
                 {$this->tblName}.additional_profit,
+                {$this->tblName}.sponsor_profit,
                 catalog_plan.profit,
                 catalog_plan.name
               FROM 
