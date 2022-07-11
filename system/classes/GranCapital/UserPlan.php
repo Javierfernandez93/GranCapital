@@ -10,7 +10,7 @@ use GranCapital\CatalogPlan;
 
 class UserPlan extends Orm {
   protected $tblName  = 'user_plan';
-
+  const MAX_ADDITIONAL_PROFIT = 2;
   public function __construct() {
     parent::__construct();
   }
@@ -134,11 +134,12 @@ class UserPlan extends Orm {
     {
       if($next_profit = (new CatalogPlan)->getProfit($catalog_plan_id))
       {
-        if($actual_plan['additional_profit'] + $actual_plan['profit'] > $next_profit)
+        if($actual_plan['profit'] != $next_profit)
         {
-          $additional_profit = ($actual_plan['additional_profit'] + $actual_plan['profit']) - $next_profit;
-
-          return $additional_profit;
+          if($actual_plan['additional_profit'] + $actual_plan['profit'] > $next_profit)
+          {
+            $additional_profit = ($actual_plan['additional_profit'] + $actual_plan['profit']) - $next_profit;
+          }
         }
       }
     }
