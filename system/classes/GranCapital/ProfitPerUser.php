@@ -107,6 +107,8 @@ class ProfitPerUser extends Orm
               WHERE 
                 {$this->tblName}.status = '1'
               AND 
+                {$this->tblName}.catalog_profit_id = '1'
+              AND 
                 {$this->tblName}.create_date
               BETWEEN 
                   {$begin_of_day}
