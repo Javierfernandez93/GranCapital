@@ -30,15 +30,15 @@ if($UserSupport->_loaded === true)
                         {
                             if(updateTransaction($data['transaction_requirement_per_user_id']))
                             {
-                                if(sendPush($TransactionRequirementPerUser->user_login_id,'Hemos fondeado tu cuenta',GranCapital\CatalogNotification::ACCOUNT))
-                                {
-                                    $data["push_sent"] = true;
-                                }
+                                // if(sendPush($TransactionRequirementPerUser->user_login_id,'Hemos fondeado tu cuenta',GranCapital\CatalogNotification::ACCOUNT))
+                                // {
+                                //     $data["push_sent"] = true;
+                                // }
 
-                                if(sendEmail($UserSupport->getUserEmail($TransactionRequirementPerUser->user_login_id),$TransactionRequirementPerUser->ammount))
-                                {
-                                    $data["email_sent"] = true;
-                                }
+                                // if(sendEmail($UserSupport->getUserEmail($TransactionRequirementPerUser->user_login_id),$TransactionRequirementPerUser->ammount))
+                                // {
+                                //     $data["email_sent"] = true;
+                                // }
 
                                 $data["s"] = 1;
                                 $data["r"] = "DATA_OK";

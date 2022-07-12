@@ -172,7 +172,7 @@ class UserPlan extends Orm {
               $UserPlan->create_date = time();
           }
 
-          $UserPlan->additional_profit = $this->calculateProfit($user_login_id,$additional_profit,$catalog_plan_id);
+          $UserPlan->additional_profit = $additional_profit ? $this->calculateProfit($user_login_id,$additional_profit,$catalog_plan_id) : 0;
           $UserPlan->sponsor_profit = $sponsor_profit ? $sponsor_profit : $UserPlan->sponsor_profit;
 
           $UserPlan->ammount = $ammount;
