@@ -97,8 +97,7 @@ class ProfitPerUser extends Orm
                 {$this->tblName}.status = '1'
               AND 
                 -- {$this->tblName}.catalog_profit_id IN ('1','2')
-                -- {$this->tblName}.catalog_profit_id IN ('1')
-                {$this->tblName}.catalog_profit_id IN ('2')
+                {$this->tblName}.catalog_profit_id IN ('1')
               AND 
                 {$this->tblName}.create_date
               BETWEEN 
