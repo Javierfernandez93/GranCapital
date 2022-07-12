@@ -9,8 +9,8 @@ $UserSupport = new GranCapital\UserSupport;
 if(($data['user'] == HCStudio\Util::$username && $data['password'] == HCStudio\Util::$password) || $UserSupport->_loaded === true)
 {
     // GranCapital\NotificationPerUser::push(1,"Prueba de cronjob ".date("Y-m-d h:i:s"),GranCapital\CatalogNotification::ACCOUNT,'');
-
     $data['unix_time'] = $data['day'] ? strtotime($data['day']) : time();
+    $data['day'] = $data['day'] ? $data['day'] : date("Y-m-d H:i:s",$data['unix_time']);
     $data['production'] = $data['production'] ? $data['production'] : true; // setting up production mode as default
 
     // checking if actual day is btwn week
