@@ -53,6 +53,8 @@ class TransactionRequirementPerUser extends Orm {
                 ON 
                     user_login.user_login_id = {$this->tblName}.user_login_id
                     {$filter}
+                GROUP BY 
+                    {$this->tblName}.transaction_requirement_per_user_id 
                 ";
 
         return $this->connection()->rows($sql);
