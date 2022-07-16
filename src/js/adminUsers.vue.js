@@ -91,6 +91,34 @@ Vue.createApp({
                 }
             })
         },
+        deletePlan: function (company_id) {
+            let alert = alertCtrl.create({
+                title: "Aviso",
+                subTitle: "¿Estás seguro de eliminar el plan de éste usuario?. Ya no recibirá más ganancias a partir de ahora",
+                buttons: [
+                    {
+                        text: "Sí, eliminar",
+                        role: "cancel",
+                        class: 'btn-danger',
+                        handler: (data) => {
+                            this.UserSupport.deletePlan({ company_id: company_id }, (response) => {
+                                if (response.s == 1) {
+                                    this.getUsers()
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancelar",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
+            })
+
+            alertCtrl.present(alert.modal); 
+        },
         goToActivatePlan: function (company_id) {
             window.location.href = '../../apps/admin-users/activate?ulid=' + company_id
         },

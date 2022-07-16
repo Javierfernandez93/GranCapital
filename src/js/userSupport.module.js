@@ -145,6 +145,9 @@ class UserSupport extends Http {
     doLoginSupport(data, callback) {
         return this.call('../../app/application/do_login_support.php', data, callback);
     }
+    deletePlan(data, callback) {
+        return this.call('../../app/application/delete_plan.php', data, callback);
+    }
     getNotices(data, callback) {
         return this.call('../../app/application/get_notices.php', data, callback);
     }

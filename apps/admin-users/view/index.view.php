@@ -166,6 +166,9 @@
                                                 <?php if($UserSupport->hasPermission('activate_plan')) { ?>
                                                     <li><button class="dropdown-item" @click="goToActivatePlan(user.user_login_id)">Activar plan</button></li>
                                                 <?php } ?>
+                                                <?php if($UserSupport->hasPermission('delete_plan')) { ?>
+                                                    <li v-if="user.catalog_plan_id"><button class="dropdown-item" @click="deletePlan(user.user_login_id)">Eliminar plan</button></li>
+                                                <?php } ?>
                                                 <?php if($UserSupport->hasPermission('backoffice_access')) { ?>
                                                     <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
                                                 <?php } ?>
