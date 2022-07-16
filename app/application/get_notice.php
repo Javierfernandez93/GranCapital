@@ -14,6 +14,7 @@ if($UserSupport->_loaded === true)
         
         if($notice = $Notice->getNotice($data['notice_id']))
         {
+            format($notice);
             $data["notice"] = $notice;
             $data["s"] = 1;
             $data["r"] = "DATA_OK";
@@ -28,6 +29,16 @@ if($UserSupport->_loaded === true)
 } else {
 	$data["s"] = 0;
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
+}
+
+function format(array &$notice = null)
+{
+    if($notice['start_date'] != 0 && $notice['end_date'] != 0)
+    {
+        $notice['start_date'] = date("Y-m-d",$notice['start_date']);
+        $notice['end_date'] = date("Y-m-d",$notice['end_date']);
+        $notice['limit_dates'] = true;
+    }
 }
 
 echo json_encode($data);
