@@ -24,7 +24,7 @@ if($UserSupport->_loaded === true)
         'totalDeposit' => $TransactionPerWallet->getAllDeposits(),
         'totalWithdraws' => $TransactionPerWallet->getAllWithdraws(),
         'totalProfits' => $TransactionPerWallet->getAllProfits(),
-        'pendingWithdraws' => $WithdrawPerUser->getCountPending(),
+        'pendingWithdraws' => $pendingWithdraws = $WithdrawPerUser->getCountPending() ? $pendingWithdraws : 0,
         'gainsPerDay' => [
             'ammount' => $GainPerBroker->getGainsPerDay($data['day'])
         ],
