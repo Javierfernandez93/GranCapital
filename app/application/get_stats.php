@@ -19,12 +19,14 @@ if($UserSupport->_loaded === true)
     $TransactionPerWallet = new GranCapital\TransactionPerWallet;
     $WithdrawPerUser = new GranCapital\WithdrawPerUser;
 
+    $pendingWithdraws = $WithdrawPerUser->getCountPending();
+
     $data["stats"] = [
         'totalCapital' => $CapitalPerBroker->getTotalCapital(),
         'totalDeposit' => $TransactionPerWallet->getAllDeposits(),
         'totalWithdraws' => $TransactionPerWallet->getAllWithdraws(),
         'totalProfits' => $TransactionPerWallet->getAllProfits(),
-        'pendingWithdraws' => $pendingWithdraws = $WithdrawPerUser->getCountPending() ? $pendingWithdraws : 0,
+        'pendingWithdraws' =>  $pendingWithdraws != false ? $pendingWithdraws : 0,
         'gainsPerDay' => [
             'ammount' => $GainPerBroker->getGainsPerDay($data['day'])
         ],
