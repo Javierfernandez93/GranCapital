@@ -26607,3 +26607,21 @@ pre[class*="language-"] {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+.item-rounded {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.list-group-item-zoom:hover {
+  transform: scale(1.01);
+  box-shadow: 12px 12px 12px rgba(0,0,0,0.06);
+  z-index: 1;
+}
+.list-group-item-zoom:hover,
+.list-group-item-zoom {
+  transition: all ease 200ms;
+}

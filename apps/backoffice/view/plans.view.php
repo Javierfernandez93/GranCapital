@@ -45,7 +45,7 @@
     </div>
     <div v-else>
         <div class="alert alert-secondary text-center text-white">
-            No tienes notificaciones aún. Vuelve más tarde
+            No tenemos planes aún. Vuelve más tarde
         </div>
     </div>
 </div>

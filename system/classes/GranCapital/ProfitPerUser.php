@@ -77,6 +77,40 @@ class ProfitPerUser extends Orm
 
     return 0;
   }
+  
+  public function getProfitToday(int $user_plan_id = null,int $catalog_profit_id = null)
+  {
+    if (isset($user_plan_id) === true) 
+    {
+      $begin_of_day = strtotime(date("Y-m-d 00:00:00"));
+      $end_of_day = strtotime(date("Y-m-d 23:59:59"));
+      
+      $sql = "SELECT
+                SUM({$this->tblName}.profit) as profit
+              FROM 
+                {$this->tblName}
+              WHERE 
+                {$this->tblName}.status = '1'
+              AND 
+                {$this->tblName}.user_plan_id = '{$user_plan_id}'
+              AND 
+                {$this->tblName}.catalog_profit_id = '{$catalog_profit_id}'
+              AND 
+                {$this->tblName}.create_date
+              BETWEEN 
+                  {$begin_of_day}
+              AND 
+                  {$end_of_day}
+              ";
+
+      if($profit = $this->connection()->field($sql))
+      {
+        return $profit;
+      }
+    }
+
+    return 0;
+  }
 
   public function getAllProfitsPerDay(string $day = null)
   {

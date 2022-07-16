@@ -37,6 +37,9 @@ class Router {
     const AdminAddOldComissions = 27;
     const AdminDeposits = 29;
     const AdminTransactionsList = 30;
+    const AdminNotices = 31;
+    const AdminNoticesEdit = 32;
+    const AdminNoticesAdd = 33;
 
     static function getName(int $route = null)
     {
@@ -104,6 +107,12 @@ class Router {
                 return 'Añadir comisiones atrasadas';
             case self::AdminTransactionsList:
                 return 'Lista de fondeos';
+            case self::AdminNotices:
+                return 'Listar noticias';
+            case self::AdminNoticesEdit:
+                return 'Editar noticia';
+            case self::AdminNoticesAdd:
+                return 'Añadir noticia';
             case self::AdminDeposits:
                 return 'Ver fondeos';
                 default: 

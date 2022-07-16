@@ -12,8 +12,7 @@
         </div>
     </div>
 
-    <profit-viewer>
-    </profit-viewer>
+    <profit-viewer></profit-viewer>
 
     <div class="row">
         <div class="col-lg-7 mb-lg-0 mb-4">
@@ -69,4 +68,7 @@
             </div>
         </div>
     </div>
+
+
+    <notice-viewer></notice-viewer>
 </div>

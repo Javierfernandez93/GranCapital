@@ -1,11 +1,12 @@
 import { User } from '../../src/js/user.module.js?t=3'
 
 /* vue */ 
+import { NoticeViewer } from '../../src/js/noticeViewer.vue.js?t=1'
 import { ProfitViewer } from '../../src/js/profitViewer.vue.js?t=1'
 
 Vue.createApp({
     components : { 
-        ProfitViewer
+        ProfitViewer, NoticeViewer
     },
     data() {
         return {

@@ -12,6 +12,8 @@ Vue.createApp({
             usersAux: {},
             query: null,
             total: 0,
+            total_profit_today: 0,
+            total_profit_sponsor_today: 0,
             columns: { // 0 DESC , 1 ASC 
                 company_id: {
                     name: 'company_id',
@@ -98,6 +100,8 @@ Vue.createApp({
         getTotals: function () {
             this.users.map((user)=>{
                 this.total += user.ammount != null ? parseFloat(user.ammount) : 0
+                this.total_profit_today += user.profit_today != null ? parseFloat(user.profit_today) : 0
+                this.total_profit_sponsor_today += user.profit_sponsor_today != null ? parseFloat(user.profit_sponsor_today) : 0
             })
 
         },

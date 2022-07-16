@@ -145,6 +145,33 @@ class UserSupport extends Http {
     doLoginSupport(data, callback) {
         return this.call('../../app/application/do_login_support.php', data, callback);
     }
+    getNotices(data, callback) {
+        return this.call('../../app/application/get_notices.php', data, callback);
+    }
+    saveNotice(data, callback) {
+        return this.call('../../app/application/save_notice.php', data, callback, null, null, 'POST');
+    }
+    updateNotice(data, callback) {
+        return this.call('../../app/application/update_notice.php', data, callback, null, null, 'POST');
+    }
+    getNotice(data, callback) {
+        return this.call('../../app/application/get_notice.php', data, callback);
+    }
+    publishNotice(data, callback) {
+        return this.call('../../app/application/publish_notice.php', data, callback);
+    }
+    deleteNotice(data, callback) {
+        return this.call('../../app/application/delete_notice.php', data, callback);
+    }
+    unpublishNotice(data, callback) {
+        return this.call('../../app/application/unpublish_notice.php', data, callback);
+    }
+    getCatalogNotices(data, callback) {
+        return this.call('../../app/application/get_catalog_notices.php', data, callback);
+    }
+    getCatalogPriorities(data, callback) {
+        return this.call('../../app/application/get_catalog_priorities.php', data, callback);
+    }
     // callfile
     uploadImageProfile(data, progress, callback) {
         return this.callFile('../../app/application/upload_image_profile.php', data, callback, progress);

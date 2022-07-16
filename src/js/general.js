@@ -676,3 +676,68 @@ Array.prototype.inArray = function(needle)
 
   return key
 }
+
+Number.prototype.timeSince = function() 
+{
+  var date = this * 1000
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + " años";
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) + " meses";
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " dias";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " horas";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minutos";
+  }
+  return Math.floor(seconds) + " segundos";
+}
+String.prototype.convertDataToHtml = function() {
+  var blocks = JSON.parse(this).blocks
+
+  var convertedHtml = "";
+  blocks.map(block => {
+    
+    switch (block.type) {
+      case "header":
+        convertedHtml += `<h${block.data.level}>${block.data.text}</h${block.data.level}>`;
+        break;
+      case "embded":
+        convertedHtml += `<div><iframe width="560" height="315" src="${block.data.embed}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+        break;
+      case "paragraph":
+        convertedHtml += `<p>${block.data.text}</p>`;
+        break;
+      case "delimiter":
+        convertedHtml += "<hr />";
+        break;
+      case "image":
+        convertedHtml += `<img class="img-fluid" src="${block.data.file.url}" title="${block.data.caption}" /><br /><em>${block.data.caption}</em>`;
+        break;
+      case "list":
+        convertedHtml += "<ul>";
+        block.data.items.forEach(function(li) {
+          convertedHtml += `<li>${li}</li>`;
+        });
+        convertedHtml += "</ul>";
+        break;
+      default:
+        console.log("Unknown block type", block.type);
+        break;
+    }
+  });
+  return convertedHtml;
+}

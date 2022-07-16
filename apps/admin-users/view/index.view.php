@@ -69,6 +69,28 @@
                                         <u class="text-sm ms-2">Monto inv.</u>
                                     </th>
                                     <th 
+                                        @click="sortData(columns.ammount)"
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.ammount.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Profit</u>
+                                    </th>
+                                    <th 
+                                        @click="sortData(columns.ammount)"
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.ammount.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">Profit pat.</u>
+                                    </th>
+                                    <th 
                                         @click="sortData(columns.signup_date)"
                                         class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
                                         <span v-if="columns.signup_date.desc">
@@ -123,6 +145,12 @@
                                             class="text-xs text-dark mb-0">N/A</span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
+                                        <div>$ {{user.profit_today.numberFormat(2)}}</div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <div>$ {{user.profit_sponsor_today.numberFormat(2)}}</div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>
                                         <p class="text-xs text-secondary mb-0">{{user.signup_date.formatDate()}}</p>
                                     </td>
@@ -163,7 +191,19 @@
                                     <td></td>
                                     <td></td>
                                     <td>Total </td>
-                                    <td>{{total.numberFormat(2)}}</td>
+                                    <td class="align-middle text-center text-sm">
+                                        <div>$ {{total.numberFormat(2)}}</div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                    
+                                        <div>$ {{total_profit_today.numberFormat(2)}}</div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <div>$ {{total_profit_sponsor_today.numberFormat(2)}}</div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm text-primary text-decoration-underline">
+                                        <div>$ {{(total_profit_today+total_profit_sponsor_today).numberFormat(2)}}</div>
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>

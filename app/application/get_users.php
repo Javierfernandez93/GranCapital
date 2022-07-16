@@ -12,7 +12,7 @@ if($UserSupport->_loaded === true)
 
     if($users = $UserSupport->getUsers($filter))
     {
-        $data["users"] = $users;
+        $data["users"] = format($users);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
@@ -22,6 +22,20 @@ if($UserSupport->_loaded === true)
 } else {
 	$data["s"] = 0;
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
+}
+
+function format($users)
+{
+    $ProfitPerUser = new GranCapital\ProfitPerUser;
+    $UserPlan = new GranCapital\UserPlan;
+    
+    foreach($users as $key => $user)
+    {
+        $users[$key]['profit_today'] = $ProfitPerUser->getProfitToday($UserPlan->getUserPlanId($user['user_login_id']),GranCapital\Transaction::INVESTMENT);
+        $users[$key]['profit_sponsor_today'] = $ProfitPerUser->getProfitToday($UserPlan->getUserPlanId($user['user_login_id']),GranCapital\Transaction::REFERRAL_INVESTMENT);
+    }
+
+    return $users;
 }
 
 echo json_encode($data);
