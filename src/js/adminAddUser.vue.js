@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?t=3'
+import { UserSupport } from '../../src/js/userSupport.module.js?t=4'
 
 /* vue */
 
