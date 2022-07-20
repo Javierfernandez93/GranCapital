@@ -148,6 +148,9 @@ class UserSupport extends Http {
     deletePlan(data, callback) {
         return this.call('../../app/application/delete_plan.php', data, callback);
     }
+    getAllGainsByDays(data, callback) {
+        return this.call('../../app/application/get_all_gains_by_days.php', data, callback);
+    }
     getNotices(data, callback) {
         return this.call('../../app/application/get_notices.php', data, callback);
     }

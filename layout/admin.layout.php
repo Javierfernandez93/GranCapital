@@ -41,7 +41,7 @@
 
                 <?php if($UserSupport->hasPermission('list_dash')) { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($route == JFStudio\Router::AdminDash){?>active<?php } ?>"
+                        <a class="nav-link <?php if(in_array($route,[JFStudio\Router::AdminDash,JFStudio\Router::AdminStats])){?>active<?php } ?>"
                             href="../../apps/admin">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

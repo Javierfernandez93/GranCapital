@@ -12,7 +12,17 @@ if($UserSupport->_loaded === true)
 
     if($users = $UserSupport->getUsers($filter))
     {
+        $data['day'] = date("Y-m-d");
+
+        $ProfitPerUser = new GranCapital\ProfitPerUser;
+        $CapitalPerBroker = new GranCapital\CapitalPerBroker;
+        $GainPerBroker = new GranCapital\GainPerBroker;
+
+        $capital_total = $CapitalPerBroker->getTotalCapital();
+        $total_gains = $GainPerBroker->getGainsPerDay($data['day']);
+
         $data["users"] = format($users);
+        $data["percentaje"] = ($total_gains/$capital_total) * 100;
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {

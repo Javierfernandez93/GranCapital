@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?t=4'
+import { UserSupport } from '../../src/js/userSupport.module.js?t=5'
 
 /* vue */
 
@@ -11,6 +11,7 @@ Vue.createApp({
             users: {},
             usersAux: {},
             query: null,
+            percentaje: 0,
             total: 0,
             total_profit_today: 0,
             total_profit_sponsor_today: 0,
@@ -30,6 +31,10 @@ Vue.createApp({
                 },
                 plan_name: {
                     name: 'plan_name',
+                    desc: false,
+                },
+                percentaje: {
+                    name: 'percentaje',
                     desc: false,
                 },
                 ammount: {
@@ -82,7 +87,6 @@ Vue.createApp({
                     window.location.href = '../../apps/backoffice'
                 }
             })
-            console.log(company_id)
         },
         deleteUser: function (company_id) {
             this.UserSupport.deleteUser({ company_id: company_id }, (response) => {
@@ -130,6 +134,8 @@ Vue.createApp({
                 this.total += user.ammount != null ? parseFloat(user.ammount) : 0
                 this.total_profit_today += user.profit_today != null ? parseFloat(user.profit_today) : 0
                 this.total_profit_sponsor_today += user.profit_sponsor_today != null ? parseFloat(user.profit_sponsor_today) : 0
+
+                user.percentaje = ((user.profit_today + user.profit_sponsor_today)/user.ammount)*100
             })
 
         },
@@ -137,6 +143,7 @@ Vue.createApp({
             this.UserSupport.getUsers({}, (response) => {
                 if (response.s == 1) {
                     this.usersAux = response.users
+                    this.percentaje = response.percentaje
                     this.users = this.usersAux
 
                     this.getTotals()

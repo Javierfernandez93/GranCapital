@@ -611,6 +611,10 @@ Number.prototype.formatFullDate = function () {
   return new Date(this * 1000).toLocaleTimeString("es-ES",{ hour: 'numeric', minute: 'numeric', hour12: true, day: 'numeric', month: 'long'})
 };
 
+Number.prototype.formatDateText = function () {
+  return new Date(this * 1000).toLocaleDateString("es-ES",{ weekday: 'long', day: 'numeric', month: 'long'})
+};
+
 Number.prototype.numberFormat = function (decimals, dec_point, thousands_sep) {
   let number = this;
   // *     example: number_format(1234.56, 2, ',', ' ');

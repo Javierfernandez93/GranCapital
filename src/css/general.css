@@ -50,3 +50,8 @@ body {
     width: 7rem !important;
     height: auto !important;
 }
+.icon-floating-top
+{
+    position: relative;
+    top: -3rem;
+}    

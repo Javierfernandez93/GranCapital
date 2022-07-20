@@ -9,6 +9,7 @@
                         </div>
                         <div class="col fw-semibold text-dark">
                             <div class="small">Usuarios</div>
+                            <div class="text-primary">Porcentaje de hoy {{percentaje.numberFormat(2)}}%</div>
                         </div>
                         <div class="col-auto text-end">
                             <div><a href="../../apps/admin-users/add" type="button" class="btn btn-success btn-sm">Añadir usuario</a></div>
@@ -91,6 +92,17 @@
                                         <u class="text-sm ms-2">Profit pat.</u>
                                     </th>
                                     <th 
+                                        @click="sortData(columns.percentaje)"
+                                        class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.percentaje.desc">
+                                            <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                        </span>    
+                                        <span v-else>    
+                                            <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                        </span>    
+                                        <u class="text-sm ms-2">%</u>
+                                    </th>
+                                    <th 
                                         @click="sortData(columns.signup_date)"
                                         class="text-center c-pointer text-uppercase text-primary text-secondary font-weight-bolder opacity-7">
                                         <span v-if="columns.signup_date.desc">
@@ -149,6 +161,14 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <div>$ {{user.profit_sponsor_today.numberFormat(2)}}</div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span 
+                                            :class="user.percentaje > percentaje ? 'text-danger' : 'text-success'" 
+                                            class="text-xs">
+                                            
+                                            {{user.percentaje.numberFormat(2)}} %
+                                        </span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <p class="text-xs font-weight-bold mb-0">Fecha</p>

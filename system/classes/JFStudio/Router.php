@@ -40,6 +40,7 @@ class Router {
     const AdminNotices = 31;
     const AdminNoticesEdit = 32;
     const AdminNoticesAdd = 33;
+    const AdminStats = 34;
 
     static function getName(int $route = null)
     {
@@ -115,6 +116,8 @@ class Router {
                 return 'Añadir noticia';
             case self::AdminDeposits:
                 return 'Ver fondeos';
+            case self::AdminStats:
+                return 'Estadísticas';
                 default: 
                 return 'Sin nombre';
         }
