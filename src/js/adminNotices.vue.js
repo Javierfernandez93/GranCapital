@@ -7,6 +7,7 @@ Vue.createApp({
         return {
             UserSupport : null,
             notices : {},
+            query : null,
             noticesAux : {},
             columns: { // 0 DESC , 1 ASC 
                 user_support_id : {
@@ -85,7 +86,7 @@ Vue.createApp({
             this.notices = this.noticesAux
             
             this.notices = this.noticesAux.filter((notice)=>{
-                return notice.title.toLowerCase().includes(this.query.toLowerCase())
+                return notice.title.toLowerCase().includes(this.query.toLowerCase()) || notice.create_date.formatDate().toLowerCase().includes(this.query.toLowerCase())
             })
         },
         getNotices : function() {
