@@ -10,21 +10,22 @@ Vue.createApp({
             query : null,
             noticesAux : {},
             columns: { // 0 DESC , 1 ASC 
-                user_support_id : {
-                    name: 'name',
-                    desc: false
-                },
-                title : {
-                    name: 'capital',
+                notice_id : {
+                    name: 'notice_id',
                     desc: true,
                 },
+                title : {
+                    name: 'title',
+                    desc: false,
+                    alphabetically: true,
+                },
                 notice : {
-                    name: 'portfolio',
+                    name: 'notice',
                     desc: false,
                     alphabetically: true,
                 },
                 create_date : {
-                    name: 'gain',
+                    name: 'create_date',
                     desc: false,
                 },
             }

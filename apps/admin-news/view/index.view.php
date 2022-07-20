@@ -26,8 +26,8 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr class="align-items-center">
-                                    <th @click="sortData(columns.user_support_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
-                                        <span v-if="columns.user_support_id">
+                                    <th @click="sortData(columns.notice_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                        <span v-if="columns.notice_id">
                                             <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                         </span>    
                                         <span v-else>    
