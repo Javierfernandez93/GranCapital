@@ -39,7 +39,7 @@ const StatsViewer = {
         }
     },
     methods: {
-        initChart: function () {
+        initChart: function (gains) {
             const ctx = document.getElementById("myChart").getContext("2d");
 
             let datasets = [];
@@ -51,11 +51,7 @@ const StatsViewer = {
             let earns = [];
             let real_gains = [];
 
-            console.log(this.gains)
-
-            const gains = this.gains.reverse()
-
-            gains.map((gain)=>{
+            gains.reverse().map((gain)=>{
                 labels.push(gain.unix_day.formatDateTextChart())
 
                 profits.push(gain.total_profit)
@@ -122,6 +118,8 @@ const StatsViewer = {
             };
 
             const myChart = new Chart(ctx, config);
+
+            gains.reverse()
         },
         filterData : function() {
             this.gains = this.gainsAux
@@ -157,9 +155,10 @@ const StatsViewer = {
                     {
                         this.gainsAux = response.gains.reverse()
                         this.gains = this.gainsAux
+
                         this.getTotals()
 
-                        resolve()
+                        resolve(response.gains)
                     }
                 })
             })
@@ -170,8 +169,8 @@ const StatsViewer = {
     mounted() 
     {   
         this.UserSupport = new UserSupport
-        this.getAllGainsByDays().then(()=>{
-            this.initChart()
+        this.getAllGainsByDays().then((gains)=>{
+            this.initChart(gains)
         })
     },
     template : `
