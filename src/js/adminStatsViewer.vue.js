@@ -39,6 +39,90 @@ const StatsViewer = {
         }
     },
     methods: {
+        initChart: function () {
+            const ctx = document.getElementById("myChart").getContext("2d");
+
+            let datasets = [];
+
+            /* datas */
+            let labels = [];
+
+            let profits = [];
+            let earns = [];
+            let real_gains = [];
+
+            console.log(this.gains)
+
+            const gains = this.gains.reverse()
+
+            gains.map((gain)=>{
+                labels.push(gain.unix_day.formatDateTextChart())
+
+                profits.push(gain.total_profit)
+                real_gains.push(gain.total_real_gain)
+                earns.push(gain.total_earn)
+            })
+            
+            datasets.push({
+                label: "Ganancias de usuarios",
+                data: profits,
+                borderColor: "#7928CA",
+                backgroundColor: "#7928CA",
+            })
+            
+            datasets.push({
+                label: "Ganancias Brokers",
+                data: real_gains,
+                borderColor: "#07A07A",
+                backgroundColor: "#07A07A",
+            })
+            
+            datasets.push({
+                label: "Utilidad",
+                data: earns,
+                borderColor: "#82d616",
+                backgroundColor: "#82d616",
+            })
+
+            const data = {
+                labels: labels,
+                datasets: datasets,
+            };
+
+            const config = {
+                type: "line",
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "top",
+                        },
+                        title: {
+                            display: false,
+                            text: "Gráfica de estadísticas general por mes",
+                        },
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                            },
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: "($) USD",
+                            },
+                        },
+                    },
+                },
+            };
+
+            const myChart = new Chart(ctx, config);
+        },
         filterData : function() {
             this.gains = this.gainsAux
             
@@ -66,14 +150,18 @@ const StatsViewer = {
             gain.detail = !gain.detail
 
         },
-        getAllGainsByDays : function() {            
-            this.UserSupport.getAllGainsByDays({},(response)=>{
-                if(response.s == 1)
-                {
-                    this.gainsAux = response.gains.reverse()
-                    this.gains = this.gainsAux
-                    this.getTotals()
-                }
+        getAllGainsByDays : function() {    
+            return new Promise((resolve) => {        
+                this.UserSupport.getAllGainsByDays({},(response)=>{
+                    if(response.s == 1)
+                    {
+                        this.gainsAux = response.gains.reverse()
+                        this.gains = this.gainsAux
+                        this.getTotals()
+
+                        resolve()
+                    }
+                })
             })
         },
     },
@@ -82,7 +170,9 @@ const StatsViewer = {
     mounted() 
     {   
         this.UserSupport = new UserSupport
-        this.getAllGainsByDays()
+        this.getAllGainsByDays().then(()=>{
+            this.initChart()
+        })
     },
     template : `
         <div class="row mb-3">

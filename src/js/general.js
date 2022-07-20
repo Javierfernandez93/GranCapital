@@ -615,6 +615,10 @@ Number.prototype.formatDateText = function () {
   return new Date(this * 1000).toLocaleDateString("es-ES",{ weekday: 'long', day: 'numeric', month: 'long'})
 };
 
+Number.prototype.formatDateTextChart = function () {
+  return new Date(this * 1000).toLocaleDateString("es-ES",{ day: 'numeric', month: 'long'})
+};
+
 Number.prototype.numberFormat = function (decimals, dec_point, thousands_sep) {
   let number = this;
   // *     example: number_format(1234.56, 2, ',', ' ');
