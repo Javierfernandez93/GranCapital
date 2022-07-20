@@ -128,7 +128,7 @@ const NoticeViewer = {
                 <div
                     v-for="(pop, index) in pops" 
                     :class="pop.view ? '' : 'd-none'"
-                    class="modal-dialog modal-dialog-centered modal-fullscreen">
+                    class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header border-0">
                             <h5 class="modal-title" id="staticBackdropLabel">{{pop.title}}</h5>
